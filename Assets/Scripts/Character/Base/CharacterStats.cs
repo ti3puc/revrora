@@ -22,7 +22,7 @@ namespace Character.Base
             private int _strengthPoints;
             private int _defensePoints;
             private int _agilityPoints;
-            private int _dexterityPoints;
+            private int _wisdomPoints;
         #endregion
         
         #region Constructors
@@ -36,7 +36,7 @@ namespace Character.Base
                 _strengthPoints = 1;
                 _defensePoints = 1;
                 _agilityPoints = 1;
-                _dexterityPoints = 1;
+                _wisdomPoints = 1;
                 _buildPoints = randomizeBuild ? RandomizeBuildPoints() : _level * BuildPointsPerLevel;
             }
         #endregion
@@ -76,27 +76,37 @@ namespace Character.Base
             
             private void IncDexterityPoints(int i)
             {
-                _dexterityPoints += i;
+                _wisdomPoints += i;
             }
             
             private int CalculateMaxHP()
             {
-                return _characterClass.BaseHP + _strengthPoints * 10;
+                return (2 * _characterClass.BaseHP + _strengthPoints / 4) * _level / 100 + _level + 10;
             }
             
             private int CalculateMaxMana()
             {
-                return _characterClass.BaseMana + _dexterityPoints * 5;
+                return (2 * _characterClass.BaseMana + _wisdomPoints / 4) * _level / 100 + _level + 10;
             }
             
             private int CalculateAttack()
             {
-                return (_strengthPoints * 2) + _agilityPoints;
+                return (2 * _characterClass.BaseStrength + (_strengthPoints * 2 + _agilityPoints) / 4) * _level / 100 + 5;
             }
             
             private int CalculateDefense()
             {
-                return (_defensePoints * 2) + _dexterityPoints;
+                return (2 * _characterClass.BaseDefense + (_defensePoints * 2 + _wisdomPoints) / 4) * _level / 100 + 5;
+            }
+            
+            private int CalculateAgility()
+            {
+                return (2 * _characterClass.BaseAgility + _agilityPoints * 2 / 4) * _level / 100 + 5;
+            }
+            
+            private int CalculateWisdom()
+            {
+                return (2 * _characterClass.BaseDexterity + _wisdomPoints * 2 / 4) * _level / 100 + 5;
             }
             
             // Este método é responsável por randomizar os pontos de build de um personagem aleatorio ao ser criado
@@ -140,12 +150,14 @@ namespace Character.Base
             public int StrenghtPoints => _strengthPoints;
             public int DefensePoints => _defensePoints;
             public int AgilityPoints => _agilityPoints;
-            public int DexterityPoints => _dexterityPoints;
+            public int WisdomPoints => _wisdomPoints;
                 #region Calculed Stats
                     public int MaxHP => CalculateMaxHP();
                     public int MaxMana => CalculateMaxMana();
                     public int Attack => CalculateAttack();
                     public int Defense => CalculateDefense();
+                    public int Agility => CalculateAgility();
+                    public int Wisdom => CalculateWisdom();
                 #endregion
         #endregion
     }
