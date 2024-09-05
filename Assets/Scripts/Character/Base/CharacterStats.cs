@@ -106,7 +106,7 @@ namespace Character.Base
             
             private int CalculateWisdom()
             {
-                return (2 * _characterClass.BaseDexterity + _wisdomPoints * 2 / 4) * _level / 100 + 5;
+                return (2 * _characterClass.BaseWisdom + _wisdomPoints * 2 / 4) * _level / 100 + 5;
             }
             
             // Este método é responsável por randomizar os pontos de build de um personagem aleatorio ao ser criado

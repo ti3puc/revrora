@@ -9,19 +9,20 @@
         public int BaseStrength { get; }
         public int BaseDefense { get; }
         public int BaseAgility { get; }
-        public int BaseDexterity { get; }
+        public int BaseWisdom { get; }
         public CharacterTypes Type { get; }
         
         public Class001Player()
         {
+            // Atributos base de ainda de teste, seguem os valores base do pokémon charmander
             Id = 1;
             Name = "Player";
-            BaseHP = 100;
-            BaseMana = 50;
-            BaseStrength = 10;
-            BaseDefense = 5;
-            BaseAgility = 5;
-            BaseDexterity = 5;
+            BaseHP = 39;
+            BaseMana = 25;
+            BaseStrength = 52;
+            BaseDefense = 43;
+            BaseAgility = 65;
+            BaseWisdom = 62;
             Type = CharacterTypes.NORMAL;
         }
     }

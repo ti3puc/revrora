@@ -9,7 +9,7 @@
         int BaseStrength { get; }
         int BaseDefense { get; }
         int BaseAgility { get; }
-        int BaseDexterity { get; }
+        int BaseWisdom { get; }
         CharacterTypes Type { get; }
     }
 }
