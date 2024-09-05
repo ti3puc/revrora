@@ -10,12 +10,14 @@ namespace Character.Base
             private const int BuildPointsPerLevel = 5;
         #endregion
         
-        #region Properties
+        #region Attributes
             private ICharacterClass _characterClass;
             private int _level;
             private int _experience;
             private int _hp;
             private int _mana;
+            
+            // Atributos de build, que são os pontos que o jogador pode distribuir
             private int _buildPoints;
             private int _strengthPoints;
             private int _defensePoints;
@@ -39,6 +41,9 @@ namespace Character.Base
             }
         #endregion
         
+        // Importante que as propriedades de um personagem nunca estejam diretamente acessíveis;
+        // Esta região é responsável por definir os métodos públicos que permitem
+        // a manipulação dos atributos do personagem baseado em regras de negócio.
         #region Public Methods
             public void LevelUp()
             {
@@ -50,6 +55,9 @@ namespace Character.Base
             }
         #endregion
         
+        // Esta região é responsável por definir os métodos privados que permitem
+        // a manipulação dos atributos do personagem baseado em regras de negócio,
+        // mas que não devem ser acessíveis diretamente.
         #region Private Methods
             private void IncStrengthPoints(int i)
             {
@@ -91,6 +99,7 @@ namespace Character.Base
                 return (_defensePoints * 2) + _dexterityPoints;
             }
             
+            // Este método é responsável por randomizar os pontos de build de um personagem aleatorio ao ser criado
             private int RandomizeBuildPoints()
             {
                 Random rnd = new();
@@ -120,6 +129,7 @@ namespace Character.Base
             }
         #endregion
 
+        // Esta região é responsável por definir os getters e setters
         #region Getters/Setters
             public int Level => _level;
             public int Experience => _experience;
