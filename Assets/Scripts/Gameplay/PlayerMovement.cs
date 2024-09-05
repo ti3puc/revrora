@@ -9,12 +9,33 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-	[Header("Settings")]
+	#region Fields
+
+	[Header("Movement")]
 	[SerializeField] private bool moveAccordingToCameraView = true;
 	[SerializeField] private float speed = 15f;
+	[SerializeField] private float acceleration = 5f;
+	[SerializeField] private float deceleration = 5f;
+
+	[Header("Air Movement")]
+	[SerializeField] private float speedOnAir = 8f;
+	[SerializeField] private float accelerationOnAir = 5f;
+
+	[Header("Rotation")]
 	[SerializeField] private float rotateSpeed = 10f;
+
+	[Header("Physics Interaction")]
 	[SerializeField] private float pushPower = 5f;
+
+	[Header("Gravity")]
 	[SerializeField] private Vector3 gravityVector = new Vector3(0f, -9.81f, 0f);
+	[SerializeField] private float fallAcceleration = -50f;
+	[SerializeField] private float maxFallSpeed = -20f;
+
+	[Header("Ground Check")]
+	[SerializeField] private float groundCheckDistance = 1;
+	[SerializeField] private float groundCheckRadius = .5f;
+	[SerializeField] private LayerMask groundMask;
 
 	[Header("Input Actions")]
 	[SerializeField] private string moveActionName = "Move";
@@ -26,9 +47,15 @@ public class PlayerMovement : MonoBehaviour
 
 	[Header("Debug")]
 	[SerializeField, ReadOnly] private Vector3 moveVector;
+	[SerializeField, ReadOnly] private Vector3 lastMoveDirection;
 	[SerializeField, ReadOnly] private Vector2 inputVector;
+	[SerializeField, ReadOnly] private float currentSpeed;
+	[SerializeField, ReadOnly] private bool isGrounded;
+	[SerializeField, ReadOnly] private float fallSpeed;
 
 	private InputAction moveAction;
+
+	#endregion
 
 	private void Awake()
 	{
@@ -47,13 +74,53 @@ public class PlayerMovement : MonoBehaviour
 		moveAction.canceled -= OnMove;
 	}
 
+	private void OnDrawGizmos()
+	{
+		// debug ground check
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere(transform.position + Vector3.down * groundCheckDistance, groundCheckRadius);
+	}
+
 	private void FixedUpdate()
 	{
-		// move character
-		characterController.Move(moveVector * speed * Time.fixedDeltaTime);
+		isGrounded = Physics.CheckSphere(transform.position + Vector3.down * groundCheckDistance, groundCheckRadius, groundMask);
 
-		// apply gravity
-		characterController.Move(gravityVector * Time.fixedDeltaTime);
+		// move character, and changes speed if on air or grounded
+		float targetSpeed = isGrounded ? speed : speedOnAir;
+		float targetAcceleration = isGrounded ? acceleration : accelerationOnAir;
+
+		if (moveVector.magnitude > 0)
+		{
+			lastMoveDirection = moveVector.normalized;
+			currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.fixedDeltaTime * targetAcceleration);
+		}
+		else
+		{
+			// avoid infinite lerping since true 0 never happens
+			if (currentSpeed < 0.01f)
+				currentSpeed = 0f;
+			else
+				currentSpeed = Mathf.Lerp(currentSpeed, 0, Time.fixedDeltaTime * deceleration);
+		}
+
+		characterController.Move(lastMoveDirection * currentSpeed * Time.fixedDeltaTime);
+
+		// apply gravity with acceleration
+		if (!isGrounded )
+		{
+			fallSpeed += fallAcceleration * Time.fixedDeltaTime;
+			fallSpeed = Mathf.Clamp(fallSpeed, maxFallSpeed, 0f);
+		}
+		else
+			fallSpeed = 0f;
+
+		if (fallSpeed < 0)
+		{
+			Vector3 fallVector = new Vector3(0f, fallSpeed, 0f);
+			characterController.Move(fallVector * Time.fixedDeltaTime);
+		}
+		else
+			characterController.Move(gravityVector * Time.fixedDeltaTime);
 
 		// rotates visual
 		if (moveVector.magnitude != 0)
@@ -63,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 
+	// simulates physics collision
 	private void OnControllerColliderHit(ControllerColliderHit hit)
 	{
 		Rigidbody body = hit.collider.attachedRigidbody;
@@ -72,6 +140,7 @@ public class PlayerMovement : MonoBehaviour
 		body.AddForceAtPosition(pushDirection * pushPower, hit.point, ForceMode.Impulse);
 	}
 
+	// get input vectors
 	private void OnMove(InputAction.CallbackContext context)
 	{
 		inputVector = context.ReadValue<Vector2>();
