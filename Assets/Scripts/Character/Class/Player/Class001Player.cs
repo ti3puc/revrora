@@ -1,6 +1,6 @@
 ﻿namespace Character.Class.Player
 {
-    public class PlayerClass : ICharacterClass
+    public class Class001Player : ICharacterClass
     {
         public int Id { get; }
         public string Name { get; }
@@ -12,7 +12,7 @@
         public int BaseDexterity { get; }
         public CharacterTypes Type { get; }
         
-        public PlayerClass()
+        public Class001Player()
         {
             Id = 1;
             Name = "Player";
