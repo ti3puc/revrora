@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private PlayerInput playerInput;
 	[SerializeField] private CharacterController characterController;
 	[SerializeField] private Transform visualToRotate;
+	[SerializeField] private PlayerPlatformParenter platformParenter;
 
 	[Header("Debug")]
 	[SerializeField, ReadOnly] private Vector3 moveVector;
@@ -62,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
 		Assert.IsNotNull(playerInput);
 		Assert.IsNotNull(characterController);
 		Assert.IsNotNull(visualToRotate);
+		Assert.IsNotNull(platformParenter);
 
 		moveAction = playerInput.actions[moveActionName];
 		moveAction.performed += OnMove;
@@ -103,7 +105,13 @@ public class PlayerMovement : MonoBehaviour
 				currentSpeed = Mathf.Lerp(currentSpeed, 0, Time.fixedDeltaTime * deceleration);
 		}
 
-		characterController.Move(lastMoveDirection * currentSpeed * Time.fixedDeltaTime);
+		Vector3 moveDirection = lastMoveDirection * currentSpeed * Time.fixedDeltaTime;
+
+		// adjust movement based on platform offset
+		if (platformParenter.IsOnPlatform)
+			characterController.Move(moveDirection + platformParenter.PlatformOffset);
+		else
+			characterController.Move(moveDirection);
 
 		// apply gravity with acceleration
 		if (!isGrounded )
