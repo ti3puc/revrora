@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		isGrounded = Physics.CheckSphere(transform.position + Vector3.down * groundCheckDistance, groundCheckRadius, groundMask);
+		isGrounded = Physics.CheckSphere(transform.position + Vector3.down * groundCheckDistance, groundCheckRadius, groundMask) || platformParenter.HasPlatformBellow;
 
 		// move character, and changes speed if on air or grounded
 		float targetSpeed = isGrounded ? speed : speedOnAir;
@@ -110,14 +110,15 @@ public class PlayerMovement : MonoBehaviour
 		// adjust movement based on platform offset
 		if (platformParenter.IsOnPlatform)
 		{
-			characterController.Move(platformParenter.GhostToParent.position - transform.position + moveDirection);
+			Vector3 platformMovement = platformParenter.GhostToParent.position - transform.position + moveDirection;
+			characterController.Move(platformMovement);
 			platformParenter.GhostToParent.position = transform.position;
 		}
 		else
 			characterController.Move(moveDirection);
 
 		// apply gravity with acceleration
-		if (!isGrounded )
+		if (!isGrounded)
 		{
 			fallSpeed += fallAcceleration * Time.fixedDeltaTime;
 			fallSpeed = Mathf.Clamp(fallSpeed, maxFallSpeed, 0f);

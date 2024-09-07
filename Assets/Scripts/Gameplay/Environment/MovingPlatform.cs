@@ -7,13 +7,14 @@ using UnityEngine.Assertions;
 public class MovingPlatform : MonoBehaviour
 {
 	[Header("Settings")]
-	[SerializeField] private float duration = 1f; // in seconds
+	[SerializeField] private float speed = 1f;
 	[SerializeField] private float delayBeforeMovement = 0f; // in seconds
 	[SerializeField] private bool infiniteMovement = true;
 
 	[Header("References")]
 	[SerializeField] private Transform startPoint;
 	[SerializeField] private Transform endPoint;
+	[SerializeField] private BoxCollider boxCollider;
 
 	[Header("Debug")]
 	[SerializeField] private float gizmosSphereRadius = .2f;
@@ -22,6 +23,7 @@ public class MovingPlatform : MonoBehaviour
 	[SerializeField, ReadOnly] private bool isWaitingDelay = false;
 	[SerializeField, ReadOnly] private bool isMovingToEnd = true;
 	[SerializeField, ReadOnly] private bool hasStartedMovement = false;
+	[SerializeField, ReadOnly] private Vector3 lastMovement;
 
 	private void Awake()
 	{
@@ -58,14 +60,15 @@ public class MovingPlatform : MonoBehaviour
 
 		if (hasStartedMovement)
 		{
-			lerpFactor += duration * Time.fixedDeltaTime;
+			lerpFactor += speed * Time.fixedDeltaTime;
 			transform.position = Vector3.Lerp(startPoint.position, endPoint.position, lerpFactor);
+			lastMovement = transform.position;
 
 			if (!isMovingToEnd)
-				lerpFactor -= 2 * duration * Time.fixedDeltaTime; // logic to go back
+				lerpFactor -= 2 * speed * Time.fixedDeltaTime; // logic to go back
 
 			// reached end of movement
-			if (lerpFactor >= 1f || lerpFactor <= 0f)
+			if (lerpFactor > 1f || lerpFactor < 0f)
 			{
 				lerpFactor = Mathf.Clamp01(lerpFactor);
 				isMovingToEnd = !isMovingToEnd;
@@ -80,6 +83,17 @@ public class MovingPlatform : MonoBehaviour
 				if (infiniteMovement)
 					DoSingleMovement();
 			}
+		}
+
+		// GAMBIARRA: corrigindo collider pq movimento vertical fica esquisito com o player
+		if (boxCollider != null)
+		{
+			if (lerpFactor > 0)
+				boxCollider.center = new Vector3(0, -Mathf.Abs(transform.position.y - lastMovement.y), 0);
+			else if (lerpFactor < 0)
+				boxCollider.center = new Vector3(0, Mathf.Abs(transform.position.y - lastMovement.y), 0);
+			else
+				boxCollider.center = Vector3.zero;
 		}
 	}
 
