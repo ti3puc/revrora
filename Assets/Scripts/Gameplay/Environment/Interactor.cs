@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using Player.Input;
 using UnityEngine;
 
-public class Interactor : MonoBehaviour
+namespace Environment.Interaction
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public class Interactor : MonoBehaviour
+	{
+		public delegate void InteractionEvent(Interactor interactor);
+		public static event InteractionEvent OnAnyInteraction;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+		private void Awake()
+		{
+			PlayerInput.OnInteractionStarted += DoInteract;
+		}
+
+		private void OnDestroy()
+		{
+			PlayerInput.OnInteractionStarted -= DoInteract;
+		}
+
+		private void DoInteract() => OnAnyInteraction?.Invoke(this);
+	}
 }

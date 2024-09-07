@@ -1,9 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Elevator : MonoBehaviour
+namespace Environment.Interaction
 {
-	[Header("Settings")]
-	[SerializeField] private float velocity;
+	public class Elevator : Interactable
+	{
+		[Header("References: Elevator")]
+		[SerializeField] private MovingPlatform platform;
+
+		public override void DoInteract()
+		{
+			if (platform != null)
+				platform.DoSingleMovement();
+		}
+	}
 }
