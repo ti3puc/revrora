@@ -109,7 +109,10 @@ public class PlayerMovement : MonoBehaviour
 
 		// adjust movement based on platform offset
 		if (platformParenter.IsOnPlatform)
-			characterController.Move(moveDirection + platformParenter.PlatformOffset);
+		{
+			characterController.Move(platformParenter.GhostToParent.position - transform.position + moveDirection);
+			platformParenter.GhostToParent.position = transform.position;
+		}
 		else
 			characterController.Move(moveDirection);
 

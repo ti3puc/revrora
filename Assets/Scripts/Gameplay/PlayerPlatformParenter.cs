@@ -11,21 +11,17 @@ public class PlayerPlatformParenter : MonoBehaviour
 	[SerializeField] private LayerMask groundMask;
 
 	[Header("References")]
+	[SerializeField] private Transform ghostToParent;
 	[SerializeField] private CharacterController characterController;
 
 	[Header("Debug")]
 	[SerializeField, ReadOnly] private bool isOnGround;
 	[SerializeField, ReadOnly] private bool isOnPlatform;
 	[SerializeField, ReadOnly] private Transform currentPlatform;
-	[SerializeField, ReadOnly] private Vector3 platformOffset;
 
 	public Transform CurrentPlatform => currentPlatform;
 	public bool IsOnPlatform => isOnPlatform = isOnGround && currentPlatform != null;
-	public Vector3 PlatformOffset
-	{
-		get => platformOffset;
-		set => platformOffset = value;
-	}
+	public Transform GhostToParent => ghostToParent;
 
 	private void OnDrawGizmos()
 	{
@@ -41,9 +37,16 @@ public class PlayerPlatformParenter : MonoBehaviour
 		if (isOnGround && hitInfo.collider.CompareTag("Platform"))
 		{
 			currentPlatform ??= hitInfo.collider.transform;
-			platformOffset = currentPlatform.position - transform.position;
+
+			if (ghostToParent.transform.parent != currentPlatform)
+				ghostToParent.SetParent(currentPlatform);
 		}
 		else
+		{
+			if (ghostToParent.transform.parent != transform)
+				ghostToParent.SetParent(transform);
+
 			currentPlatform = null;
+		}
 	}
 }
