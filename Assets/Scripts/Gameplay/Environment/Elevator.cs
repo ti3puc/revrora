@@ -7,7 +7,7 @@ namespace Environment.Interaction
 		[Header("References: Elevator")]
 		[SerializeField] private MovingPlatform platform;
 
-		public override void DoInteract()
+		public override void ReceiveInteraction()
 		{
 			if (platform != null)
 				platform.DoSingleMovement();

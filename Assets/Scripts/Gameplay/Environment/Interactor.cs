@@ -18,6 +18,6 @@ namespace Environment.Interaction
 			PlayerInput.OnInteractionStarted -= DoInteract;
 		}
 
-		private void DoInteract() => OnAnyInteraction?.Invoke(this);
+		public void DoInteract() => OnAnyInteraction?.Invoke(this);
 	}
 }

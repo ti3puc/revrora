@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Environment.Interaction
 {
-	[RequireComponent(typeof(SphereCollider))]
+	[RequireComponent(typeof(BoxCollider))]
 	public abstract class Interactable : MonoBehaviour
 	{
 		public delegate void RequestUIEvent(Interactor interactor, Interactable interactable);
@@ -11,17 +11,20 @@ namespace Environment.Interaction
 		public static event RequestUIEvent OnRequestToHideUI;
 
 		[Header("References")]
-		[SerializeField] private SphereCollider sphereCollider;
+		[SerializeField] protected bool automaticInteraction;
+
+		[Header("References")]
+		[SerializeField] protected BoxCollider boxCollider;
 
 		[Header("Debug")]
-		[SerializeField, ReadOnly] private Interactor currentInteractor;
+		[SerializeField, ReadOnly] protected Interactor currentInteractor;
 
 		protected virtual void Awake()
 		{
 			Interactor.OnAnyInteraction += TryInteract;
 
-			sphereCollider = GetComponent<SphereCollider>();
-			sphereCollider.isTrigger = true;
+			boxCollider = GetComponent<BoxCollider>();
+			boxCollider.isTrigger = true;
 		}
 
 		protected virtual void OnDestroy()
@@ -31,8 +34,8 @@ namespace Environment.Interaction
 
 		protected virtual void Reset()
 		{
-			sphereCollider = GetComponent<SphereCollider>();
-			sphereCollider.isTrigger = true;
+			boxCollider = GetComponent<BoxCollider>();
+			boxCollider.isTrigger = true;
 		}
 
 		protected virtual void OnTriggerEnter(Collider other)
@@ -41,7 +44,11 @@ namespace Environment.Interaction
 			if (interactor != null)
 			{
 				currentInteractor = interactor;
-				OnRequestToShowUI?.Invoke(currentInteractor, this);
+
+				if (automaticInteraction)
+					currentInteractor.DoInteract();
+				else
+					OnRequestToShowUI?.Invoke(currentInteractor, this);
 			}
 		}
 
@@ -60,9 +67,9 @@ namespace Environment.Interaction
 			if (interactor != currentInteractor)
 				return;
 
-			DoInteract();
+			ReceiveInteraction();
 		}
 
-		public abstract void DoInteract();
+		public abstract void ReceiveInteraction();
 	}
 }
