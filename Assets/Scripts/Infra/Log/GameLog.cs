@@ -1,28 +1,23 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Infra.Static;
+using UnityEngine;
+using Object = System.Object;
 
 public class GameLog
 {
     private static string GenerateLogMessage<T>(T domain, Object message)
     {
-        var attributes = message.GetType().GetCustomAttributes(false);
+        string logMessage = $"Domain: {domain.GetType().Name}\nType: {message.GetType().Name}\n";
 
-        string logMessage = $"Domain: {domain.GetType().Name}\nMessage Type: {message.GetType().Name}\n";
-
-        if (attributes.Any())
+        string jsonMessage = JsonUtility.ToJson(message, true);
+        if (jsonMessage != "{}")
         {
-            logMessage += "Attributes:\n";
-            foreach (var attribute in attributes)
-            {
-                logMessage += $"- {attribute.GetType().Name}\n";
-            }
+            logMessage += $"Message: {jsonMessage}\n";
         }
         else
         {
-            logMessage += "No custom attributes found.\n";
+            logMessage += $"Message: {message}\n";
         }
-        logMessage += $"Message Content: {message}\n";
 
         return logMessage;
     }
