@@ -3,6 +3,7 @@ using Character.Class;
 
 namespace Character.Base
 {
+    [System.Serializable]
     public class CharacterStats
     {
         #region Constants
