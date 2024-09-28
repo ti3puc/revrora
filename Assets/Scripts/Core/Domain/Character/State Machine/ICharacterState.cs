@@ -1,10 +1,10 @@
-using Character.Class;
+using Character.Base;
 
 namespace Character.StateMachine
 {
     public interface ICharacterState
     {
-        void EnterState(ICharacterClass character);
+        void EnterState(BaseCharacter character);
         void UpdateState();
     }
 }

@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using Character.Base;
 using Character.Class;
+using Character.StateMachine.States;
 using Infra.Exception.Character;
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace Character.StateMachine
@@ -10,7 +9,9 @@ namespace Character.StateMachine
     public class CharacterStateMachine : MonoBehaviour
     {
         #region Fields
-        private ICharacterClass _character;
+        [Header("References")]
+        [SerializeField] private BaseCharacter _character;
+
         private ICharacterState _currentState;
 
         private IdleCharacterState _idleCharacterState;
@@ -27,17 +28,8 @@ namespace Character.StateMachine
         #endregion
 
         #region Unity Cycle
-        private void Update()
+        private void Awake()
         {
-            _currentState.UpdateState();
-        }
-        #endregion
-
-        #region Public Methods
-        public void InitializeStateMachine(ICharacterClass character)
-        {
-            _character = character;
-
             // initialize states
             _idleCharacterState = new IdleCharacterState();
             _wanderCharacterState = new WanderCharacterState();
@@ -45,15 +37,21 @@ namespace Character.StateMachine
             _pursuitCharacterState = new PursuitCharacterState();
 
             // set initial state
-            SetState(_idleCharacterState);
+            SetState(_followCharacterState);
         }
 
+        private void FixedUpdate()
+        {
+            if (_currentState == null) return;
+            _currentState.UpdateState();
+        }
+        #endregion
+
+        #region Public Methods
         public void SetState(ICharacterState newState)
         {
-            if (_character == null)
-            {
-                throw new CharacterStateMachineNotInitializedException(name);
-            }
+            if (newState == null)
+                throw new InvalidCharacterStateException(name + ": trying to change to invalid state", this);
 
             _currentState = newState;
             _currentState.EnterState(_character);

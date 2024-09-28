@@ -21,21 +21,21 @@ public class GameLog
 
         return logMessage;
     }
-    public static void Debug<T>(T domain, Object message)
+    public static void Debug<T>(T domain, Object message, UnityEngine.Object context = null)
     {
         if (!Environments.IsDevelopment) return;
-        UnityEngine.Debug.Log(GenerateLogMessage<T>(domain, message));
+        UnityEngine.Debug.Log(GenerateLogMessage<T>(domain, message), context);
     }
     
-    public static void Warning<T>(T domain, Object message)
+    public static void Warning<T>(T domain, Object message, UnityEngine.Object context = null)
     {
         if (!Environments.IsDevelopment) return;
-        UnityEngine.Debug.LogWarning(GenerateLogMessage<T>(domain, message));
+        UnityEngine.Debug.LogWarning(GenerateLogMessage<T>(domain, message), context);
     }
     
-    public static void Error<T>(T domain, Object message)
+    public static void Error<T>(T domain, Object message, UnityEngine.Object context = null)
     {
         if (!Environments.IsDevelopment) return;
-        UnityEngine.Debug.LogError(GenerateLogMessage<T>(domain, message));
+        UnityEngine.Debug.LogError(GenerateLogMessage<T>(domain, message), context);
     }
 }

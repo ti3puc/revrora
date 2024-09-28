@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Character.Class;
+using Character.Base;
 
-namespace Character.StateMachine
+namespace Character.StateMachine.States
 {
-    public class FollowCharacterState : ICharacterState
+    public class IdleCharacterState : ICharacterState
     {
-        public void EnterState(ICharacterClass character)
+        public void EnterState(BaseCharacter character)
         {
             throw new System.NotImplementedException();
         }

@@ -2,6 +2,7 @@
   "dependencies": {
     "com.dbrizov.naughtyattributes": "2.1.4",
     "com.smkplus.custom-toolbar": "https://github.com/smkplus/CustomToolbar.git#master",
+    "com.unity.ai.navigation": "1.1.5",
     "com.unity.cinemachine": "2.10.1",
     "com.unity.collab-proxy": "2.4.4",
     "com.unity.ide.rider": "3.0.31",

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efd4c75defc094f439cc74552f4e38f2, type: 3}
-  m_Name: BasePlayer
+  m_Name: Pokemon 1
   m_EditorClassIdentifier: 
   id: 0
   charName: Player
