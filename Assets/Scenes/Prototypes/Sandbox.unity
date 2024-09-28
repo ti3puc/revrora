@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 5471688}
   - component: {fileID: 5471687}
   - component: {fileID: 5471691}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 11414935}
   - component: {fileID: 11414934}
   - component: {fileID: 11414937}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Breakable Part 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -725,7 +725,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 56079614}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Danglies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2239,7 +2239,7 @@ GameObject:
   - component: {fileID: 139594627}
   - component: {fileID: 139594626}
   - component: {fileID: 139594625}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2598,7 +2598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 223186261}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Boxes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2636,7 +2636,7 @@ GameObject:
   - component: {fileID: 227597370}
   - component: {fileID: 227597369}
   - component: {fileID: 227597368}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Platform
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -2898,7 +2898,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 291719006}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: StartPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3271,7 +3271,7 @@ GameObject:
   - component: {fileID: 335677550}
   - component: {fileID: 335677552}
   - component: {fileID: 335677551}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Collider (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4616,7 +4616,7 @@ GameObject:
   - component: {fileID: 390124881}
   - component: {fileID: 390124884}
   - component: {fileID: 390124885}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4907,7 +4907,7 @@ GameObject:
   - component: {fileID: 410490374}
   - component: {fileID: 410490372}
   - component: {fileID: 410490373}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5364,7 +5364,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 440759343}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Moving Platform As Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5883,7 +5883,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 566954914}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Doors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7696,7 +7696,7 @@ GameObject:
   - component: {fileID: 781756678}
   - component: {fileID: 781756677}
   - component: {fileID: 781756676}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7829,7 +7829,7 @@ GameObject:
   - component: {fileID: 790997904}
   - component: {fileID: 790997903}
   - component: {fileID: 790997906}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9175,7 +9175,7 @@ GameObject:
   - component: {fileID: 851443412}
   - component: {fileID: 851443411}
   - component: {fileID: 851443410}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -9475,7 +9475,7 @@ GameObject:
   - component: {fileID: 939195148}
   - component: {fileID: 939195147}
   - component: {fileID: 939195146}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9717,7 +9717,7 @@ GameObject:
   - component: {fileID: 960926156}
   - component: {fileID: 960926154}
   - component: {fileID: 960926155}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10308,7 +10308,7 @@ GameObject:
   - component: {fileID: 1072191459}
   - component: {fileID: 1072191458}
   - component: {fileID: 1072191461}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10606,7 +10606,8 @@ GameObject:
   - component: {fileID: 1093065710}
   - component: {fileID: 1093065709}
   - component: {fileID: 1093065708}
-  m_Layer: 6
+  - component: {fileID: 1093065712}
+  m_Layer: 7
   m_Name: Platform As Door
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -10724,6 +10725,74 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1093065706}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!208 &1093065712
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093065706}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!1 &1097990004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1097990005}
+  - component: {fileID: 1097990006}
+  m_Layer: 7
+  m_Name: NavMesh Link
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1097990005
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097990004}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2134271889}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1097990006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097990004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 0, y: 0.38, z: 1.82}
+  m_EndPoint: {x: 0, y: 0, z: 4.85}
+  m_Width: 4.57
+  m_CostModifier: -1
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 0
+  m_Area: 0
 --- !u!1 &1110148708
 GameObject:
   m_ObjectHideFlags: 0
@@ -11098,7 +11167,7 @@ GameObject:
   - component: {fileID: 1132015016}
   - component: {fileID: 1132015018}
   - component: {fileID: 1132015017}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12469,7 +12538,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1147075693}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: EndPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12505,7 +12574,7 @@ GameObject:
   - component: {fileID: 1152215349}
   - component: {fileID: 1152215347}
   - component: {fileID: 1152215348}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12732,6 +12801,58 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1159783345}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1211963783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1211963784}
+  - component: {fileID: 1211963785}
+  m_Layer: 7
+  m_Name: NavMesh Link (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1211963784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211963783}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.61, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2134271889}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1211963785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211963783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 0, y: 0.38, z: 1.82}
+  m_EndPoint: {x: 0, y: 0, z: 4.85}
+  m_Width: 3.7
+  m_CostModifier: -1
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 0
+  m_Area: 0
 --- !u!1 &1217549737
 GameObject:
   m_ObjectHideFlags: 0
@@ -12746,7 +12867,7 @@ GameObject:
   - component: {fileID: 1217549739}
   - component: {fileID: 1217549743}
   - component: {fileID: 1217549742}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Door (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12914,7 +13035,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1227739843}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: EndPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14724,7 +14845,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1314534756}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Danglies (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14764,7 +14885,7 @@ GameObject:
   - component: {fileID: 1316639239}
   - component: {fileID: 1316639238}
   - component: {fileID: 1316639237}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15058,7 +15179,7 @@ GameObject:
   - component: {fileID: 1355843231}
   - component: {fileID: 1355843230}
   - component: {fileID: 1355843229}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15278,7 +15399,7 @@ GameObject:
   - component: {fileID: 1393785011}
   - component: {fileID: 1393785010}
   - component: {fileID: 1393785009}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15999,7 +16120,7 @@ GameObject:
   - component: {fileID: 1518574017}
   - component: {fileID: 1518574015}
   - component: {fileID: 1518574016}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16308,7 +16429,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1549578879}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: StartPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16853,7 +16974,7 @@ GameObject:
   - component: {fileID: 1735314136}
   - component: {fileID: 1735314140}
   - component: {fileID: 1735314139}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Breakable Part 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17103,7 +17224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1759697286}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Passage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17277,7 +17398,7 @@ GameObject:
   - component: {fileID: 1790918994}
   - component: {fileID: 1790918992}
   - component: {fileID: 1790918993}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17578,7 +17699,7 @@ GameObject:
   - component: {fileID: 1822570139}
   - component: {fileID: 1822570138}
   - component: {fileID: 1822570137}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17711,7 +17832,7 @@ GameObject:
   - component: {fileID: 1890908018}
   - component: {fileID: 1890908017}
   - component: {fileID: 1890908016}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18557,7 +18678,7 @@ GameObject:
   - component: {fileID: 1934423234}
   - component: {fileID: 1934423232}
   - component: {fileID: 1934423233}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18710,7 +18831,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1957941633}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Danglies (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18853,7 +18974,7 @@ GameObject:
   - component: {fileID: 1996105207}
   - component: {fileID: 1996105206}
   - component: {fileID: 1996105205}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19275,7 +19396,7 @@ GameObject:
   - component: {fileID: 2038119326}
   - component: {fileID: 2038119325}
   - component: {fileID: 2038119328}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19511,6 +19632,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2054562016}
   - component: {fileID: 2054562015}
+  - component: {fileID: 2054562017}
+  - component: {fileID: 2054562018}
   m_Layer: 0
   m_Name: NavMesh Surface
   m_TagString: Untagged
@@ -19536,10 +19659,10 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 247
+    m_Bits: 119
   m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 0
+  m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -19564,6 +19687,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2054562017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054562014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 1152
+  m_UseGeometry: 0
+  m_DefaultArea: 3
+  m_GenerateLinks: 1
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 035dc1074fc94ab44860bfc67fc115ce, type: 2}
+  m_BuildHeightMesh: 0
+--- !u!114 &2054562018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054562014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de19a281a888a8841943480d2cb79ec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navMeshSurface: {fileID: 2054562017}
 --- !u!1 &2055270687
 GameObject:
   m_ObjectHideFlags: 0
@@ -19653,7 +19820,7 @@ MonoBehaviour:
   groundCheckRadius: 0.5
   groundMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   moveActionName: Move
   characterController: {fileID: 2055270695}
   visualToRotate: {fileID: 232156786}
@@ -19707,7 +19874,7 @@ MonoBehaviour:
   platformDistance: 1.25
   groundMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   ghostToParent: {fileID: 15543725}
   characterController: {fileID: 2055270695}
   isOnGround: 0
@@ -20340,7 +20507,7 @@ GameObject:
   - component: {fileID: 2127725843}
   - component: {fileID: 2127725842}
   - component: {fileID: 2127725846}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20493,7 +20660,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2132242078}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Danglies (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20528,7 +20695,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2134271889}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Moving Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20551,6 +20718,8 @@ Transform:
   - {fileID: 227597367}
   - {fileID: 291719006}
   - {fileID: 1227739843}
+  - {fileID: 1097990005}
+  - {fileID: 1211963784}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2135208183
