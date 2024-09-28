@@ -17,6 +17,10 @@ namespace Character.StateMachine.States
         private float _moveAwayDistance = 1.8f;
         #endregion
 
+        #region NavMesh Warp
+        private float _maxDistanceToPlayer = 20f;
+        #endregion
+
         #region References
         private Player.Player _player;
         private NavMeshAgent _navMeshAgent;
@@ -42,6 +46,12 @@ namespace Character.StateMachine.States
                 // move away if too close
                 Vector3 moveAwayDirection = (_navMeshAgent.transform.position - _player.transform.position).normalized;
                 _navMeshAgent.destination = _navMeshAgent.transform.position + moveAwayDirection * _moveAwayDistance;
+            }
+            else if (distanceToPlayer > _maxDistanceToPlayer)
+            {
+                // warp to player
+                Vector3 direction = (_navMeshAgent.transform.position - _player.transform.position).normalized;
+                _navMeshAgent.Warp(_player.transform.position + direction * _offset.magnitude);
             }
             else
             {
