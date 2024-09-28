@@ -7,6 +7,8 @@ namespace Character.StateMachine.States
 {
     public class PursuitCharacterState : ICharacterState
     {
+        public CharacterStates CharacterState => CharacterStates.Pursuit;
+
         public void EnterState(BaseCharacter character)
         {
             throw new System.NotImplementedException();

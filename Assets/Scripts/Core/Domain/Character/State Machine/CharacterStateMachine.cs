@@ -2,6 +2,7 @@ using Character.Base;
 using Character.Class;
 using Character.StateMachine.States;
 using Infra.Exception.Character;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Character.StateMachine
@@ -9,10 +10,15 @@ namespace Character.StateMachine
     public class CharacterStateMachine : MonoBehaviour
     {
         #region Fields
+        [Header("Settings")]
+        [SerializeField] private CharacterStates _initialState = CharacterStates.Idle;
+        [SerializeField] private FollowSettings _followStateSettings;
         [Header("References")]
         [SerializeField] private BaseCharacter _character;
+        [Header("Debug")]
+        [SerializeField, ReadOnly] private CharacterStates _currentState;
 
-        private ICharacterState _currentState;
+        private ICharacterState _actualCurrentState;
 
         private IdleCharacterState _idleCharacterState;
         private WanderCharacterState _wanderCharacterState;
@@ -30,20 +36,32 @@ namespace Character.StateMachine
         #region Unity Cycle
         private void Awake()
         {
+            if (_character == null)
+                throw new InvalidCharacterException(name + ": missing base character reference", this);
+
             // initialize states
             _idleCharacterState = new IdleCharacterState();
             _wanderCharacterState = new WanderCharacterState();
-            _followCharacterState = new FollowCharacterState();
+            _followCharacterState = new FollowCharacterState(_followStateSettings);
             _pursuitCharacterState = new PursuitCharacterState();
 
             // set initial state
-            SetState(_followCharacterState);
+            ICharacterState firstState = _initialState switch
+                {
+                    CharacterStates.Idle => _idleCharacterState,
+                    CharacterStates.Wander => _wanderCharacterState,
+                    CharacterStates.Follow => _followCharacterState,
+                    CharacterStates.Pursuit => _idleCharacterState,
+                    _ => IdleCharacterState,
+                };
+
+            SetState(firstState);
         }
 
         private void FixedUpdate()
         {
-            if (_currentState == null) return;
-            _currentState.UpdateState();
+            if (_actualCurrentState == null) return;
+            _actualCurrentState.UpdateState();
         }
         #endregion
 
@@ -53,8 +71,9 @@ namespace Character.StateMachine
             if (newState == null)
                 throw new InvalidCharacterStateException(name + ": trying to change to invalid state", this);
 
-            _currentState = newState;
-            _currentState.EnterState(_character);
+            _actualCurrentState = newState;
+            _actualCurrentState.EnterState(_character);
+            _currentState = _actualCurrentState.CharacterState;
         }
         #endregion
     }

@@ -7,6 +7,8 @@ namespace Character.StateMachine.States
 {
     public class WanderCharacterState : ICharacterState
     {
+        public CharacterStates CharacterState => CharacterStates.Wander;
+
         public void EnterState(BaseCharacter character)
         {
             throw new System.NotImplementedException();

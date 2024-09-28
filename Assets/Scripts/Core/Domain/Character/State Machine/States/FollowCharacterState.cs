@@ -1,32 +1,44 @@
 using UnityEngine;
 using UnityEngine.AI;
 using Character.Base;
+using System;
+using NaughtyAttributes;
 
 namespace Character.StateMachine.States
 {
+    [Serializable]
+    public class FollowSettings
+    {
+        [Header("Follow")]
+        public Vector3 FollowOffset = new Vector3(0, 0, 2f);
+        public float FollowSmoothDamp = .1f;
+        [HideInInspector] public Vector3 Velocity = Vector3.zero;
+
+        [Header("Out of the way")]
+        public float MinDistanceToPlayer = 2f;
+        public float MoveAwayDistance = 1.8f;
+
+        [Header("Warp")]
+        public float MaxDistanceToPlayer = 20f;
+    }
+
     public class FollowCharacterState : ICharacterState
     {
-        #region NavMesh Follow
-        private Vector3 _offset = new Vector3(0, 0, 2f);
-        private float _smoothDampTime = .1f;
-        private Vector3 _velocity = Vector3.zero;
-        #endregion
-
-        #region NavMesh Out of the way
-        private float _minDistanceToPlayer = 2f;
-        private float _moveAwayDistance = 1.8f;
-        #endregion
-
-        #region NavMesh Warp
-        private float _maxDistanceToPlayer = 20f;
-        #endregion
-
-        #region References
+        private FollowSettings _followSettings;
         private Player.Player _player;
         private NavMeshAgent _navMeshAgent;
         private BaseCharacter _character;
+
+        public CharacterStates CharacterState => CharacterStates.Follow;
+
+        #region Constructor
+        public FollowCharacterState(FollowSettings followSettings)
+        {
+            _followSettings = followSettings;
+        }
         #endregion
 
+        #region Interface Methods Implementation
         public void EnterState(BaseCharacter character)
         {
             _character = character;
@@ -41,26 +53,28 @@ namespace Character.StateMachine.States
             if (_player == null) return;
 
             float distanceToPlayer = Vector3.Distance(_navMeshAgent.transform.position, _player.transform.position);
-            if (distanceToPlayer < _minDistanceToPlayer)
+            if (distanceToPlayer < _followSettings.MinDistanceToPlayer)
             {
                 // move away if too close
                 Vector3 moveAwayDirection = (_navMeshAgent.transform.position - _player.transform.position).normalized;
-                _navMeshAgent.destination = _navMeshAgent.transform.position + moveAwayDirection * _moveAwayDistance;
+                _navMeshAgent.destination = _navMeshAgent.transform.position + moveAwayDirection * _followSettings.MoveAwayDistance;
             }
-            else if (distanceToPlayer > _maxDistanceToPlayer)
+            else if (distanceToPlayer > _followSettings.MaxDistanceToPlayer)
             {
                 // warp to player
                 Vector3 direction = (_navMeshAgent.transform.position - _player.transform.position).normalized;
-                _navMeshAgent.Warp(_player.transform.position + direction * _offset.magnitude);
+                _navMeshAgent.Warp(_player.transform.position + direction * _followSettings.FollowOffset.magnitude);
             }
             else
             {
                 // follow player
                 Vector3 direction = (_navMeshAgent.transform.position - _player.transform.position).normalized;
-                _navMeshAgent.destination = _player.transform.position + direction * _offset.magnitude;
+                _navMeshAgent.destination = _player.transform.position + direction * _followSettings.FollowOffset.magnitude;
             }
 
-            _navMeshAgent.transform.position = Vector3.SmoothDamp(_navMeshAgent.transform.position, _navMeshAgent.nextPosition, ref _velocity, _smoothDampTime);
+            _navMeshAgent.transform.position = Vector3.SmoothDamp(_navMeshAgent.transform.position, _navMeshAgent.nextPosition,
+                ref _followSettings.Velocity, _followSettings.FollowSmoothDamp);
         }
+        #endregion
     }
 }

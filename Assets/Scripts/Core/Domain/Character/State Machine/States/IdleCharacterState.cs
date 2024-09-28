@@ -7,6 +7,8 @@ namespace Character.StateMachine.States
 {
     public class IdleCharacterState : ICharacterState
     {
+        public CharacterStates CharacterState => CharacterStates.Idle;
+
         public void EnterState(BaseCharacter character)
         {
             throw new System.NotImplementedException();

@@ -11133,7 +11133,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5905d3d5e7137af43a72b015b1e40c94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _initialState: 2
+  _followStateSettings:
+    FollowOffset: {x: 0, y: 0, z: 2}
+    FollowSmoothDamp: 0.1
+    Velocity: {x: 0, y: 0, z: 0}
+    MinDistanceToPlayer: 2
+    MoveAwayDistance: 1.8
+    MaxDistanceToPlayer: 20
   _character: {fileID: 1131637544}
+  _currentState: 0
 --- !u!195 &1131637546
 NavMeshAgent:
   m_ObjectHideFlags: 0
