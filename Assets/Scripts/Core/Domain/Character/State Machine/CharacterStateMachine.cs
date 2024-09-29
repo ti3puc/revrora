@@ -13,6 +13,8 @@ namespace Character.StateMachine
         [Header("Settings")]
         [SerializeField] private CharacterStates _initialState = CharacterStates.Idle;
         [SerializeField] private FollowSettings _followStateSettings;
+        [SerializeField] private WanderSettings _wanderStateSettings;
+        [SerializeField] private PursuitSettings _pursuitStateSettings;
         [Header("References")]
         [SerializeField] private BaseCharacter _character;
         [Header("Debug")]
@@ -41,9 +43,9 @@ namespace Character.StateMachine
 
             // initialize states
             _idleCharacterState = new IdleCharacterState();
-            _wanderCharacterState = new WanderCharacterState();
+            _wanderCharacterState = new WanderCharacterState(_wanderStateSettings, _pursuitStateSettings, transform.position);
             _followCharacterState = new FollowCharacterState(_followStateSettings);
-            _pursuitCharacterState = new PursuitCharacterState();
+            _pursuitCharacterState = new PursuitCharacterState(_pursuitStateSettings);
 
             // set initial state
             ICharacterState firstState = _initialState switch
@@ -72,7 +74,7 @@ namespace Character.StateMachine
                 throw new InvalidCharacterStateException(name + ": trying to change to invalid state", this);
 
             _actualCurrentState = newState;
-            _actualCurrentState.EnterState(_character);
+            _actualCurrentState.EnterState(this);
             _currentState = _actualCurrentState.CharacterState;
         }
         #endregion

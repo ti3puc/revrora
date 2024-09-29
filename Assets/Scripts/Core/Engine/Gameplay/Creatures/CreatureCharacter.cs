@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Creatures
 {
-    public class Creature : BaseCharacter
+    public class CreatureCharacter : BaseCharacter
     {
         
     }

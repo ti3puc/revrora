@@ -1,43 +1,46 @@
 using NaughtyAttributes;
 using UnityEngine;
 
-public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+namespace Managers
 {
-	[Header("Singleton Settings")]
-	[SerializeField] private bool dontDestroyOnLoad = true;
-	[Tooltip("If true the whole duplicate obj will be destroyed, if false just the duplicate script is destroyed")]
-	[SerializeField] private bool destroyObjToEnsureInstance = true;
-
-	#region Properties
-	private static T instance;
-	public static T Instance
+	public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 	{
-		get
+		[Header("Singleton Settings")]
+		[SerializeField] private bool dontDestroyOnLoad = true;
+		[Tooltip("If true the whole duplicate obj will be destroyed, if false just the duplicate script is destroyed")]
+		[SerializeField] private bool destroyObjToEnsureInstance = true;
+
+		#region Properties
+		private static T instance;
+		public static T Instance
 		{
-			if (instance != null) return instance;
+			get
+			{
+				if (instance != null) return instance;
 
-			// search for existing instance
-			instance = (T)FindObjectOfType(typeof(T));
+				// search for existing instance
+				instance = (T)FindObjectOfType(typeof(T));
 
-			return instance;
+				return instance;
+			}
 		}
-	}
-	public static bool InstanceIsValid => Instance != null;
-	#endregion
+		public static bool InstanceIsValid => Instance != null;
+		#endregion
 
-	#region Unity Messages
-	protected virtual void Awake()
-	{
-		if (Instance != null && Instance != this)
+		#region Unity Messages
+		protected virtual void Awake()
 		{
-			if (destroyObjToEnsureInstance)
-				Destroy(gameObject);
-			else
-				Destroy(this);
-		}
+			if (Instance != null && Instance != this)
+			{
+				if (destroyObjToEnsureInstance)
+					Destroy(gameObject);
+				else
+					Destroy(this);
+			}
 
-		if (dontDestroyOnLoad)
-			DontDestroyOnLoad(gameObject);
+			if (dontDestroyOnLoad)
+				DontDestroyOnLoad(gameObject);
+		}
+		#endregion
 	}
-	#endregion
 }

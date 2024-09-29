@@ -13,7 +13,7 @@ namespace Character.StateMachine
     public interface ICharacterState
     {
         CharacterStates CharacterState { get; }
-        void EnterState(BaseCharacter character);
+        void EnterState(CharacterStateMachine character);
         void UpdateState();
     }
 }

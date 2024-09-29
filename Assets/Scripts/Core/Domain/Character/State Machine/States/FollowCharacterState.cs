@@ -3,6 +3,9 @@ using UnityEngine.AI;
 using Character.Base;
 using System;
 using NaughtyAttributes;
+using Player;
+using Managers.Player;
+using Infra.Exception.Character;
 
 namespace Character.StateMachine.States
 {
@@ -10,6 +13,7 @@ namespace Character.StateMachine.States
     public class FollowSettings
     {
         [Header("Follow")]
+        public Transform FollowTarget;
         public Vector3 FollowOffset = new Vector3(0, 0, 2f);
         public float FollowSmoothDamp = .1f;
         [HideInInspector] public Vector3 Velocity = Vector3.zero;
@@ -25,9 +29,8 @@ namespace Character.StateMachine.States
     public class FollowCharacterState : ICharacterState
     {
         private FollowSettings _followSettings;
-        private Player.Player _player;
         private NavMeshAgent _navMeshAgent;
-        private BaseCharacter _character;
+        private CharacterStateMachine _character;
 
         public CharacterStates CharacterState => CharacterStates.Follow;
 
@@ -39,39 +42,42 @@ namespace Character.StateMachine.States
         #endregion
 
         #region Interface Methods Implementation
-        public void EnterState(BaseCharacter character)
+        public void EnterState(CharacterStateMachine character)
         {
             _character = character;
             _navMeshAgent ??= _character.GetComponent<NavMeshAgent>();
-            _player ??= GameObject.FindObjectOfType<Player.Player>();
 
             _navMeshAgent.updatePosition = false;
+
+            if (_followSettings.FollowTarget == null)
+                throw new InvalidFollowTargetException(_character.name + ": missing follow target reference", _character);
         }
 
         public void UpdateState()
         {
-            if (_player == null) return;
+            if (_followSettings.FollowTarget == null) return;
 
-            float distanceToPlayer = Vector3.Distance(_navMeshAgent.transform.position, _player.transform.position);
+            float distanceToPlayer = Vector3.Distance(_navMeshAgent.transform.position, _followSettings.FollowTarget.position);
             if (distanceToPlayer < _followSettings.MinDistanceToPlayer)
             {
                 // move away if too close
-                Vector3 moveAwayDirection = (_navMeshAgent.transform.position - _player.transform.position).normalized;
+                Vector3 moveAwayDirection = (_navMeshAgent.transform.position - _followSettings.FollowTarget.position).normalized;
                 _navMeshAgent.destination = _navMeshAgent.transform.position + moveAwayDirection * _followSettings.MoveAwayDistance;
             }
             else if (distanceToPlayer > _followSettings.MaxDistanceToPlayer)
             {
                 // warp to player
-                Vector3 direction = (_navMeshAgent.transform.position - _player.transform.position).normalized;
-                _navMeshAgent.Warp(_player.transform.position + direction * _followSettings.FollowOffset.magnitude);
+                Vector3 direction = (_navMeshAgent.transform.position - _followSettings.FollowTarget.position).normalized;
+                _navMeshAgent.Warp(_followSettings.FollowTarget.position + direction * _followSettings.FollowOffset.magnitude);
             }
             else
             {
                 // follow player
-                Vector3 direction = (_navMeshAgent.transform.position - _player.transform.position).normalized;
-                _navMeshAgent.destination = _player.transform.position + direction * _followSettings.FollowOffset.magnitude;
+                Vector3 direction = (_navMeshAgent.transform.position - _followSettings.FollowTarget.position).normalized;
+                _navMeshAgent.destination = _followSettings.FollowTarget.position + direction * _followSettings.FollowOffset.magnitude;
             }
 
+            // this avoids jittering on navmesh movement
             _navMeshAgent.transform.position = Vector3.SmoothDamp(_navMeshAgent.transform.position, _navMeshAgent.nextPosition,
                 ref _followSettings.Velocity, _followSettings.FollowSmoothDamp);
         }
