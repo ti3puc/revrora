@@ -1,26 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using Character.Base;
 using Character.Class;
 using Infra.Exception.Managers;
+using NaughtyAttributes;
+using UnityEngine;
 
 namespace Managers.Party
 {
     public class PartyManager : Singleton<PartyManager>
     {
-        private List<ICharacterClass> _partyMembers;
+        public event Action OnPartyChangedEvent;
 
-        private const int MinPartySize = 1;
-        private const int MaxPartySize = 6;
+        [Header("Settings")]
+        [SerializeField] private int _minPartySize = 1;
+        [SerializeField] private int _maxPartySize = 6;
+        [SerializeField] private int _partyMembersToShow = 1;
 
+        [Header("Debug")]
+        [SerializeField, ReadOnly] private List<BaseCharacter> _partyMembers;
+        [SerializeField, ReadOnly] private BaseCharacter _activePartyMember;
+
+        public List<BaseCharacter> PartyMembers => _partyMembers;
+        public BaseCharacter ActivePartyMember => _activePartyMember;
+
+        #region Unity Messages
         protected override void Awake()
         {
             base.Awake();
-            _partyMembers = new List<ICharacterClass>();
+            _partyMembers = new List<BaseCharacter>();
+
+            OnPartyChangedEvent += HandlePartyVisibility;
         }
 
-        public void InitializePartyManager(List<ICharacterClass> partyMembers)
+        private void OnDestroy()
         {
-            if (partyMembers.Count < MinPartySize || partyMembers.Count > MaxPartySize)
+            OnPartyChangedEvent -= HandlePartyVisibility;
+        }
+        #endregion
+
+        #region Public Methods
+        public void InitializePartyManager(List<BaseCharacter> partyMembers)
+        {
+            if (partyMembers.Count < _minPartySize || partyMembers.Count > _maxPartySize)
             {
                 throw new PartyManagerGeneralException("Party size is invalid!");
             }
@@ -34,15 +56,16 @@ namespace Managers.Party
             }
         }
 
-        public void AddPartyMember(ICharacterClass character)
+        public void AddPartyMember(BaseCharacter character)
         {
-            if (_partyMembers.Count >= MaxPartySize)
+            if (_partyMembers.Count >= _maxPartySize)
             {
                 throw new PartyManagerPartyIsFullException();
             }
             try
             {
                 _partyMembers.Add(character);
+                OnPartyChangedEvent?.Invoke();
             }
             catch (Exception exception)
             {
@@ -50,9 +73,9 @@ namespace Managers.Party
             }
         }
 
-        public void RemovePartyMember(ICharacterClass character)
+        public void RemovePartyMember(BaseCharacter character)
         {
-            if (_partyMembers.Count <= MinPartySize)
+            if (_partyMembers.Count <= _minPartySize)
             {
                 throw new PartyManagerPartyIsEmptyException();
             }
@@ -63,6 +86,7 @@ namespace Managers.Party
             try
             {
                 _partyMembers.Remove(character);
+                OnPartyChangedEvent?.Invoke();
             }
             catch (Exception exception)
             {
@@ -70,7 +94,7 @@ namespace Managers.Party
             }
         }
 
-        public void SwitchMemberPosition(ICharacterClass character1, ICharacterClass character2)
+        public void SwitchMemberPosition(BaseCharacter character1, BaseCharacter character2)
         {
             if (!_partyMembers.Contains(character1))
             {
@@ -86,6 +110,8 @@ namespace Managers.Party
                 int index2 = _partyMembers.IndexOf(character2);
                 _partyMembers[index1] = character2;
                 _partyMembers[index2] = character1;
+
+                OnPartyChangedEvent?.Invoke();
             }
             catch (Exception exception)
             {
@@ -93,9 +119,39 @@ namespace Managers.Party
             }
         }
 
-        public List<ICharacterClass> GetPartyMembers()
+        public void SwitchActiveMember(int index)
         {
-            return _partyMembers;
+            if (_partyMembers.Count <= index)
+                throw new PartyManagerCharacterNotInPartyException();
+
+            try
+            {
+                _activePartyMember = _partyMembers[index];
+
+                OnPartyChangedEvent?.Invoke();
+            }
+            catch (Exception exception)
+            {
+                throw new PartyManagerGeneralException(exception.Message);
+            }
         }
+        #endregion
+
+        #region Private Methods
+        private void HandlePartyVisibility()
+        {
+            if (_partyMembers.Count <= _minPartySize)
+                return;
+
+            if (_activePartyMember == null)
+                _activePartyMember = _partyMembers[0];
+
+            for (int i = 0; i < _partyMembers.Count; i++)
+            {
+                bool isActiveMember = _partyMembers[i] == _activePartyMember;
+                _partyMembers[i].transform.GetChild(0).gameObject.SetActive(isActiveMember);
+            }
+        }
+        #endregion
     }
 }
