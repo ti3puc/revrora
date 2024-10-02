@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : Singleton<GameManager>
+namespace Managers
 {
-	public void ReloadScene()
+	public class GameManager : Singleton<GameManager>
 	{
-		SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+		public void ReloadScene()
+		{
+			SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+		}
 	}
 }

@@ -2,8 +2,8 @@
 
 public class GeneralGameException<T> : Exception
 {
-    public GeneralGameException(string message) : base(message)
+    public GeneralGameException(string message, UnityEngine.Object context = null) : base(message)
     {
-        GameLog.Error(this.GetType(), message);
+        GameLog.Error(this.GetType(), message, context);
     }
 }

@@ -14,9 +14,9 @@ TagManager:
   - UI
   - Ground
   - Platform
-  - 
-  - 
-  - 
+  - Player
+  - Creature
+  - PhysicsInteraction
   - 
   - 
   - 

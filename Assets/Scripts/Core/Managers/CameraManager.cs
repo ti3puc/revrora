@@ -3,27 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraManager : Singleton<CameraManager>
+namespace Managers.Cameras
 {
-    [Header("Debug")]
-    [SerializeField, ReadOnly] private Camera mainCamera;
-
-    public static Camera MainCamera => Instance.mainCamera;
-
-	protected override void Awake()
+	public class CameraManager : Singleton<CameraManager>
 	{
-		base.Awake();
-		mainCamera = Camera.main;
-	}
+		[Header("Debug")]
+		[SerializeField, ReadOnly] private Camera mainCamera;
 
-	public static void GetCameraVectors(out Vector3 camForwardVector, out Vector3 camRightVector)
-	{
-		camForwardVector = MainCamera.transform.forward;
-		camForwardVector.y = 0f;
-		camForwardVector.Normalize();
+		public static Camera MainCamera => Instance.mainCamera;
 
-		camRightVector = MainCamera.transform.right;
-		camRightVector.y = 0f;
-		camRightVector.Normalize();
+		protected override void Awake()
+		{
+			base.Awake();
+			mainCamera = Camera.main;
+		}
+
+		public static void GetCameraVectors(out Vector3 camForwardVector, out Vector3 camRightVector)
+		{
+			camForwardVector = MainCamera.transform.forward;
+			camForwardVector.y = 0f;
+			camForwardVector.Normalize();
+
+			camRightVector = MainCamera.transform.right;
+			camRightVector.y = 0f;
+			camRightVector.Normalize();
+		}
 	}
 }

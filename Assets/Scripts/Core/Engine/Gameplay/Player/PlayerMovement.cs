@@ -1,3 +1,4 @@
+using Managers.Cameras;
 using NaughtyAttributes;
 using Player.Input;
 using UnityEngine;
@@ -153,7 +154,7 @@ namespace Player.Movement
 			if (moveAccordingToCameraView)
 			{
 				// usando os vetores da camera pra mover o player de acordo com a camera, ao inves de usar vetores globais
-				// *out* permite criar variaveis locais direto na funçao
+				// *out* permite criar variaveis locais direto na funï¿½ao
 				CameraManager.GetCameraVectors(out Vector3 cameraForward, out Vector3 cameraRight);
 				moveVector = (inputVector.x * cameraRight) + (inputVector.y * cameraForward);
 			}
