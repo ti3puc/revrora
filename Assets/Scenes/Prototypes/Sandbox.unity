@@ -5541,8 +5541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54664e9bd1f74bac9fae69030f2f34c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 1
-  destroyObjToEnsureInstance: 1
+  dontDestroyOnLoad: 0
+  destroyObjToEnsureInstance: 0
   _minPartySize: 1
   _maxPartySize: 6
   _partyMembersToShow: 1
@@ -23667,8 +23667,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebad39fbd20f5e645960aabe20f125f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 1
-  destroyObjToEnsureInstance: 1
+  dontDestroyOnLoad: 0
+  destroyObjToEnsureInstance: 0
 --- !u!4 &2087196716
 Transform:
   m_ObjectHideFlags: 0
