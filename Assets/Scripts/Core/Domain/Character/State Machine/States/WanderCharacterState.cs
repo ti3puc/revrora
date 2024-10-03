@@ -62,9 +62,13 @@ namespace Character.StateMachine.States
                     _reachedStartingPosition = true;
                     SetNewWanderTarget();
                 }
+
+                MoveNavAgent();
+                CheckChangeStateToPursuit();
                 return;
             }
 
+            // wanders around a radius
             _wanderTimer += Time.deltaTime;
 
             if (_wanderTimer >= _wanderSettings.WanderTime)
@@ -76,17 +80,26 @@ namespace Character.StateMachine.States
             if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
                 _navMeshAgent.destination = _wanderTarget;
 
-            // this avoids jittering on navmesh movement
-            _navMeshAgent.transform.position = Vector3.SmoothDamp(_navMeshAgent.transform.position, _navMeshAgent.nextPosition,
-                ref _wanderSettings.Velocity, _wanderSettings.WanderSmoothDamp);
-
-            float distanceToTarget = _pursuitSettings.GetDistanceToTarget(_navMeshAgent.transform);
-            if (distanceToTarget < _pursuitSettings.MaxPursuitDistance)
-                _character.SetState(_character.PursuitCharacterState);
+            MoveNavAgent();
+            CheckChangeStateToPursuit();
         }
         #endregion
 
         #region Helper Methods
+        private void MoveNavAgent()
+        {
+            // this avoids jittering on navmesh movement
+            _navMeshAgent.transform.position = Vector3.SmoothDamp(_navMeshAgent.transform.position, _navMeshAgent.nextPosition,
+                ref _wanderSettings.Velocity, _wanderSettings.WanderSmoothDamp);
+        }
+
+        private void CheckChangeStateToPursuit()
+        {
+            float distanceToTarget = _pursuitSettings.GetDistanceToTarget(_navMeshAgent.transform);
+            if (distanceToTarget < _pursuitSettings.MaxPursuitDistance)
+                _character.SetState(_character.PursuitCharacterState);
+        }
+
         private void SetNewWanderTarget()
         {
             Vector3 randomDirection = Random.insideUnitSphere * _wanderSettings.WanderRadius;

@@ -11,7 +11,6 @@ namespace Character.StateMachine.States
     {
         [Header("Pursuit")]
         public Transform PursuitTarget;
-        public float StopDistance = 2f;
         public float MaxPursuitDistance = 30f;
         public float PursuitSmoothDamp = .1f;
         [HideInInspector] public Vector3 Velocity = Vector3.zero;
@@ -62,15 +61,10 @@ namespace Character.StateMachine.States
                 _navMeshAgent.isStopped = true;
                 _character.SetState(_character.WanderCharacterState);
             }
-            else if (distanceToTarget > _pursuitSettings.StopDistance)
+            else
             {
                 _navMeshAgent.isStopped = false;
                 _navMeshAgent.SetDestination(_pursuitSettings.PursuitTarget.position);
-            }
-            else
-            {
-                _navMeshAgent.isStopped = true;
-                _character.SetState(_character.WanderCharacterState);
             }
 
             // this avoids jittering on navmesh movement
