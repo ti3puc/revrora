@@ -10,16 +10,17 @@ namespace UI.Menu
 {
     public class MainMenuUI : MonoBehaviour
     {
-        [SerializeField] private List<MainMenuPanelUI> panels = new();
+        #region Fields
 
-        [Header("Main Panel Buttons")]
+        [SerializeField] private List<MainMenuPanelUI> panels = new();
         [SerializeField] private Button continueButton;
-        [SerializeField] private Button newGameButton;
-        [SerializeField] private Button loadGameButton;
-        [SerializeField] private Button quitButton;
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private MainMenuPanelUI currentPanel;
+
+        #endregion
+
+        #region Unity Messages
 
         private void Awake()
         {
@@ -28,11 +29,6 @@ namespace UI.Menu
                 panel.SubscribeToEvents();
                 panel.OnButtonClicked += UpdateCurrentPanel;
             }
-
-            continueButton.onClick.AddListener(ContinueGame);
-            newGameButton.onClick.AddListener(StartNewGame);
-            loadGameButton.onClick.AddListener(LoadGame);
-            quitButton.onClick.AddListener(QuitGame);
 
             continueButton.gameObject.SetActive(false); // TODO: check for save
             UpdateCurrentPanel(null);
@@ -45,12 +41,11 @@ namespace UI.Menu
                 panel.UnsubscribeToEvents();
                 panel.OnButtonClicked -= UpdateCurrentPanel;
             }
-
-            continueButton.onClick.RemoveListener(ContinueGame);
-            newGameButton.onClick.RemoveListener(StartNewGame);
-            loadGameButton.onClick.RemoveListener(LoadGame);
-            quitButton.onClick.RemoveListener(QuitGame);
         }
+
+        #endregion
+
+        #region Private Methods
 
         private void UpdateCurrentPanel(MainMenuPanelUI panel)
         {
@@ -65,6 +60,15 @@ namespace UI.Menu
                     panels[i].GameObject.SetActive(panels[i] == currentPanel);
             }
         }
+
+        #endregion
+
+        #region Public Methods
+
+        #region Methods for UnityEvent
+        // These functions are used inside Unity editor, on the Button
+        // component. Thats why vscode maybe wont find the reference
+        // where they're being used.
 
         public void ContinueGame()
         {
@@ -85,5 +89,8 @@ namespace UI.Menu
         {
             Application.Quit();
         }
+        #endregion
+
+        #endregion
     }
 }
