@@ -10,7 +10,7 @@ namespace Managers.Party
 {
     public class PartyManager : Singleton<PartyManager>
     {
-        public event Action OnPartyChangedEvent;
+        public static event Action OnPartyChangedEvent;
 
         [Header("Settings")]
         [SerializeField] private int _minPartySize = 1;
@@ -28,7 +28,7 @@ namespace Managers.Party
         protected override void Awake()
         {
             base.Awake();
-            _partyMembers = new List<BaseCharacter>();
+            _partyMembers = new List<BaseCharacter>(_maxPartySize);
 
             OnPartyChangedEvent += HandlePartyVisibility;
         }
@@ -56,7 +56,7 @@ namespace Managers.Party
             }
         }
 
-        public void AddPartyMember(BaseCharacter character)
+        public void AddPartyMember(BaseCharacter character, int index = -1)
         {
             if (_partyMembers.Count >= _maxPartySize)
             {
@@ -64,7 +64,11 @@ namespace Managers.Party
             }
             try
             {
-                _partyMembers.Add(character);
+                if (index >= 0 && index <= _partyMembers.Count - 1)
+                    _partyMembers.Insert(index, character);
+                else
+                    _partyMembers.Add(character);
+
                 OnPartyChangedEvent?.Invoke();
             }
             catch (Exception exception)

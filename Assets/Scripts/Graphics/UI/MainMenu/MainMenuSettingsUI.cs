@@ -7,14 +7,14 @@ namespace UI.Menu
 {
     public class MainMenuSettingsUI : MonoBehaviour
     {
-        [SerializeField] private List<MainMenuPanelUI> panels = new();
+        [SerializeField] private List<MainMenuPanelUI> _panels = new();
 
         [Header("Debug")]
-        [SerializeField, ReadOnly] private MainMenuPanelUI currentPanel;
+        [SerializeField, ReadOnly] private MainMenuPanelUI _currentPanel;
 
         private void Awake()
         {
-            foreach (var panel in panels)
+            foreach (var panel in _panels)
             {
                 panel.SubscribeToEvents();
                 panel.OnButtonClicked += UpdateCurrentPanel;
@@ -25,7 +25,7 @@ namespace UI.Menu
 
         private void OnDestroy()
         {
-            foreach (var panel in panels)
+            foreach (var panel in _panels)
             {
                 panel.UnsubscribeToEvents();
                 panel.OnButtonClicked -= UpdateCurrentPanel;
@@ -35,17 +35,17 @@ namespace UI.Menu
         private void UpdateCurrentPanel(MainMenuPanelUI panel)
         {
             if (panel == null)
-                currentPanel = panels[0];
+                _currentPanel = _panels[0];
             else
-                currentPanel = panel;
+                _currentPanel = panel;
 
             // update panel visual
-            for (int i = 0; i < panels.Count; i++)
+            for (int i = 0; i < _panels.Count; i++)
             {
-                if (panels[i].DisableButtonsIfActive)
-                    panels[i].ChangeButtonsState(panels[i] != currentPanel);
+                if (_panels[i].DisableButtonsIfActive)
+                    _panels[i].ChangeButtonsState(_panels[i] != _currentPanel);
 
-                panels[i].GameObject.SetActive(panels[i] == currentPanel);
+                _panels[i].GameObject.SetActive(_panels[i] == _currentPanel);
             }
         }
     }

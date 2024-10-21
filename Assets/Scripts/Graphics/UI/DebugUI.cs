@@ -17,12 +17,12 @@ namespace UI.UIDebug
 		#region Unity Messages
 		private void Awake()
 		{
-			PartyManager.Instance.OnPartyChangedEvent += UpdatePartyUI;
+			PartyManager.OnPartyChangedEvent += UpdatePartyUI;
 		}
 
 		private void OnDestroy()
 		{
-			PartyManager.Instance.OnPartyChangedEvent -= UpdatePartyUI;
+			PartyManager.OnPartyChangedEvent -= UpdatePartyUI;
 		}
 		#endregion
 

@@ -192,7 +192,6 @@ MonoBehaviour:
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
     PursuitTarget: {fileID: 2055270691}
-    StopDistance: 2
     MaxPursuitDistance: 30
     PursuitSmoothDamp: 0.1
     Velocity: {x: 0, y: 0, z: 0}
@@ -223,7 +222,7 @@ MonoBehaviour:
     _agilityPoints: 0
     _wisdomPoints: 0
   _addToPartyOnStart: 0
-  _addToPartyDelay: 0
+  _addToPartyIndex: 0
 --- !u!4 &4622965
 Transform:
   m_ObjectHideFlags: 0
@@ -2276,7 +2275,6 @@ MonoBehaviour:
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
     PursuitTarget: {fileID: 0}
-    StopDistance: 2
     MaxPursuitDistance: 30
     PursuitSmoothDamp: 0.1
     Velocity: {x: 0, y: 0, z: 0}
@@ -2307,7 +2305,7 @@ MonoBehaviour:
     _agilityPoints: 0
     _wisdomPoints: 0
   _addToPartyOnStart: 1
-  _addToPartyDelay: 0.2
+  _addToPartyIndex: 2
 --- !u!4 &98514994
 Transform:
   m_ObjectHideFlags: 0
@@ -13000,7 +12998,7 @@ MonoBehaviour:
     _agilityPoints: 0
     _wisdomPoints: 0
   _addToPartyOnStart: 1
-  _addToPartyDelay: 0
+  _addToPartyIndex: 0
 --- !u!114 &1131637545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13029,7 +13027,6 @@ MonoBehaviour:
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
     PursuitTarget: {fileID: 0}
-    StopDistance: 2
     MaxPursuitDistance: 30
     PursuitSmoothDamp: 0.1
     Velocity: {x: 0, y: 0, z: 0}
@@ -16999,7 +16996,6 @@ MonoBehaviour:
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
     PursuitTarget: {fileID: 2055270691}
-    StopDistance: 2
     MaxPursuitDistance: 30
     PursuitSmoothDamp: 0.1
     Velocity: {x: 0, y: 0, z: 0}
@@ -17030,7 +17026,7 @@ MonoBehaviour:
     _agilityPoints: 0
     _wisdomPoints: 0
   _addToPartyOnStart: 0
-  _addToPartyDelay: 0
+  _addToPartyIndex: 0
 --- !u!4 &1329843113
 Transform:
   m_ObjectHideFlags: 0
@@ -17436,7 +17432,6 @@ MonoBehaviour:
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
     PursuitTarget: {fileID: 2055270691}
-    StopDistance: 2
     MaxPursuitDistance: 30
     PursuitSmoothDamp: 0.1
     Velocity: {x: 0, y: 0, z: 0}
@@ -17467,7 +17462,7 @@ MonoBehaviour:
     _agilityPoints: 0
     _wisdomPoints: 0
   _addToPartyOnStart: 0
-  _addToPartyDelay: 0
+  _addToPartyIndex: 0
 --- !u!4 &1348767793
 Transform:
   m_ObjectHideFlags: 0
@@ -17907,7 +17902,6 @@ MonoBehaviour:
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
     PursuitTarget: {fileID: 2055270691}
-    StopDistance: 2
     MaxPursuitDistance: 30
     PursuitSmoothDamp: 0.1
     Velocity: {x: 0, y: 0, z: 0}
@@ -17938,7 +17932,7 @@ MonoBehaviour:
     _agilityPoints: 0
     _wisdomPoints: 0
   _addToPartyOnStart: 0
-  _addToPartyDelay: 0
+  _addToPartyIndex: 0
 --- !u!4 &1416766227
 Transform:
   m_ObjectHideFlags: 0
@@ -20627,7 +20621,6 @@ MonoBehaviour:
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
     PursuitTarget: {fileID: 0}
-    StopDistance: 2
     MaxPursuitDistance: 30
     PursuitSmoothDamp: 0.1
     Velocity: {x: 0, y: 0, z: 0}
@@ -20658,7 +20651,7 @@ MonoBehaviour:
     _agilityPoints: 0
     _wisdomPoints: 0
   _addToPartyOnStart: 1
-  _addToPartyDelay: 0.1
+  _addToPartyIndex: 1
 --- !u!4 &1839095402
 Transform:
   m_ObjectHideFlags: 0
@@ -23413,7 +23406,6 @@ MonoBehaviour:
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
     PursuitTarget: {fileID: 2055270691}
-    StopDistance: 2
     MaxPursuitDistance: 30
     PursuitSmoothDamp: 0.1
     Velocity: {x: 0, y: 0, z: 0}
@@ -23444,7 +23436,7 @@ MonoBehaviour:
     _agilityPoints: 0
     _wisdomPoints: 0
   _addToPartyOnStart: 0
-  _addToPartyDelay: 0
+  _addToPartyIndex: 0
 --- !u!4 &2074734840
 Transform:
   m_ObjectHideFlags: 0

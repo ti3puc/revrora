@@ -10,49 +10,49 @@ namespace UI.Menu.Settings
     public class DoubleSettingsButton : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private Button firstButton;
-        [SerializeField] private Button secondButton;
+        [SerializeField] private Button _firstButton;
+        [SerializeField] private Button _secondButton;
 
         [Header("Events")]
-        [SerializeField] private UnityEvent onFirstButtonSelected;
-        [SerializeField] private UnityEvent onSecondButtonSelected;
+        [SerializeField] private UnityEvent _onFirstButtonSelected;
+        [SerializeField] private UnityEvent _onSecondButtonSelected;
 
         [Header("Debug")]
-        [SerializeField, ReadOnly] private Button currentSelectedButton;
+        [SerializeField, ReadOnly] private Button _currentSelectedButton;
 
         private void Awake()
         {
-            firstButton.onClick.AddListener(SelectFirstButton);
-            secondButton.onClick.AddListener(SelectSecondButton);
+            _firstButton.onClick.AddListener(SelectFirstButton);
+            _secondButton.onClick.AddListener(SelectSecondButton);
 
             // TODO: get settings from save
-            UpdateSelectedButton(firstButton);
+            UpdateSelectedButton(_firstButton);
         }
 
         private void OnDestroy()
         {
-            firstButton.onClick.RemoveListener(SelectFirstButton);
-            secondButton.onClick.RemoveListener(SelectSecondButton);
+            _firstButton.onClick.RemoveListener(SelectFirstButton);
+            _secondButton.onClick.RemoveListener(SelectSecondButton);
         }
 
         private void UpdateSelectedButton(Button selectedButton)
         {
-            firstButton.interactable = selectedButton != firstButton;
-            secondButton.interactable = selectedButton != secondButton;
+            _firstButton.interactable = selectedButton != _firstButton;
+            _secondButton.interactable = selectedButton != _secondButton;
 
-            currentSelectedButton = selectedButton;
+            _currentSelectedButton = selectedButton;
         }
 
         private void SelectFirstButton()
         {
-            UpdateSelectedButton(firstButton);
-            onFirstButtonSelected?.Invoke();
+            UpdateSelectedButton(_firstButton);
+            _onFirstButtonSelected?.Invoke();
         }
 
         private void SelectSecondButton()
         {
-            UpdateSelectedButton(secondButton);
-            onSecondButtonSelected?.Invoke();
+            UpdateSelectedButton(_secondButton);
+            _onSecondButtonSelected?.Invoke();
         }
     }
 }

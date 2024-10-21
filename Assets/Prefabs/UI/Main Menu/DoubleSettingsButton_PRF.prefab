@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -487,8 +487,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f33027b7805a61644ad771325d729832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstButton: {fileID: 3055655640974628813}
-  secondButton: {fileID: 2167369924106374184}
+  _firstButton: {fileID: 3055655640974628813}
+  _secondButton: {fileID: 2167369924106374184}
+  _onFirstButtonSelected:
+    m_PersistentCalls:
+      m_Calls: []
+  _onSecondButtonSelected:
+    m_PersistentCalls:
+      m_Calls: []
+  _currentSelectedButton: {fileID: 0}
 --- !u!1 &6361617231409977507
 GameObject:
   m_ObjectHideFlags: 0

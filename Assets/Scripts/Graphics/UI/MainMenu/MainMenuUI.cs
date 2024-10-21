@@ -12,11 +12,11 @@ namespace UI.Menu
     {
         #region Fields
 
-        [SerializeField] private List<MainMenuPanelUI> panels = new();
-        [SerializeField] private Button continueButton;
+        [SerializeField] private List<MainMenuPanelUI> _panels = new();
+        [SerializeField] private Button _continueButton;
 
         [Header("Debug")]
-        [SerializeField, ReadOnly] private MainMenuPanelUI currentPanel;
+        [SerializeField, ReadOnly] private MainMenuPanelUI _currentPanel;
 
         #endregion
 
@@ -24,19 +24,19 @@ namespace UI.Menu
 
         private void Awake()
         {
-            foreach (var panel in panels)
+            foreach (var panel in _panels)
             {
                 panel.SubscribeToEvents();
                 panel.OnButtonClicked += UpdateCurrentPanel;
             }
 
-            continueButton.gameObject.SetActive(false); // TODO: check for save
+            _continueButton.gameObject.SetActive(false); // TODO: check for save
             UpdateCurrentPanel(null);
         }
 
         private void OnDestroy()
         {
-            foreach (var panel in panels)
+            foreach (var panel in _panels)
             {
                 panel.UnsubscribeToEvents();
                 panel.OnButtonClicked -= UpdateCurrentPanel;
@@ -49,15 +49,15 @@ namespace UI.Menu
 
         private void UpdateCurrentPanel(MainMenuPanelUI panel)
         {
-            currentPanel = panel;
+            _currentPanel = panel;
 
             // update panel visual
-            for (int i = 0; i < panels.Count; i++)
+            for (int i = 0; i < _panels.Count; i++)
             {
-                if (currentPanel == null)
-                    panels[i].GameObject.SetActive(i == 0);
+                if (_currentPanel == null)
+                    _panels[i].GameObject.SetActive(i == 0);
                 else
-                    panels[i].GameObject.SetActive(panels[i] == currentPanel);
+                    _panels[i].GameObject.SetActive(_panels[i] == _currentPanel);
             }
         }
 

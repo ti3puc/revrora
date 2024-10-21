@@ -10,60 +10,60 @@ namespace UI.Menu.Settings
     public class TripleSettingsButton : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private Button firstButton;
-        [SerializeField] private Button secondButton;
-        [SerializeField] private Button thirdButton;
+        [SerializeField] private Button _firstButton;
+        [SerializeField] private Button _secondButton;
+        [SerializeField] private Button _thirdButton;
 
         [Header("Events")]
-        [SerializeField] private UnityEvent onFirstButtonSelected;
-        [SerializeField] private UnityEvent onSecondButtonSelected;
-        [SerializeField] private UnityEvent onThirdButtonSelected;
+        [SerializeField] private UnityEvent _onFirstButtonSelected;
+        [SerializeField] private UnityEvent _onSecondButtonSelected;
+        [SerializeField] private UnityEvent _onThirdButtonSelected;
 
         [Header("Debug")]
-        [SerializeField, ReadOnly] private Button currentSelectedButton;
+        [SerializeField, ReadOnly] private Button _currentSelectedButton;
 
         private void Awake()
         {
-            firstButton.onClick.AddListener(SelectFirstButton);
-            secondButton.onClick.AddListener(SelectSecondButton);
-            thirdButton.onClick.AddListener(SelectThirdButton);
+            _firstButton.onClick.AddListener(SelectFirstButton);
+            _secondButton.onClick.AddListener(SelectSecondButton);
+            _thirdButton.onClick.AddListener(SelectThirdButton);
 
             // TODO: get settings from save
-            UpdateSelectedButton(firstButton);
+            UpdateSelectedButton(_firstButton);
         }
 
         private void OnDestroy()
         {
-            firstButton.onClick.RemoveListener(SelectFirstButton);
-            secondButton.onClick.RemoveListener(SelectSecondButton);
-            thirdButton.onClick.RemoveListener(SelectThirdButton);
+            _firstButton.onClick.RemoveListener(SelectFirstButton);
+            _secondButton.onClick.RemoveListener(SelectSecondButton);
+            _thirdButton.onClick.RemoveListener(SelectThirdButton);
         }
 
         private void UpdateSelectedButton(Button selectedButton)
         {
-            firstButton.interactable = selectedButton != firstButton;
-            secondButton.interactable = selectedButton != secondButton;
-            thirdButton.interactable = selectedButton != thirdButton;
+            _firstButton.interactable = selectedButton != _firstButton;
+            _secondButton.interactable = selectedButton != _secondButton;
+            _thirdButton.interactable = selectedButton != _thirdButton;
 
-            currentSelectedButton = selectedButton;
+            _currentSelectedButton = selectedButton;
         }
 
         private void SelectFirstButton()
         {
-            UpdateSelectedButton(firstButton);
-            onFirstButtonSelected?.Invoke();
+            UpdateSelectedButton(_firstButton);
+            _onFirstButtonSelected?.Invoke();
         }
 
         private void SelectSecondButton()
         {
-            UpdateSelectedButton(secondButton);
-            onSecondButtonSelected?.Invoke();
+            UpdateSelectedButton(_secondButton);
+            _onSecondButtonSelected?.Invoke();
         }
 
         private void SelectThirdButton()
         {
-            UpdateSelectedButton(thirdButton);
-            onThirdButtonSelected?.Invoke();
+            UpdateSelectedButton(_thirdButton);
+            _onThirdButtonSelected?.Invoke();
         }
     }
 }

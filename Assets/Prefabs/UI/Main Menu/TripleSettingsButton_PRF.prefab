@@ -362,9 +362,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40222396c903bd4faa30ca4ab58f016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstButton: {fileID: 2284123745870631362}
-  secondButton: {fileID: 7455493163587074780}
-  thirdButton: {fileID: 6741630257921603946}
+  _firstButton: {fileID: 2284123745870631362}
+  _secondButton: {fileID: 7455493163587074780}
+  _thirdButton: {fileID: 6741630257921603946}
+  _onFirstButtonSelected:
+    m_PersistentCalls:
+      m_Calls: []
+  _onSecondButtonSelected:
+    m_PersistentCalls:
+      m_Calls: []
+  _onThirdButtonSelected:
+    m_PersistentCalls:
+      m_Calls: []
+  _currentSelectedButton: {fileID: 0}
 --- !u!1 &4896017643996579747
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +467,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -733,7 +743,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -867,7 +877,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

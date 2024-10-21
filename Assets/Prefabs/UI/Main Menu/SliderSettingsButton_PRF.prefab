@@ -93,7 +93,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -435,7 +435,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -569,7 +569,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -877,14 +877,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 071e5cf9b8ed88341b75ba6c69ed2ab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  valueToIncrease: 1
-  minMaxRange: {x: 0, y: 100}
-  quickChangeValueOnHold: 1
-  timeToStartHold: 0.5
-  firstButton: {fileID: 9146656457742838613}
-  valueText: {fileID: 1924564590300039619}
-  secondButton: {fileID: 8888326570663043228}
-  currentValue: 0
-  isHoldingDecrease: 0
-  isHoldingIncrease: 0
-  holdingTimer: 0
+  _valueToIncrease: 1
+  _minMaxRange: {x: 0, y: 100}
+  _quickChangeValueOnHold: 1
+  _timeToStartHold: 0.5
+  _firstButton: {fileID: 9146656457742838613}
+  _valueText: {fileID: 1924564590300039619}
+  _secondButton: {fileID: 8888326570663043228}
+  _currentValue: 0
+  _isHoldingDecrease: 0
+  _isHoldingIncrease: 0
+  _holdingTimer: 0

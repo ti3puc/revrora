@@ -13,21 +13,21 @@ namespace UI.Menu.Settings
         #region Fields
 
         [Header("Settings")]
-        [SerializeField] private int valueToIncrease = 1;
-        [SerializeField] private Vector2Int minMaxRange = new Vector2Int(0, 100);
-        [SerializeField] private bool quickChangeValueOnHold;
-        [SerializeField, ShowIf("quickChangeValueOnHold")] private float timeToStartHold = .5f;
+        [SerializeField] private int _valueToIncrease = 1;
+        [SerializeField] private Vector2Int _minMaxRange = new Vector2Int(0, 100);
+        [SerializeField] private bool _quickChangeValueOnHold = true;
+        [SerializeField, ShowIf("_quickChangeValueOnHold")] private float _timeToStartHold = .5f;
 
         [Header("References")]
-        [SerializeField] private Button firstButton;
-        [SerializeField] private TMP_Text valueText;
-        [SerializeField] private Button secondButton;
+        [SerializeField] private Button _firstButton;
+        [SerializeField] private TMP_Text _valueText;
+        [SerializeField] private Button _secondButton;
 
         [Header("Debug")]
-        [SerializeField, ReadOnly] private int currentValue;
-        [SerializeField, ReadOnly] private bool isHoldingDecrease;
-        [SerializeField, ReadOnly] private bool isHoldingIncrease;
-        [SerializeField, ReadOnly] private float holdingTimer;
+        [SerializeField, ReadOnly] private int _currentValue;
+        [SerializeField, ReadOnly] private bool _isHoldingDecrease;
+        [SerializeField, ReadOnly] private bool _isHoldingIncrease;
+        [SerializeField, ReadOnly] private float _holdingTimer;
 
         #endregion
 
@@ -35,16 +35,16 @@ namespace UI.Menu.Settings
 
         public int CurrentValue
         {
-            get => currentValue;
+            get => _currentValue;
             set
             {
                 // sanity checks
-                if (value > minMaxRange.y)
-                    currentValue = minMaxRange.y;
-                else if (value < minMaxRange.x)
-                    currentValue = minMaxRange.x;
+                if (value > _minMaxRange.y)
+                    _currentValue = _minMaxRange.y;
+                else if (value < _minMaxRange.x)
+                    _currentValue = _minMaxRange.x;
                 else
-                    currentValue = value;
+                    _currentValue = value;
 
                 UpdateTextValue();
             }
@@ -56,8 +56,8 @@ namespace UI.Menu.Settings
 
         private void Awake()
         {
-            firstButton.onClick.AddListener(DecreaseValue);
-            secondButton.onClick.AddListener(IncreaseValue);
+            _firstButton.onClick.AddListener(DecreaseValue);
+            _secondButton.onClick.AddListener(IncreaseValue);
 
             CurrentValue = 80;
             UpdateTextValue();
@@ -65,20 +65,20 @@ namespace UI.Menu.Settings
 
         private void OnDestroy()
         {
-            firstButton.onClick.RemoveListener(DecreaseValue);
-            secondButton.onClick.RemoveListener(IncreaseValue);
+            _firstButton.onClick.RemoveListener(DecreaseValue);
+            _secondButton.onClick.RemoveListener(IncreaseValue);
         }
 
         private void Update()
         {
-            if (!isHoldingDecrease && !isHoldingIncrease) return;
+            if (!_isHoldingDecrease && !_isHoldingIncrease) return;
 
-            holdingTimer += Time.deltaTime;
-            if (holdingTimer > timeToStartHold)
+            _holdingTimer += Time.deltaTime;
+            if (_holdingTimer > _timeToStartHold)
             {
-                if (isHoldingDecrease)
+                if (_isHoldingDecrease)
                     DecreaseValue();
-                else if (isHoldingIncrease)
+                else if (_isHoldingIncrease)
                     IncreaseValue();
             }
         }
@@ -89,17 +89,17 @@ namespace UI.Menu.Settings
 
         private void UpdateTextValue()
         {
-            valueText.text = CurrentValue.ToString();
+            _valueText.text = CurrentValue.ToString();
         }
 
         private void DecreaseValue()
         {
-            CurrentValue -= valueToIncrease;
+            CurrentValue -= _valueToIncrease;
         }
 
         private void IncreaseValue()
         {
-            CurrentValue += valueToIncrease;
+            CurrentValue += _valueToIncrease;
         }
 
         #endregion
@@ -109,31 +109,31 @@ namespace UI.Menu.Settings
         // method used on EventTrigger component at Unity inspector
         public void DecreaseValueOnHoldStart()
         {
-            if (!quickChangeValueOnHold) return;
-            isHoldingDecrease = true;
+            if (!_quickChangeValueOnHold) return;
+            _isHoldingDecrease = true;
         }
 
         // method used on EventTrigger component at Unity inspector
         public void DecreaseValueOnHoldEnd()
         {
-            if (!quickChangeValueOnHold) return;
-            isHoldingDecrease = false;
-            holdingTimer = 0;
+            if (!_quickChangeValueOnHold) return;
+            _isHoldingDecrease = false;
+            _holdingTimer = 0;
         }
 
         // method used on EventTrigger component at Unity inspector
         public void IncreaseValueOnHoldStart()
         {
-            if (!quickChangeValueOnHold) return;
-            isHoldingIncrease = true;
+            if (!_quickChangeValueOnHold) return;
+            _isHoldingIncrease = true;
         }
 
         // method used on EventTrigger component at Unity inspector
         public void IncreaseValueOnHoldEnd()
         {
-            if (!quickChangeValueOnHold) return;
-            isHoldingIncrease = false;
-            holdingTimer = 0;
+            if (!_quickChangeValueOnHold) return;
+            _isHoldingIncrease = false;
+            _holdingTimer = 0;
         }
 
         #endregion

@@ -1290,7 +1290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6d599188463594b8cb8ef58ac52942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panels:
+  _panels:
   - GameObject: {fileID: 1269369851}
     DisableButtonsIfActive: 1
     ButtonsThatActivate:
@@ -1307,7 +1307,7 @@ MonoBehaviour:
     DisableButtonsIfActive: 1
     ButtonsThatActivate:
     - {fileID: 276033546}
-  currentPanel:
+  _currentPanel:
     GameObject: {fileID: 0}
     DisableButtonsIfActive: 0
     ButtonsThatActivate: []
@@ -4878,7 +4878,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80aea6fb1353ef244bce4ad84d23bbd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingsButtons: []
 --- !u!1 &974589608
 GameObject:
   m_ObjectHideFlags: 0
@@ -5397,7 +5396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb9277f2a4b188488ddcc355ac74212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panels:
+  _panels:
   - GameObject: {fileID: 807710143}
     DisableButtonsIfActive: 0
     ButtonsThatActivate:
@@ -5406,8 +5405,8 @@ MonoBehaviour:
     DisableButtonsIfActive: 0
     ButtonsThatActivate:
     - {fileID: 663902010}
-  continueButton: {fileID: 1482979252}
-  currentPanel:
+  _continueButton: {fileID: 1482979252}
+  _currentPanel:
     GameObject: {fileID: 0}
     DisableButtonsIfActive: 0
     ButtonsThatActivate: []
@@ -8268,6 +8267,146 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1006216951}
     m_Modifications:
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onFirstButtonSelected.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onSecondButtonSelected.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onFirstButtonSelected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onFirstButtonSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onSecondButtonSelected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onSecondButtonSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onFirstButtonSelected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1237381599}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onFirstButtonSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 681175605}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onSecondButtonSelected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1237381599}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onSecondButtonSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 681175605}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onFirstButtonSelected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onFirstButtonSelected.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onFirstButtonSelected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onFirstButtonSelected.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onSecondButtonSelected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onSecondButtonSelected.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onSecondButtonSelected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onSecondButtonSelected.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onFirstButtonSelected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onFirstButtonSelected.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onSecondButtonSelected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onSecondButtonSelected.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onFirstButtonSelected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onSecondButtonSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onFirstButtonSelected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onFirstButtonSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onSecondButtonSelected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 218572150320823756, guid: 500dc25144772bf4d8ba21816fc29cea,
+        type: 3}
+      propertyPath: _onSecondButtonSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1161203755031144315, guid: 500dc25144772bf4d8ba21816fc29cea,
         type: 3}
       propertyPath: m_AnchorMax.y
