@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Inventory.Items;
@@ -8,6 +9,8 @@ namespace Inventory
 {
     public class InventorySystem : MonoBehaviour
     {
+        public static event Action OnInventoryChanged;
+
         [Header("Debug")]
         [SerializeField, ReadOnly] private List<Item> _items = new();
         [SerializeField] private ItemData debugItem;
@@ -22,6 +25,9 @@ namespace Inventory
 
         public Item GetItem(ItemData dataReference)
         {
+            if (dataReference == null)
+                return null;
+
             if (_itemsDictionary.TryGetValue(dataReference, out var item))
                 return item;
 
@@ -30,6 +36,8 @@ namespace Inventory
 
         public void AddItem(ItemData dataReference)
         {
+            if (dataReference == null) return;
+
             if (_itemsDictionary.TryGetValue(dataReference, out var item))
                 item.AddToStack();
             else
@@ -38,10 +46,14 @@ namespace Inventory
                 _items.Add(newItem);
                 _itemsDictionary.Add(dataReference, newItem);
             }
+
+            OnInventoryChanged?.Invoke();
         }
 
         public void RemoveItem(ItemData dataReference)
         {
+            if (dataReference == null) return;
+
             if (_itemsDictionary.TryGetValue(dataReference, out var item))
             {
                 item.RemoveFromStack();
@@ -52,6 +64,8 @@ namespace Inventory
                     _itemsDictionary.Remove(dataReference);
                 }
             }
+
+            OnInventoryChanged?.Invoke();
         }
 
         [Button]

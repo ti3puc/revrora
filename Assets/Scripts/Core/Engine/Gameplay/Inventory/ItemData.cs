@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Inventory.Items
@@ -20,6 +21,10 @@ namespace Inventory.Items
         [Header("UI")]
         [SerializeField] private string _displayName;
         [SerializeField] private Sprite _icon;
+        [SerializeField] private bool _hideItemIfNotAvailable;
+        [SerializeField, HideIf("_hideItemIfNotAvailable")] private bool _ghostItemIfNotAvailable;
+        [SerializeField] private bool _showStackText;
+        [SerializeField, ShowIf("_showStackText")] private bool _hideStackIfEmpty;
 
 
         public string Id => _id;
@@ -28,5 +33,9 @@ namespace Inventory.Items
         public ItemType Type => _type;
         public int MinimumStackSize => _minimumStackSize;
         public int MaximumStackSize => _maximumStackSize;
+        public bool HideItemIfNotAvailable => _hideItemIfNotAvailable;
+        public bool GhostItemIfNotAvailable => _ghostItemIfNotAvailable;
+        public bool ShowStackText => _showStackText;
+        public bool HideStackIfEmpty => _hideStackIfEmpty;
     }
 }
