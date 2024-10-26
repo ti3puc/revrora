@@ -35,10 +35,10 @@ namespace Inventory.Items
             private set => stackSize = value;
         }
 
-        public Item(ItemData itemData)
+        public Item(ItemData itemData, int initialStackSize = 1)
         {
             ItemData = itemData;
-            AddToStack();
+            AddToStack(initialStackSize);
         }
 
         public void AddToStack(int value = 1)

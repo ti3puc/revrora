@@ -34,15 +34,15 @@ namespace Inventory
             return null;
         }
 
-        public void AddItem(ItemData dataReference)
+        public void AddItem(ItemData dataReference, int value = 1)
         {
             if (dataReference == null) return;
 
             if (_itemsDictionary.TryGetValue(dataReference, out var item))
-                item.AddToStack();
+                item.AddToStack(value);
             else
             {
-                Item newItem = new Item(dataReference);
+                Item newItem = new Item(dataReference, value);
                 _items.Add(newItem);
                 _itemsDictionary.Add(dataReference, newItem);
             }
@@ -50,13 +50,13 @@ namespace Inventory
             OnInventoryChanged?.Invoke();
         }
 
-        public void RemoveItem(ItemData dataReference)
+        public void RemoveItem(ItemData dataReference, int value = 1)
         {
             if (dataReference == null) return;
 
             if (_itemsDictionary.TryGetValue(dataReference, out var item))
             {
-                item.RemoveFromStack();
+                item.RemoveFromStack(value);
 
                 if (item.StackSize <= 0)
                 {
