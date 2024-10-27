@@ -13,18 +13,19 @@ namespace Player.Input
 		public static event Vector2Event OnMoveCanceled;
 
 		public static event Action OnInteractionStarted;
-		public static event Action OnInteractionPerformed;
-		public static event Action OnInteractionCanceled;
+		public static event Action OnToggleInventoryStarted;
 
 		[Header("Inputs")]
         [SerializeField] private InputActionAsset inputActionAsset;
         [SerializeField] private string actionMapName = "Main";
         [SerializeField] private string moveActionName = "Move";
 		[SerializeField] private string interactActionName = "Interact";
+		[SerializeField] private string toggleInventoryActionName = "ToggleInventory";
 
 		private InputActionMap actionMap;
 		private InputAction moveAction;
         private InputAction interactAction;
+        private InputAction toggleInventoryAction;
 
 		protected override void Awake()
 		{
@@ -34,14 +35,14 @@ namespace Player.Input
 			actionMap = inputActionAsset.FindActionMap(actionMapName);
 			moveAction = actionMap.FindAction(moveActionName);
 			interactAction = actionMap.FindAction(interactActionName);
+			toggleInventoryAction = actionMap.FindAction(toggleInventoryActionName);
 
 			moveAction.started += MoveStarted;
 			moveAction.performed += MovePerformed;
 			moveAction.canceled += MoveCanceled;
 
 			interactAction.started += InteractionStarted;
-			interactAction.performed += InteractionPerformed;
-			interactAction.canceled += InteractionCanceled;
+			toggleInventoryAction.started += ToggleInventoryStarted;
 		}
 
 		private void OnDestroy()
@@ -51,8 +52,7 @@ namespace Player.Input
 			moveAction.canceled -= MoveCanceled;
 
 			interactAction.started -= InteractionStarted;
-			interactAction.performed -= InteractionPerformed;
-			interactAction.canceled -= InteractionCanceled;
+			toggleInventoryAction.started -= ToggleInventoryStarted;
 
 			inputActionAsset.Disable();
 		}
@@ -62,7 +62,6 @@ namespace Player.Input
 		private void MoveCanceled(InputAction.CallbackContext context) => OnMoveCanceled?.Invoke(context.ReadValue<Vector2>());
 
 		private void InteractionStarted(InputAction.CallbackContext context) => OnInteractionStarted?.Invoke();
-		private void InteractionPerformed(InputAction.CallbackContext context) => OnInteractionPerformed?.Invoke();
-		private void InteractionCanceled(InputAction.CallbackContext context) => OnInteractionCanceled?.Invoke();
+		private void ToggleInventoryStarted(InputAction.CallbackContext context) => OnToggleInventoryStarted?.Invoke();
 	}
 }
