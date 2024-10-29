@@ -14,6 +14,7 @@ namespace UI
         [SerializeField] private Canvas mainCanvas;
         [SerializeField] private Canvas inventoryCanvas;
         [SerializeField] private Canvas pauseCanvas;
+        [SerializeField] private Canvas dialogueCanvas;
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private bool isInventoryOpen;
