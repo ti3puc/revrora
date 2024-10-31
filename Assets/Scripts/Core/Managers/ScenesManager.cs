@@ -15,5 +15,15 @@ namespace Managers.Scenes
         {
             SceneManager.LoadSceneAsync(Instance.firstScene, LoadSceneMode.Single);
         }
+
+		public static void LoadScene(string sceneName)
+		{
+			SceneManager.LoadSceneAsync(sceneName);
+		}
+
+		public static void ReloadScene()
+		{
+			SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+		}
     }
 }

@@ -57,6 +57,7 @@ namespace Environment.Interaction
 			var interactor = other.GetComponent<Interactor>();
 			if (interactor != null)
 			{
+				UndoInteraction();
 				OnRequestToHideUI?.Invoke(currentInteractor, this);
 				currentInteractor = null;
 			}
@@ -71,5 +72,6 @@ namespace Environment.Interaction
 		}
 
 		public abstract void ReceiveInteraction();
+		public virtual void UndoInteraction() { }
 	}
 }

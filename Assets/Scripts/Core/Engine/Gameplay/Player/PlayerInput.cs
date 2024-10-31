@@ -13,6 +13,7 @@ namespace Player.Input
 		public static event Vector2Event OnMoveCanceled;
 
 		public static event Action OnInteractionStarted;
+		public static event Action OnInteractionCanceled;
 		public static event Action OnToggleInventoryStarted;
 
 		[Header("Inputs")]
@@ -42,6 +43,8 @@ namespace Player.Input
 			moveAction.canceled += MoveCanceled;
 
 			interactAction.started += InteractionStarted;
+			interactAction.canceled += InteractionCanceled;
+
 			toggleInventoryAction.started += ToggleInventoryStarted;
 		}
 
@@ -52,6 +55,8 @@ namespace Player.Input
 			moveAction.canceled -= MoveCanceled;
 
 			interactAction.started -= InteractionStarted;
+			interactAction.canceled -= InteractionCanceled;
+
 			toggleInventoryAction.started -= ToggleInventoryStarted;
 
 			inputActionAsset.Disable();
@@ -62,6 +67,8 @@ namespace Player.Input
 		private void MoveCanceled(InputAction.CallbackContext context) => OnMoveCanceled?.Invoke(context.ReadValue<Vector2>());
 
 		private void InteractionStarted(InputAction.CallbackContext context) => OnInteractionStarted?.Invoke();
+		private void InteractionCanceled(InputAction.CallbackContext context) => OnInteractionCanceled?.Invoke();
+
 		private void ToggleInventoryStarted(InputAction.CallbackContext context) => OnToggleInventoryStarted?.Invoke();
 	}
 }

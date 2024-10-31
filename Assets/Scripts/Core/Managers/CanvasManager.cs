@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core.Managers;
 using Managers;
 using NaughtyAttributes;
 using Player.Input;
@@ -14,10 +15,12 @@ namespace UI
         [SerializeField] private Canvas mainCanvas;
         [SerializeField] private Canvas inventoryCanvas;
         [SerializeField] private Canvas pauseCanvas;
-        [SerializeField] private Canvas dialogueCanvas;
+        [SerializeField] private DialogManager dialogCanvas;
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private bool isInventoryOpen;
+
+        public DialogManager DialogCanvas => dialogCanvas;
 
         protected override void Awake()
         {

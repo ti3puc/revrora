@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Managers;
+using Managers.Scenes;
 using Managers.Party;
 using UnityEngine;
 
@@ -27,7 +27,11 @@ namespace UI.UIDebug
 		#endregion
 
 		#region Public Methods
-		public void ReloadGame() => GameManager.Instance.ReloadScene();
+		public void ReloadGame() => ScenesManager.ReloadScene();
+
+		public void GoToMenu() => ScenesManager.LoadScene("Main Menu");
+
+		public void GoToSandbox() => ScenesManager.LoadScene("Sandbox");
 
 		public void SwitchToPokemon1()
 		{
