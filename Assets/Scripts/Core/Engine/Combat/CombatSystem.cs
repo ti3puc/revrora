@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Character.Base;
+using Core.Engine.Combat.CombatActions;
 using Managers.Combat;
 using NaughtyAttributes;
 using Player.Input;
@@ -41,18 +42,16 @@ namespace Combat
             {
                 _currentCharacter = TurnCombatManager.Instance.GetCurrentCharacter();
 
-                switch (_currentCharacter.CombatAction.ActionType)
+                if (_currentCharacter.CharacterMoves.Count == 0)
                 {
-                    case CombatActionType.Attack:
-                        _currentCharacter.CombatAction.Move.DoMove();
-                        break;
-                    case CombatActionType.Defense:
-                        break;
-                    case CombatActionType.Heal:
-                        break;
-                    default:
-                        break;
+                    GameLog.Warning(this, $"{_currentCharacter.Name} has no moves.");
+                    TurnCombatManager.Instance.SetNextCharacter();
+                    continue;
                 }
+                
+                var tackle = _currentCharacter.CharacterMoves[0];
+                
+                new CombatActionMove().execute(_currentCharacter, tackle, TurnCombatManager.Instance.GetEnemies(_currentCharacter));
 
                 yield return new WaitForSeconds(1f);
                 TurnCombatManager.Instance.SetNextCharacter();

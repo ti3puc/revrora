@@ -42,7 +42,20 @@ namespace Managers.Combat
 
         public BaseCharacter GetCurrentCharacter()
         {
+            if (_turnCharacters[_turnIndex].CharacterStats.IsDead())
+            {
+                SetNextCharacter();
+            }
             return _turnCharacters[_turnIndex];
+        }
+        
+        public List<BaseCharacter> GetEnemies(BaseCharacter character)
+        {
+            var enemies = _turnCharacters.Where(c => (c.IsTeamPlayer != character.IsTeamPlayer) && (!c.CharacterStats.IsDead())).ToList();
+            enemies.Shuffle<BaseCharacter>();
+            var list = new List<BaseCharacter>();
+            list.Add(enemies[0]);
+            return list;
         }
 
         [Button]

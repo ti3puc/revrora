@@ -35,13 +35,13 @@ namespace Character.Base
             _characterClass = characterClass;
             _level = level;
             _experience = 0;
-            _hp = 0;
             _mana = 0;
             _strengthPoints = 1;
             _defensePoints = 1;
             _agilityPoints = 1;
             _wisdomPoints = 1;
             _buildPoints = randomizeBuild ? RandomizeBuildPoints() : _level * BuildPointsPerLevel;
+            _hp = MaxHP;
         }
         #endregion
 
@@ -56,6 +56,21 @@ namespace Character.Base
                 _level++;
                 _buildPoints += BuildPointsPerLevel;
             }
+        }
+        
+        public void ReceiveDamage(int damage)
+        {
+            _hp -= damage;
+            if (_hp <= 0)
+            {
+                _hp = 0;
+                Debug.Log("Character is dead! (" + _characterClass.Name + ")");
+            }
+        }
+        
+        public bool IsDead()
+        {
+            return _hp <= 0;
         }
         #endregion
 
