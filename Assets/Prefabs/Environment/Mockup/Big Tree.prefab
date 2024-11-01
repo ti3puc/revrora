@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5862709932503497932}
   - component: {fileID: 2408877072105417770}
   - component: {fileID: 1997405840785529248}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Sphere (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2657,6 +2657,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3667043971172582255}
+  - component: {fileID: 5360604278227151087}
   m_Layer: 0
   m_Name: Big Tree
   m_TagString: Untagged
@@ -2683,6 +2684,25 @@ Transform:
   - {fileID: 8682852804966061640}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -123.22, z: 0}
+--- !u!114 &5360604278227151087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4419769835978307171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &4993519460061674011
 GameObject:
   m_ObjectHideFlags: 0
@@ -2697,7 +2717,7 @@ GameObject:
   - component: {fileID: 406509046838856549}
   - component: {fileID: 7284038023925025378}
   - component: {fileID: 2761829529975407071}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4992,7 +5012,7 @@ GameObject:
   - component: {fileID: 1846095670853434136}
   - component: {fileID: 1780488664659185628}
   - component: {fileID: 2584229916216293938}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Sphere (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
