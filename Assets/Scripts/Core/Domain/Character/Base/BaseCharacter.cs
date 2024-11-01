@@ -6,6 +6,8 @@ namespace Character.Base
 {
     public abstract class BaseCharacter : MonoBehaviour, ICharacterClass
     {
+        [SerializeField] private CombatAction _combatAction;
+
         [Header("References")]
         [SerializeField] private BaseCharacterStats _baseCharacterStats;
         [Header("Debug")]
@@ -20,5 +22,6 @@ namespace Character.Base
         public int BaseAgility => _baseCharacterStats.BaseAgility;
         public int BaseWisdom => _baseCharacterStats.BaseWisdom;
         public CharacterTypes Type => _baseCharacterStats.Type;
+        public CombatAction CombatAction => _combatAction;
     }
 }
