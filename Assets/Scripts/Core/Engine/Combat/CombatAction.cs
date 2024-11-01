@@ -15,13 +15,14 @@ public enum CombatActionType
 public class CombatMove
 {
     public string MoveName;
+    public List<BaseCharacter> Targets;
 
-    public virtual void DoMove(BaseCharacter user, List<BaseCharacter> targets)
+    public virtual void DoMove()//BaseCharacter user, List<BaseCharacter> targets)
     {
-        Targets = targets;
+        // Targets = targets;
 
         GameLog.Debug(this, $"Called {MoveName}");
-        GameLog.Debug(this, targets);
+        // GameLog.Debug(this, targets);
     }
 }
 
@@ -30,7 +31,4 @@ public class CombatAction
 {
     public CombatMove Move;
     public CombatActionType ActionType;
-    public List<BaseCharacter> Targets;
-
-    public 
 }

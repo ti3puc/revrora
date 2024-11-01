@@ -28,13 +28,14 @@ namespace Combat
 
         private void Update()
         {
-            if (_hasReceivedPlayerInput)
+            if (TurnCombatManager.Instance.HasInitialized && _hasReceivedPlayerInput)
             {
-                
+                StartCoroutine(ProcessCombatCoroutine());
+                _hasReceivedPlayerInput = false;
             }
         }
 
-        private void ProcessCombat()
+        private IEnumerator ProcessCombatCoroutine()
         {
             while (!TurnCombatManager.Instance.IsTurnEnd)
             {
@@ -53,8 +54,11 @@ namespace Combat
                         break;
                 }
 
+                yield return new WaitForSeconds(1f);
                 TurnCombatManager.Instance.SetNextCharacter();
             }
+
+            TurnCombatManager.Instance.SetNewTurn();
         }
 
         private void ReceivedInteraction()
