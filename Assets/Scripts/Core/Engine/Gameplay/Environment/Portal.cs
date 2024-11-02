@@ -10,15 +10,15 @@ namespace Environment.Interaction
 
 		public override void ReceiveInteraction()
 		{
-			if (currentInteractor != null && otherPortal != null)
+			if (_currentInteractor != null && otherPortal != null)
 			{
-				var controller = currentInteractor.GetComponent<CharacterController>();
+				var controller = _currentInteractor.GetComponent<CharacterController>();
 
 				controller.enabled = false;
-				currentInteractor.transform.position = otherPortal.transform.position;
+				_currentInteractor.transform.position = otherPortal.transform.position;
 				controller.enabled = true;
 
-				currentInteractor = null;
+				_currentInteractor = null;
 			}
 		}
 	}

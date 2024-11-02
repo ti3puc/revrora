@@ -11,12 +11,10 @@ namespace Character.StateMachine.States
 
         public void EnterState(CharacterStateMachine character)
         {
-            throw new System.NotImplementedException();
         }
 
         public void UpdateState()
         {
-            throw new System.NotImplementedException();
         }
     }
 }
