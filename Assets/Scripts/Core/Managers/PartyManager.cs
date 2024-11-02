@@ -20,9 +20,11 @@ namespace Managers.Party
         [Header("Debug")]
         [SerializeField, ReadOnly] private List<BaseCharacter> _partyMembers;
         [SerializeField, ReadOnly] private BaseCharacter _activePartyMember;
+        [SerializeField, ReadOnly] private int _activeMemberIndex;
 
         public List<BaseCharacter> PartyMembers => _partyMembers;
         public BaseCharacter ActivePartyMember => _activePartyMember;
+        public int ActiveMemberIndex => _activeMemberIndex;
 
         #region Unity Messages
         protected override void Awake()
@@ -123,15 +125,14 @@ namespace Managers.Party
             }
         }
 
-        public void SwitchActiveMember(int index)
+        public void SwitchActiveMemberIndex(int index)
         {
             if (_partyMembers.Count <= index)
                 throw new PartyManagerCharacterNotInPartyException();
 
             try
             {
-                _activePartyMember = _partyMembers[index];
-
+                _activeMemberIndex = index;
                 OnPartyChangedEvent?.Invoke();
             }
             catch (Exception exception)
@@ -147,8 +148,7 @@ namespace Managers.Party
             if (_partyMembers.Count <= _minPartySize)
                 return;
 
-            if (_activePartyMember == null)
-                _activePartyMember = _partyMembers[0];
+            _activePartyMember = _partyMembers[_activeMemberIndex];
 
             for (int i = 0; i < _partyMembers.Count; i++)
             {

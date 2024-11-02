@@ -61,5 +61,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
   destroyObjToEnsureInstance: 1
-  _sceneTransitionTime: 0.5
+  _sceneTransitionTime: 0.8
   firstScene: Initial City
+  _lastScene: 

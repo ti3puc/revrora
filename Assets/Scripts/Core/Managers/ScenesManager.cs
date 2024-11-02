@@ -10,12 +10,19 @@ namespace Managers.Scenes
 {
     public class ScenesManager : Singleton<ScenesManager>
     {
+        public delegate void SceneEvent(string lastSceneName, string sceneName);
+        public static event SceneEvent OnSceneStartedLoading;
+
         [Header("Settings")]
         [SerializeField] private float _sceneTransitionTime = 1f;
         [SerializeField, Scene] private string firstScene;
 
-        #region Load Scene
+        [Header("Debug")]
+        [SerializeField, ReadOnly] private string _lastScene;
 
+        public static string LastScene => Instance._lastScene;
+
+        #region Load Scene
         public static void LoadFirstScene()
         {
             LoadScene(Instance.firstScene);
@@ -26,16 +33,19 @@ namespace Managers.Scenes
             LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        public static void LoadScene(string sceneName)
-        {
-            // load after Transition
-            FadeIn(() => SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single));
-        }
-
         public static void LoadScene(int buildIndex)
         {
+            string sceneName = SceneManager.GetSceneByBuildIndex(buildIndex).name;
+            LoadScene(sceneName);
+        }
+
+        public static void LoadScene(string sceneName)
+        {
+            Instance._lastScene = SceneManager.GetActiveScene().name;
+            OnSceneStartedLoading?.Invoke(Instance._lastScene, sceneName);
+
             // load after Transition
-            FadeIn(() => SceneManager.LoadSceneAsync(buildIndex, LoadSceneMode.Single));
+            FadeIn(() => SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single));
         }
 
         #endregion
