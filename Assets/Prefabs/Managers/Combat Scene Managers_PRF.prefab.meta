@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Managers/Combat Scene Managers_PRF.prefab.meta
 guid: 2e43965e9a2d6724eb582c16035c55d0
+========
+guid: fd981db887508ea4492812c967139425
+>>>>>>>> develop:Assets/Prefabs/Environment/Invisible Wall_PRF.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
