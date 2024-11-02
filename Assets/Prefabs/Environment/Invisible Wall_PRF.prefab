@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 6042401253063362559}
   - component: {fileID: 5295394822509699562}
   m_Layer: 0
-  m_Name: SceneChangerTrigger_PRF
+  m_Name: Invisible Wall_PRF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
