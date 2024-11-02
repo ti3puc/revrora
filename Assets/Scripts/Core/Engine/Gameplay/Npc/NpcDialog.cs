@@ -47,7 +47,7 @@ namespace Npc.Dialog
             if (!_isLookingAtInteractor)
                 StartCoroutine(LookAtInteractor());
 
-            CanvasManager.Instance.DialogCanvas.AddDialogue(_dialogue);
+            CanvasManager.DialogCanvas.AddDialogue(_dialogue);
         }
 
         public override void UndoInteraction()
@@ -56,7 +56,7 @@ namespace Npc.Dialog
                 _characterStateMachine.SetState(_lastState);
 
             StopLookingAtInteractor();
-            CanvasManager.Instance.DialogCanvas.ClearDialogue();
+            CanvasManager.DialogCanvas.ClearDialogue();
         }
 
         private IEnumerator LookAtInteractor()

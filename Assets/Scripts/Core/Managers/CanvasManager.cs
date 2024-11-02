@@ -12,15 +12,17 @@ namespace UI
     public class CanvasManager : Singleton<CanvasManager>
     {
         [Header("References")]
-        [SerializeField] private Canvas mainCanvas;
-        [SerializeField] private Canvas inventoryCanvas;
-        [SerializeField] private Canvas pauseCanvas;
-        [SerializeField] private DialogManager dialogCanvas;
+        [SerializeField] private Canvas _mainCanvas;
+        [SerializeField] private Canvas _inventoryCanvas;
+        [SerializeField] private Canvas _pauseCanvas;
+        [SerializeField] private CanvasGroup _transitionCanvasGroup;
+        [SerializeField] private DialogManager _dialogCanvas;
 
         [Header("Debug")]
-        [SerializeField, ReadOnly] private bool isInventoryOpen;
+        [SerializeField, ReadOnly] private bool _isInventoryOpen;
 
-        public DialogManager DialogCanvas => dialogCanvas;
+        public static DialogManager DialogCanvas => Instance._dialogCanvas;
+        public static CanvasGroup TransitionCanvasGroup => Instance._transitionCanvasGroup;
 
         protected override void Awake()
         {
@@ -35,21 +37,21 @@ namespace UI
 
         public void ShowMainCanvas()
         {
-            mainCanvas.enabled = true;
-            inventoryCanvas.enabled = false;
-            pauseCanvas.enabled = false;
+            _mainCanvas.enabled = true;
+            _inventoryCanvas.enabled = false;
+            _pauseCanvas.enabled = false;
 
-            if (isInventoryOpen)
-                isInventoryOpen = !isInventoryOpen;
+            if (_isInventoryOpen)
+                _isInventoryOpen = !_isInventoryOpen;
         }
 
         public void ToggleInventory()
         {
-            isInventoryOpen = !isInventoryOpen;
+            _isInventoryOpen = !_isInventoryOpen;
 
-            mainCanvas.enabled = !isInventoryOpen;
-            inventoryCanvas.enabled = isInventoryOpen;
-            pauseCanvas.enabled = false;
+            _mainCanvas.enabled = !_isInventoryOpen;
+            _inventoryCanvas.enabled = _isInventoryOpen;
+            _pauseCanvas.enabled = false;
         }
     }
 }
