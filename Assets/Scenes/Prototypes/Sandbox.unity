@@ -189,6 +189,7 @@ MonoBehaviour:
     WanderRadius: 10
     WanderTime: 5
     WanderSmoothDamp: 0.1
+    CanPassToPursuit: 1
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
     PursuitTarget: {fileID: 627493940}
@@ -2204,6 +2205,7 @@ MonoBehaviour:
     WanderRadius: 10
     WanderTime: 5
     WanderSmoothDamp: 0.1
+    CanPassToPursuit: 1
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
     PursuitTarget: {fileID: 0}
@@ -2404,9 +2406,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f65b54caeb3f8c449ab77da551500b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticInteraction: 0
-  boxCollider: {fileID: 121233029}
-  currentInteractor: {fileID: 0}
+  _automaticInteraction: 0
+  _useBoxCollider: 1
+  _boxCollider: {fileID: 121233029}
+  _sphereCollider: {fileID: 0}
+  _currentInteractor: {fileID: 0}
   platform: {fileID: 1689592042}
 --- !u!65 &121233029
 BoxCollider:
@@ -2632,9 +2636,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679bff5305bf12d4eafb02ba75adfd38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticInteraction: 0
-  boxCollider: {fileID: 160341127}
-  currentInteractor: {fileID: 0}
+  _automaticInteraction: 0
+  _useBoxCollider: 1
+  _boxCollider: {fileID: 160341127}
+  _sphereCollider: {fileID: 0}
+  _currentInteractor: {fileID: 0}
   otherPortal: {fileID: 282623895}
 --- !u!65 &160341127
 BoxCollider:
@@ -3087,9 +3093,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679bff5305bf12d4eafb02ba75adfd38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticInteraction: 0
-  boxCollider: {fileID: 282623894}
-  currentInteractor: {fileID: 0}
+  _automaticInteraction: 0
+  _useBoxCollider: 1
+  _boxCollider: {fileID: 282623894}
+  _sphereCollider: {fileID: 0}
+  _currentInteractor: {fileID: 0}
   otherPortal: {fileID: 160341126}
 --- !u!1 &291719005
 GameObject:
@@ -3612,9 +3620,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f826358e7458c0547934cfff66e33c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticInteraction: 1
-  boxCollider: {fileID: 335677552}
-  currentInteractor: {fileID: 0}
+  _automaticInteraction: 0
+  _useBoxCollider: 1
+  _boxCollider: {fileID: 335677552}
+  _sphereCollider: {fileID: 0}
+  _currentInteractor: {fileID: 0}
   breakForce: 10
   rigidbodyRef: {fileID: 11414937}
   fixedJointRef: {fileID: 0}
@@ -5937,9 +5947,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ebdc243dc9ff24dbfe88f634ba9335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticInteraction: 0
-  boxCollider: {fileID: 443946741}
-  currentInteractor: {fileID: 0}
+  _automaticInteraction: 0
+  _useBoxCollider: 1
+  _boxCollider: {fileID: 443946741}
+  _sphereCollider: {fileID: 0}
+  _currentInteractor: {fileID: 0}
   hingePoint: {fileID: 318619074}
   rotationSpeed: 5
   rotateDegrees: {x: 0, y: 90, z: 0}
@@ -5959,9 +5971,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ebdc243dc9ff24dbfe88f634ba9335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticInteraction: 0
-  boxCollider: {fileID: 443946741}
-  currentInteractor: {fileID: 0}
+  _automaticInteraction: 0
+  _useBoxCollider: 1
+  _boxCollider: {fileID: 0}
+  _sphereCollider: {fileID: 0}
+  _currentInteractor: {fileID: 0}
   hingePoint: {fileID: 243001432}
   rotationSpeed: 5
   rotateDegrees: {x: 0, y: -90, z: 0}
@@ -12124,6 +12138,7 @@ MonoBehaviour:
     WanderRadius: 10
     WanderTime: 5
     WanderSmoothDamp: 0.1
+    CanPassToPursuit: 1
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
     PursuitTarget: {fileID: 0}
@@ -12199,9 +12214,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f826358e7458c0547934cfff66e33c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticInteraction: 1
-  boxCollider: {fileID: 1132015018}
-  currentInteractor: {fileID: 0}
+  _automaticInteraction: 0
+  _useBoxCollider: 1
+  _boxCollider: {fileID: 1132015018}
+  _sphereCollider: {fileID: 0}
+  _currentInteractor: {fileID: 0}
   breakForce: 10
   rigidbodyRef: {fileID: 1735314140}
   fixedJointRef: {fileID: 1735314139}
@@ -16394,6 +16411,7 @@ MonoBehaviour:
     WanderRadius: 10
     WanderTime: 5
     WanderSmoothDamp: 0.1
+    CanPassToPursuit: 1
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
     PursuitTarget: {fileID: 627493940}
@@ -16646,6 +16664,7 @@ MonoBehaviour:
     WanderRadius: 10
     WanderTime: 5
     WanderSmoothDamp: 0.1
+    CanPassToPursuit: 1
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
     PursuitTarget: {fileID: 627493940}
@@ -17116,6 +17135,7 @@ MonoBehaviour:
     WanderRadius: 10
     WanderTime: 5
     WanderSmoothDamp: 0.1
+    CanPassToPursuit: 1
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
     PursuitTarget: {fileID: 627493940}
@@ -18319,9 +18339,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f65b54caeb3f8c449ab77da551500b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticInteraction: 0
-  boxCollider: {fileID: 1593585116}
-  currentInteractor: {fileID: 0}
+  _automaticInteraction: 0
+  _useBoxCollider: 1
+  _boxCollider: {fileID: 1593585116}
+  _sphereCollider: {fileID: 0}
+  _currentInteractor: {fileID: 0}
   platform: {fileID: 1093065708}
 --- !u!65 &1593585116
 BoxCollider:
@@ -19898,6 +19920,7 @@ MonoBehaviour:
     WanderRadius: 10
     WanderTime: 5
     WanderSmoothDamp: 0.1
+    CanPassToPursuit: 1
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
     PursuitTarget: {fileID: 0}
@@ -22083,6 +22106,7 @@ MonoBehaviour:
     WanderRadius: 10
     WanderTime: 5
     WanderSmoothDamp: 0.1
+    CanPassToPursuit: 1
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
     PursuitTarget: {fileID: 627493940}

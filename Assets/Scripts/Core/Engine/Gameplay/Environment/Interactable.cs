@@ -1,9 +1,9 @@
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Environment.Interaction
 {
-	[RequireComponent(typeof(BoxCollider))]
 	public abstract class Interactable : MonoBehaviour
 	{
 		public delegate void RequestUIEvent(Interactor interactor, Interactable interactable);
@@ -11,20 +11,30 @@ namespace Environment.Interaction
 		public static event RequestUIEvent OnRequestToHideUI;
 
 		[Header("References")]
-		[SerializeField] protected bool automaticInteraction;
+		[SerializeField] protected bool _automaticInteraction;
 
 		[Header("References")]
-		[SerializeField] protected BoxCollider boxCollider;
+		[SerializeField] protected bool _useBoxCollider = true;
+		[SerializeField, ShowIf("_useBoxCollider")] protected BoxCollider _boxCollider;
+		[SerializeField, HideIf("_useBoxCollider")] protected SphereCollider _sphereCollider;
 
 		[Header("Debug")]
-		[SerializeField, ReadOnly] protected Interactor currentInteractor;
+		[SerializeField, ReadOnly] protected Interactor _currentInteractor;
 
 		protected virtual void Awake()
 		{
 			Interactor.OnAnyInteraction += TryInteract;
 
-			boxCollider = GetComponent<BoxCollider>();
-			boxCollider.isTrigger = true;
+			if (_useBoxCollider)
+			{
+				_boxCollider = GetComponent<BoxCollider>();
+				_boxCollider.isTrigger = true;
+			}
+			else
+			{
+				_sphereCollider = GetComponent<SphereCollider>();
+				_sphereCollider.isTrigger = true;
+			}
 		}
 
 		protected virtual void OnDestroy()
@@ -34,8 +44,16 @@ namespace Environment.Interaction
 
 		protected virtual void Reset()
 		{
-			boxCollider = GetComponent<BoxCollider>();
-			boxCollider.isTrigger = true;
+			if (_useBoxCollider)
+			{
+				_boxCollider = GetComponent<BoxCollider>();
+				_boxCollider.isTrigger = true;
+			}
+			else
+			{
+				_sphereCollider = GetComponent<SphereCollider>();
+				_sphereCollider.isTrigger = true;
+			}
 		}
 
 		protected virtual void OnTriggerEnter(Collider other)
@@ -43,12 +61,12 @@ namespace Environment.Interaction
 			var interactor = other.GetComponent<Interactor>();
 			if (interactor != null)
 			{
-				currentInteractor = interactor;
+				_currentInteractor = interactor;
 
-				if (automaticInteraction)
-					currentInteractor.DoInteract();
+				if (_automaticInteraction)
+					_currentInteractor.DoInteract();
 				else
-					OnRequestToShowUI?.Invoke(currentInteractor, this);
+					OnRequestToShowUI?.Invoke(_currentInteractor, this);
 			}
 		}
 
@@ -58,14 +76,14 @@ namespace Environment.Interaction
 			if (interactor != null)
 			{
 				UndoInteraction();
-				OnRequestToHideUI?.Invoke(currentInteractor, this);
-				currentInteractor = null;
+				OnRequestToHideUI?.Invoke(_currentInteractor, this);
+				_currentInteractor = null;
 			}
 		}
 
 		protected virtual void TryInteract(Interactor interactor)
 		{
-			if (interactor != currentInteractor)
+			if (interactor != _currentInteractor)
 				return;
 
 			ReceiveInteraction();

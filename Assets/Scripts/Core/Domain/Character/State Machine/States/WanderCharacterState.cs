@@ -13,6 +13,7 @@ namespace Character.StateMachine.States
         public float WanderRadius = 10f;
         public float WanderTime = 5f;
         public float WanderSmoothDamp = .1f;
+        public bool CanPassToPursuit = true;
         [HideInInspector] public Vector3 Velocity = Vector3.zero;
     }
 
@@ -95,6 +96,8 @@ namespace Character.StateMachine.States
 
         private void CheckChangeStateToPursuit()
         {
+            if (_wanderSettings.CanPassToPursuit == false) return;
+
             float distanceToTarget = _pursuitSettings.GetDistanceToTarget(_navMeshAgent.transform);
             if (distanceToTarget < _pursuitSettings.MaxPursuitDistance)
                 _character.SetState(_character.PursuitCharacterState);
@@ -103,7 +106,7 @@ namespace Character.StateMachine.States
         private void SetNewWanderTarget()
         {
             Vector3 randomDirection = Random.insideUnitSphere * _wanderSettings.WanderRadius;
-            randomDirection += _character.transform.position;
+            randomDirection += _startingPosition;
 
             NavMeshHit navHit;
             NavMesh.SamplePosition(randomDirection, out navHit, _wanderSettings.WanderRadius, -1);
