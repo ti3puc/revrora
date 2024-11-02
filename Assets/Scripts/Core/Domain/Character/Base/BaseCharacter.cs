@@ -9,6 +9,9 @@ namespace Character.Base
 {
     public abstract class BaseCharacter : MonoBehaviour, ICharacterClass
     {
+        public delegate void CharacterEvent(BaseCharacter character);
+        public static event CharacterEvent OnCharacterDied;
+
         [Header("References")]
         [SerializeField] private BaseCharacterStats _baseCharacterStats;
         [SerializeField] private List<CharacterMove> _characterMoves;
@@ -33,5 +36,11 @@ namespace Character.Base
         public CharacterStats CharacterStats => _characterStats;
         public List<CharacterMove> CharacterMoves => _characterMoves;
         public bool IsTeamPlayer => _isTeamPlayer;
+
+        public void RaiseCharacterDied()
+        {
+            gameObject.SetActive(false);
+            OnCharacterDied?.Invoke(this);
+        }
     }
 }

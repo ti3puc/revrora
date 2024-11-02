@@ -10,13 +10,13 @@ namespace Core.Engine.Combat.CombatActions
     {
         private List<BaseCharacter> _targets;
 
-        
+
         public void execute(BaseCharacter user, CharacterMove move, List<BaseCharacter> targets)
         {
             _targets = targets;
 
 
-            switch (move.category)
+            switch (move.Category)
             {
                 case MoveCategory.PHYSICAL:
                     DoPhysicalMove(user, move, targets);
@@ -26,20 +26,20 @@ namespace Core.Engine.Combat.CombatActions
                     break;
             }
         }
-        
+
         private void DoPhysicalMove(BaseCharacter user, CharacterMove move, List<BaseCharacter> targets)
         {
             foreach (var enemy in targets)
             {
                 var random = Random.Range(0, 4);
-                var damage = (user.CharacterStats.Attack + move.power + random) - enemy.CharacterStats.Defense;
-                
+                var damage = (user.CharacterStats.Attack + move.Power + random) - enemy.CharacterStats.Defense;
+
                 Debug.Log("damage: " + damage);
-                
+
                 enemy.CharacterStats.ReceiveDamage(damage);
             }
         }
-        
+
         private void DoStatusMove(BaseCharacter user, CharacterMove move, List<BaseCharacter> targets)
         {
 

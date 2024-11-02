@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ce6dd5a45e44f5b027dfad7fa623a7, type: 3}
   m_Name: Tackle
   m_EditorClassIdentifier: 
-  name: Tackle
+  moveName: Tackle
   category: 0
   type: 0
-  power: 1
+  power: 5
   manaCost: 0
   rate: 100
   script: 

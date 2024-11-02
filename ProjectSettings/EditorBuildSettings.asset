@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Air Scenes/Air.unity
     guid: 1e346ce9476be5e4582d1a2bdc196bc9
+  - enabled: 1
+    path: Assets/Scenes/Prototypes/Combat.unity
+    guid: b5748881f54262346abf45575e1c18f9
   m_configObjects: {}

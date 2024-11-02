@@ -64,6 +64,7 @@ namespace Character.Base
             if (_hp <= 0)
             {
                 _hp = 0;
+                _characterClass.RaiseCharacterDied();
                 Debug.Log("Character is dead! (" + _characterClass.Name + ")");
             }
         }
