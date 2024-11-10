@@ -1,4 +1,6 @@
+using System;
 using Managers.Cameras;
+using Managers.Scenes;
 using NaughtyAttributes;
 using Player.Input;
 using UnityEngine;
@@ -15,6 +17,7 @@ namespace Player.Movement
 		[SerializeField] private float speed = 15f;
 		[SerializeField] private float acceleration = 5f;
 		[SerializeField] private float deceleration = 5f;
+		[SerializeField] private bool movementStartsDisabled = false;
 
 		[Header("Air Movement")]
 		[SerializeField] private float speedOnAir = 8f;
@@ -51,6 +54,7 @@ namespace Player.Movement
 		[SerializeField, ReadOnly] private float currentSpeed;
 		[SerializeField, ReadOnly] private bool isGrounded;
 		[SerializeField, ReadOnly] private float fallSpeed;
+		[SerializeField, ReadOnly] private bool isMovementDisabled;
 
 		#endregion
 
@@ -62,15 +66,23 @@ namespace Player.Movement
 
 			PlayerInput.OnMovePerformed += OnMove;
 			PlayerInput.OnMoveCanceled += OnMove;
+			ScenesManager.OnSceneStartedLoading += DisableMovementForSceneLoad;
+
+			if (movementStartsDisabled)
+			{
+				Debug.LogWarning("Player movement was disabled from awake.");
+				DisableMovement();
+			}
 		}
 
 		private void OnDestroy()
 		{
 			PlayerInput.OnMovePerformed -= OnMove;
 			PlayerInput.OnMoveCanceled -= OnMove;
+			ScenesManager.OnSceneStartedLoading -= DisableMovementForSceneLoad;
 		}
 
-		private void OnDrawGizmos()
+        private void OnDrawGizmos()
 		{
 			// debug ground check
 			Gizmos.color = Color.red;
@@ -79,6 +91,7 @@ namespace Player.Movement
 
 		private void FixedUpdate()
 		{
+			if (isMovementDisabled) return;
 			isGrounded = Physics.CheckSphere(transform.position + Vector3.down * groundCheckDistance, groundCheckRadius, groundMask) || platformParenter.HasPlatformBellow;
 
 			// move character, and changes speed if on air or grounded
@@ -164,5 +177,22 @@ namespace Player.Movement
 				moveVector.z = inputVector.y;
 			}
 		}
+
+		public void DisableMovement()
+		{
+			isMovementDisabled = true;
+			characterController.enabled = false;
+		}
+
+		public void EnableMovement()
+		{
+			characterController.enabled = true;
+			isMovementDisabled = false;
+		}
+
+        private void DisableMovementForSceneLoad(string lastScene, string sceneName)
+        {
+			DisableMovement();
+        }
 	}
 }

@@ -11,5 +11,7 @@
         int BaseAgility { get; }
         int BaseWisdom { get; }
         CharacterTypes Type { get; }
+
+        public void RaiseCharacterDied();
     }
 }

@@ -10,13 +10,12 @@ namespace Creatures
     {
         [Header("Debug")]
         [SerializeField] private bool _addToPartyOnStart;
-        [SerializeField] private float _addToPartyDelay;
+        [SerializeField] private int _addToPartyIndex;
 
-        private IEnumerator Start()
+        private void Start()
         {
-            yield return new WaitForSeconds(_addToPartyDelay);
             if (_addToPartyOnStart)
-                PartyManager.Instance.AddPartyMember(this);
+                PartyManager.Instance.AddPartyMember(this, _addToPartyIndex);
         }
     }
 }

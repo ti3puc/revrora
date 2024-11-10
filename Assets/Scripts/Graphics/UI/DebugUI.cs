@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Managers;
+using Managers.Scenes;
 using Managers.Party;
 using UnityEngine;
 
@@ -17,31 +17,37 @@ namespace UI.UIDebug
 		#region Unity Messages
 		private void Awake()
 		{
-			PartyManager.Instance.OnPartyChangedEvent += UpdatePartyUI;
+			PartyManager.OnPartyChangedEvent += UpdatePartyUI;
 		}
 
 		private void OnDestroy()
 		{
-			PartyManager.Instance.OnPartyChangedEvent -= UpdatePartyUI;
+			PartyManager.OnPartyChangedEvent -= UpdatePartyUI;
 		}
 		#endregion
 
 		#region Public Methods
-		public void ReloadGame() => GameManager.Instance.ReloadScene();
+		public void ReloadGame() => ScenesManager.ReloadScene();
+
+		public void GoToMenu() => ScenesManager.LoadScene("Main Menu");
+
+		public void GoToSandbox() => ScenesManager.LoadScene("Sandbox");
+		
+		public void GoToCombat() => ScenesManager.LoadScene("Combat");
 
 		public void SwitchToPokemon1()
 		{
-			PartyManager.Instance.SwitchActiveMember(0);
+			PartyManager.Instance.SwitchActiveMemberIndex(0);
 		}
 
 		public void SwitchToPokemon2()
 		{
-			PartyManager.Instance.SwitchActiveMember(1);
+			PartyManager.Instance.SwitchActiveMemberIndex(1);
 		}
 
 		public void SwitchToPokemon3()
 		{
-			PartyManager.Instance.SwitchActiveMember(2);
+			PartyManager.Instance.SwitchActiveMemberIndex(2);
 		}
 		#endregion
 
@@ -51,7 +57,7 @@ namespace UI.UIDebug
 			var partyMembers = PartyManager.Instance.PartyMembers;
 			for (int i = 0; i < partyMembers.Count; i++)
 			{
-				bool isActiveMember = i == partyMembers.IndexOf(PartyManager.Instance.ActivePartyMember);
+				bool isActiveMember = i == PartyManager.Instance.ActiveMemberIndex;
 
 				var width = isActiveMember ? 200 : 150;
 				var height = isActiveMember ? 200 : 150;
