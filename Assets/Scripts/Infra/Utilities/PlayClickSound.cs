@@ -10,8 +10,6 @@ namespace Audio
 	{
 		[SerializeField] private string _clickSoundName = "ui_click";
 		[SerializeField, Min(1)] private int _trackNumber = 3;
-
-		[Header("Exclude Buttons")]
 		[SerializeField] private List<Button> _excludeButtons = new List<Button>();
 
 		[Header("Debug")]
