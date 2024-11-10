@@ -5,7 +5,7 @@ using Character.Base;
 using Managers;
 using NaughtyAttributes;
 using UnityEngine;
-using Utility.Extensions;
+using Extensions;
 
 namespace Managers.Combat
 {

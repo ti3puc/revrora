@@ -2,7 +2,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-namespace Utility.Extensions
+namespace Extensions
 {
     public static class ListExtensions
     {
