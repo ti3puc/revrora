@@ -28,6 +28,11 @@ namespace Managers.Scenes
             LoadScene(Instance.firstScene);
         }
 
+        public static void LoadLastScene()
+        {
+            LoadScene(Instance._lastScene);
+        }
+
         public static void ReloadScene()
         {
             LoadScene(SceneManager.GetActiveScene().buildIndex);

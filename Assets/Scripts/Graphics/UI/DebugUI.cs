@@ -32,6 +32,8 @@ namespace UI.UIDebug
 		public void GoToMenu() => ScenesManager.LoadScene("Main Menu");
 
 		public void GoToSandbox() => ScenesManager.LoadScene("Sandbox");
+		
+		public void GoToCombat() => ScenesManager.LoadScene("Combat");
 
 		public void SwitchToPokemon1()
 		{
