@@ -1371,6 +1371,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1981473704636436312}
+  - component: {fileID: 685102121312679790}
   m_Layer: 0
   m_Name: UI Group_PRF
   m_TagString: Untagged
@@ -1405,6 +1406,22 @@ Transform:
   - {fileID: 7402272135508529782}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &685102121312679790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536552919123503514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 905bbd89289e4ff4f8632b162787397a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clickSoundName: ui_click
+  _trackNumber: 3
+  _excludeButtons: []
+  _buttons: []
 --- !u!1 &1543657668129049225
 GameObject:
   m_ObjectHideFlags: 0
