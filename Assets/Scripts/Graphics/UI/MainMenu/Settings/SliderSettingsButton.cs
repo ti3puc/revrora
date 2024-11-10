@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
 
@@ -17,6 +18,9 @@ namespace UI.Menu.Settings
         [SerializeField] private Vector2Int _minMaxRange = new Vector2Int(0, 100);
         [SerializeField] private bool _quickChangeValueOnHold = true;
         [SerializeField, ShowIf("_quickChangeValueOnHold")] private float _timeToStartHold = .5f;
+
+        [Header("Events")]
+        [SerializeField] private UnityEvent<int> _onValueChange;
 
         [Header("References")]
         [SerializeField] private Button _firstButton;
@@ -59,7 +63,6 @@ namespace UI.Menu.Settings
             _firstButton.onClick.AddListener(DecreaseValue);
             _secondButton.onClick.AddListener(IncreaseValue);
 
-            CurrentValue = 80;
             UpdateTextValue();
         }
 
@@ -95,11 +98,13 @@ namespace UI.Menu.Settings
         private void DecreaseValue()
         {
             CurrentValue -= _valueToIncrease;
+            _onValueChange?.Invoke(CurrentValue);
         }
 
         private void IncreaseValue()
         {
             CurrentValue += _valueToIncrease;
+            _onValueChange?.Invoke(CurrentValue);
         }
 
         #endregion

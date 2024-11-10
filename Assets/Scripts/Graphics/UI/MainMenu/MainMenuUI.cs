@@ -80,11 +80,6 @@ namespace UI.Menu
             ScenesManager.LoadFirstScene();
         }
 
-        public void LoadGame()
-        {
-            Debug.Log("Trying to load game.");
-        }
-
         public void QuitGame()
         {
             Application.Quit();

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers.Settings;
 using NaughtyAttributes;
+using UI.Menu.Settings;
 using UnityEngine;
 
 namespace UI.Menu
@@ -9,9 +11,14 @@ namespace UI.Menu
     {
         [SerializeField] private List<MainMenuPanelUI> _panels = new();
 
+        [Header("Sliders")]
+        [SerializeField] private SliderSettingsButton _musicSlider;
+        [SerializeField] private SliderSettingsButton _sfxSlider;
+
         [Header("Debug")]
         [SerializeField, ReadOnly] private MainMenuPanelUI _currentPanel;
 
+        #region Unity Messages
         private void Awake()
         {
             foreach (var panel in _panels)
@@ -21,6 +28,7 @@ namespace UI.Menu
             }
 
             UpdateCurrentPanel(null);
+            GetVolumesFromPrefs();
         }
 
         private void OnDestroy()
@@ -30,6 +38,26 @@ namespace UI.Menu
                 panel.UnsubscribeToEvents();
                 panel.OnButtonClicked -= UpdateCurrentPanel;
             }
+        }
+        #endregion
+
+        #region Public Methods
+        public void ChangeMusicVolume(int newValue)
+        {
+            SettingsManager.Instance.MusicVolume = newValue;
+        }
+
+        public void ChangeSfxVolume(int newValue)
+        {
+            SettingsManager.Instance.SfxVolume = newValue;
+        }
+        #endregion
+
+        #region Private Methods
+        private void GetVolumesFromPrefs()
+        {
+            _musicSlider.CurrentValue = SettingsManager.Instance.MusicVolume;
+            _sfxSlider.CurrentValue = SettingsManager.Instance.SfxVolume;
         }
 
         private void UpdateCurrentPanel(MainMenuPanelUI panel)
@@ -48,5 +76,6 @@ namespace UI.Menu
                 _panels[i].GameObject.SetActive(_panels[i] == _currentPanel);
             }
         }
+        #endregion
     }
 }
