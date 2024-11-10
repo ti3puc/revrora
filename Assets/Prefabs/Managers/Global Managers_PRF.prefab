@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6362081701375861767}
   - component: {fileID: 3430758459400544096}
   - component: {fileID: 8471586155594883238}
+  - component: {fileID: 3317243995942728863}
   m_Layer: 0
   m_Name: Global Managers_PRF
   m_TagString: Untagged
@@ -80,3 +81,17 @@ MonoBehaviour:
   dontDestroyOnLoad: 1
   destroyObjToEnsureInstance: 1
   _audioMixer: {fileID: 24100000, guid: 5bd9d2ed319b0a04eb647a02d850ebd6, type: 2}
+--- !u!114 &3317243995942728863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2795710042868603732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b25005605c1d4122be127c6c648c9781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  destroyObjToEnsureInstance: 1

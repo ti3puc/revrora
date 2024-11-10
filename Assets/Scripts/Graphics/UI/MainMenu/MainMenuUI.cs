@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Managers.Scenes;
 using NaughtyAttributes;
+using Persistence;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +15,10 @@ namespace UI.Menu
         #region Fields
 
         [SerializeField] private List<MainMenuPanelUI> _panels = new();
+
+        [Header("Saves")]
         [SerializeField] private Button _continueButton;
+        [SerializeField] private Button _newGameButton;
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private MainMenuPanelUI _currentPanel;
@@ -30,8 +35,19 @@ namespace UI.Menu
                 panel.OnButtonClicked += UpdateCurrentPanel;
             }
 
-            _continueButton.gameObject.SetActive(false); // TODO: check for save
             UpdateCurrentPanel(null);
+        }
+
+        private void Start()
+        {
+            bool hasAnySave = SaveSystem.Instance.SaveSlots.Count > 0;
+            _continueButton.gameObject.SetActive(hasAnySave);
+
+            bool hasAvailableSaveSlot = SaveSystem.Instance.SaveSlots.Count < SaveSystem.Instance.MaxSlots;
+            if (hasAvailableSaveSlot)
+                _newGameButton.onClick.AddListener(StartNewGame);
+            else
+                _newGameButton.onClick.AddListener(ShowLoadPanel);
         }
 
         private void OnDestroy()
@@ -41,6 +57,9 @@ namespace UI.Menu
                 panel.UnsubscribeToEvents();
                 panel.OnButtonClicked -= UpdateCurrentPanel;
             }
+
+            _newGameButton.onClick.RemoveListener(StartNewGame);
+            _newGameButton.onClick.RemoveListener(ShowLoadPanel);
         }
 
         #endregion
@@ -61,24 +80,31 @@ namespace UI.Menu
             }
         }
 
+        private void ShowLoadPanel()
+        {
+            var loadPanel = _panels.Find(panel => panel.GameObject.name.Contains("Load"));
+            if (loadPanel == null)
+            {
+                Debug.LogError("Could not find Load Panel", this);
+                return;
+            }
+
+            UpdateCurrentPanel(loadPanel);
+        }
+
         #endregion
 
         #region Public Methods
-
-        #region Methods for UnityEvent
-        // These functions are used inside Unity editor, on the Button
-        // component. Thats why vscode maybe wont find the reference
-        // where they're being used.
-
-        public void ContinueGame()
-        {
-            // TODO: continue last save
-        }
 
         public void StartNewGame()
         {
             ScenesManager.LoadFirstScene();
         }
+
+        #region Methods for UnityEvent
+        // These functions are used inside Unity editor, on the Button
+        // component. Thats why vscode maybe wont find the reference
+        // where they're being used.
 
         public void QuitGame()
         {
