@@ -98,6 +98,7 @@ namespace UI.Menu
 
         public void StartNewGame()
         {
+            SaveSystem.Instance.CreateAvailableSaveSlot();
             ScenesManager.LoadFirstScene();
         }
 

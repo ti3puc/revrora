@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Managers;
+using Managers.Scenes;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,16 +11,20 @@ namespace Persistence
 {
     public class SaveSystem : Singleton<SaveSystem>
     {
+        public event Action OnAutoSave;
+
         [Header("Settings")]
         [SerializeField] private int _maxSlots = 4;
+        [SerializeField] private float _autoSaveInterval = 300f;
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private List<string> _saveSlots;
+        [SerializeField, ReadOnly] private float _autoSaveTimer = 0f;
 
-        private GameData _gameData;
+        private GameData _currentGameData;
         private IDataService _dataService;
 
-        public GameData GameData => _gameData;
+        public GameData GameData => _currentGameData;
         public int MaxSlots => _maxSlots;
         public List<string> SaveSlots => _saveSlots = ListSaveSlots();
 
@@ -29,6 +34,30 @@ namespace Persistence
         {
             base.Awake();
             _dataService = new FileDataService(new JsonSerializer());
+
+            Application.quitting += SaveGame;
+            ScenesManager.OnAnySceneLoading += SaveGame;
+        }
+
+        private void OnDestroy()
+        {
+            Application.quitting -= SaveGame;
+            ScenesManager.OnAnySceneLoading -= SaveGame;
+        }
+
+        private void LateUpdate()
+        {
+            if (_currentGameData == null)
+                return;
+
+            _autoSaveTimer += Time.deltaTime;
+            if (_autoSaveTimer >= _autoSaveInterval)
+            {
+                OnAutoSave?.Invoke();
+                SaveGame();
+
+                _autoSaveTimer = 0f;
+            }
         }
 
         #endregion
@@ -36,9 +65,21 @@ namespace Persistence
         #region Public Methods
 
         [Button]
-        public void CreateSaveSlot(int slotIndex = 1)
+        public void CreateAvailableSaveSlot()
         {
-            _gameData = new GameData
+            for (int i = 0; i < _maxSlots; i++)
+            {
+                if (!SaveSlots.Contains(GetSlotName(i)))
+                {
+                    CreateSaveSlot(i);
+                    break;
+                }
+            }
+        }
+
+        public void CreateSaveSlot(int slotIndex)
+        {
+            _currentGameData = new GameData
             {
                 Id = slotIndex,
                 CurrentScene = "Initial City",
@@ -55,17 +96,17 @@ namespace Persistence
                 return;
             }
 
-            if (_gameData == null)
+            if (_currentGameData == null)
             {
                 Debug.LogError("Game Data is not set.");
                 return;
             }
 
-            _gameData.LastPlayedDate = DateTime.Now.ToString("o");
-            _dataService.Save(_gameData);
+            _currentGameData.LastPlayedDate = DateTime.Now.ToString("o");
+            _dataService.Save(_currentGameData);
         }
 
-        public void LoadSaveSlot(int slotIndex = 1)
+        public void LoadSaveSlot(int slotIndex)
         {
             if (_dataService == null)
             {
@@ -73,13 +114,24 @@ namespace Persistence
                 return;
             }
 
-            _gameData = _dataService.Load(GetSlotName(slotIndex));
+            _currentGameData = GetSaveSlotData(slotIndex);
 
-            if (string.IsNullOrWhiteSpace(_gameData.CurrentScene))
-                _gameData.CurrentScene = "Initial City";
+            if (string.IsNullOrWhiteSpace(_currentGameData.CurrentScene))
+                _currentGameData.CurrentScene = "Initial City";
         }
 
-        public void DeleteSaveSlot(int slotIndex = 1)
+        public GameData GetSaveSlotData(int slotIndex)
+        {
+            if (_dataService == null)
+            {
+                Debug.LogError("Data service is not set.");
+                return null;
+            }
+
+            return _dataService.Load(GetSlotName(slotIndex));
+        }
+
+        public void DeleteSaveSlot(int slotIndex)
         {
             if (_dataService == null)
             {
@@ -88,6 +140,19 @@ namespace Persistence
             }
 
             _dataService.Delete(GetSlotName(slotIndex));
+        }
+
+        [Button]
+        public void DeleteAll()
+        {
+            if (_dataService == null)
+            {
+                Debug.LogError("Data service is not set.");
+                return;
+            }
+
+            PlayerPrefs.DeleteAll();
+            _dataService.DeleteAll();
         }
 
         #endregion

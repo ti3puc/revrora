@@ -12,6 +12,7 @@ namespace Managers.Scenes
     {
         public delegate void SceneEvent(string lastSceneName, string sceneName);
         public static event SceneEvent OnSceneStartedLoading;
+        public static event Action OnAnySceneLoading;
 
         [Header("Settings")]
         [SerializeField] private float _sceneTransitionTime = 1f;
@@ -48,6 +49,7 @@ namespace Managers.Scenes
         {
             Instance._lastScene = SceneManager.GetActiveScene().name;
             OnSceneStartedLoading?.Invoke(Instance._lastScene, sceneName);
+            OnAnySceneLoading?.Invoke();
 
             // load after Transition
             FadeIn(() => SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single));

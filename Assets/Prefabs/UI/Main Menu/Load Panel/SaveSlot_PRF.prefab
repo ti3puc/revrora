@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7075944757813963751}
+  - component: {fileID: 732324177167605200}
   m_Layer: 5
   m_Name: SaveSlot_PRF
   m_TagString: Untagged
@@ -37,6 +38,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &732324177167605200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993394841615522532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7dedd6bcf5cc74ab0e10d241edf994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _emptyState: {fileID: 3404204794136305856}
+  _withDataState: {fileID: 7169201121594856353}
+  _slotName: {fileID: 292241365749846109}
 --- !u!1 &1146822153024939258
 GameObject:
   m_ObjectHideFlags: 0

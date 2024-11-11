@@ -25,7 +25,8 @@ namespace Persistence
 
             if (!overwrite && File.Exists(fileLocation))
             {
-                throw new IOException($"The file '{data.SlotName}{_fileExtension}' already exists and cannot be overwritten.");
+                Debug.LogError($"The file '{data.SlotName}{_fileExtension}' already exists and cannot be overwritten.");
+                return;
             }
 
             File.WriteAllText(fileLocation, _serializer.Serialize(data));
@@ -37,7 +38,8 @@ namespace Persistence
 
             if (!File.Exists(fileLocation))
             {
-                throw new ArgumentException($"No persisted GameData with name '{name}'");
+                Debug.LogError($"No persisted GameData with name '{name}'");
+                return null;
             }
 
             return _serializer.Deserialize<GameData>(File.ReadAllText(fileLocation));
