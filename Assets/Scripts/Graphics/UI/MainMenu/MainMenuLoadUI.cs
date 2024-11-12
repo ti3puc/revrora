@@ -14,10 +14,7 @@ namespace UI.Menu
         private void OnEnable()
         {
             for (int i = 0; i < _saveSlots.Count; i++)
-            {
-                var gameData = SaveSystem.Instance.GetSaveSlotData(i);
-                _saveSlots[i].UpdateSlot(gameData);
-            }
+                _saveSlots[i].UpdateSlot(i);
         }
     }
 }

@@ -35,10 +35,23 @@ namespace UI.Menu
                 panel.OnButtonClicked += UpdateCurrentPanel;
             }
 
+            _continueButton.onClick.AddListener(ContinueGame);
+
             UpdateCurrentPanel(null);
         }
 
-        private void Start()
+        private void OnDestroy()
+        {
+            foreach (var panel in _panels)
+            {
+                panel.UnsubscribeToEvents();
+                panel.OnButtonClicked -= UpdateCurrentPanel;
+            }
+
+            _continueButton.onClick.RemoveListener(ContinueGame);
+        }
+
+        private void OnEnable()
         {
             bool hasAnySave = SaveSystem.Instance.SaveSlots.Count > 0;
             _continueButton.gameObject.SetActive(hasAnySave);
@@ -50,14 +63,8 @@ namespace UI.Menu
                 _newGameButton.onClick.AddListener(ShowLoadPanel);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
-            foreach (var panel in _panels)
-            {
-                panel.UnsubscribeToEvents();
-                panel.OnButtonClicked -= UpdateCurrentPanel;
-            }
-
             _newGameButton.onClick.RemoveListener(StartNewGame);
             _newGameButton.onClick.RemoveListener(ShowLoadPanel);
         }
@@ -98,8 +105,26 @@ namespace UI.Menu
 
         public void StartNewGame()
         {
-            SaveSystem.Instance.CreateAvailableSaveSlot();
-            ScenesManager.LoadFirstScene();
+            var newSave = SaveSystem.Instance.CreateAvailableSaveSlot();
+            SaveSystem.Instance.SaveGame();
+            ScenesManager.LoadScene(newSave.CurrentScene);
+        }
+
+        public void ContinueGame()
+        {
+            if (SaveSystem.Instance.SaveSlots.Count <= 0)
+                return;
+
+            var mostRecentSave = SaveSystem.Instance.SaveSlots
+                .Where(slot => slot != null)
+                .OrderByDescending(slot => DateTime.Parse(SaveSystem.Instance.GetSaveSlotData(int.Parse(slot.Replace("Slot", ""))).LastPlayedDate))
+                .FirstOrDefault();
+
+            if (mostRecentSave != null)
+            {
+                var saveSlotData = SaveSystem.Instance.GetSaveSlotData(int.Parse(mostRecentSave.Replace("Slot", "")));
+                SaveSystem.Instance.LoadSaveSlot(saveSlotData.IndexId);
+            }
         }
 
         #region Methods for UnityEvent

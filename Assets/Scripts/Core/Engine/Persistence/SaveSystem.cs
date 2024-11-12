@@ -47,8 +47,8 @@ namespace Persistence
 
         private void LateUpdate()
         {
-            if (_currentGameData == null)
-                return;
+            if (_currentGameData == null) return;
+            if (_autoSaveInterval <= 0) return;
 
             _autoSaveTimer += Time.deltaTime;
             if (_autoSaveTimer >= _autoSaveInterval)
@@ -65,26 +65,27 @@ namespace Persistence
         #region Public Methods
 
         [Button]
-        public void CreateAvailableSaveSlot()
+        public GameData CreateAvailableSaveSlot()
         {
             for (int i = 0; i < _maxSlots; i++)
             {
                 if (!SaveSlots.Contains(GetSlotName(i)))
-                {
-                    CreateSaveSlot(i);
-                    break;
-                }
+                    return CreateSaveSlot(i);
             }
+
+            return null;
         }
 
-        public void CreateSaveSlot(int slotIndex)
+        public GameData CreateSaveSlot(int slotIndex)
         {
             _currentGameData = new GameData
             {
-                Id = slotIndex,
+                IndexId = slotIndex,
                 CurrentScene = "Initial City",
                 StartDate = DateTime.Now.ToString("o") // ISO 8601 format
             };
+
+            return _currentGameData;
         }
 
         [Button]
@@ -118,6 +119,8 @@ namespace Persistence
 
             if (string.IsNullOrWhiteSpace(_currentGameData.CurrentScene))
                 _currentGameData.CurrentScene = "Initial City";
+
+            ScenesManager.LoadScene(_currentGameData.CurrentScene);
         }
 
         public GameData GetSaveSlotData(int slotIndex)
