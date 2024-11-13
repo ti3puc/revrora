@@ -34,9 +34,6 @@ namespace Combat
         {
             CombatInputUI.OnMoveCalled += ChooseMove;
             _isReceivingTurnInput = true;
-
-            // TODO: start with pokemons from scene
-            TurnCombatManager.Instance.DebugInitialize();
         }
 
         private void OnDestroy()

@@ -6,6 +6,7 @@ using Managers;
 using NaughtyAttributes;
 using UnityEngine;
 using Extensions;
+using Combat.Creatures;
 
 namespace Managers.Combat
 {
@@ -20,6 +21,12 @@ namespace Managers.Combat
         public List<BaseCharacter> TurnCharacters => _turnCharacters;
         public bool HasInitialized => _turnCharacters != null && _turnCharacters.Count > 0;
         public bool IsTurnEnd => _isTurnEnd = _turnIndex > _turnCharacters.Count - 1;
+
+        public void CacheInstantiateCharacters(List<BaseCharacter> characters)
+        {
+            _turnCharacters.Clear();
+            _turnCharacters.AddRange(characters);
+        }
 
         public void InitializeCharacters(List<BaseCharacter> characters)
         {
