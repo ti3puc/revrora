@@ -53,6 +53,18 @@ namespace UI.Menu
 
         private void OnEnable()
         {
+            UpdateButtons();
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void UpdateButtons()
+        {
+            _newGameButton.onClick.RemoveListener(StartNewGame);
+            _newGameButton.onClick.RemoveListener(ShowLoadPanel);
+
             bool hasAnySave = SaveSystem.Instance.SaveSlots.Count > 0;
             _continueButton.gameObject.SetActive(hasAnySave);
 
@@ -63,18 +75,9 @@ namespace UI.Menu
                 _newGameButton.onClick.AddListener(ShowLoadPanel);
         }
 
-        private void OnDisable()
-        {
-            _newGameButton.onClick.RemoveListener(StartNewGame);
-            _newGameButton.onClick.RemoveListener(ShowLoadPanel);
-        }
-
-        #endregion
-
-        #region Private Methods
-
         private void UpdateCurrentPanel(MainMenuPanelUI panel)
         {
+            UpdateButtons();
             _currentPanel = panel;
 
             // update panel visual
