@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Character.Base;
+using Character.Class;
 using Core.Engine.Combat.CombatActions;
 using Managers.Combat;
 using NaughtyAttributes;
@@ -77,7 +78,7 @@ namespace Combat
                     continue;
                 }
 
-                if (_currentInputCharacter != null && !_currentInputCharacter.IsTeamPlayer)
+                if (_currentInputCharacter != null && _currentInputCharacter.CharacterTeam != CharacterTeam.Ally)
                 {
                     // TODO: logic to choose move for enemies
                     var randomIndex = Random.Range(0, _currentInputCharacter.CharacterMoves.Count);
@@ -149,8 +150,8 @@ namespace Combat
             var turnCharacters = TurnCombatManager.Instance.TurnCharacters;
             var aliveCharacters = turnCharacters.Where(c => !c.CharacterStats.IsDead()).ToList();
 
-            var teamPlayers = aliveCharacters.Where(c => c.IsTeamPlayer).ToList();
-            var enemies = aliveCharacters.Where(c => !c.IsTeamPlayer).ToList();
+            var teamPlayers = aliveCharacters.Where(c => c.CharacterTeam == CharacterTeam.Ally).ToList();
+            var enemies = aliveCharacters.Where(c => c.CharacterTeam == CharacterTeam.Enemy).ToList();
 
             if (teamPlayers.Count == 0)
             {

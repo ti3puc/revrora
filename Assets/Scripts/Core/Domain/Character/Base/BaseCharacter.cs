@@ -13,29 +13,52 @@ namespace Character.Base
         public static event CharacterEvent OnCharacterDied;
 
         [Header("References")]
-        [SerializeField] private BaseCharacterStats _baseCharacterStats;
-        [SerializeField] private List<CharacterMove> _characterMoves;
-        [SerializeField] private bool _isTeamPlayer;
+        [SerializeField] private CharacterDefinition _characterDefinition;
+        [SerializeField] private CharacterTeam _characterTeam;
         [Header("Debug")]
         [SerializeField, ReadOnly] private CharacterStats _characterStats;
 
-        private void Awake()
+        public int Id => _characterDefinition.Id;
+        public string Name => _characterDefinition.Name;
+        public int BaseHP => _characterDefinition.BaseStats.BaseHP;
+        public int BaseMana => _characterDefinition.BaseStats.BaseMana;
+        public int BaseStrength => _characterDefinition.BaseStats.BaseStrength;
+        public int BaseDefense => _characterDefinition.BaseStats.BaseDefense;
+        public int BaseAgility => _characterDefinition.BaseStats.BaseAgility;
+        public int BaseWisdom => _characterDefinition.BaseStats.BaseWisdom;
+        public CharacterTypes Type => _characterDefinition.BaseStats.Type;
+        public CharacterStats CharacterStats => _characterStats;
+        public List<CharacterMove> CharacterMoves => _characterDefinition.CharacterMoves;
+        public CharacterTeam CharacterTeam => _characterTeam;
+        public CharacterDefinition CharacterDefinition
         {
-            _characterStats = new CharacterStats(this, 5, true);
+            get => _characterDefinition;
+            set => _characterDefinition = value;
         }
 
-        public int Id => _baseCharacterStats.Id;
-        public string Name => _baseCharacterStats.Name;
-        public int BaseHP => _baseCharacterStats.BaseHP;
-        public int BaseMana => _baseCharacterStats.BaseMana;
-        public int BaseStrength => _baseCharacterStats.BaseStrength;
-        public int BaseDefense => _baseCharacterStats.BaseDefense;
-        public int BaseAgility => _baseCharacterStats.BaseAgility;
-        public int BaseWisdom => _baseCharacterStats.BaseWisdom;
-        public CharacterTypes Type => _baseCharacterStats.Type;
-        public CharacterStats CharacterStats => _characterStats;
-        public List<CharacterMove> CharacterMoves => _characterMoves;
-        public bool IsTeamPlayer => _isTeamPlayer;
+        private void Awake()
+        {
+            if (CharacterDefinition != null)
+                Initialize();
+        }
+
+        public void Initialize()
+        {
+            _characterStats = new CharacterStats(this, 5, true);
+
+            // clean Visual and instantiate the correct one on Definition
+            var visualObj = transform.Find("Visuals");
+            if (visualObj == null)
+            {
+                Debug.LogError("Could not found 'Visuals' object on " + name);
+                return;
+            }
+
+            foreach (Transform child in visualObj)
+                Destroy(child.gameObject);
+
+            Instantiate(_characterDefinition.Visual, visualObj);
+        }
 
         public void RaiseCharacterDied()
         {

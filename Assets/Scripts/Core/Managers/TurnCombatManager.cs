@@ -7,6 +7,8 @@ using NaughtyAttributes;
 using UnityEngine;
 using Extensions;
 using Combat.Creatures;
+using Unity.VisualScripting;
+using Character.Class;
 
 namespace Managers.Combat
 {
@@ -18,18 +20,22 @@ namespace Managers.Combat
         [SerializeField, ReadOnly] private int _turnCount;
         [SerializeField, ReadOnly] private bool _isTurnEnd;
 
+        private Dictionary<CharacterDefinition, CharacterTeam> _toInstanceCacheCharacters = new ();
+
         public List<BaseCharacter> TurnCharacters => _turnCharacters;
+        public Dictionary<CharacterDefinition, CharacterTeam> ToInstanceCharacters => _toInstanceCacheCharacters;
         public bool HasInitialized => _turnCharacters != null && _turnCharacters.Count > 0;
         public bool IsTurnEnd => _isTurnEnd = _turnIndex > _turnCharacters.Count - 1;
 
-        public void CacheInstantiateCharacters(List<BaseCharacter> characters)
+        public void CacheInstantiateCharacters(Dictionary<CharacterDefinition, CharacterTeam> characters)
         {
-            _turnCharacters.Clear();
-            _turnCharacters.AddRange(characters);
+            _toInstanceCacheCharacters.Clear();
+            _toInstanceCacheCharacters.AddRange(characters);
         }
 
         public void InitializeCharacters(List<BaseCharacter> characters)
         {
+            _toInstanceCacheCharacters.Clear();
             _turnCharacters.Clear();
             _turnCharacters.AddRange(characters);
 
@@ -60,7 +66,7 @@ namespace Managers.Combat
 
         public List<BaseCharacter> GetEnemies(BaseCharacter character)
         {
-            var enemies = _turnCharacters.Where(c => (c.IsTeamPlayer != character.IsTeamPlayer) && (!c.CharacterStats.IsDead())).ToList();
+            var enemies = _turnCharacters.Where(c => (c.CharacterTeam != character.CharacterTeam) && (!c.CharacterStats.IsDead())).ToList();
             var list = new List<BaseCharacter>();
             if (enemies.Count <= 0)
                 return list;

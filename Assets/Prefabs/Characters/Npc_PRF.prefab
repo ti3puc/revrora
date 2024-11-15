@@ -72,6 +72,7 @@ MonoBehaviour:
   _sphereCollider: {fileID: 7631024015652280386}
   _currentInteractor: {fileID: 0}
   _dialogue: {fileID: 0}
+  _rotationSpeed: 5
   _characterStateMachine: {fileID: 6711367996869212038}
   _navMeshAgent: {fileID: 0}
   _isLookingAtInteractor: 0
@@ -238,7 +239,7 @@ Transform:
   m_GameObject: {fileID: 3196984988783239787}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.14, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -378,8 +379,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fe596cd4318514ba04aca9352131a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseCharacterStats: {fileID: 11400000, guid: 262e78183eb0da7409131ff8b6a86c4c,
+  _characterDefinition: {fileID: 11400000, guid: 128690e0cf9b0564b91c2c09cab0a40b,
     type: 2}
+  _characterTeam: 0
   _characterStats:
     _level: 0
     _experience: 0
@@ -404,6 +406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initialState: 1
   _followStateSettings:
+    FollowPlayer: 1
     FollowTarget: {fileID: 0}
     FollowOffset: {x: 0, y: 0, z: 2}
     FollowSmoothDamp: 0.1
@@ -418,6 +421,7 @@ MonoBehaviour:
     CanPassToPursuit: 0
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
+    PursuitPlayer: 1
     PursuitTarget: {fileID: 0}
     MaxPursuitDistance: 30
     PursuitSmoothDamp: 0.1

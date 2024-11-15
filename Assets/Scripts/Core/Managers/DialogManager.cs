@@ -76,13 +76,13 @@ namespace Core.Managers
 
         #region Public Methods
 
-        public void AddDialogue(Dialogue dialogue)
+        public void AddDialogue(Dialogue dialogue, string characterName)
         {
             if (_dialogue != null)
                 return;
 
             _dialogue = dialogue;
-            _nameText.text = _dialogue.Name;
+            _nameText.text = characterName;
             _dialogText.text = _dialogue.Sentences[_dialogueIndex];
         }
 
@@ -137,7 +137,7 @@ namespace Core.Managers
         [Button]
         private void DebugShowDialogue()
         {
-            AddDialogue(_debugDialogue);
+            AddDialogue(_debugDialogue, "Debug Char");
         }
 
         [Button]

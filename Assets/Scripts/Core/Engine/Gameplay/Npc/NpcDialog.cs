@@ -40,14 +40,16 @@ namespace Npc.Dialog
 
             if (_characterStateMachine != null)
             {
-                _lastState = _characterStateMachine.CurrentState;
+                if (_characterStateMachine.CurrentState != _characterStateMachine.IdleCharacterState)
+                    _lastState = _characterStateMachine.CurrentState;
+
                 _characterStateMachine.SetState(_characterStateMachine.IdleCharacterState);
             }
 
             if (!_isLookingAtInteractor)
                 StartCoroutine(LookAtInteractor());
 
-            CanvasManager.DialogCanvas.AddDialogue(_dialogue);
+            CanvasManager.DialogCanvas.AddDialogue(_dialogue, _characterStateMachine.Character.Name);
         }
 
         public override void UndoInteraction()

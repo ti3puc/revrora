@@ -9,15 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efd4c75defc094f439cc74552f4e38f2, type: 3}
+  m_Script: {fileID: 11500000, guid: e6186e71f71368342b7058710441a95b, type: 3}
   m_Name: Npc
   m_EditorClassIdentifier: 
-  id: -1
-  charName: Npc 1
-  baseHP: 39
-  baseMana: 25
-  baseStrength: 52
-  baseDefense: 43
-  baseAgility: 65
-  baseWisdom: 62
-  type: 2
+  _id: 99
+  _baseStats:
+    charName: Npc
+    baseHP: 39
+    baseMana: 52
+    baseStrength: 43
+    baseDefense: 60
+    baseAgility: 50
+    baseWisdom: 65
+    type: 0
+  _characterMoves:
+  - {fileID: 11400000, guid: 0836f2666f00007499f4acc1c52a874d, type: 2}
+  - {fileID: 11400000, guid: b7d5cc13a136b2445b5a3d3bd84e32e3, type: 2}
+  - {fileID: 11400000, guid: b063865351c6c674491fe0301c39eeb0, type: 2}
+  _visual: {fileID: 7181864663477541246, guid: 03bde336ee2d1034fa264563324cbe90, type: 3}

@@ -6,6 +6,7 @@ using Managers.Combat;
 using Managers.Party;
 using Managers.Player;
 using Managers.Scenes;
+using Character.Class;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -29,12 +30,18 @@ namespace Creatures.Combat
 
             if (other.CompareTag("Player"))
             {
-                var playerPokemon = GameManager.Creatures.Find(x => x.Id == PlayerManager.Instance.Player.Id);
-                var partyPokemon = GameManager.Creatures.Find(x => x.Id == _creatureCharacter.Id);
-                var wildPokemon = GameManager.Creatures.Find(x => x.Id == PartyManager.Instance.ActivePartyMember.Id);
+                var playerPokemon = GameManager.Characters.Find(x => x.Id == PlayerManager.Instance.Player.Id);
+                var partyPokemon = GameManager.Characters.Find(x => x.Id == PartyManager.Instance.ActivePartyMember.Id);
+                var wildPokemon = GameManager.Characters.Find(x => x.Id == _creatureCharacter.Id);
 
-                var listOfCharacters = new List<BaseCharacter> { playerPokemon, partyPokemon, wildPokemon };
-                TurnCombatManager.Instance.CacheInstantiateCharacters(listOfCharacters);
+                var dictOfCharacters = new Dictionary<CharacterDefinition, CharacterTeam>
+                    {
+                        { playerPokemon, CharacterTeam.Ally },
+                        { partyPokemon, CharacterTeam.Ally },
+                        { wildPokemon, CharacterTeam.Enemy }
+                    };
+
+                TurnCombatManager.Instance.CacheInstantiateCharacters(dictOfCharacters);
                 ScenesManager.LoadScene("Combat");
 
                 _hasInitialized = true;
