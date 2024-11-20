@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   _id: 0
+  _name: Player
   _baseStats:
-    charName: Player
     baseHP: 39
     baseMana: 52
     baseStrength: 43

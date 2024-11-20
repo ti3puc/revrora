@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Pokemon 3
   m_EditorClassIdentifier: 
   _id: 3
+  _name: Pokemon 3
   _baseStats:
-    charName: Pokemon 3
     baseHP: 39
     baseMana: 52
     baseStrength: 43
