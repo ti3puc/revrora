@@ -2,16 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Rendering.Universal;
 
 namespace Managers.Settings
 {
     public class SettingsManager : Singleton<SettingsManager>
     {
+        #region Fields
+
         [Header("References")]
         [SerializeField] private AudioMixer _audioMixer;
+        [SerializeField] private UniversalRendererData _lowRenderer;
+        [SerializeField] private UniversalRendererData _mediumRenderer;
+        [SerializeField] private UniversalRendererData _highRenderer;
+        [SerializeField] private PostProcessData _postProcessData;
 
         private const string MusicVolumeKey = "MusicVolume";
         private const string SfxVolumeKey = "SfxVolume";
+        private const string MusicKey = "Music";
+        private const string SfxKey = "Sfx";
+        private const string GraphicsKey = "Graphics";
+        private const string FullscreenKey = "Fullscreen";
+        private const string FramerateKey = "Framerate";
+        private const string PostProcessKey = "PostProcess";
+        private const string VSyncKey = "VSync";
+
+        #endregion
+
+        #region Properties
+
+        public int Music
+        {
+            get => PlayerPrefs.GetInt(MusicKey, 0);
+            set
+            {
+                PlayerPrefs.SetInt(MusicKey, value);
+                SetMusicVolume(MusicVolume);
+            }
+        }
+
+        public int Sfx
+        {
+            get => PlayerPrefs.GetInt(SfxKey, 0);
+            set
+            {
+                PlayerPrefs.SetInt(SfxKey, value);
+                SetSfxVolume(SfxVolume);
+            }
+        }
 
         public int MusicVolume
         {
@@ -33,15 +71,79 @@ namespace Managers.Settings
             }
         }
 
+        public int Graphics
+        {
+            get => PlayerPrefs.GetInt(GraphicsKey, 2);
+            set
+            {
+                PlayerPrefs.SetInt(GraphicsKey, value);
+                SetGraphics(value);
+            }
+        }
+
+        public int Fullscreen
+        {
+            get => PlayerPrefs.GetInt(FullscreenKey, 0);
+            set
+            {
+                PlayerPrefs.SetInt(FullscreenKey, value);
+                SetFullscreen(value);
+            }
+        }
+
+        public int Framerate
+        {
+            get => PlayerPrefs.GetInt(FramerateKey, 1);
+            set
+            {
+                PlayerPrefs.SetInt(FramerateKey, value);
+                SetFramerate(value);
+            }
+        }
+
+        public int PostProcess
+        {
+            get => PlayerPrefs.GetInt(PostProcessKey, 0);
+            set
+            {
+                PlayerPrefs.SetInt(PostProcessKey, value);
+                SetPostProcess(value);
+            }
+        }
+
+        public int VSync
+        {
+            get => PlayerPrefs.GetInt(VSyncKey, 0);
+            set
+            {
+                PlayerPrefs.SetInt(VSyncKey, value);
+                SetVsync(value);
+            }
+        }
+
+        #endregion
+
+        #region Unity Messages
+
         private void Start()
         {
             SetMusicVolume(MusicVolume);
             SetSfxVolume(SfxVolume);
+
+            SetGraphics(Graphics);
+            SetPostProcess(PostProcess);
+            SetFullscreen(Fullscreen);
+            SetFramerate(Framerate);
+            SetVsync(VSync);
         }
+
+        #endregion
+
+        #region Private Methods
 
         private void SetMusicVolume(int volume)
         {
-            if (volume == 0)
+            if (Music == 1)
             {
                 _audioMixer.SetFloat("MusicVolume", -80f);
             }
@@ -54,7 +156,7 @@ namespace Managers.Settings
 
         private void SetSfxVolume(int volume)
         {
-            if (volume == 0)
+            if (Sfx == 1)
             {
                 _audioMixer.SetFloat("SfxVolume", -80f);
             }
@@ -64,5 +166,59 @@ namespace Managers.Settings
                 _audioMixer.SetFloat("SfxVolume", dbVolume);
             }
         }
+
+        private void SetGraphics(int quality)
+        {
+            QualitySettings.SetQualityLevel(quality);
+        }
+
+        private void SetFullscreen(int value)
+        {
+            if (value == 0)
+            {
+                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                Screen.fullScreen = true;
+            }
+            else
+            {
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                Screen.fullScreen = false;
+            }
+        }
+
+        private void SetFramerate(int value)
+        {
+            Application.targetFrameRate = value switch
+            {
+                0 => 30,
+                1 => 60,
+                2 => 0,
+                _ => 60
+            };
+        }
+
+        private void SetPostProcess(int value)
+        {
+            bool hasPostprocess = value == 0;
+            if (hasPostprocess)
+            {
+                _lowRenderer.postProcessData = _postProcessData;
+                _mediumRenderer.postProcessData = _postProcessData;
+                _highRenderer.postProcessData = _postProcessData;
+            }
+            else
+            {
+                _lowRenderer.postProcessData = null;
+                _mediumRenderer.postProcessData = null;
+                _highRenderer.postProcessData = null;
+            }
+        }
+
+        private void SetVsync(int value)
+        {
+            QualitySettings.vSyncCount = value;
+        }
+
+        #endregion
     }
 }

@@ -11,9 +11,19 @@ namespace UI.Menu
     {
         [SerializeField] private List<MainMenuPanelUI> _panels = new();
 
-        [Header("Sliders")]
+        [Header("Video Settings")]
+        [SerializeField] private TripleSettingsButton _graphicsButton;
+        [SerializeField] private DoubleSettingsButton _postProcessButton;
+        [SerializeField] private DoubleSettingsButton _fullscreenButton;
+        [SerializeField] private TripleSettingsButton _framerateButton;
+        [SerializeField] private DoubleSettingsButton _vSyncButton;
+
+
+        [Header("Audio Settings")]
         [SerializeField] private SliderSettingsButton _musicSlider;
+        [SerializeField] private DoubleSettingsButton _musicButton;
         [SerializeField] private SliderSettingsButton _sfxSlider;
+        [SerializeField] private DoubleSettingsButton _sfxButton;
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private MainMenuPanelUI _currentPanel;
@@ -28,7 +38,7 @@ namespace UI.Menu
             }
 
             UpdateCurrentPanel(null);
-            GetVolumesFromPrefs();
+            UpdateSettings();
         }
 
         private void OnDestroy()
@@ -41,21 +51,30 @@ namespace UI.Menu
         }
         #endregion
 
-        #region Public Methods
-        public void ChangeMusicVolume(int newValue)
-        {
-            SettingsManager.Instance.MusicVolume = newValue;
-        }
+        #region Public Methods (used on UnityEvents inside inspector)
+        public void ChangeGraphics(int newValue) => SettingsManager.Instance.Graphics = newValue;
+        public void ChangeFullscreen(int newValue) => SettingsManager.Instance.Fullscreen = newValue;
+        public void ChangeVSync(int newValue) => SettingsManager.Instance.VSync = newValue;
+        public void ChangeFramerate(int newValue) => SettingsManager.Instance.Framerate = newValue;
+        public void ChangePostProcess(int newValue) => SettingsManager.Instance.PostProcess = newValue;
 
-        public void ChangeSfxVolume(int newValue)
-        {
-            SettingsManager.Instance.SfxVolume = newValue;
-        }
+        public void ChangeMusicVolume(int newValue) => SettingsManager.Instance.MusicVolume = newValue;
+        public void ChangeSfxVolume(int newValue) => SettingsManager.Instance.SfxVolume = newValue;
+        public void ChangeMusic(int newValue) => SettingsManager.Instance.Music = newValue;
+        public void ChangeSfx(int newValue) => SettingsManager.Instance.Sfx = newValue;
         #endregion
 
         #region Private Methods
-        private void GetVolumesFromPrefs()
+        private void UpdateSettings()
         {
+            _graphicsButton.UpdateSelectedButton(SettingsManager.Instance.Graphics);
+            _postProcessButton.UpdateSelectedButton(SettingsManager.Instance.PostProcess);
+            _fullscreenButton.UpdateSelectedButton(SettingsManager.Instance.Fullscreen);
+            _framerateButton.UpdateSelectedButton(SettingsManager.Instance.Framerate);
+            _vSyncButton.UpdateSelectedButton(SettingsManager.Instance.VSync);
+
+            _musicButton.UpdateSelectedButton(SettingsManager.Instance.Music);
+            _sfxButton.UpdateSelectedButton(SettingsManager.Instance.Sfx);
             _musicSlider.CurrentValue = SettingsManager.Instance.MusicVolume;
             _sfxSlider.CurrentValue = SettingsManager.Instance.SfxVolume;
         }

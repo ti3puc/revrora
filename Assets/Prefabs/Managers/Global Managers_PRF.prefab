@@ -90,6 +90,10 @@ MonoBehaviour:
   dontDestroyOnLoad: 1
   destroyObjToEnsureInstance: 1
   _audioMixer: {fileID: 24100000, guid: 5bd9d2ed319b0a04eb647a02d850ebd6, type: 2}
+  _lowRenderer: {fileID: 11400000, guid: 707360a9c581a4bd7aa53bfeb1429f71, type: 2}
+  _mediumRenderer: {fileID: 11400000, guid: e634585d5c4544dd297acaee93dc2beb, type: 2}
+  _highRenderer: {fileID: 11400000, guid: c40be3174f62c4acf8c1216858c64956, type: 2}
+  _postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
 --- !u!114 &5398248034969777601
 MonoBehaviour:
   m_ObjectHideFlags: 0

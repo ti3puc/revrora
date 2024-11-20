@@ -14,19 +14,18 @@ namespace UI.Menu.Settings
         [SerializeField] private Button _secondButton;
 
         [Header("Events")]
-        [SerializeField] private UnityEvent _onFirstButtonSelected;
-        [SerializeField] private UnityEvent _onSecondButtonSelected;
+        [SerializeField] private UnityEvent<int> _onFirstButtonSelected;
+        [SerializeField] private UnityEvent<int> _onSecondButtonSelected;
 
         [Header("Debug")]
-        [SerializeField, ReadOnly] private Button _currentSelectedButton;
+        [SerializeField, ReadOnly] private int _currentSelectedButton;
 
         private void Awake()
         {
             _firstButton.onClick.AddListener(SelectFirstButton);
             _secondButton.onClick.AddListener(SelectSecondButton);
 
-            // TODO: get settings from save
-            UpdateSelectedButton(_firstButton);
+            UpdateSelectedButton(0);
         }
 
         private void OnDestroy()
@@ -35,24 +34,32 @@ namespace UI.Menu.Settings
             _secondButton.onClick.RemoveListener(SelectSecondButton);
         }
 
-        private void UpdateSelectedButton(Button selectedButton)
+        public void UpdateSelectedButton(int index)
         {
+            if (index < 0 || index > 1) return;
+
+            _currentSelectedButton = index;
+            Button selectedButton = index switch
+            {
+                0 => _firstButton,
+                1 => _secondButton,
+                _ => _firstButton
+            };
+
             _firstButton.interactable = selectedButton != _firstButton;
             _secondButton.interactable = selectedButton != _secondButton;
-
-            _currentSelectedButton = selectedButton;
         }
 
         private void SelectFirstButton()
         {
-            UpdateSelectedButton(_firstButton);
-            _onFirstButtonSelected?.Invoke();
+            UpdateSelectedButton(0);
+            _onFirstButtonSelected?.Invoke(0);
         }
 
         private void SelectSecondButton()
         {
-            UpdateSelectedButton(_secondButton);
-            _onSecondButtonSelected?.Invoke();
+            UpdateSelectedButton(1);
+            _onSecondButtonSelected?.Invoke(1);
         }
     }
 }

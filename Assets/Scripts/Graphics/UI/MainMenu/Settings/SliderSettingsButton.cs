@@ -50,7 +50,7 @@ namespace UI.Menu.Settings
                 else
                     _currentValue = value;
 
-                UpdateTextValue();
+                UpdateVisuals();
             }
         }
 
@@ -63,7 +63,7 @@ namespace UI.Menu.Settings
             _firstButton.onClick.AddListener(DecreaseValue);
             _secondButton.onClick.AddListener(IncreaseValue);
 
-            UpdateTextValue();
+            UpdateVisuals();
         }
 
         private void OnDestroy()
@@ -90,9 +90,19 @@ namespace UI.Menu.Settings
 
         #region Private Methods
 
-        private void UpdateTextValue()
+        private void UpdateVisuals()
         {
             _valueText.text = CurrentValue.ToString();
+
+            if (CurrentValue == _minMaxRange.x)
+                _firstButton.interactable = false;
+            else if (CurrentValue == _minMaxRange.y)
+                _secondButton.interactable = false;
+            else
+            {
+                _firstButton.interactable = true;
+                _secondButton.interactable = true;
+            }
         }
 
         private void DecreaseValue()
