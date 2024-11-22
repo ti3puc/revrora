@@ -67,7 +67,10 @@ namespace UI
             if (_pauseCanvas.enabled)
                 GameManager.Pause();
             else
+            {
                 GameManager.Resume();
+                ShowMainCanvas();
+            }
         }
 
         public void GoToMenu()

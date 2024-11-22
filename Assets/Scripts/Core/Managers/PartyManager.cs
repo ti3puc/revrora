@@ -100,6 +100,16 @@ namespace Managers.Party
             }
         }
 
+        public void RotateMembers()
+        {
+            var firstMember = PartyMembers[0];
+            var secondMember = PartyMembers[1];
+            var thirdMember = PartyMembers[2];
+
+            SwitchMemberPosition(firstMember, secondMember);
+            SwitchMemberPosition(thirdMember, firstMember);
+        }
+
         public void SwitchMemberPosition(BaseCharacter character1, BaseCharacter character2)
         {
             if (!_partyMembers.Contains(character1))

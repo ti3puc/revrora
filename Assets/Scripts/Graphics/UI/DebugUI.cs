@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Managers.Scenes;
 using Managers.Party;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.UIDebug
 {
@@ -11,8 +12,9 @@ namespace UI.UIDebug
 	/// </summary>
 	public class DebugUI : MonoBehaviour
 	{
-		[Header("References")]
-		[SerializeField] private RectTransform[] _partyMembersUI;
+		[SerializeField] private Color _normalColor;
+		[SerializeField] private Color _selectedColor;
+		[SerializeField] private Button[] _partyMembersButtons;
 
 		#region Unity Messages
 		private void Awake()
@@ -32,22 +34,12 @@ namespace UI.UIDebug
 		public void GoToMenu() => ScenesManager.LoadScene("Main Menu");
 
 		public void GoToSandbox() => ScenesManager.LoadScene("Sandbox");
-		
+
 		public void GoToCombat() => ScenesManager.LoadScene("Combat");
 
-		public void SwitchToPokemon1()
+		public void RotateMember()
 		{
-			PartyManager.Instance.SwitchActiveMemberIndex(0);
-		}
-
-		public void SwitchToPokemon2()
-		{
-			PartyManager.Instance.SwitchActiveMemberIndex(1);
-		}
-
-		public void SwitchToPokemon3()
-		{
-			PartyManager.Instance.SwitchActiveMemberIndex(2);
+			PartyManager.Instance.RotateMembers();
 		}
 		#endregion
 
@@ -58,11 +50,10 @@ namespace UI.UIDebug
 			for (int i = 0; i < partyMembers.Count; i++)
 			{
 				bool isActiveMember = i == PartyManager.Instance.ActiveMemberIndex;
+				_partyMembersButtons[i].image.color = isActiveMember ? _selectedColor : _normalColor;
 
-				var width = isActiveMember ? 200 : 150;
-				var height = isActiveMember ? 200 : 150;
-
-				_partyMembersUI[i].sizeDelta = new Vector2(width, height);
+				var image = _partyMembersButtons[i].transform.GetChild(0).GetComponent<RawImage>();
+				image.texture = PartyManager.Instance.PartyMembers[i].CharacterDefinition.Icon;
 			}
 		}
 		#endregion

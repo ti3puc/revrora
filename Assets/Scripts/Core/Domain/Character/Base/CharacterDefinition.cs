@@ -15,11 +15,15 @@ namespace Character.Base
         [SerializeField] private BaseCharacterStats _baseStats;
         [SerializeField] private List<CharacterMove> _characterMoves = new();
         [SerializeField] private GameObject _visual;
+        [SerializeField] private Texture2D _icon;
+        [SerializeField] private Sprite _graph;
 
         public int Id => _id;
         public string Name => _name;
         public BaseCharacterStats BaseStats => _baseStats;
         public List<CharacterMove> CharacterMoves => _characterMoves;
         public GameObject Visual => _visual;
+        public Texture2D Icon => _icon;
+        public Sprite Graph => _graph;
     }
 }
