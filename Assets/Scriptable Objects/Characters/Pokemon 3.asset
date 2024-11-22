@@ -27,3 +27,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b7d5cc13a136b2445b5a3d3bd84e32e3, type: 2}
   - {fileID: 11400000, guid: b063865351c6c674491fe0301c39eeb0, type: 2}
   _visual: {fileID: 4175087798748082238, guid: d406be6b21a81c64f996e2b920325625, type: 3}
+  _icon: {fileID: 2800000, guid: fc5f921395745834d85d60ce0279d9c0, type: 3}
+  _graph: {fileID: 21300000, guid: e2e6ad6c2d039a04c93dc92ad284cd36, type: 3}

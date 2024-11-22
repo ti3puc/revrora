@@ -53,6 +53,7 @@ namespace UI.UIDebug
 				_partyMembersButtons[i].image.color = isActiveMember ? _selectedColor : _normalColor;
 
 				var image = _partyMembersButtons[i].transform.GetChild(0).GetComponent<RawImage>();
+				image.color = new Color(1, 1, 1, 1);
 				image.texture = PartyManager.Instance.PartyMembers[i].CharacterDefinition.Icon;
 			}
 		}

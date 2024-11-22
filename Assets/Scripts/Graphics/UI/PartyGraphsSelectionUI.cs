@@ -58,6 +58,7 @@ namespace UI.Graphs
                 graphImage.sprite = PartyManager.Instance.PartyMembers[i].CharacterDefinition.Graph;
 
                 var image = selectGraphButtons[i].transform.GetChild(0).GetComponent<RawImage>();
+				image.color = new Color(1, 1, 1, 1);
                 image.texture = PartyManager.Instance.PartyMembers[i].CharacterDefinition.Icon;
             }
         }
