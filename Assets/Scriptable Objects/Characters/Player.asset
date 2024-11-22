@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   _id: 0
-  _name: Player
+  _name: Chloe
   _baseStats:
     baseHP: 39
     baseMana: 52
@@ -27,3 +27,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b7d5cc13a136b2445b5a3d3bd84e32e3, type: 2}
   - {fileID: 11400000, guid: b063865351c6c674491fe0301c39eeb0, type: 2}
   _visual: {fileID: 919132149155446097, guid: 6b89303b45cf50d4f89841d519899e27, type: 3}
+  _icon: {fileID: 0}
+  _graph: {fileID: 0}

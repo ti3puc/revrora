@@ -213,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initialState: 2
   _followStateSettings:
+    FollowPlayer: 1
     FollowTarget: {fileID: 0}
     FollowOffset: {x: 0, y: 0, z: 2}
     FollowSmoothDamp: 0.1
@@ -227,6 +228,7 @@ MonoBehaviour:
     CanPassToPursuit: 1
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
+    PursuitPlayer: 1
     PursuitTarget: {fileID: 0}
     MaxPursuitDistance: 30
     PursuitSmoothDamp: 0.1
