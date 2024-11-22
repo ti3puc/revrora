@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Core.Managers;
 using Managers;
+using Managers.Scenes;
 using NaughtyAttributes;
 using Player.Input;
 using UnityEngine;
@@ -20,6 +21,7 @@ namespace UI
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private bool _isInventoryOpen;
+        [SerializeField, ReadOnly] private bool _isPauseOpen;
 
         public static DialogManager DialogCanvas => Instance._dialogCanvas;
         public static CanvasGroup TransitionCanvasGroup => Instance._transitionCanvasGroup;
@@ -28,11 +30,13 @@ namespace UI
         {
             base.Awake();
             PlayerInput.OnToggleInventoryStarted += ToggleInventory;
+            PlayerInput.OnPauseStarted += TogglePause;
         }
 
         private void OnDestroy()
         {
             PlayerInput.OnToggleInventoryStarted -= ToggleInventory;
+            PlayerInput.OnPauseStarted -= TogglePause;
         }
 
         public void ShowMainCanvas()
@@ -52,6 +56,23 @@ namespace UI
             _mainCanvas.enabled = !_isInventoryOpen;
             _inventoryCanvas.enabled = _isInventoryOpen;
             _pauseCanvas.enabled = false;
+        }
+
+        public void TogglePause()
+        {
+            _mainCanvas.enabled = false;
+            _inventoryCanvas.enabled = false;
+            _pauseCanvas.enabled = !_pauseCanvas.enabled;
+
+            if (_pauseCanvas.enabled)
+                GameManager.Pause();
+            else
+                GameManager.Resume();
+        }
+
+        public void GoToMenu()
+        {
+            ScenesManager.LoadScene("Main Menu");
         }
     }
 }

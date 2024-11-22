@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace Managers.Settings
 {
     public class SettingsManager : Singleton<SettingsManager>
     {
+        public static event Action OnSettingsChanged;
+
         #region Fields
 
         [Header("References")]
@@ -17,6 +20,9 @@ namespace Managers.Settings
         [SerializeField] private UniversalRendererData _highRenderer;
         [SerializeField] private PostProcessData _postProcessData;
 
+        private const string AutosaveKey = "Autosave";
+        private const string TextSpeedKey = "TextSpeed";
+        private const string CameraDistanceKey = "CameraDistance";
         private const string MusicVolumeKey = "MusicVolume";
         private const string SfxVolumeKey = "SfxVolume";
         private const string MusicKey = "Music";
@@ -38,6 +44,7 @@ namespace Managers.Settings
             {
                 PlayerPrefs.SetInt(MusicKey, value);
                 SetMusicVolume(MusicVolume);
+                OnSettingsChanged?.Invoke();
             }
         }
 
@@ -48,6 +55,7 @@ namespace Managers.Settings
             {
                 PlayerPrefs.SetInt(SfxKey, value);
                 SetSfxVolume(SfxVolume);
+                OnSettingsChanged?.Invoke();
             }
         }
 
@@ -58,6 +66,7 @@ namespace Managers.Settings
             {
                 PlayerPrefs.SetInt(MusicVolumeKey, value);
                 SetMusicVolume(value);
+                OnSettingsChanged?.Invoke();
             }
         }
 
@@ -68,6 +77,7 @@ namespace Managers.Settings
             {
                 PlayerPrefs.SetInt(SfxVolumeKey, value);
                 SetSfxVolume(value);
+                OnSettingsChanged?.Invoke();
             }
         }
 
@@ -78,6 +88,7 @@ namespace Managers.Settings
             {
                 PlayerPrefs.SetInt(GraphicsKey, value);
                 SetGraphics(value);
+                OnSettingsChanged?.Invoke();
             }
         }
 
@@ -88,6 +99,7 @@ namespace Managers.Settings
             {
                 PlayerPrefs.SetInt(FullscreenKey, value);
                 SetFullscreen(value);
+                OnSettingsChanged?.Invoke();
             }
         }
 
@@ -98,6 +110,7 @@ namespace Managers.Settings
             {
                 PlayerPrefs.SetInt(FramerateKey, value);
                 SetFramerate(value);
+                OnSettingsChanged?.Invoke();
             }
         }
 
@@ -108,6 +121,7 @@ namespace Managers.Settings
             {
                 PlayerPrefs.SetInt(PostProcessKey, value);
                 SetPostProcess(value);
+                OnSettingsChanged?.Invoke();
             }
         }
 
@@ -118,6 +132,37 @@ namespace Managers.Settings
             {
                 PlayerPrefs.SetInt(VSyncKey, value);
                 SetVsync(value);
+                OnSettingsChanged?.Invoke();
+            }
+        }
+
+        public int Autosave
+        {
+            get => PlayerPrefs.GetInt(AutosaveKey, 0);
+            set
+            {
+                PlayerPrefs.SetInt(AutosaveKey, value);
+                OnSettingsChanged?.Invoke();
+            }
+        }
+
+        public int TextSpeed
+        {
+            get => PlayerPrefs.GetInt(TextSpeedKey, 1);
+            set
+            {
+                PlayerPrefs.SetInt(TextSpeedKey, value);
+                OnSettingsChanged?.Invoke();
+            }
+        }
+
+        public int CameraDistance
+        {
+            get => PlayerPrefs.GetInt(CameraDistanceKey, 0);
+            set
+            {
+                PlayerPrefs.SetInt(CameraDistanceKey, value);
+                OnSettingsChanged?.Invoke();
             }
         }
 

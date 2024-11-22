@@ -11,6 +11,11 @@ namespace UI.Menu
     {
         [SerializeField] private List<MainMenuPanelUI> _panels = new();
 
+        [Header("System Settings")]
+        [SerializeField] private DoubleSettingsButton _autosaveButton;
+        [SerializeField] private TripleSettingsButton _textSpeedButton;
+        [SerializeField] private DoubleSettingsButton _cameraDistanceButton;
+
         [Header("Video Settings")]
         [SerializeField] private TripleSettingsButton _graphicsButton;
         [SerializeField] private DoubleSettingsButton _postProcessButton;
@@ -52,6 +57,10 @@ namespace UI.Menu
         #endregion
 
         #region Public Methods (used on UnityEvents inside inspector)
+        public void ChangeAutosave(int newValue) => SettingsManager.Instance.Autosave = newValue;
+        public void ChangeTextSpeed(int newValue) => SettingsManager.Instance.TextSpeed = newValue;
+        public void ChangeCameraDistance(int newValue) => SettingsManager.Instance.CameraDistance = newValue;
+
         public void ChangeGraphics(int newValue) => SettingsManager.Instance.Graphics = newValue;
         public void ChangeFullscreen(int newValue) => SettingsManager.Instance.Fullscreen = newValue;
         public void ChangeVSync(int newValue) => SettingsManager.Instance.VSync = newValue;
@@ -67,6 +76,10 @@ namespace UI.Menu
         #region Private Methods
         private void UpdateSettings()
         {
+            _autosaveButton.UpdateSelectedButton(SettingsManager.Instance.Autosave);
+            _textSpeedButton.UpdateSelectedButton(SettingsManager.Instance.TextSpeed);
+            _cameraDistanceButton.UpdateSelectedButton(SettingsManager.Instance.CameraDistance);
+
             _graphicsButton.UpdateSelectedButton(SettingsManager.Instance.Graphics);
             _postProcessButton.UpdateSelectedButton(SettingsManager.Instance.PostProcess);
             _fullscreenButton.UpdateSelectedButton(SettingsManager.Instance.Fullscreen);

@@ -15,6 +15,7 @@ namespace Player.Input
 		public static event Action OnInteractionStarted;
 		public static event Action OnInteractionCanceled;
 		public static event Action OnToggleInventoryStarted;
+		public static event Action OnPauseStarted;
 
 		[Header("Inputs")]
         [SerializeField] private InputActionAsset inputActionAsset;
@@ -22,11 +23,13 @@ namespace Player.Input
         [SerializeField] private string moveActionName = "Move";
 		[SerializeField] private string interactActionName = "Interact";
 		[SerializeField] private string toggleInventoryActionName = "ToggleInventory";
+		[SerializeField] private string pauseActionName = "Pause";
 
 		private InputActionMap actionMap;
 		private InputAction moveAction;
         private InputAction interactAction;
         private InputAction toggleInventoryAction;
+        private InputAction pauseAction;
 
 		protected override void Awake()
 		{
@@ -37,6 +40,7 @@ namespace Player.Input
 			moveAction = actionMap.FindAction(moveActionName);
 			interactAction = actionMap.FindAction(interactActionName);
 			toggleInventoryAction = actionMap.FindAction(toggleInventoryActionName);
+			pauseAction = actionMap.FindAction(pauseActionName);
 
 			moveAction.started += MoveStarted;
 			moveAction.performed += MovePerformed;
@@ -46,6 +50,8 @@ namespace Player.Input
 			interactAction.canceled += InteractionCanceled;
 
 			toggleInventoryAction.started += ToggleInventoryStarted;
+
+			pauseAction.started += PauseStarted;
 		}
 
 		private void OnDestroy()
@@ -59,6 +65,8 @@ namespace Player.Input
 
 			toggleInventoryAction.started -= ToggleInventoryStarted;
 
+			pauseAction.started -= PauseStarted;
+
 			inputActionAsset.Disable();
 		}
 
@@ -70,5 +78,7 @@ namespace Player.Input
 		private void InteractionCanceled(InputAction.CallbackContext context) => OnInteractionCanceled?.Invoke();
 
 		private void ToggleInventoryStarted(InputAction.CallbackContext context) => OnToggleInventoryStarted?.Invoke();
+
+		private void PauseStarted(InputAction.CallbackContext context) => OnPauseStarted?.Invoke();
 	}
 }

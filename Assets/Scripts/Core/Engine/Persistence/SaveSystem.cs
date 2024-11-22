@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Managers;
 using Managers.Scenes;
+using Managers.Settings;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,20 +36,27 @@ namespace Persistence
             base.Awake();
             _dataService = new FileDataService(new JsonSerializer());
 
-            Application.quitting += SaveGame;
-            ScenesManager.OnAnySceneLoading += SaveGame;
+            if (SettingsManager.Instance.Autosave == 0)
+            {
+                Application.quitting += SaveGame;
+                ScenesManager.OnAnySceneLoading += SaveGame;
+            }
         }
 
         private void OnDestroy()
         {
-            Application.quitting -= SaveGame;
-            ScenesManager.OnAnySceneLoading -= SaveGame;
+            if (SettingsManager.Instance.Autosave == 0)
+            {
+                Application.quitting -= SaveGame;
+                ScenesManager.OnAnySceneLoading -= SaveGame;
+            }
         }
 
         private void LateUpdate()
         {
             if (_currentGameData == null) return;
             if (_autoSaveInterval <= 0) return;
+            if (SettingsManager.Instance.Autosave == 1) return;
 
             _autoSaveTimer += Time.deltaTime;
             if (_autoSaveTimer >= _autoSaveInterval)
