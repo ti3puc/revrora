@@ -53,6 +53,8 @@ namespace UI
 
         public void ShowMainCanvas()
         {
+            if (_mainCanvas == null) return;
+
             _mainCanvas.gameObject.SetActive(true);
             _inventoryCanvas.gameObject.SetActive(false);
             _pauseCanvas.gameObject.SetActive(false);
