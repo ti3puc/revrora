@@ -46,8 +46,7 @@ namespace UI.Combat
 
         private void ExitBattle()
         {
-            // TODO: logic to go back to last scene
-            ScenesManager.LoadFirstScene();
+            ScenesManager.LoadLastScene();
         }
     }
 }
