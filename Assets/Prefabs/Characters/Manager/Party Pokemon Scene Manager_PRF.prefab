@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b3bd594d798e4449167621cdc7630e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 0
+  destroyObjToEnsureInstance: 0
   _partyBaseCharacters:
   - {fileID: 754586601636974617}
   - {fileID: 7543048011613929615}

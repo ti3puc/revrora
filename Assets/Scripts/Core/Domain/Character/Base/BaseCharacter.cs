@@ -41,10 +41,10 @@ namespace Character.Base
             Initialize();
         }
 
-        public void Initialize(CharacterDefinition newCharacterDefinition = null)
+        public void Initialize() => Initialize(_characterDefinition);
+        public void Initialize(CharacterDefinition newCharacterDefinition)
         {
-            if (newCharacterDefinition != null)
-                _characterDefinition = newCharacterDefinition;
+            _characterDefinition = newCharacterDefinition;
 
             // clean Visual and instantiate the correct one on Definition
             var visualObj = transform.Find("Visuals");

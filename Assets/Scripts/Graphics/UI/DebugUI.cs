@@ -4,6 +4,7 @@ using Managers.Scenes;
 using Managers.Party;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 namespace UI.UIDebug
 {
@@ -44,18 +45,19 @@ namespace UI.UIDebug
 		#endregion
 
 		#region Private Methods
+		[Obsolete]
 		private void UpdatePartyUI()
 		{
-			var partyMembers = PartyManager.Instance.PartyMembers;
-			for (int i = 0; i < partyMembers.Count; i++)
-			{
-				bool isActiveMember = i == PartyManager.Instance.ActiveMemberIndex;
-				_partyMembersButtons[i].image.color = isActiveMember ? _selectedColor : _normalColor;
+			// var partyMembers = PartyManager.Instance.PartyMembers;
+			// for (int i = 0; i < partyMembers.Count; i++)
+			// {
+			// 	bool isActiveMember = i == PartyManager.Instance.ActiveMemberIndex;
+			// 	_partyMembersButtons[i].image.color = isActiveMember ? _selectedColor : _normalColor;
 
-				var image = _partyMembersButtons[i].transform.GetChild(0).GetComponent<RawImage>();
-				image.color = new Color(1, 1, 1, 1);
-				image.texture = PartyManager.Instance.PartyMembers[i].CharacterDefinition.Icon;
-			}
+			// 	var image = _partyMembersButtons[i].transform.GetChild(0).GetComponent<RawImage>();
+			// 	image.color = new Color(1, 1, 1, 1);
+			// 	image.texture = PartyManager.Instance.PartyMembers[i].CharacterDefinition.Icon;
+			// }
 		}
 		#endregion
 	}

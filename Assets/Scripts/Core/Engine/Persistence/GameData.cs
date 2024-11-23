@@ -40,6 +40,7 @@ namespace Persistence
     [Serializable]
     public class CreaturesData
     {
+        public int ActivePartyMemberIndex = 0;
         public List<CharacterDefinition> Party = new List<CharacterDefinition>();
         public List<CharacterDefinition> Box = new List<CharacterDefinition>();
     }

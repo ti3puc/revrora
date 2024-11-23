@@ -22,13 +22,17 @@ namespace Persistence
         [Header("Debug")]
         [SerializeField, ReadOnly] private List<string> _saveSlots;
         [SerializeField, ReadOnly] private float _autoSaveTimer = 0f;
+        [SerializeField, ReadOnly] private GameData _currentGameData;
 
-        private GameData _currentGameData;
         private IDataService _dataService;
 
-        public GameData GameData => _currentGameData;
         public int MaxSlots => _maxSlots;
         public List<string> SaveSlots => _saveSlots = ListSaveSlots();
+        public GameData GameData
+        {
+            get => _currentGameData;
+            set => _currentGameData = value;
+        }
 
         #region Unity Messages
 
@@ -36,6 +40,7 @@ namespace Persistence
         {
             base.Awake();
             _dataService = new FileDataService(new JsonSerializer());
+            GameData = new GameData();
 
             if (SettingsManager.Instance.Autosave == 0)
             {

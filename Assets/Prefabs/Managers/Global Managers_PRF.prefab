@@ -113,6 +113,15 @@ MonoBehaviour:
   _autoSaveInterval: 300
   _saveSlots: []
   _autoSaveTimer: 0
+  _currentGameData:
+    IndexId: 0
+    CurrentScene: 
+    StartDate: 
+    LastPlayedDate: 
+    CreaturesData:
+      ActivePartyMemberIndex: 0
+      Party: []
+      Box: []
 --- !u!114 &4296800281911556931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,7 +136,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
   destroyObjToEnsureInstance: 1
-  _debugAddToBox: {fileID: 11400000, guid: 0c474a0c42c174842bb4e8d67ecd965b, type: 2}
+  _debugAddToBox:
+  - {fileID: 11400000, guid: 0c474a0c42c174842bb4e8d67ecd965b, type: 2}
+  - {fileID: 11400000, guid: f3988332a293c5e459edffe7d125a038, type: 2}
+  - {fileID: 11400000, guid: f3988332a293c5e459edffe7d125a038, type: 2}
+  - {fileID: 11400000, guid: 8652b6e72c1a7c2488f34a886d3857fa, type: 2}
   _boxCharacters: []
 --- !u!1001 &1700175913044022662
 PrefabInstance:
