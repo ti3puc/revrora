@@ -34,9 +34,6 @@ namespace UI.Combat
         [SerializeField] private Button _moveButton2;
         [SerializeField] private Button _moveButton3;
 
-        [Header("Text")]
-        [SerializeField] private TMP_Text _characterText;
-
         [Header("Debug")]
         [SerializeField, ReadOnly] private bool _isShowingMovesPanel;
 
@@ -56,9 +53,9 @@ namespace UI.Combat
 
             CombatSystem.OnCombatEnded += HideUI;
 
-            TurnInputManager.OnChangedInputCharacter += PopulateCharacterInfo;
-
             ShowActions();
+            
+            TurnInputManager.OnChangedInputCharacter += PopulateCharacterMoves;
         }
 
         private void OnDestroy()
@@ -75,8 +72,8 @@ namespace UI.Combat
             CombatSystem.OnFinishedProcessingCombat -= ShowUI;
 
             CombatSystem.OnCombatEnded -= HideUI;
-
-            TurnInputManager.OnChangedInputCharacter -= PopulateCharacterInfo;
+            
+            TurnInputManager.OnChangedInputCharacter -= PopulateCharacterMoves;
         }
 
         private void HideUI()
@@ -115,11 +112,9 @@ namespace UI.Combat
         {
             ScenesManager.LoadLastScene();
         }
-
-        private void PopulateCharacterInfo(BaseCharacter character)
+        
+        private void PopulateCharacterMoves(BaseCharacter character)
         {
-            _characterText.text = character.Name;
-
             var moveButtons = new Button[] { _moveButton1, _moveButton2, _moveButton3 };
             for (int i = 0; i < moveButtons.Length; i++)
             {
