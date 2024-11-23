@@ -48,10 +48,11 @@ MonoBehaviour:
   dontDestroyOnLoad: 0
   destroyObjToEnsureInstance: 0
   _minPartySize: 1
-  _maxPartySize: 6
+  _maxPartySize: 3
   _partyMembersToShow: 1
   _partyMembers: []
   _activePartyMember: {fileID: 0}
+  _activeMemberIndex: 0
 --- !u!114 &3876081082709326649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,3 +73,4 @@ MonoBehaviour:
   moveActionName: Move
   interactActionName: Interact
   toggleInventoryActionName: ToggleInventory
+  pauseActionName: Pause

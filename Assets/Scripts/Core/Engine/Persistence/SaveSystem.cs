@@ -12,6 +12,7 @@ namespace Persistence
 {
     public class SaveSystem : Singleton<SaveSystem>
     {
+        public static event Action OnSaveLoaded;
         public event Action OnAutoSave;
 
         [Header("Settings")]
@@ -111,6 +112,10 @@ namespace Persistence
                 return;
             }
 
+            _currentGameData.CurrentScene = SceneManager.GetActiveScene().name;
+            if (_currentGameData.CurrentScene == "Main Menu" || _currentGameData.CurrentScene == "Combat")
+                _currentGameData.CurrentScene = "Initial City";
+
             _currentGameData.LastPlayedDate = DateTime.Now.ToString("o");
             _dataService.Save(_currentGameData);
         }
@@ -128,6 +133,7 @@ namespace Persistence
             if (string.IsNullOrWhiteSpace(_currentGameData.CurrentScene))
                 _currentGameData.CurrentScene = "Initial City";
 
+            OnSaveLoaded?.Invoke();
             ScenesManager.LoadScene(_currentGameData.CurrentScene);
         }
 

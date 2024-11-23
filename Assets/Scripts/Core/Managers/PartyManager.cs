@@ -102,12 +102,17 @@ namespace Managers.Party
 
         public void RotateMembers()
         {
-            var firstMember = PartyMembers[0];
-            var secondMember = PartyMembers[1];
-            var thirdMember = PartyMembers[2];
+            if (PartyMembers.Count < 2) return;
 
-            SwitchMemberPosition(firstMember, secondMember);
-            SwitchMemberPosition(thirdMember, firstMember);
+            var firstMember = PartyMembers[0];
+            var secondMember = PartyMembers.Count > 1 ? PartyMembers[1] : null;
+            var thirdMember = PartyMembers.Count > 2 ? PartyMembers[2] : null;
+
+            if (secondMember != null)
+                SwitchMemberPosition(firstMember, secondMember);
+
+            if (thirdMember != null)
+                SwitchMemberPosition(thirdMember, firstMember);
         }
 
         public void SwitchMemberPosition(BaseCharacter character1, BaseCharacter character2)
