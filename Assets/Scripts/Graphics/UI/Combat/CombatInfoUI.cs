@@ -5,6 +5,7 @@ using Combat;
 using Managers.Scenes;
 using Managers.Combat;
 using Character.Base;
+using Character.Class;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
@@ -71,8 +72,11 @@ namespace UI.Combat
         //TODO rodar ao perder vida
         private void UpdateHealthBar(BaseCharacter character)
         {
-            _hpSlider.value = (float) Math.Round((float)(character.CharacterStats.HP / character.CharacterStats.MaxHP),2);
-            
+            if (character.CharacterTeam == CharacterTeam.Ally)
+            {
+                _hpSlider.value =
+                    (float)Math.Round((float)(character.CharacterStats.HP / character.CharacterStats.MaxHP), 2);
+            }
         }
     }
 }
