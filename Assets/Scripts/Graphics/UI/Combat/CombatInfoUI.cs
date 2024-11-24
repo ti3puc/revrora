@@ -30,6 +30,7 @@ namespace UI.Combat
         {
             CombatSystem.OnPlayerWonCombat += ShowWinScreen;
             CombatSystem.OnPlayerLostCombat += ShowLoseScreen;
+            BaseCharacter.OnDamageReceived += UpdateHealthBar;
 
             foreach (var button in _exitButtons)
                 button.onClick.AddListener(ExitBattle);
@@ -41,6 +42,7 @@ namespace UI.Combat
         {
             CombatSystem.OnPlayerWonCombat -= ShowWinScreen;
             CombatSystem.OnPlayerLostCombat -= ShowLoseScreen;
+            BaseCharacter.OnDamageReceived -= UpdateHealthBar;
 
             foreach (var button in _exitButtons)
                 button.onClick.RemoveListener(ExitBattle);
