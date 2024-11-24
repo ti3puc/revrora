@@ -52,12 +52,21 @@ namespace UI.Graphs
 
         private void UpdatePartyUI()
         {
-            for (int i = 0; i < PartyManager.Instance.PartyMembers.Count; i++)
+            for (int i = 0; i < PartyManager.Instance.MaxPartySize; i++)
             {
                 var graphImage = graphs[i].GetComponent<Image>();
-                graphImage.sprite = PartyManager.Instance.PartyMembers[i].CharacterDefinition.Graph;
 
                 var image = selectGraphButtons[i].transform.GetChild(0).GetComponent<RawImage>();
+                if (PartyManager.Instance.PartyMembers.Count <= i)
+                {
+                    graphImage.color = new Color(1, 1, 1, 0);
+                    image.color = new Color(1, 1, 1, 0);
+                    continue;
+                }
+
+                graphImage.color = new Color(1, 1, 1, 1);
+                graphImage.sprite = PartyManager.Instance.PartyMembers[i].CharacterDefinition.Graph;
+
 				image.color = new Color(1, 1, 1, 1);
                 image.texture = PartyManager.Instance.PartyMembers[i].CharacterDefinition.Icon;
             }

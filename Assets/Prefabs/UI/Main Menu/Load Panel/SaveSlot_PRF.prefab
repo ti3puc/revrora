@@ -54,15 +54,20 @@ MonoBehaviour:
   _withDataState: {fileID: 7169201121594856353}
   _slotName: {fileID: 292241365749846109}
   _slotPlayTime: {fileID: 3643979074376460789}
+  _slotLastArea: {fileID: 350010815366228061}
   _emptyButton: {fileID: 4791037322495577841}
   _loadButton: {fileID: 6499127913921780927}
   _deleteButton: {fileID: 6351465306785656347}
   _slotIndex: -1
   _currentSlotGameData:
-    Id: 0
+    IndexId: 0
     CurrentScene: 
     StartDate: 
     LastPlayedDate: 
+    CreaturesData:
+      ActivePartyMemberIndex: 0
+      Party: []
+      Box: []
 --- !u!1 &1146822153024939258
 GameObject:
   m_ObjectHideFlags: 0

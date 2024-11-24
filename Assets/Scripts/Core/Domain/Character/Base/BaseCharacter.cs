@@ -39,13 +39,13 @@ namespace Character.Base
 
         private void Awake()
         {
-            if (CharacterDefinition != null)
-                Initialize();
+            Initialize();
         }
 
-        public void Initialize()
+        public void Initialize() => Initialize(_characterDefinition);
+        public void Initialize(CharacterDefinition newCharacterDefinition)
         {
-            _characterStats = new CharacterStats(this, 5, true);
+            _characterDefinition = newCharacterDefinition;
 
             // clean Visual and instantiate the correct one on Definition
             var visualObj = transform.Find("Visuals");
@@ -58,7 +58,11 @@ namespace Character.Base
             foreach (Transform child in visualObj)
                 Destroy(child.gameObject);
 
-            Instantiate(_characterDefinition.Visual, visualObj);
+            if (CharacterDefinition != null)
+            {
+                _characterStats = new CharacterStats(this, 5, true);
+                Instantiate(_characterDefinition.Visual, visualObj);
+            }
         }
 
         public void RaiseCharacterDied()

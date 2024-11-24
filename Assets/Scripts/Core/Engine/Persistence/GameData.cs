@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Character.Base;
 
 namespace Persistence
 {
@@ -11,8 +13,16 @@ namespace Persistence
         public string LastPlayedDate;
         public PlayerData PlayerData;
         public InventoryData InventoryData;
+        public CreaturesData CreaturesData;
 
         public string SlotName => $"Slot {IndexId}";
+
+        public GameData()
+        {
+            PlayerData = new PlayerData();
+            InventoryData = new InventoryData();
+            CreaturesData = new CreaturesData();
+        }
     }
 
     [Serializable]
@@ -25,5 +35,13 @@ namespace Persistence
     public class InventoryData
     {
 
+    }
+
+    [Serializable]
+    public class CreaturesData
+    {
+        public int ActivePartyMemberIndex = 0;
+        public List<CharacterDefinition> Party = new List<CharacterDefinition>();
+        public List<CharacterDefinition> Box = new List<CharacterDefinition>();
     }
 }

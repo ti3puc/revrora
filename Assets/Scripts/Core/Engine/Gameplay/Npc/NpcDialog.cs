@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Character.Base;
 using Character.StateMachine;
 using Environment.Interaction;
 using Infra.Handler;
@@ -18,6 +19,11 @@ namespace Npc.Dialog
         [Header("Character")]
         [SerializeField] private float _rotationSpeed = 5f;
         [SerializeField] private CharacterStateMachine _characterStateMachine;
+        [SerializeField] private bool _useNameReference;
+        [SerializeField, ShowIf("_useNameReference")] private BaseCharacter _characterForName;
+
+        [Header("Animation")]
+        [SerializeField] private bool _useRotation = true;
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private NavMeshAgent _navMeshAgent;
@@ -27,7 +33,8 @@ namespace Npc.Dialog
         protected override void Awake()
         {
             base.Awake();
-            _navMeshAgent = _characterStateMachine.GetComponent<NavMeshAgent>();
+            if (_characterStateMachine != null)
+                _navMeshAgent = _characterStateMachine.GetComponent<NavMeshAgent>();
         }
 
         public override void ReceiveInteraction()
@@ -49,7 +56,8 @@ namespace Npc.Dialog
             if (!_isLookingAtInteractor)
                 StartCoroutine(LookAtInteractor());
 
-            CanvasManager.DialogCanvas.AddDialogue(_dialogue, _characterStateMachine.Character.Name);
+            string name = _useNameReference ? _characterForName.Name : _characterStateMachine.Character.Name;
+            CanvasManager.DialogCanvas.AddDialogue(_dialogue, name);
         }
 
         public override void UndoInteraction()
@@ -69,18 +77,22 @@ namespace Npc.Dialog
             {
                 if (_currentInteractor != null)
                 {
-                    _navMeshAgent.updateRotation = false;
+                    if (_navMeshAgent != null)
+                        _navMeshAgent.updateRotation = false;
 
-                    Vector3 direction = _currentInteractor.transform.position - transform.parent.position;
-                    direction.y = 0f;
-                    if (direction != Vector3.zero)
+                    if (_useRotation)
                     {
-                        Quaternion targetRotation = Quaternion.LookRotation(direction);
-                        transform.parent.rotation = Quaternion.Slerp(
-                            transform.parent.rotation,
-                            targetRotation,
-                            Time.deltaTime * _rotationSpeed
-                        );
+                        Vector3 direction = _currentInteractor.transform.position - transform.parent.position;
+                        direction.y = 0f;
+                        if (direction != Vector3.zero)
+                        {
+                            Quaternion targetRotation = Quaternion.LookRotation(direction);
+                            transform.parent.rotation = Quaternion.Slerp(
+                                transform.parent.rotation,
+                                targetRotation,
+                                Time.deltaTime * _rotationSpeed
+                            );
+                        }
                     }
                 }
 
@@ -93,7 +105,8 @@ namespace Npc.Dialog
             _isLookingAtInteractor = false;
             if (_currentInteractor != null)
             {
-                _navMeshAgent.updateRotation = true;
+                if (_navMeshAgent != null)
+                    _navMeshAgent.updateRotation = true;
             }
         }
     }

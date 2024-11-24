@@ -23,6 +23,7 @@ namespace UI.Menu.Load
         [Header("Slot Info")]
         [SerializeField] private TMP_Text _slotName;
         [SerializeField] private TMP_Text _slotPlayTime;
+        [SerializeField] private TMP_Text _slotLastArea;
 
         [Header("Slot Buttons")]
         [SerializeField] private Button _emptyButton;
@@ -79,6 +80,8 @@ namespace UI.Menu.Load
             var startDate = DateTime.Parse(slotGameData.StartDate);
             var playTime = lastPlayedDate - startDate;
             _slotPlayTime.text = $"{playTime.ToString(@"hh\:mm\:ss")}";
+
+            _slotLastArea.text = slotGameData.CurrentScene;
         }
 
         private void NewSlot()
