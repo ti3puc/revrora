@@ -23,7 +23,9 @@ namespace UI.Combat
         [Header("Text")]
         [SerializeField] private TMP_Text _characterText;
 
-        [Header("HP Bar")] [SerializeField] private Slider _hpSlider;
+        [Header("HP Bar")]
+        [SerializeField] private Slider _playerHpSlider;
+        [SerializeField] private Slider _enemyHpSlider;
         private void Awake()
         {
             CombatSystem.OnPlayerWonCombat += ShowWinScreen;
@@ -74,7 +76,12 @@ namespace UI.Combat
         {
             if (character.CharacterTeam == CharacterTeam.Ally)
             {
-                _hpSlider.value =
+                _playerHpSlider.value =
+                    (float)Math.Round((float)(character.CharacterStats.HP / character.CharacterStats.MaxHP), 2);
+            }
+            else
+            {
+                _enemyHpSlider.value =
                     (float)Math.Round((float)(character.CharacterStats.HP / character.CharacterStats.MaxHP), 2);
             }
         }
