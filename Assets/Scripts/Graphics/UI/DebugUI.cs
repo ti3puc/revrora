@@ -36,7 +36,7 @@ namespace UI.UIDebug
 
 		public void GoToSandbox() => ScenesManager.LoadScene("Sandbox");
 
-		public void GoToCombat() => ScenesManager.LoadScene("Combat");
+		public void GoToCombat() => ScenesManager.LoadScene("Earth");
 
 		public void RotateMember()
 		{
