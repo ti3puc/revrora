@@ -67,6 +67,10 @@ namespace Character.Base
                 _characterClass.RaiseCharacterDied();
                 Debug.Log("Character is dead! (" + _characterClass.Name + ")");
             }
+            else
+            {
+                _characterClass.RaiseDamageReceived();
+            }
         }
         
         public bool IsDead()

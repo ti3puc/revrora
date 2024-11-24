@@ -11,6 +11,7 @@ namespace Character.Base
     {
         public delegate void CharacterEvent(BaseCharacter character);
         public static event CharacterEvent OnCharacterDied;
+        public static event CharacterEvent OnDamageReceived;
 
         [Header("References")]
         [SerializeField] private CharacterDefinition _characterDefinition;
@@ -68,6 +69,11 @@ namespace Character.Base
         {
             gameObject.SetActive(false);
             OnCharacterDied?.Invoke(this);
+        }
+
+        public void RaiseDamageReceived()
+        {
+            OnDamageReceived?.Invoke(this);
         }
     }
 }

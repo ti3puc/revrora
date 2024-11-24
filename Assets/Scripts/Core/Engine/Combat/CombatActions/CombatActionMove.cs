@@ -29,14 +29,14 @@ namespace Core.Engine.Combat.CombatActions
 
         private void DoPhysicalMove(BaseCharacter user, CharacterMove move, List<BaseCharacter> targets)
         {
-            foreach (var enemy in targets)
+            foreach (var target in targets)
             {
                 var random = Random.Range(0, 4);
-                var damage = (user.CharacterStats.Attack + move.Power + random) - enemy.CharacterStats.Defense;
+                var damage = (user.CharacterStats.Attack + move.Power + random) - target.CharacterStats.Defense;
 
                 Debug.Log("damage: " + damage);
 
-                enemy.CharacterStats.ReceiveDamage(damage);
+                target.CharacterStats.ReceiveDamage(damage);
             }
         }
 
