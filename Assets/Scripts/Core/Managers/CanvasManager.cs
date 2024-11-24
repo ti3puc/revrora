@@ -128,6 +128,7 @@ namespace UI
 
         public void GoToMenu()
         {
+            GameManager.Resume();
             ScenesManager.LoadScene("Main Menu");
         }
     }
