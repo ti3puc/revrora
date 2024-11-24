@@ -51,7 +51,7 @@ namespace Character.Base
             var visualObj = transform.Find("Visuals");
             if (visualObj == null)
             {
-                Debug.LogError("Could not found 'Visuals' object on " + name);
+                Debug.LogWarning("Could not found 'Visuals' object on " + name);
                 return;
             }
 
