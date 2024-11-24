@@ -74,10 +74,8 @@ namespace UI.Combat
         }
         private void UpdateHealthBar(BaseCharacter character)
         {
-            double value = character.CharacterStats.HP / character.CharacterStats.MaxHP;
-            var roundedValue = Math.Round(value,2);
-            Debug.Log("Damage percentage "+ value);
-            Debug.Log("Damage percentage rounded " + roundedValue);
+            float value = (float) character.CharacterStats.HP / character.CharacterStats.MaxHP;
+            double roundedValue = Math.Round(value,2);
             if (character.CharacterTeam == CharacterTeam.Ally)
             {
                 _playerHpSlider.value = (float) roundedValue;
