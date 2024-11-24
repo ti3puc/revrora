@@ -112,7 +112,19 @@ namespace UI.Box
         private void SwitchBoxCharacter(CharacterDefinition characterDefinition)
         {
             if (_currentPartyMemberSelected == null)
-                return;
+            {
+                var emptySlot = _partyMembersButtons.Find(x => x.transform.GetChild(0).GetComponent<RawImage>().color.a == 0);
+                if (emptySlot != null)
+                {
+                    _currentPartyMemberSelected = emptySlot;
+                    _currentPartyMemberSelected.interactable = false;
+                }
+                else
+                {
+                    Debug.LogWarning("No empty slot found");
+                    return;
+                }
+            }
 
             var boxMember = BoxManager.Instance.BoxCharacters.Find(x => x.Id == characterDefinition.Id);
             if (boxMember == null)
