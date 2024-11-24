@@ -61,15 +61,12 @@ namespace Character.Base
         public void ReceiveDamage(int damage)
         {
             _hp -= damage;
+            _characterClass.RaiseDamageReceived();
             if (_hp <= 0)
             {
                 _hp = 0;
                 _characterClass.RaiseCharacterDied();
                 Debug.Log("Character is dead! (" + _characterClass.Name + ")");
-            }
-            else
-            {
-                _characterClass.RaiseDamageReceived();
             }
         }
         
