@@ -72,19 +72,19 @@ namespace UI.Combat
         {
             _characterText.text = character.Name;
         }
-
-        //TODO rodar ao perder vida
         private void UpdateHealthBar(BaseCharacter character)
         {
+            double value = character.CharacterStats.HP / character.CharacterStats.MaxHP;
+            var roundedValue = Math.Round(value,2);
+            Debug.Log("Damage percentage "+ value);
+            Debug.Log("Damage percentage rounded " + roundedValue);
             if (character.CharacterTeam == CharacterTeam.Ally)
             {
-                _playerHpSlider.value =
-                    (float)Math.Round((float)(character.CharacterStats.HP / character.CharacterStats.MaxHP), 2);
+                _playerHpSlider.value = (float) roundedValue;
             }
             else
             {
-                _enemyHpSlider.value =
-                    (float)Math.Round((float)(character.CharacterStats.HP / character.CharacterStats.MaxHP), 2);
+                _enemyHpSlider.value = (float) roundedValue;
             }
         }
     }
