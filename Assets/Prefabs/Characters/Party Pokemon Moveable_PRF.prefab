@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 6832386495124299296}
   - component: {fileID: 883601517858940036}
   - component: {fileID: 8098493032208076531}
+  - component: {fileID: 484357264351986207}
   m_Layer: 9
   m_Name: Party Pokemon Moveable_PRF
   m_TagString: Untagged
@@ -219,7 +220,7 @@ MonoBehaviour:
     Velocity: {x: 0, y: 0, z: 0}
     MinDistanceToPlayer: 2
     MoveAwayDistance: 1.8
-    MaxDistanceToPlayer: 20
+    MaxDistanceToPlayer: 40
   _wanderStateSettings:
     WanderRadius: 10
     WanderTime: 5
@@ -256,3 +257,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &484357264351986207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8639751545572500535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f8ad1a2339a6046b8296f1cf4b4fa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseSpeed: 15
+  _runningSpeed: 30
+  _angularSpeed: 3600
+  _runningAngularSpeed: 500
+  _acceleration: 50
+  _runningAcceleration: 100
+  _navMeshAgent: {fileID: 0}

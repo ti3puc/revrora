@@ -15,6 +15,7 @@ namespace Player.Movement
 		[Header("Movement")]
 		[SerializeField] private bool moveAccordingToCameraView = true;
 		[SerializeField] private float speed = 15f;
+		[SerializeField] private float runningSpeed = 30f;
 		[SerializeField] private float acceleration = 5f;
 		[SerializeField] private float deceleration = 5f;
 		[SerializeField] private bool movementStartsDisabled = false;
@@ -55,6 +56,10 @@ namespace Player.Movement
 		[SerializeField, ReadOnly] private bool isGrounded;
 		[SerializeField, ReadOnly] private float fallSpeed;
 		[SerializeField, ReadOnly] private bool isMovementDisabled;
+		[SerializeField, ReadOnly] private bool isRunning;
+
+		public bool IsRunning => isRunning;
+		public float MoveSpeed => isRunning ? runningSpeed : speed;
 
 		#endregion
 
@@ -66,6 +71,8 @@ namespace Player.Movement
 
 			PlayerInput.OnMovePerformed += OnMove;
 			PlayerInput.OnMoveCanceled += OnMove;
+			PlayerInput.OnRunStarted += OnRun;
+			PlayerInput.OnRunCanceled += OnStopRun;
 			ScenesManager.OnSceneStartedLoading += DisableMovementForSceneLoad;
 
 			if (movementStartsDisabled)
@@ -79,6 +86,8 @@ namespace Player.Movement
 		{
 			PlayerInput.OnMovePerformed -= OnMove;
 			PlayerInput.OnMoveCanceled -= OnMove;
+			PlayerInput.OnRunStarted -= OnRun;
+			PlayerInput.OnRunCanceled -= OnStopRun;
 			ScenesManager.OnSceneStartedLoading -= DisableMovementForSceneLoad;
 		}
 
@@ -95,7 +104,7 @@ namespace Player.Movement
 			isGrounded = Physics.CheckSphere(transform.position + Vector3.down * groundCheckDistance, groundCheckRadius, groundMask) || platformParenter.HasPlatformBellow;
 
 			// move character, and changes speed if on air or grounded
-			float targetSpeed = isGrounded ? speed : speedOnAir;
+			float targetSpeed = isGrounded ? MoveSpeed : speedOnAir;
 			float targetAcceleration = isGrounded ? acceleration : accelerationOnAir;
 
 			if (moveVector.magnitude > 0)
@@ -194,5 +203,15 @@ namespace Player.Movement
         {
 			DisableMovement();
         }
+
+		private void OnRun()
+		{
+			isRunning = true;
+		}
+
+		private void OnStopRun()
+		{
+			isRunning = false;
+		}
 	}
 }

@@ -16,6 +16,8 @@ namespace Player.Input
 		public static event Action OnInteractionCanceled;
 		public static event Action OnToggleInventoryStarted;
 		public static event Action OnPauseStarted;
+		public static event Action OnRunStarted;
+		public static event Action OnRunCanceled;
 
 		[Header("Inputs")]
         [SerializeField] private InputActionAsset inputActionAsset;
@@ -24,23 +26,27 @@ namespace Player.Input
 		[SerializeField] private string interactActionName = "Interact";
 		[SerializeField] private string toggleInventoryActionName = "ToggleInventory";
 		[SerializeField] private string pauseActionName = "Pause";
+		[SerializeField] private string runActionName = "Run";
 
 		private InputActionMap actionMap;
 		private InputAction moveAction;
         private InputAction interactAction;
         private InputAction toggleInventoryAction;
         private InputAction pauseAction;
+        private InputAction runAction;
 
 		protected override void Awake()
 		{
 			base.Awake();
 
             inputActionAsset.Enable();
+
 			actionMap = inputActionAsset.FindActionMap(actionMapName);
 			moveAction = actionMap.FindAction(moveActionName);
 			interactAction = actionMap.FindAction(interactActionName);
 			toggleInventoryAction = actionMap.FindAction(toggleInventoryActionName);
 			pauseAction = actionMap.FindAction(pauseActionName);
+			runAction = actionMap.FindAction(runActionName);
 
 			moveAction.started += MoveStarted;
 			moveAction.performed += MovePerformed;
@@ -52,6 +58,9 @@ namespace Player.Input
 			toggleInventoryAction.started += ToggleInventoryStarted;
 
 			pauseAction.started += PauseStarted;
+
+			runAction.started += RunStarted;
+			runAction.canceled += RunCanceled;
 		}
 
 		private void OnDestroy()
@@ -67,6 +76,9 @@ namespace Player.Input
 
 			pauseAction.started -= PauseStarted;
 
+			runAction.started -= RunStarted;
+			runAction.canceled -= RunCanceled;
+
 			inputActionAsset.Disable();
 		}
 
@@ -80,5 +92,8 @@ namespace Player.Input
 		private void ToggleInventoryStarted(InputAction.CallbackContext context) => OnToggleInventoryStarted?.Invoke();
 
 		private void PauseStarted(InputAction.CallbackContext context) => OnPauseStarted?.Invoke();
+
+		private void RunStarted(InputAction.CallbackContext context) => OnRunStarted?.Invoke();
+		private void RunCanceled(InputAction.CallbackContext context) => OnRunCanceled?.Invoke();
 	}
 }
