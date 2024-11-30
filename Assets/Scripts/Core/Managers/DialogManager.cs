@@ -100,7 +100,13 @@ namespace Core.Managers
                 return;
 
             _dialogue = dialogue;
-            _nameText.text = characterName;
+            if (string.IsNullOrEmpty(characterName))
+                _nameText.transform.parent.gameObject.SetActive(false);
+            else
+            {
+                _nameText.transform.parent.gameObject.SetActive(true);
+                _nameText.text = characterName;
+            }
             // StartCoroutine(AnimateText(_dialogue.Sentences[_dialogueIndex]));
         }
 
