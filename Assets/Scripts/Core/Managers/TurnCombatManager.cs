@@ -19,6 +19,8 @@ namespace Managers.Combat
         [SerializeField, ReadOnly] private int _turnIndex;
         [SerializeField, ReadOnly] private int _turnCount;
         [SerializeField, ReadOnly] private bool _isTurnEnd;
+        [SerializeField, ReadOnly] private int _combatCreatureSceneId;
+        [SerializeField, ReadOnly] private Vector3 _lastPlayerPosition;
 
         private Dictionary<CharacterDefinition, CharacterTeam> _toInstanceCacheCharacters = new ();
 
@@ -26,12 +28,21 @@ namespace Managers.Combat
         public Dictionary<CharacterDefinition, CharacterTeam> ToInstanceCharacters => _toInstanceCacheCharacters;
         public bool HasInitialized => _turnCharacters != null && _turnCharacters.Count > 0;
         public bool IsTurnEnd => _isTurnEnd = _turnIndex > _turnCharacters.Count - 1;
+        public int CombatCreatureSceneId => _combatCreatureSceneId;
+        public Vector3 LastPlayerPosition => _lastPlayerPosition;
 
         public void CacheInstantiateCharacters(Dictionary<CharacterDefinition, CharacterTeam> characters)
         {
             _toInstanceCacheCharacters.Clear();
             _toInstanceCacheCharacters.AddRange(characters);
         }
+
+        public void CacheLastSceneInformation(int combatCreatureSceneId, Vector3 lastPlayerPosition)
+        {
+            _combatCreatureSceneId = combatCreatureSceneId;
+            _lastPlayerPosition = lastPlayerPosition;
+        }
+
 
         public void InitializeCharacters(List<BaseCharacter> characters)
         {

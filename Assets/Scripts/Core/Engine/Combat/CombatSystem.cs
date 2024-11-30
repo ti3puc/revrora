@@ -7,6 +7,7 @@ using Character.Class;
 using Core.Engine.Combat.CombatActions;
 using Managers.Combat;
 using NaughtyAttributes;
+using Persistence;
 using Player.Input;
 using UI.Combat;
 using UnityEngine;
@@ -171,6 +172,12 @@ namespace Combat
         {
             if (isWin)
             {
+                var combatSceneId = TurnCombatManager.Instance.CombatCreatureSceneId;
+                if (!SaveSystem.Instance.GameData.CombatSceneWinData.CombatSceneIds.Contains(combatSceneId))
+                    SaveSystem.Instance.GameData.CombatSceneWinData.CombatSceneIds.Add(combatSceneId);
+
+                SaveSystem.Instance.GameData.CombatSceneWinData.LastPlayerPosition = TurnCombatManager.Instance.LastPlayerPosition;
+
                 GameLog.Debug(this, "You win!");
                 OnPlayerWonCombat?.Invoke();
             }

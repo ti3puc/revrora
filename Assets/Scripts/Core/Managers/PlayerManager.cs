@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Inventory;
 using NaughtyAttributes;
+using Persistence;
 using Player;
 using Player.Movement;
 using UnityEngine;
@@ -27,6 +28,15 @@ namespace Managers.Player
         protected override void Awake()
         {
             base.Awake();
+
+            if (SaveSystem.Instance.GameData.CombatSceneWinData.LastPlayerPosition != null &&
+                SaveSystem.Instance.GameData.CombatSceneWinData.LastPlayerPosition != Vector3.zero &&
+                PlayerMovement != null)
+            {
+                PlayerMovement.DisableMovement();
+                PlayerTransform.position = SaveSystem.Instance.GameData.CombatSceneWinData.LastPlayerPosition;
+                PlayerMovement.EnableMovement();
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ using Managers.Scenes;
 using Character.Class;
 using NaughtyAttributes;
 using UnityEngine;
+using Persistence;
 
 namespace Creatures.Combat
 {
@@ -17,16 +18,23 @@ namespace Creatures.Combat
     {
         [Header("Debug")]
         [SerializeField, ReadOnly] private CreatureCharacter _creatureCharacter;
-        [SerializeField, ReadOnly] private bool _hasInitialized;
+        [SerializeField, ReadOnly] private bool _hasTriggered;
+        [SerializeField, ReadOnly] private int _sceneId;
+
+        public int SceneId => _sceneId;
 
         private void Awake()
         {
             _creatureCharacter = GetComponent<CreatureCharacter>();
+            _sceneId = GenerateUniqueSceneId();
+
+            if (SaveSystem.Instance.GameData.CombatSceneWinData.CombatSceneIds.Contains(SceneId))
+                gameObject.SetActive(false);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (_hasInitialized) return;
+            if (_hasTriggered) return;
 
             if (other.CompareTag("Player"))
             {
@@ -42,10 +50,17 @@ namespace Creatures.Combat
                     };
 
                 TurnCombatManager.Instance.CacheInstantiateCharacters(dictOfCharacters);
+                TurnCombatManager.Instance.CacheLastSceneInformation(SceneId, other.transform.position);
                 ScenesManager.LoadScene("Combat");
 
-                _hasInitialized = true;
+                _hasTriggered = true;
             }
+        }
+
+        private int GenerateUniqueSceneId()
+        {
+            string uniqueString = $"{gameObject.name}_{transform.position.x}_{transform.position.y}_{transform.position.z}";
+            return uniqueString.GetHashCode();
         }
     }
 }
