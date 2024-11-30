@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Inventory.Items
 {
-    public enum ItemType { Currency, Key, MonsterDrops, Quest }
+    public enum ItemType { Currency, Key, MonsterDrops, Collectible }
 
     [CreateAssetMenu(fileName = nameof(ItemData), menuName = "Inventory/" + nameof(ItemData))]
     public class ItemData : ScriptableObject
