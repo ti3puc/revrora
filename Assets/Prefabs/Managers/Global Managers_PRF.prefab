@@ -52,6 +52,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
   destroyObjToEnsureInstance: 1
+  _namesPerScene:
+  - Name: Numantia Town
+    Scene: Initial City
+  - Name: Emerald Road
+    Scene: Earth Transition
+  - Name: Mazewood Forest
+    Scene: Earth
+  - Name: Tiree Islands
+    Scene: Water
+  - Name: "An Gunna M\xF3r"
+    Scene: Fire
+  - Name: Skylink Bridge
+    Scene: Air Transition
+  - Name: The Aetherspire
+    Scene: Air
   _charactersDefinitions:
   - {fileID: 11400000, guid: 128690e0cf9b0564b91c2c09cab0a40b, type: 2}
   - {fileID: 11400000, guid: c9d9ee231966ac04aa1bfff28ca588a6, type: 2}
@@ -122,6 +137,9 @@ MonoBehaviour:
       ActivePartyMemberIndex: 0
       Party: []
       Box: []
+    CombatSceneWinData:
+      CombatSceneIds: 
+      LastPlayerPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &4296800281911556931
 MonoBehaviour:
   m_ObjectHideFlags: 0

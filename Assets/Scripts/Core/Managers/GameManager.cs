@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Character.Base;
@@ -14,11 +15,22 @@ namespace Managers
 		public delegate void PauseEvent(bool isPaused);
 		public static event PauseEvent OnPauseStateChanged;
 
+		[Serializable]
+		public struct NamePerScene
+		{
+			public string Name;
+			[Scene] public string Scene;
+		}
+
+		[Header("Scene Names")]
+		[SerializeField] private List<NamePerScene> _namesPerScene = new List<NamePerScene>();
+
 		[Header("Debug")]
 		[SerializeField, ReadOnly] private List<CharacterDefinition> _charactersDefinitions;
 		[SerializeField, ReadOnly] private bool _isGamePaused;
 
 		public static List<CharacterDefinition> Characters => Instance._charactersDefinitions;
+		public static List<NamePerScene> NamesPerScene => Instance._namesPerScene;
 		public static bool IsGamePaused => Instance._isGamePaused;
 
 		protected override void Awake()

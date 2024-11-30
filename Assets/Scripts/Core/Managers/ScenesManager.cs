@@ -22,6 +22,7 @@ namespace Managers.Scenes
         [SerializeField, ReadOnly] private string _lastScene;
 
         public static string LastScene => Instance._lastScene;
+        public static string CurrentScene => SceneManager.GetActiveScene().name;
 
         #region Load Scene
         public static void LoadFirstScene()
