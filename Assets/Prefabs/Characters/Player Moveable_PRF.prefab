@@ -87,6 +87,7 @@ MonoBehaviour:
   dontDestroyOnLoad: 0
   destroyObjToEnsureInstance: 0
   _player: {fileID: 0}
+  _playerMovement: {fileID: 0}
   _playerTransform: {fileID: 0}
   _playerInventory: {fileID: 0}
 --- !u!114 &9153215700453275908
@@ -128,10 +129,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveAccordingToCameraView: 1
   speed: 15
+  runningSpeed: 30
   acceleration: 5
   deceleration: 10
   movementStartsDisabled: 0
   speedOnAir: 3
+  runningSpeedOnAir: 16
   accelerationOnAir: 8
   rotateSpeed: 15
   pushPower: 5
@@ -154,6 +157,7 @@ MonoBehaviour:
   isGrounded: 0
   fallSpeed: 0
   isMovementDisabled: 0
+  isRunning: 0
 --- !u!136 &7564090042485660755
 CapsuleCollider:
   m_ObjectHideFlags: 0

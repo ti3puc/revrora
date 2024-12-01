@@ -21,7 +21,8 @@ namespace Player.Movement
 		[SerializeField] private bool movementStartsDisabled = false;
 
 		[Header("Air Movement")]
-		[SerializeField] private float speedOnAir = 8f;
+		[SerializeField] private float speedOnAir = 3f;
+		[SerializeField] private float runningSpeedOnAir = 8f;
 		[SerializeField] private float accelerationOnAir = 5f;
 
 		[Header("Rotation")]
@@ -60,6 +61,7 @@ namespace Player.Movement
 
 		public bool IsRunning => isRunning;
 		public float MoveSpeed => isRunning ? runningSpeed : speed;
+		public float AirSpeed => isRunning ? runningSpeedOnAir : speedOnAir;
 
 		#endregion
 
@@ -72,6 +74,7 @@ namespace Player.Movement
 			PlayerInput.OnMovePerformed += OnMove;
 			PlayerInput.OnMoveCanceled += OnMove;
 			PlayerInput.OnRunStarted += OnRun;
+			PlayerInput.OnRunPressed += OnCheckRun;
 			PlayerInput.OnRunCanceled += OnStopRun;
 			ScenesManager.OnSceneStartedLoading += DisableMovementForSceneLoad;
 
@@ -87,6 +90,7 @@ namespace Player.Movement
 			PlayerInput.OnMovePerformed -= OnMove;
 			PlayerInput.OnMoveCanceled -= OnMove;
 			PlayerInput.OnRunStarted -= OnRun;
+			PlayerInput.OnRunPressed -= OnCheckRun;
 			PlayerInput.OnRunCanceled -= OnStopRun;
 			ScenesManager.OnSceneStartedLoading -= DisableMovementForSceneLoad;
 		}
@@ -104,7 +108,7 @@ namespace Player.Movement
 			isGrounded = Physics.CheckSphere(transform.position + Vector3.down * groundCheckDistance, groundCheckRadius, groundMask) || platformParenter.HasPlatformBellow;
 
 			// move character, and changes speed if on air or grounded
-			float targetSpeed = isGrounded ? MoveSpeed : speedOnAir;
+			float targetSpeed = isGrounded ? MoveSpeed : AirSpeed;
 			float targetAcceleration = isGrounded ? acceleration : accelerationOnAir;
 
 			if (moveVector.magnitude > 0)
@@ -207,6 +211,12 @@ namespace Player.Movement
 		private void OnRun()
 		{
 			isRunning = true;
+		}
+
+		private void OnCheckRun()
+		{
+			if (!isRunning)
+				isRunning = true;
 		}
 
 		private void OnStopRun()
