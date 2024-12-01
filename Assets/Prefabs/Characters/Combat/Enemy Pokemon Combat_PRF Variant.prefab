@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 196998738819867176, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
       propertyPath: m_Name
-      value: Wild Pokemon_PRF Variant
+      value: Enemy Pokemon Combat_PRF Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}

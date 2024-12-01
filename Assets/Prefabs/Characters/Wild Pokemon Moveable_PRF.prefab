@@ -51,6 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterDefinition: {fileID: 0}
   _characterTeam: 1
+  _damageVfx: {fileID: 7719087324886769821, guid: fe54ac683d85c2745b402db31ca5e414,
+    type: 3}
   _characterStats:
     _level: 0
     _experience: 0
@@ -77,6 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initialState: 1
   _followStateSettings:
+    FollowPlayer: 1
     FollowTarget: {fileID: 0}
     FollowOffset: {x: 0, y: 0, z: 2}
     FollowSmoothDamp: 0.1
@@ -91,6 +94,7 @@ MonoBehaviour:
     CanPassToPursuit: 1
     Velocity: {x: 0, y: 0, z: 0}
   _pursuitStateSettings:
+    PursuitPlayer: 1
     PursuitTarget: {fileID: 0}
     MaxPursuitDistance: 15
     PursuitSmoothDamp: 0.1
@@ -153,7 +157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _creatureCharacter: {fileID: 0}
-  _hasInitialized: 0
+  _hasTriggered: 0
+  _sceneId: 0
 --- !u!1 &649750787969134213
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +189,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5807920578820871522}
-  - {fileID: 8180966639485023594}
   m_Father: {fileID: 8442375789571981017}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3447199047152099389
@@ -292,92 +296,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &8503386178264633985
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6038795510154766925}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: aecc6fba8b89b7447a2877a141fc7a1e,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.6087
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: aecc6fba8b89b7447a2877a141fc7a1e,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.6087
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: aecc6fba8b89b7447a2877a141fc7a1e,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.6087
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: aecc6fba8b89b7447a2877a141fc7a1e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: aecc6fba8b89b7447a2877a141fc7a1e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.294
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: aecc6fba8b89b7447a2877a141fc7a1e,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.059562
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: aecc6fba8b89b7447a2877a141fc7a1e,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: aecc6fba8b89b7447a2877a141fc7a1e,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: aecc6fba8b89b7447a2877a141fc7a1e,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: aecc6fba8b89b7447a2877a141fc7a1e,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: aecc6fba8b89b7447a2877a141fc7a1e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: aecc6fba8b89b7447a2877a141fc7a1e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: aecc6fba8b89b7447a2877a141fc7a1e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: aecc6fba8b89b7447a2877a141fc7a1e,
-        type: 3}
-      propertyPath: m_Name
-      value: Squirtle
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: aecc6fba8b89b7447a2877a141fc7a1e, type: 3}
---- !u!4 &8180966639485023594 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: aecc6fba8b89b7447a2877a141fc7a1e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8503386178264633985}
-  m_PrefabAsset: {fileID: 0}

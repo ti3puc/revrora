@@ -23,7 +23,6 @@ namespace Combat
         public static event Action OnPlayerWonCombat;
         public static event Action OnPlayerLostCombat;
 
-
         [Header("Debug")]
         [SerializeField, ReadOnly] private BaseCharacter _currentCharacter;
         [SerializeField, ReadOnly] private BaseCharacter _currentInputCharacter;

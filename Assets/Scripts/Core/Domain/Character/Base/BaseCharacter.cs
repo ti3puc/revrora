@@ -16,6 +16,8 @@ namespace Character.Base
         [Header("References")]
         [SerializeField] private CharacterDefinition _characterDefinition;
         [SerializeField] private CharacterTeam _characterTeam;
+        [SerializeField] private GameObject _damageVfx;
+
         [Header("Debug")]
         [SerializeField, ReadOnly] private CharacterStats _characterStats;
 
@@ -73,6 +75,7 @@ namespace Character.Base
 
         public void RaiseDamageReceived()
         {
+            Instantiate(_damageVfx, transform);
             OnDamageReceived?.Invoke(this);
         }
     }
