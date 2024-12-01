@@ -53,7 +53,7 @@ MonoBehaviour:
   dontDestroyOnLoad: 1
   destroyObjToEnsureInstance: 1
   _namesPerScene:
-  - Name: Numantia Town
+  - Name: Dunmor Village
     Scene: Initial City
   - Name: Emerald Road
     Scene: Earth Transition
