@@ -58,10 +58,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6236395788742694167, guid: 68ed3bd6c0b195345be7e18c3535824e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7548806455020266317, guid: 68ed3bd6c0b195345be7e18c3535824e,
         type: 3}
       propertyPath: m_Name
-      value: Player_PRF Variant
+      value: Player Combat_PRF Variant
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2344595445268851040, guid: 68ed3bd6c0b195345be7e18c3535824e, type: 3}
