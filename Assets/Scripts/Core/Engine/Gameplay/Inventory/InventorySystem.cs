@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Inventory.Items;
+using Managers;
 using NaughtyAttributes;
+using Persistence;
 using UnityEngine;
 
 namespace Inventory
@@ -21,6 +23,30 @@ namespace Inventory
         {
             _items.Clear();
             _itemsDictionary.Clear();
+
+            // populate inventory from saved data
+            var inventoryData = SaveSystem.Instance.GameData.InventoryData;
+            var itemsToAdd = new List<(ItemData, int)>();
+
+            foreach (var itemData in inventoryData.Keys)
+                itemsToAdd.Add((GetItemData(itemData.Id), itemData.Quantity));
+
+            foreach (var itemData in inventoryData.Currency)
+                itemsToAdd.Add((GetItemData(itemData.Id), itemData.Quantity));
+
+            foreach (var itemData in inventoryData.Drops)
+                itemsToAdd.Add((GetItemData(itemData.Id), itemData.Quantity));
+
+            foreach (var itemData in inventoryData.Collectibles)
+                itemsToAdd.Add((GetItemData(itemData.Id), itemData.Quantity));
+
+            foreach (var (itemData, quantity) in itemsToAdd)
+                AddItem(itemData, quantity);
+        }
+
+        public ItemData GetItemData(string id)
+        {
+            return GameManager.Items.Find(item => item.Id == id);
         }
 
         public Item GetItem(ItemData dataReference)
@@ -48,6 +74,7 @@ namespace Inventory
             }
 
             OnInventoryChanged?.Invoke();
+            SaveInventory();
         }
 
         public void RemoveItem(ItemData dataReference, int value = 1)
@@ -66,6 +93,42 @@ namespace Inventory
             }
 
             OnInventoryChanged?.Invoke();
+            SaveInventory();
+        }
+
+        private void SaveInventory()
+        {
+            var inventoryData = SaveSystem.Instance.GameData.InventoryData;
+
+            inventoryData.Keys.Clear();
+            inventoryData.Currency.Clear();
+            inventoryData.Drops.Clear();
+            inventoryData.Collectibles.Clear();
+
+            foreach (var item in _items)
+            {
+                var itemData = new ItemSavedData
+                {
+                    Id = item.ItemData.Id,
+                    Quantity = item.StackSize
+                };
+
+                switch (item.ItemData.Type)
+                {
+                    case ItemType.Key:
+                        inventoryData.Keys.Add(itemData);
+                        break;
+                    case ItemType.Currency:
+                        inventoryData.Currency.Add(itemData);
+                        break;
+                    case ItemType.MonsterDrops:
+                        inventoryData.Drops.Add(itemData);
+                        break;
+                    case ItemType.Collectible:
+                        inventoryData.Collectibles.Add(itemData);
+                        break;
+                }
+            }
         }
 
         [Button]

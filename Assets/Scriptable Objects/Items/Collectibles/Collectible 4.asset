@@ -17,7 +17,7 @@ MonoBehaviour:
   _minimumStackSize: 0
   _maximumStackSize: 1
   _displayName: 
-  _icon: {fileID: 21300000, guid: ddd9abc95ef49d445aace20ba5d7b5f0, type: 3}
+  _icon: {fileID: 21300000, guid: 31f9982e44bb63b4d80c919dc465e0ae, type: 3}
   _hideItemIfNotAvailable: 1
   _ghostItemIfNotAvailable: 0
   _showStackText: 0

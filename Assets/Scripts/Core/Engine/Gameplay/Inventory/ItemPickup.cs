@@ -7,6 +7,9 @@ namespace Inventory.Items
 {
     public class ItemPickup : MonoBehaviour
     {
+        [Header("Settings")]
+        [SerializeField] private bool _persistentPickup;
+
         [Header("References")]
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private SphereCollider _sphereCollider;
@@ -18,6 +21,12 @@ namespace Inventory.Items
         private void Awake()
         {
             _spriteRenderer.sprite = _itemReference.Icon;
+        }
+
+        private void Start()
+        {
+            if (_persistentPickup && PlayerManager.Instance.PlayerInventory.GetItem(_itemReference) != null)
+                Destroy(gameObject);
         }
 
         private void OnTriggerEnter(Collider other)

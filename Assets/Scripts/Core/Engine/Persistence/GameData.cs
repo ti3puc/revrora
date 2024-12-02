@@ -37,7 +37,17 @@ namespace Persistence
     [Serializable]
     public class InventoryData
     {
+        public List<ItemSavedData> Keys = new List<ItemSavedData>();
+        public List<ItemSavedData> Currency = new List<ItemSavedData>();
+        public List<ItemSavedData> Drops = new List<ItemSavedData>();
+        public List<ItemSavedData> Collectibles = new List<ItemSavedData>();
+    }
 
+    [Serializable]
+    public class ItemSavedData
+    {
+        public string Id;
+        public int Quantity;
     }
 
     [Serializable]

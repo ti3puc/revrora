@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Character.Base;
 using Creatures;
+using Inventory.Items;
 using NaughtyAttributes;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -27,9 +28,11 @@ namespace Managers
 
 		[Header("Debug")]
 		[SerializeField, ReadOnly] private List<CharacterDefinition> _charactersDefinitions;
+		[SerializeField, ReadOnly] private List<ItemData> _itemsData;
 		[SerializeField, ReadOnly] private bool _isGamePaused;
 
 		public static List<CharacterDefinition> Characters => Instance._charactersDefinitions;
+		public static List<ItemData> Items => Instance._itemsData;
 		public static List<NamePerScene> NamesPerScene => Instance._namesPerScene;
 		public static bool IsGamePaused => Instance._isGamePaused;
 
@@ -67,6 +70,22 @@ namespace Managers
 				var characterDefinition = UnityEditor.AssetDatabase.LoadAssetAtPath<CharacterDefinition>(path);
 
 				_charactersDefinitions.Add(characterDefinition);
+			}
+		}
+		
+		[Button]
+		public void GetAllItems()
+		{
+			_itemsData = new List<ItemData>();
+
+			var guids = UnityEditor.AssetDatabase.FindAssets("t:ItemData");
+
+			foreach (var guid in guids)
+			{
+				var path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
+				var itemData = UnityEditor.AssetDatabase.LoadAssetAtPath<ItemData>(path);
+
+				_itemsData.Add(itemData);
 			}
 		}
 #endif

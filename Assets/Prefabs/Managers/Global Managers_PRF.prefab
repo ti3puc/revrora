@@ -73,6 +73,25 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0c474a0c42c174842bb4e8d67ecd965b, type: 2}
   - {fileID: 11400000, guid: f3988332a293c5e459edffe7d125a038, type: 2}
   - {fileID: 11400000, guid: 8652b6e72c1a7c2488f34a886d3857fa, type: 2}
+  _itemsData:
+  - {fileID: 11400000, guid: f0a38ea551060a8419ce194d506d9afe, type: 2}
+  - {fileID: 11400000, guid: ba379b634fb210e469c751a99e12ff8e, type: 2}
+  - {fileID: 11400000, guid: 1222fbc9592c2d748b8071a3227ac90c, type: 2}
+  - {fileID: 11400000, guid: 834d4c09a1da59a46a8785eae627a21d, type: 2}
+  - {fileID: 11400000, guid: b5e7b0b1b4678b542974610daeaf0aa7, type: 2}
+  - {fileID: 11400000, guid: 1019c713a6c0ea54e81459a883060c7b, type: 2}
+  - {fileID: 11400000, guid: 05cb75f5c039077409f2820b66f24551, type: 2}
+  - {fileID: 11400000, guid: 01378cddc83697f449cfaf86e58dea5d, type: 2}
+  - {fileID: 11400000, guid: 636393416550acf46891a402b58974fe, type: 2}
+  - {fileID: 11400000, guid: 852f12cb96da4474dbb148b67092d053, type: 2}
+  - {fileID: 11400000, guid: 80f62e667f39f924298844c4e7424fe6, type: 2}
+  - {fileID: 11400000, guid: 787b4918b53cfb44cb588c331910b3b4, type: 2}
+  - {fileID: 11400000, guid: 5f2fe688f369da54d9c526a46db34de7, type: 2}
+  - {fileID: 11400000, guid: 673687013d78b8a4ab4d06645a4e39a5, type: 2}
+  - {fileID: 11400000, guid: 24fd389b0be1e4441baec737f4813a4f, type: 2}
+  - {fileID: 11400000, guid: edaf6b1ffcb52e84fb5767bbee9001cc, type: 2}
+  - {fileID: 11400000, guid: 8902b8558abb29b47800d1695c289b71, type: 2}
+  - {fileID: 11400000, guid: c6698789e54529d4280e9a4642acad0b, type: 2}
   _isGamePaused: 0
 --- !u!114 &3430758459400544096
 MonoBehaviour:
@@ -133,6 +152,11 @@ MonoBehaviour:
     CurrentScene: 
     StartDate: 
     LastPlayedDate: 
+    InventoryData:
+      Keys: []
+      Currency: []
+      Drops: []
+      Collectibles: []
     CreaturesData:
       ActivePartyMemberIndex: 0
       Party: []
