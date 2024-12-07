@@ -57,8 +57,10 @@ namespace Player.Movement
 		[SerializeField, ReadOnly] private bool isGrounded;
 		[SerializeField, ReadOnly] private float fallSpeed;
 		[SerializeField, ReadOnly] private bool isMovementDisabled;
+		[SerializeField, ReadOnly] private bool isMoving;
 		[SerializeField, ReadOnly] private bool isRunning;
 
+		public bool IsMoving => isMoving;
 		public bool IsRunning => isRunning;
 		public float MoveSpeed => isRunning ? runningSpeed : speed;
 		public float AirSpeed => isRunning ? runningSpeedOnAir : speedOnAir;
@@ -95,7 +97,7 @@ namespace Player.Movement
 			ScenesManager.OnSceneStartedLoading -= DisableMovementForSceneLoad;
 		}
 
-        private void OnDrawGizmos()
+		private void OnDrawGizmos()
 		{
 			// debug ground check
 			Gizmos.color = Color.red;
@@ -160,6 +162,8 @@ namespace Player.Movement
 				Quaternion rotation = Quaternion.LookRotation(moveVector);
 				visualToRotate.rotation = Quaternion.RotateTowards(visualToRotate.rotation, rotation, rotateSpeed);
 			}
+
+			isMoving = moveVector.magnitude != 0;
 		}
 
 		// simulates physics collision
@@ -203,10 +207,10 @@ namespace Player.Movement
 			isMovementDisabled = false;
 		}
 
-        private void DisableMovementForSceneLoad(string lastScene, string sceneName)
-        {
+		private void DisableMovementForSceneLoad(string lastScene, string sceneName)
+		{
 			DisableMovement();
-        }
+		}
 
 		private void OnRun()
 		{

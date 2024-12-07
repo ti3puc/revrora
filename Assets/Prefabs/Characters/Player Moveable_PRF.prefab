@@ -107,6 +107,7 @@ MonoBehaviour:
   _characterTeam: 0
   _damageVfx: {fileID: 7719087324886769821, guid: fe54ac683d85c2745b402db31ca5e414,
     type: 3}
+  _hitSoundId: hit
   _characterStats:
     _level: 0
     _experience: 0
