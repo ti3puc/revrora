@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers.Audio;
 using Managers.Player;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace Inventory.Items
         [Header("References")]
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private SphereCollider _sphereCollider;
+        [SerializeField] private string _collectSoundId = "collect";
 
         [Header("Item")]
         [SerializeField] private ItemData _itemReference;
@@ -51,9 +53,12 @@ namespace Inventory.Items
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
+            {
+                AudioManager.Instance.PlaySoundOneShot(_collectSoundId, 3);
                 PlayerManager.Instance.PlayerInventory.AddItem(_itemReference, _itemQuantity);
+                Destroy(gameObject);
+            }
 
-            Destroy(gameObject);
         }
     }
 }

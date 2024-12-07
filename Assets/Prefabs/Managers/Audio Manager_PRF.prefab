@@ -61,6 +61,10 @@ MonoBehaviour:
   _soundEffects:
   - _id: ui_click
     _audioClip: {fileID: 8300000, guid: 15fcd43809e7edc44966a0d9fc6199fb, type: 3}
+  - _id: hit
+    _audioClip: {fileID: 8300000, guid: 145c9e21126cbda4b99c4b30c0e49e48, type: 3}
+  - _id: collect
+    _audioClip: {fileID: 8300000, guid: dda9db792f6977941acb2463b5669fe2, type: 3}
   _fadeTime: 0.5
   _tracks: []
 --- !u!82 &8365461079339131892

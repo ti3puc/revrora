@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Character.Class;
 using Core.Domain.Character.Moves;
+using Managers.Audio;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace Character.Base
         [SerializeField] private CharacterDefinition _characterDefinition;
         [SerializeField] private CharacterTeam _characterTeam;
         [SerializeField] private GameObject _damageVfx;
+        [SerializeField] private string _hitSoundId = "hit";
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private CharacterStats _characterStats;
@@ -76,6 +78,7 @@ namespace Character.Base
         public void RaiseDamageReceived()
         {
             Instantiate(_damageVfx, transform);
+            AudioManager.Instance.PlaySoundOneShot(_hitSoundId, 3);
             OnDamageReceived?.Invoke(this);
         }
     }
