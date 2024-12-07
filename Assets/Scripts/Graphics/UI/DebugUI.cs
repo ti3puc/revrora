@@ -5,6 +5,8 @@ using Managers.Party;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using Managers.Player;
+using Managers;
 
 namespace UI.UIDebug
 {
@@ -37,6 +39,16 @@ namespace UI.UIDebug
 		public void GoToSandbox() => ScenesManager.LoadScene("Sandbox");
 
 		public void GoToCombat() => ScenesManager.LoadScene("Earth");
+
+		public void GetKeys()
+		{
+			if (PlayerManager.Instance == null) return;
+
+			PlayerManager.Instance.PlayerInventory.AddItem(GameManager.Items.Find(x => x.Id == "key.1"), 1);
+			PlayerManager.Instance.PlayerInventory.AddItem(GameManager.Items.Find(x => x.Id == "key.2"), 1);
+			PlayerManager.Instance.PlayerInventory.AddItem(GameManager.Items.Find(x => x.Id == "key.3"), 1);
+			PlayerManager.Instance.PlayerInventory.AddItem(GameManager.Items.Find(x => x.Id == "key.4"), 1);
+		}
 
 		public void RotateMember()
 		{

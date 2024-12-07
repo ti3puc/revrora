@@ -18,13 +18,32 @@ namespace Inventory.Items
         [SerializeField] private ItemData _itemReference;
         [SerializeField] private int _itemQuantity = 1;
 
+        public bool PersistentPickup
+        {
+            get => _persistentPickup;
+            set => _persistentPickup = value;
+        }
+        public ItemData ItemData
+        {
+            get => _itemReference;
+            set => _itemReference = value;
+        }
+
         private void Awake()
         {
-            _spriteRenderer.sprite = _itemReference.Icon;
+            if (_spriteRenderer == null && _itemReference != null)
+                _spriteRenderer.sprite = _itemReference.Icon;
         }
 
         private void Start()
         {
+            Initialize();
+        }
+
+        public void Initialize()
+        {
+            _spriteRenderer.sprite = _itemReference.Icon;
+
             if (_persistentPickup && PlayerManager.Instance.PlayerInventory.GetItem(_itemReference) != null)
                 Destroy(gameObject);
         }

@@ -10,6 +10,7 @@ namespace Environment
 		[SerializeField] private float speed = 1f;
 		[SerializeField] private float delayBeforeMovement = 0f; // in seconds
 		[SerializeField] private bool infiniteMovement = true;
+		[SerializeField] private bool changeRotation;
 
 		[Header("References")]
 		[SerializeField] private Transform startPoint;
@@ -64,6 +65,8 @@ namespace Environment
 				lerpFactor += speed * Time.fixedDeltaTime;
 				transform.position = Vector3.Lerp(startPoint.position, endPoint.position, lerpFactor);
 				lastMovement = transform.position;
+				if (changeRotation)
+					transform.rotation = Quaternion.Lerp(startPoint.rotation, endPoint.rotation, lerpFactor);
 
 				if (!isMovingToEnd)
 					lerpFactor -= 2 * speed * Time.fixedDeltaTime; // logic to go back

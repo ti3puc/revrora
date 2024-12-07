@@ -18,6 +18,7 @@ namespace UI.Interaction
 		{
 			Interactable.OnRequestToShowUI += ShowUI;
 			Interactable.OnRequestToHideUI += HideUI;
+			ElementInteractable.OnInteractableDestroyed += HideUI;
 
 			canvas = GetComponentInParent<Canvas>();
 			rectTransform = GetComponent<RectTransform>();
@@ -30,6 +31,7 @@ namespace UI.Interaction
 		{
 			Interactable.OnRequestToShowUI -= ShowUI;
 			Interactable.OnRequestToHideUI -= HideUI;
+			ElementInteractable.OnInteractableDestroyed -= HideUI;
 		}
 
 		private void FixedUpdate()
@@ -57,7 +59,8 @@ namespace UI.Interaction
 				child.gameObject.SetActive(true);
 		}
 
-		private void HideUI(Interactor interactor, Interactable interactable)
+		private void HideUI(Interactor interactor, Interactable interactable) => HideUI();
+		private void HideUI()
 		{
 			foreach (Transform child in transform)
 				child.gameObject.SetActive(false);
