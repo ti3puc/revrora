@@ -189,6 +189,7 @@ MonoBehaviour:
   _characterTeam: 0
   _damageVfx: {fileID: 7719087324886769821, guid: fe54ac683d85c2745b402db31ca5e414,
     type: 3}
+  _hitSoundId: hit
   _characterStats:
     _level: 0
     _experience: 0
@@ -222,7 +223,7 @@ MonoBehaviour:
     Velocity: {x: 0, y: 0, z: 0}
     MinDistanceToPlayer: 2
     MoveAwayDistance: 1.8
-    MaxDistanceToPlayer: 40
+    MaxDistanceToPlayer: 20
   _wanderStateSettings:
     WanderRadius: 10
     WanderTime: 5
@@ -272,9 +273,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseSpeed: 15
-  _runningSpeed: 30
+  _runningSpeed: 45
   _angularSpeed: 3600
   _runningAngularSpeed: 500
   _acceleration: 50
-  _runningAcceleration: 100
+  _runningAcceleration: 150
   _navMeshAgent: {fileID: 0}
