@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6186e71f71368342b7058710441a95b, type: 3}
+  m_Name: Pokemon 12
+  m_EditorClassIdentifier: 
+  _id: 12
+  _name: Jequitiranaboia
+  _baseStats:
+    baseHP: 39
+    baseMana: 52
+    baseStrength: 43
+    baseDefense: 60
+    baseAgility: 50
+    baseWisdom: 65
+    type: 0
+  _characterMoves:
+  - {fileID: 11400000, guid: 0836f2666f00007499f4acc1c52a874d, type: 2}
+  - {fileID: 11400000, guid: b7d5cc13a136b2445b5a3d3bd84e32e3, type: 2}
+  - {fileID: 11400000, guid: b063865351c6c674491fe0301c39eeb0, type: 2}
+  _visual: {fileID: 2496978506789081796, guid: d3b17ca88bd42ab4ea1f698deff35e03, type: 3}
+  _icon: {fileID: 2800000, guid: c807a285b85a98f47a0b7514f2f158d0, type: 3}
+  _graph: {fileID: 21300000, guid: ca1bd6dc80342034aab3a7f6c5ae7c2f, type: 3}

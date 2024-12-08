@@ -2992,7 +2992,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &673712896
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5451,37 +5451,37 @@ PrefabInstance:
     - target: {fileID: 7391883014584468114, guid: b78f19440b24ed145ab94ad7f5934c20,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.2
+      value: -6.4
       objectReference: {fileID: 0}
     - target: {fileID: 7391883014584468114, guid: b78f19440b24ed145ab94ad7f5934c20,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.6
+      value: -4.08
       objectReference: {fileID: 0}
     - target: {fileID: 7391883014584468114, guid: b78f19440b24ed145ab94ad7f5934c20,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.2
+      value: -15.7
       objectReference: {fileID: 0}
     - target: {fileID: 7391883014584468114, guid: b78f19440b24ed145ab94ad7f5934c20,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9816538
       objectReference: {fileID: 0}
     - target: {fileID: 7391883014584468114, guid: b78f19440b24ed145ab94ad7f5934c20,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7391883014584468114, guid: b78f19440b24ed145ab94ad7f5934c20,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.1906722
       objectReference: {fileID: 0}
     - target: {fileID: 7391883014584468114, guid: b78f19440b24ed145ab94ad7f5934c20,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7391883014584468114, guid: b78f19440b24ed145ab94ad7f5934c20,
         type: 3}
@@ -5491,7 +5491,7 @@ PrefabInstance:
     - target: {fileID: 7391883014584468114, guid: b78f19440b24ed145ab94ad7f5934c20,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 21.984
       objectReference: {fileID: 0}
     - target: {fileID: 7391883014584468114, guid: b78f19440b24ed145ab94ad7f5934c20,
         type: 3}

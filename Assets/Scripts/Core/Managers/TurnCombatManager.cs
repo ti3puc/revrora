@@ -21,20 +21,23 @@ namespace Managers.Combat
         [SerializeField, ReadOnly] private bool _isTurnEnd;
         [SerializeField, ReadOnly] private int _combatCreatureSceneId;
         [SerializeField, ReadOnly] private Vector3 _lastPlayerPosition;
-
-        private Dictionary<CharacterDefinition, CharacterTeam> _toInstanceCacheCharacters = new ();
+        [SerializeField, ReadOnly] private List<CharacterDefinition> _toInstanceCacheCharacterDefinitions = new();
+        [SerializeField, ReadOnly] private List<CharacterTeam> _toInstanceCacheCharacterTeams = new();
 
         public List<BaseCharacter> TurnCharacters => _turnCharacters;
-        public Dictionary<CharacterDefinition, CharacterTeam> ToInstanceCharacters => _toInstanceCacheCharacters;
+        public List<CharacterDefinition> ToInstanceCharacterDefinitions => _toInstanceCacheCharacterDefinitions;
+        public List<CharacterTeam> ToInstanceCharacterTeams => _toInstanceCacheCharacterTeams;
         public bool HasInitialized => _turnCharacters != null && _turnCharacters.Count > 0;
         public bool IsTurnEnd => _isTurnEnd = _turnIndex > _turnCharacters.Count - 1;
         public int CombatCreatureSceneId => _combatCreatureSceneId;
         public Vector3 LastPlayerPosition => _lastPlayerPosition;
 
-        public void CacheInstantiateCharacters(Dictionary<CharacterDefinition, CharacterTeam> characters)
+        public void CacheInstantiateCharacters(List<CharacterDefinition> characterDefinitions, List<CharacterTeam> characterTeams)
         {
-            _toInstanceCacheCharacters.Clear();
-            _toInstanceCacheCharacters.AddRange(characters);
+            _toInstanceCacheCharacterDefinitions.Clear();
+            _toInstanceCacheCharacterTeams.Clear();
+            _toInstanceCacheCharacterDefinitions.AddRange(characterDefinitions);
+            _toInstanceCacheCharacterTeams.AddRange(characterTeams);
         }
 
         public void CacheLastSceneInformation(int combatCreatureSceneId, Vector3 lastPlayerPosition)
@@ -46,7 +49,8 @@ namespace Managers.Combat
 
         public void InitializeCharacters(List<BaseCharacter> characters)
         {
-            _toInstanceCacheCharacters.Clear();
+            _toInstanceCacheCharacterDefinitions.Clear();
+            _toInstanceCacheCharacterTeams.Clear();
             _turnCharacters.Clear();
             _turnCharacters.AddRange(characters);
 

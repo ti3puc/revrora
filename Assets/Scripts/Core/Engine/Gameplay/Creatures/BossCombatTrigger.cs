@@ -61,14 +61,21 @@ namespace Creatures.Combat
             var partyPokemon = GameManager.Characters.Find(x => x.Id == PartyManager.Instance.ActivePartyMember.Id);
             var wildPokemon = GameManager.Characters.Find(x => x.Id == _creatureCharacter.Id);
 
-            var dictOfCharacters = new Dictionary<CharacterDefinition, CharacterTeam>
+            var characterDefinitions = new List<CharacterDefinition>
                 {
-                    { playerPokemon, CharacterTeam.Ally },
-                    { partyPokemon, CharacterTeam.Ally },
-                    { wildPokemon, CharacterTeam.Enemy }
+                    playerPokemon,
+                    partyPokemon,
+                    wildPokemon
                 };
 
-            TurnCombatManager.Instance.CacheInstantiateCharacters(dictOfCharacters);
+            var characterTeams = new List<CharacterTeam>
+                {
+                    CharacterTeam.Ally,
+                    CharacterTeam.Ally,
+                    CharacterTeam.Enemy
+                };
+
+            TurnCombatManager.Instance.CacheInstantiateCharacters(characterDefinitions, characterTeams);
             TurnCombatManager.Instance.CacheLastSceneInformation(SceneId, PlayerManager.Instance.PlayerTransform.position);
             ScenesManager.LoadScene("Combat");
 

@@ -16,6 +16,9 @@ namespace Visual.Player
 
         private void FixedUpdate()
         {
+            if (PlayerManager.Instance == null) return;
+            if (PlayerManager.Instance.PlayerMovement == null) return;
+
             if (PlayerManager.Instance.PlayerMovement.IsMoving)
             {
                 _animator.SetBool(_walkParam, true);

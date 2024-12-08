@@ -35,12 +35,15 @@ namespace Combat.Creatures
 
         public void InstantiateCharacters()
         {
+            var characterDefinitions = TurnCombatManager.Instance.ToInstanceCharacterDefinitions;
+            var characterTeams = TurnCombatManager.Instance.ToInstanceCharacterTeams;
+
             // player as pokemon
             var playerCharacter = Instantiate(_playerCombatPrefab, _playerSpawnPoint.position, _playerSpawnPoint.rotation)
                 .GetComponent<BaseCharacter>();
 
-            var playerDefinition = TurnCombatManager.Instance.ToInstanceCharacters
-                .FirstOrDefault(x => x.Key.Id == PlayerManager.Instance.Player.Id).Key;
+            var playerDefinition = characterDefinitions
+                .FirstOrDefault(x => x.Id == PlayerManager.Instance.Player.Id);
 
             playerCharacter.CharacterDefinition = playerDefinition;
             playerCharacter.Initialize();
@@ -49,8 +52,8 @@ namespace Combat.Creatures
             var partyCharacter = Instantiate(_partyCombatPrefab, _partySpawnPoint.position, _partySpawnPoint.rotation)
                 .GetComponent<BaseCharacter>();
 
-            var partyDefinition = TurnCombatManager.Instance.ToInstanceCharacters
-                .FirstOrDefault(x => x.Key.Id != PlayerManager.Instance.Player.Id && x.Value == CharacterTeam.Ally).Key;
+            var partyDefinition = characterDefinitions
+                .FirstOrDefault(x => x.Id != PlayerManager.Instance.Player.Id && characterTeams[characterDefinitions.IndexOf(x)] == CharacterTeam.Ally);
 
             partyCharacter.CharacterDefinition = partyDefinition;
             partyCharacter.Initialize();
@@ -59,7 +62,9 @@ namespace Combat.Creatures
             var enemyCharacter = Instantiate(_enemyCombatPrefab, _enemySpawnPoint.position, _enemySpawnPoint.rotation)
                 .GetComponent<BaseCharacter>();
 
-            var enemyDefinition = TurnCombatManager.Instance.ToInstanceCharacters.FirstOrDefault(x => x.Value == CharacterTeam.Enemy).Key;
+            var enemyIndex = characterTeams.IndexOf(CharacterTeam.Enemy);
+            var enemyDefinition = characterDefinitions[enemyIndex];
+
             enemyCharacter.CharacterDefinition = enemyDefinition;
             enemyCharacter.Initialize();
 
