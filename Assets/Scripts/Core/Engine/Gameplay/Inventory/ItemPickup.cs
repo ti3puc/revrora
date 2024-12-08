@@ -35,7 +35,7 @@ namespace Inventory.Items
 
         private void Awake()
         {
-            if (!_use3d && _spriteRenderer == null && _itemReference != null)
+            if (!_use3d && _spriteRenderer != null && _itemReference != null)
                 _spriteRenderer.sprite = _itemReference.Icon;
 
             if (_use3d && _itemReference != null)
@@ -54,7 +54,7 @@ namespace Inventory.Items
 
         public void Initialize()
         {
-            if (_use3d && _spriteRenderer == null && _itemReference != null)
+            if (!_use3d && _spriteRenderer != null && _itemReference != null)
                 _spriteRenderer.sprite = _itemReference.Icon;
 
             if (_use3d && _itemReference != null)
