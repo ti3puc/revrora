@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Managers.Audio;
 using Managers.Player;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Inventory.Items
@@ -10,9 +11,10 @@ namespace Inventory.Items
     {
         [Header("Settings")]
         [SerializeField] private bool _persistentPickup;
+        [SerializeField] private bool _use3d;
 
         [Header("References")]
-        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField, HideIf("_use3d")] private SpriteRenderer _spriteRenderer;
         [SerializeField] private SphereCollider _sphereCollider;
         [SerializeField] private string _collectSoundId = "collect";
 
@@ -33,8 +35,16 @@ namespace Inventory.Items
 
         private void Awake()
         {
-            if (_spriteRenderer == null && _itemReference != null)
+            if (!_use3d && _spriteRenderer == null && _itemReference != null)
                 _spriteRenderer.sprite = _itemReference.Icon;
+
+            if (_use3d && _itemReference != null)
+            {
+                if (_spriteRenderer != null)
+                    Destroy(_spriteRenderer.gameObject);
+                var gameObject = Instantiate(_itemReference.Icon3d, transform);
+                gameObject.AddComponent<Rotate>().Speed = 30f;
+            }
         }
 
         private void Start()
@@ -44,7 +54,16 @@ namespace Inventory.Items
 
         public void Initialize()
         {
-            _spriteRenderer.sprite = _itemReference.Icon;
+            if (_use3d && _spriteRenderer == null && _itemReference != null)
+                _spriteRenderer.sprite = _itemReference.Icon;
+
+            if (_use3d && _itemReference != null)
+            {
+                if (_spriteRenderer != null)
+                    Destroy(_spriteRenderer.gameObject);
+                var gameObject = Instantiate(_itemReference.Icon3d, transform);
+                gameObject.AddComponent<Rotate>().Speed = 30f;
+            }
 
             if (_persistentPickup && PlayerManager.Instance.PlayerInventory.GetItem(_itemReference) != null)
                 Destroy(gameObject);

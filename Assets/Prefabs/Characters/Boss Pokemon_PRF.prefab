@@ -191,6 +191,7 @@ MonoBehaviour:
   _characterTeam: 1
   _damageVfx: {fileID: 7719087324886769821, guid: fe54ac683d85c2745b402db31ca5e414,
     type: 3}
+  _hitSoundId: hit
   _characterStats:
     _level: 0
     _experience: 0
@@ -300,7 +301,7 @@ MonoBehaviour:
   _sphereCollider: {fileID: 3252722325977399638}
   _currentInteractor: {fileID: 0}
   _itemDrop: {fileID: 11400000, guid: 24fd389b0be1e4441baec737f4813a4f, type: 2}
-  _itemPickupPrefab: {fileID: 4743171176492237528, guid: 99efc912283688f4fa8f8dc48a78c461,
+  _itemPickupPrefab: {fileID: 4743171176492237528, guid: 89fb8a22d4b0c4d4896d9a96ca1b2188,
     type: 3}
   _itemSpawnOffset: {x: -2, y: 1.5, z: -2}
   _creatureCharacter: {fileID: 0}
