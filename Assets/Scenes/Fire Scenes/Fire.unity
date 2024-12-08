@@ -550,22 +550,22 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: c96a7c8823f371e4d903ef7014b71a04,
+      objectReference: {fileID: 11400000, guid: f1f46ca82ba2fbd439b7918bb2ab2b4f,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -51.6
+      value: -54.42
       objectReference: {fileID: 0}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.7
+      value: 7.1
       objectReference: {fileID: 0}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -111.3
+      value: -146.23
       objectReference: {fileID: 0}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -1984,7 +1984,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: febce28155bc47e41b0799205acb07ed,
+      objectReference: {fileID: 11400000, guid: f3988332a293c5e459edffe7d125a038,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -4835,7 +4835,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: 8652b6e72c1a7c2488f34a886d3857fa,
+      objectReference: {fileID: 11400000, guid: a2dc7e897c306c24eaa053a952cab9e8,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -5958,7 +5958,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: febce28155bc47e41b0799205acb07ed,
+      objectReference: {fileID: 11400000, guid: 3c076749d034ee14da4e996f11a04c3a,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -10414,7 +10414,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: c2b7e06a3ff7f474fbbc85f8cd4acfd0,
+      objectReference: {fileID: 11400000, guid: c96a7c8823f371e4d903ef7014b71a04,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -13897,7 +13897,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: febce28155bc47e41b0799205acb07ed,
+      objectReference: {fileID: 11400000, guid: a2dc7e897c306c24eaa053a952cab9e8,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -14408,6 +14408,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss Arena_PRF
       objectReference: {fileID: 0}
+    - target: {fileID: 7296374618091399732, guid: ffa61a74122f10644b81fea1e13ad269,
+        type: 3}
+      propertyPath: _characterDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: fb51f5a0d30ab934d9073894dfb7fd29,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

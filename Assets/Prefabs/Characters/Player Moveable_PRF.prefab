@@ -160,6 +160,7 @@ MonoBehaviour:
   isGrounded: 0
   fallSpeed: 0
   isMovementDisabled: 0
+  isMoving: 0
   isRunning: 0
 --- !u!136 &7564090042485660755
 CapsuleCollider:

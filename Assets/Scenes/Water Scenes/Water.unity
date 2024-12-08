@@ -235,7 +235,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: c2b7e06a3ff7f474fbbc85f8cd4acfd0,
+      objectReference: {fileID: 11400000, guid: f1f46ca82ba2fbd439b7918bb2ab2b4f,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -966,7 +966,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: f1f46ca82ba2fbd439b7918bb2ab2b4f,
+      objectReference: {fileID: 11400000, guid: 63863a68f07828f46b17715b26de5c9b,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -2585,7 +2585,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: febce28155bc47e41b0799205acb07ed,
+      objectReference: {fileID: 11400000, guid: 0c474a0c42c174842bb4e8d67ecd965b,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -4094,7 +4094,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: 0c474a0c42c174842bb4e8d67ecd965b,
+      objectReference: {fileID: 11400000, guid: f1f46ca82ba2fbd439b7918bb2ab2b4f,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -4180,7 +4180,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: 0c474a0c42c174842bb4e8d67ecd965b,
+      objectReference: {fileID: 11400000, guid: f1f46ca82ba2fbd439b7918bb2ab2b4f,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -5297,7 +5297,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: 8652b6e72c1a7c2488f34a886d3857fa,
+      objectReference: {fileID: 11400000, guid: c96a7c8823f371e4d903ef7014b71a04,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -6881,7 +6881,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: f3988332a293c5e459edffe7d125a038,
+      objectReference: {fileID: 11400000, guid: 63863a68f07828f46b17715b26de5c9b,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -11872,6 +11872,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss Arena_PRF
       objectReference: {fileID: 0}
+    - target: {fileID: 7296374618091399732, guid: ffa61a74122f10644b81fea1e13ad269,
+        type: 3}
+      propertyPath: _characterDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: febce28155bc47e41b0799205acb07ed,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

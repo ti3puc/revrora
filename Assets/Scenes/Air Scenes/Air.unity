@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: bbe9494f815f3c340956427c884b72a0, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 5464c15ff9c6ca04cb5790c1773e76fa, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -1488,6 +1488,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss Arena_PRF
       objectReference: {fileID: 0}
+    - target: {fileID: 7296374618091399732, guid: ffa61a74122f10644b81fea1e13ad269,
+        type: 3}
+      propertyPath: _characterDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: 28b687534e2334948bef9c7c9921b47c,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5330,7 +5336,7 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 5000
+  m_ColorTemperature: 6833
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -7726,7 +7732,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: f3988332a293c5e459edffe7d125a038,
+      objectReference: {fileID: 11400000, guid: c2b7e06a3ff7f474fbbc85f8cd4acfd0,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -9513,7 +9519,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: f3988332a293c5e459edffe7d125a038,
+      objectReference: {fileID: 11400000, guid: c2b7e06a3ff7f474fbbc85f8cd4acfd0,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -14159,7 +14165,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: 0c474a0c42c174842bb4e8d67ecd965b,
+      objectReference: {fileID: 11400000, guid: f1f46ca82ba2fbd439b7918bb2ab2b4f,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -19404,7 +19410,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: 8652b6e72c1a7c2488f34a886d3857fa,
+      objectReference: {fileID: 11400000, guid: c2b7e06a3ff7f474fbbc85f8cd4acfd0,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -22306,7 +22312,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: f3988332a293c5e459edffe7d125a038,
+      objectReference: {fileID: 11400000, guid: 3c076749d034ee14da4e996f11a04c3a,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -31782,7 +31788,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: febce28155bc47e41b0799205acb07ed,
+      objectReference: {fileID: 11400000, guid: 63863a68f07828f46b17715b26de5c9b,
         type: 2}
     - target: {fileID: 8442375789571981017, guid: 5693d2112329f4046869ed6557e7140c,
         type: 3}
@@ -35134,6 +35140,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7413038505496941544, guid: ccab06a8b69962044ad28b6899bf72d6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1678a9b41a5f12d4c8d3473f8715ed29, type: 2}
     - target: {fileID: 8551011751635708039, guid: ccab06a8b69962044ad28b6899bf72d6,
         type: 3}
       propertyPath: m_LocalPosition.x
