@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using Infra.Handler;
+using Managers.Settings;
 using NaughtyAttributes;
 using Player.Input;
 using TMPro;
@@ -12,6 +14,11 @@ namespace Core.Managers
     {
         #region Fields
 
+        [Header("Settings")]
+        [SerializeField] private float _slowTextDelay = .2f;
+        [SerializeField] private float _mediumTextDelay = .1f;
+        [SerializeField] private float _fastTextDelay = .05f;
+
         [Header("Debug")]
         [SerializeField, ReadOnly] private Canvas _canvas;
         [SerializeField, ReadOnly] private TMP_Text _nameText;
@@ -20,6 +27,7 @@ namespace Core.Managers
         [SerializeField, ReadOnly] private Dialogue _dialogue;
         [SerializeField, ReadOnly] private int _dialogueIndex = 0;
         [SerializeField, ReadOnly] private bool _isInteracting = false;
+        [SerializeField, ReadOnly] private bool _isAnimatingText = false;
 
         [Header("Debug: Test")]
         [SerializeField] private Dialogue _debugDialogue;
@@ -59,8 +67,18 @@ namespace Core.Managers
             {
                 if (_dialogueIndex < _dialogue.Sentences.Count)
                 {
-                    _dialogText.text = _dialogue.Sentences[_dialogueIndex];
-                    _dialogueIndex++;
+                    if (_isAnimatingText)
+                    {
+                        StopAllCoroutines();
+                        _dialogText.text = _dialogue.Sentences[_dialogueIndex];
+                        _dialogueIndex++;
+                        _isAnimatingText = false;
+                    }
+                    else
+                    {
+                        StopAllCoroutines();
+                        StartCoroutine(AnimateText(_dialogue.Sentences[_dialogueIndex]));
+                    }
                 }
                 else
                 {
@@ -76,14 +94,20 @@ namespace Core.Managers
 
         #region Public Methods
 
-        public void AddDialogue(Dialogue dialogue)
+        public void AddDialogue(Dialogue dialogue, string characterName)
         {
             if (_dialogue != null)
                 return;
 
             _dialogue = dialogue;
-            _nameText.text = _dialogue.Name;
-            _dialogText.text = _dialogue.Sentences[_dialogueIndex];
+            if (string.IsNullOrEmpty(characterName))
+                _nameText.transform.parent.gameObject.SetActive(false);
+            else
+            {
+                _nameText.transform.parent.gameObject.SetActive(true);
+                _nameText.text = characterName;
+            }
+            // StartCoroutine(AnimateText(_dialogue.Sentences[_dialogueIndex]));
         }
 
         public void ClearDialogue()
@@ -137,13 +161,31 @@ namespace Core.Managers
         [Button]
         private void DebugShowDialogue()
         {
-            AddDialogue(_debugDialogue);
+            AddDialogue(_debugDialogue, "Debug Char");
         }
 
         [Button]
         private void DebugClearDialogue()
         {
             ClearDialogue();
+        }
+
+        private IEnumerator AnimateText(string text)
+        {
+            _isAnimatingText = true;
+
+            _dialogText.text = "";
+            int textSpeed = SettingsManager.Instance.TextSpeed;
+            float delay = textSpeed == 0 ? _slowTextDelay : textSpeed == 1 ? _mediumTextDelay : _fastTextDelay;
+
+            foreach (char letter in text.ToCharArray())
+            {
+                _dialogText.text += letter;
+                yield return new WaitForSeconds(delay);
+            }
+
+            _dialogueIndex++;
+            _isAnimatingText = false;
         }
 
         #endregion

@@ -15,12 +15,14 @@ namespace Player.Movement
 		[Header("Movement")]
 		[SerializeField] private bool moveAccordingToCameraView = true;
 		[SerializeField] private float speed = 15f;
+		[SerializeField] private float runningSpeed = 30f;
 		[SerializeField] private float acceleration = 5f;
 		[SerializeField] private float deceleration = 5f;
 		[SerializeField] private bool movementStartsDisabled = false;
 
 		[Header("Air Movement")]
-		[SerializeField] private float speedOnAir = 8f;
+		[SerializeField] private float speedOnAir = 3f;
+		[SerializeField] private float runningSpeedOnAir = 8f;
 		[SerializeField] private float accelerationOnAir = 5f;
 
 		[Header("Rotation")]
@@ -55,6 +57,13 @@ namespace Player.Movement
 		[SerializeField, ReadOnly] private bool isGrounded;
 		[SerializeField, ReadOnly] private float fallSpeed;
 		[SerializeField, ReadOnly] private bool isMovementDisabled;
+		[SerializeField, ReadOnly] private bool isMoving;
+		[SerializeField, ReadOnly] private bool isRunning;
+
+		public bool IsMoving => isMoving;
+		public bool IsRunning => isRunning;
+		public float MoveSpeed => isRunning ? runningSpeed : speed;
+		public float AirSpeed => isRunning ? runningSpeedOnAir : speedOnAir;
 
 		#endregion
 
@@ -66,6 +75,9 @@ namespace Player.Movement
 
 			PlayerInput.OnMovePerformed += OnMove;
 			PlayerInput.OnMoveCanceled += OnMove;
+			PlayerInput.OnRunStarted += OnRun;
+			PlayerInput.OnRunPressed += OnCheckRun;
+			PlayerInput.OnRunCanceled += OnStopRun;
 			ScenesManager.OnSceneStartedLoading += DisableMovementForSceneLoad;
 
 			if (movementStartsDisabled)
@@ -79,10 +91,13 @@ namespace Player.Movement
 		{
 			PlayerInput.OnMovePerformed -= OnMove;
 			PlayerInput.OnMoveCanceled -= OnMove;
+			PlayerInput.OnRunStarted -= OnRun;
+			PlayerInput.OnRunPressed -= OnCheckRun;
+			PlayerInput.OnRunCanceled -= OnStopRun;
 			ScenesManager.OnSceneStartedLoading -= DisableMovementForSceneLoad;
 		}
 
-        private void OnDrawGizmos()
+		private void OnDrawGizmos()
 		{
 			// debug ground check
 			Gizmos.color = Color.red;
@@ -95,7 +110,7 @@ namespace Player.Movement
 			isGrounded = Physics.CheckSphere(transform.position + Vector3.down * groundCheckDistance, groundCheckRadius, groundMask) || platformParenter.HasPlatformBellow;
 
 			// move character, and changes speed if on air or grounded
-			float targetSpeed = isGrounded ? speed : speedOnAir;
+			float targetSpeed = isGrounded ? MoveSpeed : AirSpeed;
 			float targetAcceleration = isGrounded ? acceleration : accelerationOnAir;
 
 			if (moveVector.magnitude > 0)
@@ -147,6 +162,8 @@ namespace Player.Movement
 				Quaternion rotation = Quaternion.LookRotation(moveVector);
 				visualToRotate.rotation = Quaternion.RotateTowards(visualToRotate.rotation, rotation, rotateSpeed);
 			}
+
+			isMoving = moveVector.magnitude != 0;
 		}
 
 		// simulates physics collision
@@ -190,9 +207,25 @@ namespace Player.Movement
 			isMovementDisabled = false;
 		}
 
-        private void DisableMovementForSceneLoad(string lastScene, string sceneName)
-        {
+		private void DisableMovementForSceneLoad(string lastScene, string sceneName)
+		{
 			DisableMovement();
-        }
+		}
+
+		private void OnRun()
+		{
+			isRunning = true;
+		}
+
+		private void OnCheckRun()
+		{
+			if (!isRunning)
+				isRunning = true;
+		}
+
+		private void OnStopRun()
+		{
+			isRunning = false;
+		}
 	}
 }

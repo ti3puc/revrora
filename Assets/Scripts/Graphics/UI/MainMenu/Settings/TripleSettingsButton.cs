@@ -15,12 +15,12 @@ namespace UI.Menu.Settings
         [SerializeField] private Button _thirdButton;
 
         [Header("Events")]
-        [SerializeField] private UnityEvent _onFirstButtonSelected;
-        [SerializeField] private UnityEvent _onSecondButtonSelected;
-        [SerializeField] private UnityEvent _onThirdButtonSelected;
+        [SerializeField] private UnityEvent<int> _onFirstButtonSelected;
+        [SerializeField] private UnityEvent<int> _onSecondButtonSelected;
+        [SerializeField] private UnityEvent<int> _onThirdButtonSelected;
 
         [Header("Debug")]
-        [SerializeField, ReadOnly] private Button _currentSelectedButton;
+        [SerializeField, ReadOnly] private int _currentSelectedButton;
 
         private void Awake()
         {
@@ -28,8 +28,7 @@ namespace UI.Menu.Settings
             _secondButton.onClick.AddListener(SelectSecondButton);
             _thirdButton.onClick.AddListener(SelectThirdButton);
 
-            // TODO: get settings from save
-            UpdateSelectedButton(_firstButton);
+            UpdateSelectedButton(_currentSelectedButton);
         }
 
         private void OnDestroy()
@@ -39,31 +38,40 @@ namespace UI.Menu.Settings
             _thirdButton.onClick.RemoveListener(SelectThirdButton);
         }
 
-        private void UpdateSelectedButton(Button selectedButton)
+        public void UpdateSelectedButton(int index)
         {
+            if (index < 0 || index > 2) return;
+
+            _currentSelectedButton = index;
+            Button selectedButton = index switch
+            {
+                0 => _firstButton,
+                1 => _secondButton,
+                2 => _thirdButton,
+                _ => _firstButton
+            };
+
             _firstButton.interactable = selectedButton != _firstButton;
             _secondButton.interactable = selectedButton != _secondButton;
             _thirdButton.interactable = selectedButton != _thirdButton;
-
-            _currentSelectedButton = selectedButton;
         }
 
         private void SelectFirstButton()
         {
-            UpdateSelectedButton(_firstButton);
-            _onFirstButtonSelected?.Invoke();
+            UpdateSelectedButton(0);
+            _onFirstButtonSelected?.Invoke(0);
         }
 
         private void SelectSecondButton()
         {
-            UpdateSelectedButton(_secondButton);
-            _onSecondButtonSelected?.Invoke();
+            UpdateSelectedButton(1);
+            _onSecondButtonSelected?.Invoke(1);
         }
 
         private void SelectThirdButton()
         {
-            UpdateSelectedButton(_thirdButton);
-            _onThirdButtonSelected?.Invoke();
+            UpdateSelectedButton(2);
+            _onThirdButtonSelected?.Invoke(2);
         }
     }
 }

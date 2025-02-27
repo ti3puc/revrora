@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Character.Base;
 using Character.Class;
 using Infra.Exception.Managers;
 using NaughtyAttributes;
+using Persistence;
 using UnityEngine;
 
 namespace Managers.Party
@@ -21,10 +23,17 @@ namespace Managers.Party
         [SerializeField, ReadOnly] private List<BaseCharacter> _partyMembers;
         [SerializeField, ReadOnly] private BaseCharacter _activePartyMember;
         [SerializeField, ReadOnly] private int _activeMemberIndex;
+        [SerializeField, ReadOnly] private int _savedMemberIndex;
 
         public List<BaseCharacter> PartyMembers => _partyMembers;
         public BaseCharacter ActivePartyMember => _activePartyMember;
         public int ActiveMemberIndex => _activeMemberIndex;
+        public int MaxPartySize => _maxPartySize;
+        public int SavedMemberIndex
+        {
+            get => _savedMemberIndex = SaveSystem.Instance.GameData.CreaturesData.ActivePartyMemberIndex;
+            set => SaveSystem.Instance.GameData.CreaturesData.ActivePartyMemberIndex = value;
+        }
 
         #region Unity Messages
         protected override void Awake()
@@ -38,6 +47,16 @@ namespace Managers.Party
         private void OnDestroy()
         {
             OnPartyChangedEvent -= HandlePartyVisibility;
+        }
+
+        private IEnumerator Start()
+        {
+            while (PartyMembers.Count <= 0)
+                yield return null;
+
+            var partyMemberShouldBeActive = PartyMembers[SavedMemberIndex];
+            while (ActivePartyMember != partyMemberShouldBeActive)
+                RotateMembers();
         }
         #endregion
 
@@ -64,6 +83,11 @@ namespace Managers.Party
             {
                 throw new PartyManagerPartyIsFullException();
             }
+            if (_partyMembers.Contains(character))
+            {
+                Debug.LogWarning($"Already has {character.Name} in party!");
+                return;
+            }
             try
             {
                 if (index >= 0 && index <= _partyMembers.Count - 1)
@@ -81,7 +105,7 @@ namespace Managers.Party
 
         public void RemovePartyMember(BaseCharacter character)
         {
-            if (_partyMembers.Count <= _minPartySize)
+            if (_partyMembers.Count < _minPartySize)
             {
                 throw new PartyManagerPartyIsEmptyException();
             }
@@ -98,6 +122,26 @@ namespace Managers.Party
             {
                 throw new PartyManagerGeneralException(exception.Message);
             }
+        }
+
+        public void RotateMembers()
+        {
+            if (PartyMembers.Count <= 0) return;
+
+            var firstMember = PartyMembers[0];
+            var secondMember = PartyMembers.Count > 1 ? PartyMembers[1] : null;
+            var thirdMember = PartyMembers.Count > 2 ? PartyMembers[2] : null;
+
+            if (secondMember != null)
+                SwitchMemberPosition(firstMember, secondMember);
+
+            if (thirdMember != null)
+                SwitchMemberPosition(thirdMember, firstMember);
+
+            if (ActivePartyMember == null || PartySceneInstanceManager.Instance.PartyBaseCharacters.Contains(ActivePartyMember) == false)
+                SavedMemberIndex = 0;
+            else
+                SavedMemberIndex = PartySceneInstanceManager.Instance.PartyBaseCharacters.IndexOf(ActivePartyMember);
         }
 
         public void SwitchMemberPosition(BaseCharacter character1, BaseCharacter character2)
@@ -127,7 +171,7 @@ namespace Managers.Party
 
         public void SwitchActiveMemberIndex(int index)
         {
-            if (_partyMembers.Count <= index)
+            if (_partyMembers.Count < index)
                 throw new PartyManagerCharacterNotInPartyException();
 
             try
@@ -145,7 +189,7 @@ namespace Managers.Party
         #region Private Methods
         private void HandlePartyVisibility()
         {
-            if (_partyMembers.Count <= _minPartySize)
+            if (_partyMembers.Count < _minPartySize)
                 return;
 
             _activePartyMember = _partyMembers[_activeMemberIndex];

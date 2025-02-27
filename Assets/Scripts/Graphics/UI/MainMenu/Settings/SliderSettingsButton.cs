@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
 
@@ -17,6 +18,9 @@ namespace UI.Menu.Settings
         [SerializeField] private Vector2Int _minMaxRange = new Vector2Int(0, 100);
         [SerializeField] private bool _quickChangeValueOnHold = true;
         [SerializeField, ShowIf("_quickChangeValueOnHold")] private float _timeToStartHold = .5f;
+
+        [Header("Events")]
+        [SerializeField] private UnityEvent<int> _onValueChange;
 
         [Header("References")]
         [SerializeField] private Button _firstButton;
@@ -46,7 +50,7 @@ namespace UI.Menu.Settings
                 else
                     _currentValue = value;
 
-                UpdateTextValue();
+                UpdateVisuals();
             }
         }
 
@@ -59,8 +63,7 @@ namespace UI.Menu.Settings
             _firstButton.onClick.AddListener(DecreaseValue);
             _secondButton.onClick.AddListener(IncreaseValue);
 
-            CurrentValue = 80;
-            UpdateTextValue();
+            UpdateVisuals();
         }
 
         private void OnDestroy()
@@ -87,19 +90,31 @@ namespace UI.Menu.Settings
 
         #region Private Methods
 
-        private void UpdateTextValue()
+        private void UpdateVisuals()
         {
             _valueText.text = CurrentValue.ToString();
+
+            if (CurrentValue == _minMaxRange.x)
+                _firstButton.interactable = false;
+            else if (CurrentValue == _minMaxRange.y)
+                _secondButton.interactable = false;
+            else
+            {
+                _firstButton.interactable = true;
+                _secondButton.interactable = true;
+            }
         }
 
         private void DecreaseValue()
         {
             CurrentValue -= _valueToIncrease;
+            _onValueChange?.Invoke(CurrentValue);
         }
 
         private void IncreaseValue()
         {
             CurrentValue += _valueToIncrease;
+            _onValueChange?.Invoke(CurrentValue);
         }
 
         #endregion

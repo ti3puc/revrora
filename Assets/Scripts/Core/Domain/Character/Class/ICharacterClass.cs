@@ -13,5 +13,6 @@
         CharacterTypes Type { get; }
 
         public void RaiseCharacterDied();
+        public void RaiseDamageReceived();
     }
 }

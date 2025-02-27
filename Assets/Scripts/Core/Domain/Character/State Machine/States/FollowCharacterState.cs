@@ -13,7 +13,8 @@ namespace Character.StateMachine.States
     public class FollowSettings
     {
         [Header("Follow")]
-        public Transform FollowTarget;
+        public bool FollowPlayer = true;
+        [HideIf("FollowPlayer")] public Transform FollowTarget;
         public Vector3 FollowOffset = new Vector3(0, 0, 2f);
         public float FollowSmoothDamp = .1f;
         [HideInInspector] public Vector3 Velocity = Vector3.zero;
@@ -48,6 +49,9 @@ namespace Character.StateMachine.States
             _navMeshAgent ??= _character.GetComponent<NavMeshAgent>();
 
             _navMeshAgent.updatePosition = false;
+
+            if (_followSettings.FollowPlayer)
+                _followSettings.FollowTarget = PlayerManager.Instance.Player.transform;
 
             if (_followSettings.FollowTarget == null)
                 throw new InvalidFollowTargetException(_character.name + ": missing follow target reference", _character);

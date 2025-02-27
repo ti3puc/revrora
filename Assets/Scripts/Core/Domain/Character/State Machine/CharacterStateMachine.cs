@@ -29,7 +29,9 @@ namespace Character.StateMachine
         #endregion
 
         #region Properties
+        public BaseCharacter Character => _character;
         public ICharacterState CurrentState => _actualCurrentState;
+        public CharacterStates CurrentStateEnum => _currentState;
         public IdleCharacterState IdleCharacterState => _idleCharacterState;
         public WanderCharacterState WanderCharacterState => _wanderCharacterState;
         public FollowCharacterState FollowCharacterState => _followCharacterState;

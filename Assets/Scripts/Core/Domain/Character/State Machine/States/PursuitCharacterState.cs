@@ -3,6 +3,8 @@ using UnityEngine.AI;
 using System;
 using Character.Base;
 using Infra.Exception.Character;
+using NaughtyAttributes;
+using Managers.Player;
 
 namespace Character.StateMachine.States
 {
@@ -10,13 +12,17 @@ namespace Character.StateMachine.States
     public class PursuitSettings
     {
         [Header("Pursuit")]
-        public Transform PursuitTarget;
+        public bool PursuitPlayer = true;
+        [HideIf("PursuitPlayer")] public Transform PursuitTarget;
         public float MaxPursuitDistance = 30f;
         public float PursuitSmoothDamp = .1f;
         [HideInInspector] public Vector3 Velocity = Vector3.zero;
 
         public float GetDistanceToTarget(Transform character)
         {
+            if (PursuitPlayer)
+                PursuitTarget = PlayerManager.Instance.Player.transform;
+
             if (PursuitTarget == null)
                 throw new InvalidFollowTargetException(character.name + ": missing follow target reference", character);
 
@@ -46,6 +52,9 @@ namespace Character.StateMachine.States
             _navMeshAgent ??= _character.GetComponent<NavMeshAgent>();
 
             _navMeshAgent.updatePosition = false;
+
+            if (_pursuitSettings.PursuitPlayer)
+                _pursuitSettings.PursuitTarget = PlayerManager.Instance.Player.transform;
 
             if (_pursuitSettings.PursuitTarget == null)
                 throw new InvalidFollowTargetException(_character.name + ": missing follow target reference", _character);

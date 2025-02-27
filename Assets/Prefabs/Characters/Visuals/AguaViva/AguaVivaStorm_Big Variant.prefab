@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5181919839382370982
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4290529122171773509, guid: 881453712849e904489b5dcc2f7abc30,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4290529122171773509, guid: 881453712849e904489b5dcc2f7abc30,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4290529122171773509, guid: 881453712849e904489b5dcc2f7abc30,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4290529122171773509, guid: 881453712849e904489b5dcc2f7abc30,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4290529122171773509, guid: 881453712849e904489b5dcc2f7abc30,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4290529122171773509, guid: 881453712849e904489b5dcc2f7abc30,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4290529122171773509, guid: 881453712849e904489b5dcc2f7abc30,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339026819624962670, guid: 881453712849e904489b5dcc2f7abc30,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4ae41c85d36a7794eb8e985e46c53989, type: 2}
+    - target: {fileID: 4339026819624962670, guid: 881453712849e904489b5dcc2f7abc30,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1fe9ee651d66a374db002e8296583e81, type: 2}
+    - target: {fileID: 4647993069651906228, guid: 881453712849e904489b5dcc2f7abc30,
+        type: 3}
+      propertyPath: m_Name
+      value: AguaVivaStorm_Big Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 881453712849e904489b5dcc2f7abc30, type: 3}
