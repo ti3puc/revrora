@@ -45,6 +45,15 @@ namespace UI.Graphs
             UpdatePartyUI();
         }
 
+        public void SelectPartyMember(int memberIndex)
+        {
+            if (PartyManager.Instance.PartyMembers.Count <= memberIndex)
+                return;
+
+            PartyManager.Instance.SwitchActiveMemberIndex(memberIndex);
+            SelectGraph(memberIndex);
+        }
+
         public void RotateMember()
         {
             PartyManager.Instance.RotateMembers();

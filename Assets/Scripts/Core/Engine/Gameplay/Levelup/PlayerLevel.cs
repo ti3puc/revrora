@@ -46,7 +46,7 @@ public class PlayerLevel : MonoBehaviour
         playerData.Experience = _experience;
     }
 
-    public void LevelUp()
+    private void LevelUp()
     {
         _level++;
 
