@@ -19,11 +19,13 @@ namespace Managers.Player
         [SerializeField, ReadOnly] private PlayerMovement _playerMovement;
         [SerializeField, ReadOnly] private Transform _playerTransform;
         [SerializeField, ReadOnly] private InventorySystem _playerInventory;
+        [SerializeField, ReadOnly] private PlayerLevel _playerLevel;
 
         public PlayerCharacter Player => _player ??= FindObjectOfType<PlayerCharacter>();
         public PlayerMovement PlayerMovement => _playerMovement ??= FindObjectOfType<PlayerMovement>();
         public Transform PlayerTransform => Player.transform;
         public InventorySystem PlayerInventory => _playerInventory ??= FindObjectOfType<InventorySystem>();
+        public PlayerLevel PlayerLevel => _playerLevel ??= FindObjectOfType<PlayerLevel>();
 
         protected override void Awake()
         {

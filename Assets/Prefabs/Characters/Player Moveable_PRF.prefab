@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 7564090042485660755}
   - component: {fileID: 5971779844945007028}
   - component: {fileID: 3373183201556408945}
+  - component: {fileID: 5134824926106233788}
   - component: {fileID: 2996699411777276875}
   - component: {fileID: 3468956760691464092}
   m_Layer: 8
@@ -90,6 +91,7 @@ MonoBehaviour:
   _playerMovement: {fileID: 0}
   _playerTransform: {fileID: 0}
   _playerInventory: {fileID: 0}
+  _playerLevel: {fileID: 0}
 --- !u!114 &9153215700453275908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +237,21 @@ MonoBehaviour:
   isOnPlatform: 0
   hasPlatformBellow: 0
   currentPlatform: {fileID: 0}
+--- !u!114 &5134824926106233788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7548806455020266317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3154674c5656094780ebba8231e7146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _experiencePerLevel: 32000000320000003200000032000000
+  _level: 0
+  _experience: 0
 --- !u!114 &2996699411777276875
 MonoBehaviour:
   m_ObjectHideFlags: 0
