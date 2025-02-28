@@ -249,7 +249,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3154674c5656094780ebba8231e7146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _experiencePerLevel: 32000000320000003200000032000000
+  _maxLevelTotal: 8
+  _maxLevelPerRegion: 02000000040000000600000008000000
+  _experiencePerLevel: 3200000032000000320000003200000032000000320000003200000032000000
   _level: 0
   _experience: 0
 --- !u!114 &2996699411777276875

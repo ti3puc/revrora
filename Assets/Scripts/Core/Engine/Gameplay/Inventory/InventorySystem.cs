@@ -19,6 +19,9 @@ namespace Inventory
 
         private Dictionary<ItemData, Item> _itemsDictionary = new();
 
+        public List<Item> Items => _items;
+        public int KeysCount => _items.FindAll(item => item.ItemData.Type == ItemType.Key).Count;
+
         private void Awake()
         {
             _items.Clear();

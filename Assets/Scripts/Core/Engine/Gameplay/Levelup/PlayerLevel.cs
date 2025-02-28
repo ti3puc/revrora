@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Managers.Player;
 using NaughtyAttributes;
 using Persistence;
 using UnityEngine;
@@ -8,15 +10,17 @@ using UnityEngine;
 public class PlayerLevel : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private int _maxLevel = 4;
+    [SerializeField] private List<int> _maxLevelPerRegion = new List<int>();
     [SerializeField] private List<int> _experiencePerLevel = new List<int>();
 
     [Header("Debug")]
     [SerializeField, ReadOnly] private int _level = 0;
     [SerializeField, ReadOnly] private int _experience = 0;
+    [SerializeField, ReadOnly] private int _currentMaxLevel = 0;
 
     public int Level => _level;
     public int Experience => _experience;
+    public int MaxLevelTotal => _maxLevelPerRegion[_maxLevelPerRegion.Count - 1];
 
     private void Awake()
     {
@@ -25,9 +29,22 @@ public class PlayerLevel : MonoBehaviour
         _experience = playerData.Experience;
     }
 
+    private void OnValidate()
+    {
+        if (_experiencePerLevel.Count < MaxLevelTotal)
+        {
+            for (int i = _experiencePerLevel.Count; i < MaxLevelTotal; i++)
+                _experiencePerLevel.Add(0);
+        }
+        else if (_experiencePerLevel.Count > MaxLevelTotal)
+            _experiencePerLevel.RemoveRange(MaxLevelTotal, _experiencePerLevel.Count - MaxLevelTotal);
+    }
+
     public void AddExperience(int experience)
     {
-        if (_level >= _maxLevel)
+        _currentMaxLevel = _maxLevelPerRegion[Mathf.Clamp(PlayerManager.Instance.PlayerInventory.KeysCount, 0, _maxLevelPerRegion.Count - 1)];
+
+        if (_level >= _currentMaxLevel)
         {
             _experience = _experiencePerLevel[_experiencePerLevel.Count - 1];
             return;
@@ -38,7 +55,7 @@ public class PlayerLevel : MonoBehaviour
         if (_experience >= _experiencePerLevel[_level])
         {
             _experience -= _experiencePerLevel[_level];
-            LevelUp();
+            LevelUp(_currentMaxLevel);
         }
 
         var playerData = SaveSystem.Instance.GameData.PlayerData;
@@ -46,11 +63,11 @@ public class PlayerLevel : MonoBehaviour
         playerData.Experience = _experience;
     }
 
-    private void LevelUp()
+    private void LevelUp(int currentMaxLevel)
     {
         _level++;
 
-        if (_level >= _maxLevel)
+        if (_level >= currentMaxLevel)
             _experience = _experiencePerLevel[_experiencePerLevel.Count - 1];
     }
 
