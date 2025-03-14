@@ -18,6 +18,8 @@ namespace UI
         [SerializeField] private Canvas _inventoryCanvas;
         [SerializeField] private Canvas _boxCanvas;
         [SerializeField] private Canvas _pauseCanvas;
+        [SerializeField] private Canvas _storeCanvas;
+        [SerializeField] private Canvas _dialogOptionsCanvas;
         [SerializeField] private CanvasGroup _transitionCanvasGroup;
         [SerializeField] private DialogManager _dialogCanvas;
 
@@ -25,6 +27,8 @@ namespace UI
         [SerializeField, ReadOnly] private bool _isInventoryOpen;
         [SerializeField, ReadOnly] private bool _isPaused;
         [SerializeField, ReadOnly] private bool _isBoxOpen;
+        [SerializeField, ReadOnly] private bool _isStoreOpen;
+        [SerializeField, ReadOnly] private bool _isDialogOptionsOpen;
 
         public static DialogManager DialogCanvas => Instance._dialogCanvas;
         public static CanvasGroup TransitionCanvasGroup => Instance._transitionCanvasGroup;
@@ -59,6 +63,8 @@ namespace UI
             _inventoryCanvas.gameObject.SetActive(false);
             _pauseCanvas.gameObject.SetActive(false);
             _boxCanvas.gameObject.SetActive(false);
+            _storeCanvas.gameObject.SetActive(false);
+            _dialogOptionsCanvas.gameObject.SetActive(false);
 
             if (_isInventoryOpen)
                 _isInventoryOpen = !_isInventoryOpen;
@@ -75,6 +81,8 @@ namespace UI
             _inventoryCanvas.gameObject.SetActive(_isInventoryOpen);
             _pauseCanvas.gameObject.SetActive(false);
             _boxCanvas.gameObject.SetActive(false);
+            _storeCanvas.gameObject.SetActive(false);
+            _dialogOptionsCanvas.gameObject.SetActive(false);
 
             if (_isBoxOpen)
                 _isBoxOpen = !_isBoxOpen;
@@ -100,6 +108,8 @@ namespace UI
             _inventoryCanvas.gameObject.SetActive(false);
             _boxCanvas.gameObject.SetActive(false);
             _pauseCanvas.gameObject.SetActive(_isPaused);
+            _storeCanvas.gameObject.SetActive(false);
+            _dialogOptionsCanvas.gameObject.SetActive(false);
 
             if (_isPaused)
                 GameManager.Pause();
@@ -118,12 +128,50 @@ namespace UI
             _inventoryCanvas.gameObject.SetActive(false);
             _pauseCanvas.gameObject.SetActive(false);
             _boxCanvas.gameObject.SetActive(_isBoxOpen);
+            _storeCanvas.gameObject.SetActive(false);
+            _dialogOptionsCanvas.gameObject.SetActive(false);
         }
 
         private void CloseBox()
         {
             if (_isBoxOpen)
                 ToggleBox();
+        }
+
+        public void ToggleStore()
+        {
+            _isStoreOpen = !_isStoreOpen;
+
+            _mainCanvas.gameObject.SetActive(!_isStoreOpen);
+            _inventoryCanvas.gameObject.SetActive(false);
+            _pauseCanvas.gameObject.SetActive(false);
+            _boxCanvas.gameObject.SetActive(false);
+            _storeCanvas.gameObject.SetActive(_isStoreOpen);
+            _dialogOptionsCanvas.gameObject.SetActive(false);
+        }
+
+        private void CloseStore()
+        {
+            if (_isStoreOpen)
+                ToggleStore();
+        }
+
+        public void ToggleDialogOptions()
+        {
+            _isDialogOptionsOpen = !_isDialogOptionsOpen;
+
+            _mainCanvas.gameObject.SetActive(!_isDialogOptionsOpen);
+            _inventoryCanvas.gameObject.SetActive(false);
+            _pauseCanvas.gameObject.SetActive(false);
+            _boxCanvas.gameObject.SetActive(false);
+            _storeCanvas.gameObject.SetActive(false);
+            _dialogOptionsCanvas.gameObject.SetActive(_isDialogOptionsOpen);
+        }
+
+        private void CloseDialogOptions()
+        {
+            if (_isDialogOptionsOpen)
+                ToggleDialogOptions();
         }
 
         public void GoToMenu()
