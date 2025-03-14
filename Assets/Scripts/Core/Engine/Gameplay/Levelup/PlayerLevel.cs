@@ -17,10 +17,13 @@ public class PlayerLevel : MonoBehaviour
     [SerializeField, ReadOnly] private int _level = 0;
     [SerializeField, ReadOnly] private int _experience = 0;
     [SerializeField, ReadOnly] private int _currentMaxLevel = 0;
+    [SerializeField, ReadOnly] private bool _isLevelLocked;
 
     public int Level => _level;
     public int Experience => _experience;
+    public int CurrentMaxExperience => _experiencePerLevel[_level];
     public int MaxLevelTotal => _maxLevelPerRegion[_maxLevelPerRegion.Count - 1];
+    public bool IsLevelLocked => _isLevelLocked = _level > 0 && _level >= _currentMaxLevel;
 
     private void Awake()
     {
@@ -46,7 +49,7 @@ public class PlayerLevel : MonoBehaviour
 
         if (_level >= _currentMaxLevel)
         {
-            _experience = _experiencePerLevel[_experiencePerLevel.Count - 1];
+            _experience = 0;
             return;
         }
 
@@ -68,7 +71,10 @@ public class PlayerLevel : MonoBehaviour
         _level++;
 
         if (_level >= currentMaxLevel)
-            _experience = _experiencePerLevel[_experiencePerLevel.Count - 1];
+        {
+            _level = currentMaxLevel;
+            _experience = 0;
+        }
     }
 
     [Button]
