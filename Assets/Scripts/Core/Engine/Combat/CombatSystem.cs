@@ -6,6 +6,7 @@ using Character.Base;
 using Character.Class;
 using Core.Engine.Combat.CombatActions;
 using Managers.Combat;
+using Managers.Player;
 using NaughtyAttributes;
 using Persistence;
 using Player.Input;
@@ -176,6 +177,8 @@ namespace Combat
                     SaveSystem.Instance.GameData.CombatSceneWinData.CombatSceneIds.Add(combatSceneId);
 
                 SaveSystem.Instance.GameData.CombatSceneWinData.LastPlayerPosition = TurnCombatManager.Instance.LastPlayerPosition;
+
+                TurnCombatManager.Instance.GiveItems();
 
                 GameLog.Debug(this, "You win!");
                 OnPlayerWonCombat?.Invoke();

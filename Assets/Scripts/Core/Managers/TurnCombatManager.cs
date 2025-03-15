@@ -9,6 +9,7 @@ using Extensions;
 using Combat.Creatures;
 using Unity.VisualScripting;
 using Character.Class;
+using Managers.Player;
 
 namespace Managers.Combat
 {
@@ -23,6 +24,7 @@ namespace Managers.Combat
         [SerializeField, ReadOnly] private Vector3 _lastPlayerPosition;
         [SerializeField, ReadOnly] private List<CharacterDefinition> _toInstanceCacheCharacterDefinitions = new();
         [SerializeField, ReadOnly] private List<CharacterTeam> _toInstanceCacheCharacterTeams = new();
+        [SerializeField, ReadOnly] private List<CombatDropItem> _itemsToGive;
 
         public List<BaseCharacter> TurnCharacters => _turnCharacters;
         public List<CharacterDefinition> ToInstanceCharacterDefinitions => _toInstanceCacheCharacterDefinitions;
@@ -54,10 +56,15 @@ namespace Managers.Combat
             _turnCharacters.Clear();
             _turnCharacters.AddRange(characters);
 
+            // items
+            var playerEnemies = _turnCharacters.Where(c => (c.CharacterTeam == CharacterTeam.Enemy) && (!c.CharacterStats.IsDead())).ToList();
+            _itemsToGive.Clear();
+            _itemsToGive.AddRange(playerEnemies.SelectMany(c => c.CharacterDefinition.DropItems).ToList());
+
             _turnIndex = 0;
             _turnCount = 0;
 
-            // TODO: logic to organize with stats
+            // TODO: logic to organize with agility stats?
             _turnCharacters.Shuffle<BaseCharacter>();
 
             TurnInputManager.Instance.InitializeCharacters(_turnCharacters);
@@ -89,6 +96,19 @@ namespace Managers.Combat
             enemies.Shuffle<BaseCharacter>();
             list.Add(enemies[0]);
             return list;
+        }
+
+        public void GiveItems()
+        {
+            if (_itemsToGive == null || _itemsToGive.Count <= 0)
+                return;
+
+            // TODO: show these items on UI
+            foreach (var item in _itemsToGive)
+            {
+                PlayerManager.Instance.PlayerInventory.AddItem(item.ItemReference, item.Quantity);
+                Debug.Log($"Gained {item.ItemReference.name} x{item.Quantity}");
+            }
         }
 
         [Button]
