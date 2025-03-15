@@ -38,7 +38,7 @@ namespace UI
             base.Awake();
             PlayerInput.OnToggleInventoryStarted += ToggleInventory;
             PlayerInput.OnPauseStarted += TogglePause;
-            BoxAccess.OnBoxAccessed += ToggleBox;
+            BoxAccess.OnBoxAccessed += ToggleDialogOptions;
             BoxAccess.OnBoxExit += CloseBox;
         }
 
@@ -46,7 +46,7 @@ namespace UI
         {
             PlayerInput.OnToggleInventoryStarted -= ToggleInventory;
             PlayerInput.OnPauseStarted -= TogglePause;
-            BoxAccess.OnBoxAccessed -= ToggleBox;
+            BoxAccess.OnBoxAccessed -= ToggleDialogOptions;
             BoxAccess.OnBoxExit -= CloseBox;
         }
 
@@ -98,7 +98,7 @@ namespace UI
 
             if (_isBoxOpen)
             {
-                ToggleBox();
+                ToggleStorage();
                 return;
             }
 
@@ -120,7 +120,7 @@ namespace UI
             }
         }
 
-        public void ToggleBox()
+        public void ToggleStorage()
         {
             _isBoxOpen = !_isBoxOpen;
 
@@ -135,7 +135,11 @@ namespace UI
         private void CloseBox()
         {
             if (_isBoxOpen)
-                ToggleBox();
+                ToggleStorage();
+            if (_isDialogOptionsOpen)
+                ToggleDialogOptions();
+            if (_isStoreOpen)
+                ToggleStore();
         }
 
         public void ToggleStore()
@@ -150,12 +154,6 @@ namespace UI
             _dialogOptionsCanvas.gameObject.SetActive(false);
         }
 
-        private void CloseStore()
-        {
-            if (_isStoreOpen)
-                ToggleStore();
-        }
-
         public void ToggleDialogOptions()
         {
             _isDialogOptionsOpen = !_isDialogOptionsOpen;
@@ -166,12 +164,6 @@ namespace UI
             _boxCanvas.gameObject.SetActive(false);
             _storeCanvas.gameObject.SetActive(false);
             _dialogOptionsCanvas.gameObject.SetActive(_isDialogOptionsOpen);
-        }
-
-        private void CloseDialogOptions()
-        {
-            if (_isDialogOptionsOpen)
-                ToggleDialogOptions();
         }
 
         public void GoToMenu()

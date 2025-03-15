@@ -16,8 +16,11 @@ MonoBehaviour:
   _type: 2
   _minimumStackSize: 0
   _maximumStackSize: 99
+  _canSell: 1
+  _sellXp: 10
   _displayName: 
   _icon: {fileID: 21300000, guid: 8a85cb37cec25274a9304e3736126c57, type: 3}
+  _icon3d: {fileID: 0}
   _hideItemIfNotAvailable: 1
   _ghostItemIfNotAvailable: 0
   _showStackText: 1
