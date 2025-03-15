@@ -54,6 +54,16 @@ namespace UI.Menu.Settings
             }
         }
 
+        public Vector2Int MinMaxRange
+        {
+            get => _minMaxRange;
+            set
+            {
+                _minMaxRange = value;
+                UpdateVisuals();
+            }
+        }
+
         #endregion
 
         #region Unity Messages
@@ -95,9 +105,15 @@ namespace UI.Menu.Settings
             _valueText.text = CurrentValue.ToString();
 
             if (CurrentValue == _minMaxRange.x)
+            {
                 _firstButton.interactable = false;
+                _secondButton.interactable = true;
+            }
             else if (CurrentValue == _minMaxRange.y)
+            {
+                _firstButton.interactable = true;
                 _secondButton.interactable = false;
+            }
             else
             {
                 _firstButton.interactable = true;

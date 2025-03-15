@@ -11,28 +11,30 @@ namespace Inventory.UI
     public class ItemUI : MonoBehaviour
     {
         [Header("UI")]
-        [SerializeField] private Image _image;
-        [SerializeField] private TMP_Text _stackText;
+        [SerializeField] protected Image _image;
+        [SerializeField] protected TMP_Text _stackText;
 
         [Header("Item")]
-        [SerializeField] private ItemData _itemReference;
+        [SerializeField] protected ItemData _itemReference;
 
-        private void Awake()
+        public ItemData ItemReference => _itemReference;
+
+        protected virtual void Awake()
         {
             InventorySystem.OnInventoryChanged += UpdateItemUI;
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             InventorySystem.OnInventoryChanged -= UpdateItemUI;
         }
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             UpdateItemUI();
         }
 
-        private void UpdateItemUI()
+        protected virtual void UpdateItemUI()
         {
             if (_stackText != null)
                 _stackText.text = "";
