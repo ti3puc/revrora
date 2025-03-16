@@ -26,7 +26,6 @@ namespace Character.Base
         public int Id => _characterDefinition.Id;
         public string Name => _characterDefinition.Name;
         public int BaseHP => _characterDefinition.BaseStats.BaseHP;
-        public int BaseMana => _characterDefinition.BaseStats.BaseMana;
         public int BaseStrength => _characterDefinition.BaseStats.BaseStrength;
         public int BaseDefense => _characterDefinition.BaseStats.BaseDefense;
         public int BaseAgility => _characterDefinition.BaseStats.BaseAgility;

@@ -19,7 +19,6 @@ namespace Character.Base
         [SerializeField, ReadOnly] private int _level;
         [SerializeField, ReadOnly] private int _experience;
         [SerializeField, ReadOnly] private int _hp;
-        [SerializeField, ReadOnly] private int _mana;
 
         // Atributos de build, que são os pontos que o jogador pode distribuir
         [SerializeField, ReadOnly] private int _buildPoints;
@@ -35,7 +34,6 @@ namespace Character.Base
             _characterClass = characterClass;
             _level = level;
             _experience = 0;
-            _mana = 0;
             _strengthPoints = 1;
             _defensePoints = 1;
             _agilityPoints = 1;
@@ -105,11 +103,6 @@ namespace Character.Base
             return (2 * _characterClass.BaseHP + _strengthPoints / 4) * _level / 100 + _level + 10;
         }
 
-        private int CalculateMaxMana()
-        {
-            return (2 * _characterClass.BaseMana + _wisdomPoints / 4) * _level / 100 + _level + 10;
-        }
-
         private int CalculateAttack()
         {
             return (2 * _characterClass.BaseStrength + (_strengthPoints * 2 + _agilityPoints) / 4) * _level / 100 + 5;
@@ -166,7 +159,6 @@ namespace Character.Base
         public int Experience => _experience;
         public CharacterTypes Type => _characterClass.Type;
         public int HP => _hp;
-        public int Mana => _mana;
         public int BuildPoints => _buildPoints;
         public int StrenghtPoints => _strengthPoints;
         public int DefensePoints => _defensePoints;
@@ -174,7 +166,6 @@ namespace Character.Base
         public int WisdomPoints => _wisdomPoints;
         #region Calculed Stats
         public int MaxHP => CalculateMaxHP();
-        public int MaxMana => CalculateMaxMana();
         public int Attack => CalculateAttack();
         public int Defense => CalculateDefense();
         public int Agility => CalculateAgility();

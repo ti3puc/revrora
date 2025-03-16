@@ -9,16 +9,14 @@ namespace Character.Base
     [Serializable]
     public class BaseCharacterStats
     {
-        [SerializeField] private int baseHP;
-        [SerializeField] private int baseMana;
-        [SerializeField] private int baseStrength;
-        [SerializeField] private int baseDefense;
-        [SerializeField] private int baseAgility;
-        [SerializeField] private int baseWisdom;
+        [SerializeField, Range(0, 100)] private int baseHP;
+        [SerializeField, Range(0, 100)] private int baseStrength;
+        [SerializeField, Range(0, 100)] private int baseDefense;
+        [SerializeField, Range(0, 100)] private int baseAgility;
+        [SerializeField, Range(0, 100)] private int baseWisdom;
         [SerializeField] private CharacterTypes type;
 
         public int BaseHP => baseHP;
-        public int BaseMana => baseMana;
         public int BaseStrength => baseStrength;
         public int BaseDefense => baseDefense;
         public int BaseAgility => baseAgility;
