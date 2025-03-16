@@ -21,7 +21,7 @@ public class PlayerLevel : MonoBehaviour
 
     public int Level => _level;
     public int Experience => _experience;
-    public int CurrentMaxExperience => _experiencePerLevel[_level];
+    public int CurrentMaxExperience => _level < _experiencePerLevel.Count ? _experiencePerLevel[_level] : MaxLevelTotal;
     public int MaxLevelTotal => _maxLevelPerRegion[_maxLevelPerRegion.Count - 1];
     public bool IsLevelLocked => _isLevelLocked = _level > 0 && _level >= _currentMaxLevel;
 
@@ -50,6 +50,8 @@ public class PlayerLevel : MonoBehaviour
         if (_level >= _currentMaxLevel)
         {
             _experience = 0;
+            if (_currentMaxLevel >= MaxLevelTotal)
+                _experience = _experiencePerLevel[_maxLevelPerRegion.Count - 1];
             return;
         }
 
@@ -74,6 +76,8 @@ public class PlayerLevel : MonoBehaviour
         {
             _level = currentMaxLevel;
             _experience = 0;
+            if (_currentMaxLevel >= MaxLevelTotal)
+                _experience = _experiencePerLevel[_maxLevelPerRegion.Count - 1];
         }
     }
 
