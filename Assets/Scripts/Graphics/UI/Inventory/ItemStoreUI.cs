@@ -10,6 +10,7 @@ public class ItemStoreUI : ItemUI
 {
     public event Action<ItemStoreUI> OnItemButtonClicked;
 
+    [SerializeField] private bool _hideIfEmpty;
     [SerializeField] private Button _itemButton;
 
     public Button ItemButton => _itemButton;
@@ -37,6 +38,9 @@ public class ItemStoreUI : ItemUI
         var item = PlayerManager.Instance.PlayerInventory.GetItem(_itemReference);
         if (_itemReference.ShowStackText && _stackText != null)
             _stackText.text = item != null ? item.StackSize.ToString() : _itemReference.HideStackIfEmpty ? "" : "0";
+
+        if (_hideIfEmpty && _itemReference.HideItemIfNotAvailable)
+            gameObject.SetActive(item != null);
     }
 
     private void OnItemButtonClickedEvent()

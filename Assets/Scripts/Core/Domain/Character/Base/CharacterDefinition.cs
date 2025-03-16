@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Character.Base;
 using Core.Domain.Character.Moves;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Character.Base
@@ -16,7 +17,7 @@ namespace Character.Base
         [SerializeField] private List<CharacterMove> _characterMoves = new();
         [SerializeField] private List<CombatDropItem> _dropItems;
         [SerializeField] private GameObject _visual;
-        [SerializeField] private Texture2D _icon;
+        [SerializeField, ShowAssetPreview(128)] private Texture2D _icon;
         [SerializeField] private Sprite _graph;
 
         public int Id => _id;

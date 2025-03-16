@@ -15,6 +15,9 @@ namespace Managers.Combat
 {
     public class TurnCombatManager : Singleton<TurnCombatManager>
     {
+        public delegate void GiveItemsEvent(List<CombatDropItem> itemsToGive);
+        public static event GiveItemsEvent OnGivingItemsAfterCombat;
+
         [Header("Debug")]
         [SerializeField, ReadOnly] private List<BaseCharacter> _turnCharacters = new List<BaseCharacter>();
         [SerializeField, ReadOnly] private int _turnIndex;
@@ -103,7 +106,8 @@ namespace Managers.Combat
             if (_itemsToGive == null || _itemsToGive.Count <= 0)
                 return;
 
-            // TODO: show these items on UI
+            OnGivingItemsAfterCombat?.Invoke(_itemsToGive);
+
             foreach (var item in _itemsToGive)
             {
                 PlayerManager.Instance.PlayerInventory.AddItem(item.ItemReference, item.Quantity);
