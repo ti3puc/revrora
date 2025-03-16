@@ -7,9 +7,9 @@ using NaughtyAttributes;
 using UnityEngine;
 using Extensions;
 using Combat.Creatures;
-using Unity.VisualScripting;
 using Character.Class;
 using Managers.Player;
+using System;
 
 namespace Managers.Combat
 {
@@ -17,6 +17,8 @@ namespace Managers.Combat
     {
         public delegate void GiveItemsEvent(List<CombatDropItem> itemsToGive);
         public static event GiveItemsEvent OnGivingItemsAfterCombat;
+
+        public static event Action OnTurnManagerInitialized;
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private List<BaseCharacter> _turnCharacters = new List<BaseCharacter>();
@@ -71,6 +73,7 @@ namespace Managers.Combat
             _turnCharacters.Shuffle<BaseCharacter>();
 
             TurnInputManager.Instance.InitializeCharacters(_turnCharacters);
+            OnTurnManagerInitialized?.Invoke();
         }
 
         public void SetNewTurn()

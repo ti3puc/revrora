@@ -12,6 +12,8 @@ namespace Character.Base
     public class CharacterDefinition : ScriptableObject
     {
         [SerializeField] private int _id;
+        [Tooltip("If ID is 0 then it's the player character")]
+        [SerializeField, ReadOnly] private bool _isPlayer;
         [SerializeField] private string _name;
         [SerializeField] private BaseCharacterStats _baseStats;
         [SerializeField] private List<CharacterMove> _characterMoves = new();
@@ -20,7 +22,13 @@ namespace Character.Base
         [SerializeField, ShowAssetPreview(128)] private Texture2D _icon;
         [SerializeField] private Sprite _graph;
 
+        private void OnValidate()
+        {
+            _isPlayer = _id == 0;
+        }
+
         public int Id => _id;
+        public bool IsPlayer => _isPlayer = _id == 0;
         public string Name => _name;
         public BaseCharacterStats BaseStats => _baseStats;
         public List<CharacterMove> CharacterMoves => _characterMoves;

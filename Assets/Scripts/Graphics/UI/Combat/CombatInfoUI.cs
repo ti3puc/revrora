@@ -22,12 +22,10 @@ namespace UI.Combat
         [SerializeField] private GameObject _loseScreen;
         [SerializeField] private Button[] _exitButtons;
 
-        [Header("Text")]
-        [SerializeField] private TMP_Text _characterText;
-
-        [Header("HP Bar")]
-        [SerializeField] private Slider _playerHpSlider;
-        [SerializeField] private Slider _enemyHpSlider;
+        [Header("HP Bars")]
+        [SerializeField] private HpBarUI _playerHpSlider;
+        [SerializeField] private HpBarUI _partyHpSlider;
+        [SerializeField] private HpBarUI _enemyHpSlider;
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private List<ItemCombatUI> _combatItemsUI;
@@ -38,11 +36,10 @@ namespace UI.Combat
             CombatSystem.OnPlayerLostCombat += ShowLoseScreen;
             BaseCharacter.OnDamageReceived += UpdateHealthBar;
             TurnCombatManager.OnGivingItemsAfterCombat += SetupItemsToGive;
+            TurnCombatManager.OnTurnManagerInitialized += SetupCharacterNames;
 
             foreach (var button in _exitButtons)
                 button.onClick.AddListener(ExitBattle);
-
-            TurnInputManager.OnChangedInputCharacter += PopulateCharacterInfo;
 
             _combatItemsUI = GetComponentsInChildren<ItemCombatUI>(true).ToList();
         }
@@ -53,11 +50,10 @@ namespace UI.Combat
             CombatSystem.OnPlayerLostCombat -= ShowLoseScreen;
             BaseCharacter.OnDamageReceived -= UpdateHealthBar;
             TurnCombatManager.OnGivingItemsAfterCombat -= SetupItemsToGive;
+            TurnCombatManager.OnTurnManagerInitialized -= SetupCharacterNames;
 
             foreach (var button in _exitButtons)
                 button.onClick.RemoveListener(ExitBattle);
-
-            TurnInputManager.OnChangedInputCharacter -= PopulateCharacterInfo;
         }
 
         private void ShowWinScreen()
@@ -77,23 +73,27 @@ namespace UI.Combat
             ScenesManager.LoadLastScene();
         }
 
-        private void PopulateCharacterInfo(BaseCharacter character)
+        private void SetupCharacterNames()
         {
-            _characterText.text = character.Name;
+            foreach (var character in TurnCombatManager.Instance.TurnCharacters)
+            {
+                if (character.CharacterTeam == CharacterTeam.Enemy)
+                    _enemyHpSlider.PopulateCharacterInfo(character);
+                else if (character.CharacterDefinition.IsPlayer)
+                    _playerHpSlider.PopulateCharacterInfo(character);
+                else
+                    _partyHpSlider.PopulateCharacterInfo(character);
+            }
         }
 
         private void UpdateHealthBar(BaseCharacter character)
         {
-            float value = (float)character.CharacterStats.HP / character.CharacterStats.MaxHP;
-            double roundedValue = Math.Round(value, 2);
-            if (character.CharacterTeam == CharacterTeam.Ally)
-            {
-                _playerHpSlider.value = (float)roundedValue;
-            }
+            if (character.CharacterTeam == CharacterTeam.Enemy)
+                _enemyHpSlider.UpdateHealthBar(character);
+            else if (character.CharacterDefinition.IsPlayer)
+                _playerHpSlider.UpdateHealthBar(character);
             else
-            {
-                _enemyHpSlider.value = (float)roundedValue;
-            }
+                _partyHpSlider.UpdateHealthBar(character);
         }
 
         private void SetupItemsToGive(List<CombatDropItem> itemsToGive)

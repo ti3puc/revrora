@@ -24,6 +24,10 @@ namespace UI.Combat
         [SerializeField] private GameObject _actionsPanel;
         [SerializeField] private GameObject _movesPanel;
 
+        [Header("Panels")]
+        [SerializeField] private TMP_Text _nameText;
+        [SerializeField] private string _namePrefix = "Waiting action from: ";
+
         [Header("Action Buttons")]
         [SerializeField] private Button _attackButton;
         [SerializeField] private Button _backMovesButton;
@@ -55,7 +59,7 @@ namespace UI.Combat
 
             ShowActions();
             
-            TurnInputManager.OnChangedInputCharacter += PopulateCharacterMoves;
+            TurnInputManager.OnChangedInputCharacter += OnChangedInputCharacter;
         }
 
         private void OnDestroy()
@@ -73,7 +77,7 @@ namespace UI.Combat
 
             CombatSystem.OnCombatEnded -= HideUI;
             
-            TurnInputManager.OnChangedInputCharacter -= PopulateCharacterMoves;
+            TurnInputManager.OnChangedInputCharacter -= OnChangedInputCharacter;
         }
 
         private void HideUI()
@@ -113,8 +117,11 @@ namespace UI.Combat
             ScenesManager.LoadLastScene();
         }
         
-        private void PopulateCharacterMoves(BaseCharacter character)
+        private void OnChangedInputCharacter(BaseCharacter character)
         {
+            _nameText.text = _namePrefix + character.Name;
+
+            // populate moves
             var moveButtons = new Button[] { _moveButton1, _moveButton2, _moveButton3 };
             for (int i = 0; i < moveButtons.Length; i++)
             {
