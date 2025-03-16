@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers.Audio;
 using NaughtyAttributes;
 using UI;
 using UnityEngine;
@@ -51,6 +52,16 @@ namespace Managers.Scenes
             Instance._lastScene = SceneManager.GetActiveScene().name;
             OnSceneStartedLoading?.Invoke(Instance._lastScene, sceneName);
             OnAnySceneLoading?.Invoke();
+
+            if (sceneName.Contains("Combat"))
+            {
+                var combatTransition = FindObjectOfType<CombatTransition>();
+                if (combatTransition != null)
+                {
+                    combatTransition.StartCombatTransition(() => SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single));
+                    return;
+                }
+            }
 
             // load after Transition
             FadeIn(() => SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single));

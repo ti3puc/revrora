@@ -10,12 +10,17 @@ using Character.Class;
 using NaughtyAttributes;
 using UnityEngine;
 using Persistence;
+using Managers.Audio;
+using static Audio.PlayLevelMusic;
 
 namespace Creatures.Combat
 {
     [RequireComponent(typeof(SphereCollider))]
     public class CreatureCombatTrigger : MonoBehaviour
     {
+		[SerializeField] private MusicPerTrack _combatMusic = new MusicPerTrack
+            { MusicId = "combat", Track = 1 };
+
         [Header("Debug")]
         [SerializeField, ReadOnly] private CreatureCharacter _creatureCharacter;
         [SerializeField, ReadOnly] private bool _hasTriggered;
@@ -38,6 +43,8 @@ namespace Creatures.Combat
 
             if (other.CompareTag("Player"))
             {
+                AudioManager.Instance.PlaySound(_combatMusic.MusicId, _combatMusic.Track);
+
                 var playerPokemon = GameManager.Characters.Find(x => x.Id == PlayerManager.Instance.Player.Id);
                 var partyPokemon = GameManager.Characters.Find(x => x.Id == PartyManager.Instance.ActivePartyMember.Id);
                 var wildPokemon = GameManager.Characters.Find(x => x.Id == _creatureCharacter.Id);

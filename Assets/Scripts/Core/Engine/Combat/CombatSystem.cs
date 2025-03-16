@@ -5,6 +5,7 @@ using System.Linq;
 using Character.Base;
 using Character.Class;
 using Core.Engine.Combat.CombatActions;
+using Managers;
 using Managers.Combat;
 using Managers.Player;
 using NaughtyAttributes;

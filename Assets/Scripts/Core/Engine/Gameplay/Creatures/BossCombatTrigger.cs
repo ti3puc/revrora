@@ -12,6 +12,8 @@ using UnityEngine;
 using Persistence;
 using Environment.Interaction;
 using Inventory.Items;
+using static Audio.PlayLevelMusic;
+using Managers.Audio;
 
 namespace Creatures.Combat
 {
@@ -21,6 +23,11 @@ namespace Creatures.Combat
         [SerializeField] private ItemData _itemDrop;
         [SerializeField] private ItemPickup _itemPickupPrefab;
         [SerializeField] private Vector3 _itemSpawnOffset = new Vector3(0, 0, -2);
+
+        [Header("Sound")]
+        [SerializeField]
+        private MusicPerTrack _combatMusic = new MusicPerTrack
+        { MusicId = "combat", Track = 1 };
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private CreatureCharacter _creatureCharacter;
@@ -56,6 +63,8 @@ namespace Creatures.Combat
         public override void ReceiveInteraction()
         {
             if (_hasTriggered) return;
+
+            AudioManager.Instance.PlaySound(_combatMusic.MusicId, _combatMusic.Track);
 
             var playerPokemon = GameManager.Characters.Find(x => x.Id == PlayerManager.Instance.Player.Id);
             var partyPokemon = GameManager.Characters.Find(x => x.Id == PartyManager.Instance.ActivePartyMember.Id);
