@@ -14,8 +14,11 @@ namespace Character.Base
         public static event CharacterEvent OnCharacterDied;
         public static event CharacterEvent OnDamageReceived;
 
+        [Header("Level")]
+        [SerializeField] private int _customLevel = 1;
+
         [Header("References")]
-        [SerializeField] private CharacterDefinition _characterDefinition;
+        [SerializeField, OnValueChanged("InstantiateVisual")] private CharacterDefinition _characterDefinition;
         [SerializeField] private CharacterTeam _characterTeam;
         [SerializeField] private GameObject _damageVfx;
         [SerializeField] private string _hitSoundId = "hit";
@@ -35,6 +38,11 @@ namespace Character.Base
         public CharacterStats CharacterStats => _characterStats;
         public List<CharacterMove> CharacterMoves => _characterDefinition.CharacterMoves;
         public CharacterTeam CharacterTeam => _characterTeam;
+        public int CustomLevel
+        {
+            get => _customLevel;
+            set => _customLevel = value;
+        }
         public CharacterDefinition CharacterDefinition
         {
             get => _characterDefinition;
@@ -50,23 +58,7 @@ namespace Character.Base
         public void Initialize(CharacterDefinition newCharacterDefinition)
         {
             _characterDefinition = newCharacterDefinition;
-
-            // clean Visual and instantiate the correct one on Definition
-            var visualObj = transform.Find("Visuals");
-            if (visualObj == null)
-            {
-                Debug.LogWarning("Could not found 'Visuals' object on " + name);
-                return;
-            }
-
-            foreach (Transform child in visualObj)
-                Destroy(child.gameObject);
-
-            if (CharacterDefinition != null)
-            {
-                _characterStats = new CharacterStats(this);
-                Instantiate(_characterDefinition.Visual, visualObj);
-            }
+            InstantiateVisual();
         }
 
         public void RaiseCharacterDied()
@@ -80,6 +72,32 @@ namespace Character.Base
             Instantiate(_damageVfx, transform);
             AudioManager.Instance.PlaySoundOneShot(_hitSoundId, 3);
             OnDamageReceived?.Invoke(this);
+        }
+
+        [Button]
+        private void InstantiateVisual()
+        {
+            // clean Visual and instantiate the correct one on Definition
+            var visualObj = transform.Find("Visuals");
+            if (visualObj == null)
+            {
+                Debug.LogWarning("Could not found 'Visuals' object on " + name);
+                return;
+            }
+
+            foreach (Transform child in visualObj)
+            {
+                if (Application.isPlaying)
+                    Destroy(child.gameObject);
+                else
+                    DestroyImmediate(child.gameObject);
+            }
+
+            if (CharacterDefinition != null)
+            {
+                _characterStats = new CharacterStats(this);
+                Instantiate(_characterDefinition.Visual, visualObj);
+            }
         }
     }
 }

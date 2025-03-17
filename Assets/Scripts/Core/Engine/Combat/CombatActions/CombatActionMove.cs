@@ -10,11 +10,9 @@ namespace Core.Engine.Combat.CombatActions
     {
         private List<BaseCharacter> _targets;
 
-
-        public void execute(BaseCharacter user, CharacterMove move, List<BaseCharacter> targets)
+        public void Execute(BaseCharacter user, CharacterMove move, List<BaseCharacter> targets)
         {
             _targets = targets;
-
 
             switch (move.Category)
             {
@@ -34,7 +32,7 @@ namespace Core.Engine.Combat.CombatActions
                 var random = Random.Range(0, 4);
                 var damage = (user.CharacterStats.Attack + move.Power + random) - target.CharacterStats.Defense;
 
-                Debug.Log("damage: " + damage);
+                Debug.Log($"Damage: ({user.CharacterStats.Attack} + {move.Power} + {random}) - {target.CharacterStats.Defense} = {damage}");
 
                 target.CharacterStats.ReceiveDamage(damage);
             }

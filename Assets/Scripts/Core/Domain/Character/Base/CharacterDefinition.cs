@@ -104,10 +104,10 @@ namespace Character.Base
 
             baseBuildPointsPerStat = baseBuildPoints / 5; // 5 stats
             hpBaseBuildPoints = _baseStats.BaseHP / 100f * baseBuildPointsPerStat;
-            strengthBaseBuildPoints = _baseStats.BaseStrength / 100f * baseBuildPointsPerStat;
+            strengthBaseBuildPoints = _baseStats.BaseAttack / 100f * baseBuildPointsPerStat;
             defenseBaseBuildPoints = _baseStats.BaseDefense / 100f * baseBuildPointsPerStat;
-            agilityBaseBuildPoints = _baseStats.BaseAgility / 100f * baseBuildPointsPerStat;
-            wisdomBaseBuildPoints = _baseStats.BaseWisdom / 100f * baseBuildPointsPerStat;
+            agilityBaseBuildPoints = _baseStats.BaseSpeed / 100f * baseBuildPointsPerStat;
+            wisdomBaseBuildPoints = _baseStats.BaseIntelligence / 100f * baseBuildPointsPerStat;
 
             if (statsPriorityOrder.Count < 5)
             {

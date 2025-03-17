@@ -13,6 +13,8 @@ namespace Character.Class
         int Speed { get; }
         int Intelligence { get; }
         CharacterDefinition CharacterDefinition { get; set; }
+        CharacterTeam CharacterTeam { get; }
+        int CustomLevel { get; set; }
 
         public void RaiseCharacterDied();
         public void RaiseDamageReceived();

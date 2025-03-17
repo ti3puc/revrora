@@ -29,22 +29,28 @@ namespace Managers.Combat
         [SerializeField, ReadOnly] private Vector3 _lastPlayerPosition;
         [SerializeField, ReadOnly] private List<CharacterDefinition> _toInstanceCacheCharacterDefinitions = new();
         [SerializeField, ReadOnly] private List<CharacterTeam> _toInstanceCacheCharacterTeams = new();
+        [SerializeField, ReadOnly] private List<int> _toInstanceCustomLevels = new();
         [SerializeField, ReadOnly] private List<CombatDropItem> _itemsToGive;
 
         public List<BaseCharacter> TurnCharacters => _turnCharacters;
         public List<CharacterDefinition> ToInstanceCharacterDefinitions => _toInstanceCacheCharacterDefinitions;
         public List<CharacterTeam> ToInstanceCharacterTeams => _toInstanceCacheCharacterTeams;
+        public List<int> ToInstanceCustomLevels => _toInstanceCustomLevels;
         public bool HasInitialized => _turnCharacters != null && _turnCharacters.Count > 0;
         public bool IsTurnEnd => _isTurnEnd = _turnIndex > _turnCharacters.Count - 1;
         public int CombatCreatureSceneId => _combatCreatureSceneId;
         public Vector3 LastPlayerPosition => _lastPlayerPosition;
 
-        public void CacheInstantiateCharacters(List<CharacterDefinition> characterDefinitions, List<CharacterTeam> characterTeams)
+        public void CacheInstantiateCharacters(List<CharacterDefinition> characterDefinitions, List<CharacterTeam> characterTeams, List<int> customLevels)
         {
             _toInstanceCacheCharacterDefinitions.Clear();
-            _toInstanceCacheCharacterTeams.Clear();
             _toInstanceCacheCharacterDefinitions.AddRange(characterDefinitions);
+
+            _toInstanceCacheCharacterTeams.Clear();
             _toInstanceCacheCharacterTeams.AddRange(characterTeams);
+
+            _toInstanceCustomLevels.Clear();
+            _toInstanceCustomLevels.AddRange(customLevels);
         }
 
         public void CacheLastSceneInformation(int combatCreatureSceneId, Vector3 lastPlayerPosition)
@@ -58,6 +64,8 @@ namespace Managers.Combat
         {
             _toInstanceCacheCharacterDefinitions.Clear();
             _toInstanceCacheCharacterTeams.Clear();
+            _toInstanceCustomLevels.Clear();
+
             _turnCharacters.Clear();
             _turnCharacters.AddRange(characters);
 
@@ -69,8 +77,8 @@ namespace Managers.Combat
             _turnIndex = 0;
             _turnCount = 0;
 
-            // TODO: logic to organize with agility stats?
-            _turnCharacters.Shuffle<BaseCharacter>();
+            // logic to organize with speed stats
+            _turnCharacters = _turnCharacters.OrderByDescending(c => c.CharacterStats.Speed).ToList();
 
             TurnInputManager.Instance.InitializeCharacters(_turnCharacters);
             OnTurnManagerInitialized?.Invoke();

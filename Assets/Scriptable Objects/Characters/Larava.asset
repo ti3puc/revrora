@@ -16,11 +16,11 @@ MonoBehaviour:
   _isPlayer: 0
   _name: Larava
   _baseStats:
-    baseHP: 78
-    baseStrength: 84
-    baseDefense: 80
-    baseAgility: 75
-    baseWisdom: 74
+    baseHP: 100
+    baseAttack: 0
+    baseDefense: 14
+    baseSpeed: 100
+    baseIntelligence: 0
     type: 0
   maxBuildPoints: 400
   baseBuildPointsPercentage: 0.6
@@ -30,7 +30,7 @@ MonoBehaviour:
   totalBuildPointsPerLevel: 19.999998
   buildPointsPerLevelPercentagePerStat: 0.08
   buildPointsPerLevelPerStat: 3.9999995
-  statsLevelDivision: 1
+  statsLevelDivision: 2
   statsPriorityOrder: 0000000001000000020000000300000004000000
   _characterMoves:
   - {fileID: 11400000, guid: 0836f2666f00007499f4acc1c52a874d, type: 2}

@@ -6,6 +6,6 @@ namespace Combat
 {
     public interface ICombatAction
     {
-        void execute(BaseCharacter user, CharacterMove move, List<BaseCharacter> targets);
+        void Execute(BaseCharacter user, CharacterMove move, List<BaseCharacter> targets);
     }
 }

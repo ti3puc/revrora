@@ -84,7 +84,14 @@ namespace Creatures.Combat
                     CharacterTeam.Enemy
                 };
 
-            TurnCombatManager.Instance.CacheInstantiateCharacters(characterDefinitions, characterTeams);
+            var customLevels = new List<int>
+                {
+                    -1,
+                    -1,
+                    _creatureCharacter.CustomLevel
+                };
+
+            TurnCombatManager.Instance.CacheInstantiateCharacters(characterDefinitions, characterTeams, customLevels);
             TurnCombatManager.Instance.CacheLastSceneInformation(SceneId, PlayerManager.Instance.PlayerTransform.position);
             ScenesManager.LoadScene("Combat");
 

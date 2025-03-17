@@ -116,7 +116,8 @@ namespace Combat
                 }
 
                 var move = _currentCharacter.CharacterMoves[_turnMoveDict[_currentCharacter]];
-                new CombatActionMove().execute(_currentCharacter, move, TurnCombatManager.Instance.GetEnemies(_currentCharacter));
+                new CombatActionMove().Execute(_currentCharacter, move, TurnCombatManager.Instance.GetEnemies(_currentCharacter));
+                Debug.Log($"{_currentCharacter.Name} used {move.MoveName}");
 
                 TurnCombatManager.Instance.SetNextCharacter();
                 yield return new WaitForSeconds(1f);

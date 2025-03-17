@@ -16,11 +16,11 @@ MonoBehaviour:
   _isPlayer: 0
   _name: Jequitiranaboia
   _baseStats:
-    baseHP: 39
-    baseStrength: 43
-    baseDefense: 60
-    baseAgility: 50
-    baseWisdom: 65
+    baseHP: 11
+    baseAttack: 0
+    baseDefense: 99
+    baseSpeed: 0
+    baseIntelligence: 0
     type: 0
   maxBuildPoints: 400
   baseBuildPointsPercentage: 0.6
@@ -30,7 +30,7 @@ MonoBehaviour:
   totalBuildPointsPerLevel: 19.999998
   buildPointsPerLevelPercentagePerStat: 0.08
   buildPointsPerLevelPerStat: 3.9999995
-  statsLevelDivision: 0
+  statsLevelDivision: 1
   statsPriorityOrder: 0000000001000000020000000300000004000000
   _characterMoves:
   - {fileID: 11400000, guid: 0836f2666f00007499f4acc1c52a874d, type: 2}

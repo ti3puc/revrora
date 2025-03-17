@@ -84,6 +84,11 @@ namespace Character.Base
             }
         }
 
+        public CharacterDefinition CharacterDefinition => _characterClass.CharacterDefinition;
+        public int ActualLevel => _characterClass.CharacterTeam == CharacterTeam.Ally
+                    ? (PlayerManager.InstanceIsValid ? PlayerManager.Instance.PlayerLevel.Level : 1)
+                    : _characterClass.CustomLevel;
+
         #endregion
 
         // Importante que as propriedades de um personagem nunca estejam diretamente acessíveis;
@@ -118,7 +123,7 @@ namespace Character.Base
 
         private void CalculateAttributes()
         {
-            var statsPriorityOrder = _characterClass.CharacterDefinition.StatsPriorityOrder;
+            var statsPriorityOrder = CharacterDefinition.StatsPriorityOrder;
 
             _firstRemainingPoints = CalculateStat(statsPriorityOrder[0], 0);
             _secondRemainingPoints = CalculateStat(statsPriorityOrder[1], _firstRemainingPoints);
@@ -148,9 +153,7 @@ namespace Character.Base
 
         private int CalculateMaxHP(int remaining)
         {
-            var charDef = _characterClass.CharacterDefinition;
-            var actualLevel = PlayerManager.Instance.PlayerLevel.Level;
-            var maxHp = charDef.HPBaseBuildPoints + (charDef.HPLevelBuildPoints * actualLevel);
+            var maxHp = CharacterDefinition.HPBaseBuildPoints + (CharacterDefinition.HPLevelBuildPoints * ActualLevel);
 
             var totalValue = Mathf.FloorToInt(maxHp) + remaining;
             _maxHp = totalValue;
@@ -165,9 +168,7 @@ namespace Character.Base
 
         private int CalculateAttack(int remaining)
         {
-            var charDef = _characterClass.CharacterDefinition;
-            var actualLevel = PlayerManager.Instance.PlayerLevel.Level;
-            var attack = charDef.StrengthBaseBuildPoints + (charDef.StrengthLevelBuildPoints * actualLevel);
+            var attack = CharacterDefinition.StrengthBaseBuildPoints + (CharacterDefinition.StrengthLevelBuildPoints * ActualLevel);
 
             var totalValue = Mathf.FloorToInt(attack) + remaining;
             _attack = totalValue;
@@ -182,9 +183,7 @@ namespace Character.Base
 
         private int CalculateDefense(int remaining)
         {
-            var charDef = _characterClass.CharacterDefinition;
-            var actualLevel = PlayerManager.Instance.PlayerLevel.Level;
-            var defense = charDef.DefenseBaseBuildPoints + (charDef.DefenseLevelBuildPoints * actualLevel);
+            var defense = CharacterDefinition.DefenseBaseBuildPoints + (CharacterDefinition.DefenseLevelBuildPoints * ActualLevel);
 
             var totalValue = Mathf.FloorToInt(defense) + remaining;
             _defense = totalValue;
@@ -199,9 +198,7 @@ namespace Character.Base
 
         private int CalculateAgility(int remaining)
         {
-            var charDef = _characterClass.CharacterDefinition;
-            var actualLevel = PlayerManager.Instance.PlayerLevel.Level;
-            var agility = charDef.AgilityBaseBuildPoints + (charDef.AgilityLevelBuildPoints * actualLevel);
+            var agility = CharacterDefinition.AgilityBaseBuildPoints + (CharacterDefinition.AgilityLevelBuildPoints * ActualLevel);
 
             var totalValue = Mathf.FloorToInt(agility) + remaining;
             _speed = totalValue;
@@ -216,9 +213,7 @@ namespace Character.Base
 
         private int CalculateIntelligence(int remaining)
         {
-            var charDef = _characterClass.CharacterDefinition;
-            var actualLevel = PlayerManager.Instance.PlayerLevel.Level;
-            var wisdom = charDef.WisdomBaseBuildPoints + (charDef.WisdomLevelBuildPoints * actualLevel);
+            var wisdom = CharacterDefinition.WisdomBaseBuildPoints + (CharacterDefinition.WisdomLevelBuildPoints * ActualLevel);
 
             var totalValue = Mathf.FloorToInt(wisdom) + remaining;
             _intelligence = totalValue;
