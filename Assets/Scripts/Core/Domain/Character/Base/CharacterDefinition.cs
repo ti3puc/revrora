@@ -23,9 +23,10 @@ namespace Character.Base
 
         public enum StatsOrderDivision
         {
+            SuperBalanced, // 22222
             Balanced, // 33211
-            Specialist, // 42211
-            SuperSpecialist // 53110
+            Specialist, // 52111
+            SuperSpecialist // 10 0000 // 62110
         }
 
         [SerializeField] private int _id;
@@ -118,6 +119,13 @@ namespace Character.Base
 
             switch (statsLevelDivision)
             {
+                case StatsOrderDivision.SuperBalanced:
+                    SetStat(statsPriorityOrder[0], totalBuildPointsPerLevel * 0.2f);
+                    SetStat(statsPriorityOrder[1], totalBuildPointsPerLevel * 0.2f);
+                    SetStat(statsPriorityOrder[2], totalBuildPointsPerLevel * 0.2f);
+                    SetStat(statsPriorityOrder[3], totalBuildPointsPerLevel * 0.2f);
+                    SetStat(statsPriorityOrder[4], totalBuildPointsPerLevel * 0.2f);
+                    break;
                 case StatsOrderDivision.Balanced:
                     SetStat(statsPriorityOrder[0], totalBuildPointsPerLevel * 0.3f);
                     SetStat(statsPriorityOrder[1], totalBuildPointsPerLevel * 0.3f);
@@ -126,17 +134,17 @@ namespace Character.Base
                     SetStat(statsPriorityOrder[4], totalBuildPointsPerLevel * 0.1f);
                     break;
                 case StatsOrderDivision.Specialist:
-                    SetStat(statsPriorityOrder[0], totalBuildPointsPerLevel * 0.4f);
+                    SetStat(statsPriorityOrder[0], totalBuildPointsPerLevel * 0.5f);
                     SetStat(statsPriorityOrder[1], totalBuildPointsPerLevel * 0.2f);
-                    SetStat(statsPriorityOrder[2], totalBuildPointsPerLevel * 0.2f);
+                    SetStat(statsPriorityOrder[2], totalBuildPointsPerLevel * 0.1f);
                     SetStat(statsPriorityOrder[3], totalBuildPointsPerLevel * 0.1f);
                     SetStat(statsPriorityOrder[4], totalBuildPointsPerLevel * 0.1f);
                     break;
                 case StatsOrderDivision.SuperSpecialist:
-                    SetStat(statsPriorityOrder[0], totalBuildPointsPerLevel * 0.5f);
-                    SetStat(statsPriorityOrder[1], totalBuildPointsPerLevel * 0.3f);
-                    SetStat(statsPriorityOrder[2], totalBuildPointsPerLevel * 0.1f);
-                    SetStat(statsPriorityOrder[3], totalBuildPointsPerLevel * 0.1f);
+                    SetStat(statsPriorityOrder[0], totalBuildPointsPerLevel);
+                    SetStat(statsPriorityOrder[1], 0);
+                    SetStat(statsPriorityOrder[2], 0);
+                    SetStat(statsPriorityOrder[3], 0);
                     SetStat(statsPriorityOrder[4], 0);
                     break;
             }
