@@ -9,6 +9,9 @@ using UnityEngine;
 
 public class PlayerLevel : MonoBehaviour
 {
+    public static event Action OnGainExperience;
+    public static event Action OnLevelUp;
+
     [Header("Settings")]
     [SerializeField] private List<int> _maxLevelPerRegion = new List<int>();
     [SerializeField] private List<int> _experiencePerLevel = new List<int>();
@@ -56,6 +59,7 @@ public class PlayerLevel : MonoBehaviour
         }
 
         _experience += experience;
+        OnGainExperience?.Invoke();
 
         if (_experience >= _experiencePerLevel[_level])
         {
@@ -78,7 +82,11 @@ public class PlayerLevel : MonoBehaviour
             _experience = 0;
             if (_currentMaxLevel >= MaxLevelTotal)
                 _experience = _experiencePerLevel[_maxLevelPerRegion.Count - 1];
+
+            return;
         }
+
+        OnLevelUp?.Invoke();
     }
 
     [Button]

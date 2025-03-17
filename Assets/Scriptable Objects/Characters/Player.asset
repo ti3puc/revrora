@@ -13,17 +13,27 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   _id: 0
+  _isPlayer: 1
   _name: Chloe
   _baseStats:
     baseHP: 39
-    baseMana: 52
     baseStrength: 43
     baseDefense: 60
     baseAgility: 50
     baseWisdom: 65
     type: 0
+  maxBuildPoints: 400
+  baseBuildPointsPercentage: 0.6
+  baseBuildPoints: 240.00002
+  baseBuildPointsPerStat: 48.000004
+  totalBuildPointsPerLevelPercentage: 0.39999998
+  totalBuildPointsPerLevel: 19.999998
+  buildPointsPerLevelPercentagePerStat: 0.08
+  buildPointsPerLevelPerStat: 3.9999995
+  statsLevelDivision: 0
+  statsPriorityOrder: 0000000001000000020000000300000004000000
   _characterMoves:
   - {fileID: 11400000, guid: 0836f2666f00007499f4acc1c52a874d, type: 2}
+  _dropItems: []
   _visual: {fileID: 1466259435542957955, guid: f2ba1a2fed4c5c74fbcd491bbc3acbfb, type: 3}
   _icon: {fileID: 0}
-  _graph: {fileID: 0}

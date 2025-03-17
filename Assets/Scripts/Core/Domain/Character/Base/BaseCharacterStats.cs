@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Character.Class;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Character.Base

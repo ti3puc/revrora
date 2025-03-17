@@ -25,11 +25,12 @@ namespace Character.Base
 
         public int Id => _characterDefinition.Id;
         public string Name => _characterDefinition.Name;
-        public int BaseHP => _characterDefinition.BaseStats.BaseHP;
-        public int BaseStrength => _characterDefinition.BaseStats.BaseStrength;
-        public int BaseDefense => _characterDefinition.BaseStats.BaseDefense;
-        public int BaseAgility => _characterDefinition.BaseStats.BaseAgility;
-        public int BaseWisdom => _characterDefinition.BaseStats.BaseWisdom;
+        public int HP => _characterStats.HP;
+        public int MaxHP => _characterStats.MaxHP;
+        public int Attack => _characterStats.Attack;
+        public int Defense => _characterStats.Defense;
+        public int Speed => _characterStats.Speed;
+        public int Intelligence => _characterStats.Intelligence;
         public CharacterTypes Type => _characterDefinition.BaseStats.Type;
         public CharacterStats CharacterStats => _characterStats;
         public List<CharacterMove> CharacterMoves => _characterDefinition.CharacterMoves;
@@ -63,7 +64,7 @@ namespace Character.Base
 
             if (CharacterDefinition != null)
             {
-                _characterStats = new CharacterStats(this, 5, true);
+                _characterStats = new CharacterStats(this);
                 Instantiate(_characterDefinition.Visual, visualObj);
             }
         }

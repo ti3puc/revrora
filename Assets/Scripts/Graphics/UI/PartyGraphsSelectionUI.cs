@@ -25,11 +25,13 @@ namespace UI.Graphs
         private void Awake()
         {
             PartyManager.OnPartyChangedEvent += UpdatePartyUI;
+            PlayerLevel.OnGainExperience += UpdatePartyUI;
         }
 
         private void OnDestroy()
         {
             PartyManager.OnPartyChangedEvent -= UpdatePartyUI;
+            PlayerLevel.OnGainExperience -= UpdatePartyUI;
         }
 
         private void OnEnable()
@@ -82,19 +84,19 @@ namespace UI.Graphs
 
             float angleIncrement = 360f / 5 * -1;
 
-            Vector3 hpVertex = Quaternion.Euler(0, 0, angleIncrement * 0) * Vector3.up * _maxRadarValue * (_currentCharacter.BaseHP / 100f);
+            Vector3 hpVertex = Quaternion.Euler(0, 0, angleIncrement * 0) * Vector3.up * _maxRadarValue * (_currentCharacter.MaxHP / 100f);
             int hpVertexIndex = 1;
 
-            Vector3 attackVertex = Quaternion.Euler(0, 0, angleIncrement * 1) * Vector3.up * _maxRadarValue * (_currentCharacter.BaseStrength / 100f);
+            Vector3 attackVertex = Quaternion.Euler(0, 0, angleIncrement * 1) * Vector3.up * _maxRadarValue * (_currentCharacter.Attack / 100f);
             int attackVertexIndex = 2;
 
-            Vector3 defenseVertex = Quaternion.Euler(0, 0, angleIncrement * 2) * Vector3.up * _maxRadarValue * (_currentCharacter.BaseDefense / 100f);
+            Vector3 defenseVertex = Quaternion.Euler(0, 0, angleIncrement * 2) * Vector3.up * _maxRadarValue * (_currentCharacter.Defense / 100f);
             int defenseVertexIndex = 3;
 
-            Vector3 agilityVertex = Quaternion.Euler(0, 0, angleIncrement * 3) * Vector3.up * _maxRadarValue * (_currentCharacter.BaseAgility / 100f);
+            Vector3 agilityVertex = Quaternion.Euler(0, 0, angleIncrement * 3) * Vector3.up * _maxRadarValue * (_currentCharacter.Speed / 100f);
             int agilityVertexIndex = 4;
 
-            Vector3 wisdomVertex = Quaternion.Euler(0, 0, angleIncrement * 4) * Vector3.up * _maxRadarValue * (_currentCharacter.BaseWisdom / 100f);
+            Vector3 wisdomVertex = Quaternion.Euler(0, 0, angleIncrement * 4) * Vector3.up * _maxRadarValue * (_currentCharacter.Intelligence / 100f);
             int wisdomVertexIndex = 5;
 
             vertices[0] = Vector3.zero;

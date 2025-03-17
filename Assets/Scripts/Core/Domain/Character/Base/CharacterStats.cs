@@ -3,59 +3,94 @@ using UnityEngine;
 using Character.Class;
 using NaughtyAttributes;
 using Random = System.Random;
+using Managers.Player;
+using static Character.Base.CharacterDefinition;
 
 namespace Character.Base
 {
     [System.Serializable]
     public class CharacterStats
     {
-        #region Constants
-        private const int MaxLevel = 100;
-        private const int BuildPointsPerLevel = 5;
-        #endregion
+        #region Fields
 
-        #region Attributes
-        private ICharacterClass _characterClass;
-        [SerializeField, ReadOnly] private int _level;
-        [SerializeField, ReadOnly] private int _experience;
         [SerializeField, ReadOnly] private int _hp;
+        [SerializeField, ReadOnly] private int _maxHp;
+        [SerializeField, ReadOnly] private int _attack;
+        [SerializeField, ReadOnly] private int _defense;
+        [SerializeField, ReadOnly] private int _speed;
+        [SerializeField, ReadOnly] private int _intelligence;
+        [SerializeField, ReadOnly] private int _firstRemainingPoints;
+        [SerializeField, ReadOnly] private int _secondRemainingPoints;
+        [SerializeField, ReadOnly] private int _thirdRemainingPoints;
+        [SerializeField, ReadOnly] private int _fourthRemainingPoints;
+        [SerializeField, ReadOnly] private int _fifthRemainingPoints;
 
-        // Atributos de build, que são os pontos que o jogador pode distribuir
-        [SerializeField, ReadOnly] private int _buildPoints;
-        [SerializeField, ReadOnly] private int _strengthPoints;
-        [SerializeField, ReadOnly] private int _defensePoints;
-        [SerializeField, ReadOnly] private int _agilityPoints;
-        [SerializeField, ReadOnly] private int _wisdomPoints;
+        private ICharacterClass _characterClass;
+
         #endregion
 
         #region Constructors
-        public CharacterStats(ICharacterClass characterClass, int level, bool randomizeBuild = false)
+
+        public CharacterStats(ICharacterClass characterClass)
         {
             _characterClass = characterClass;
-            _level = level;
-            _experience = 0;
-            _strengthPoints = 1;
-            _defensePoints = 1;
-            _agilityPoints = 1;
-            _wisdomPoints = 1;
-            _buildPoints = randomizeBuild ? RandomizeBuildPoints() : _level * BuildPointsPerLevel;
             _hp = MaxHP;
         }
+
+        #endregion
+
+
+        #region Properties
+
+        public int HP => _hp;
+        public int MaxHP
+        {
+            get
+            {
+                CalculateAttributes();
+                return _maxHp;
+            }
+        }
+        public int Attack
+        {
+            get
+            {
+                CalculateAttributes();
+                return _attack;
+            }
+        }
+        public int Defense
+        {
+            get
+            {
+                CalculateAttributes();
+                return _defense;
+            }
+        }
+        public int Speed
+        {
+            get
+            {
+                CalculateAttributes();
+                return _speed;
+            }
+        }
+        public int Intelligence
+        {
+            get
+            {
+                CalculateAttributes();
+                return _intelligence;
+            }
+        }
+
         #endregion
 
         // Importante que as propriedades de um personagem nunca estejam diretamente acessíveis;
         // Esta região é responsável por definir os métodos públicos que permitem
         // a manipulação dos atributos do personagem baseado em regras de negócio.
         #region Public Methods
-        public void LevelUp()
-        {
-            if (_level < MaxLevel)
-            {
-                _level++;
-                _buildPoints += BuildPointsPerLevel;
-            }
-        }
-        
+
         public void ReceiveDamage(int damage)
         {
             _hp -= damage;
@@ -67,110 +102,135 @@ namespace Character.Base
                 Debug.Log("Character is dead! (" + _characterClass.Name + ")");
             }
         }
-        
+
         public bool IsDead()
         {
             return _hp <= 0;
         }
+
         #endregion
 
         // Esta região é responsável por definir os métodos privados que permitem
         // a manipulação dos atributos do personagem baseado em regras de negócio,
         // mas que não devem ser acessíveis diretamente.
         #region Private Methods
-        private void IncStrengthPoints(int i)
+
+
+        private void CalculateAttributes()
         {
-            _strengthPoints += i;
+            var statsPriorityOrder = _characterClass.CharacterDefinition.StatsPriorityOrder;
+
+            _firstRemainingPoints = CalculateStat(statsPriorityOrder[0], 0);
+            _secondRemainingPoints = CalculateStat(statsPriorityOrder[1], _firstRemainingPoints);
+            _thirdRemainingPoints = CalculateStat(statsPriorityOrder[2], _secondRemainingPoints);
+            _fourthRemainingPoints = CalculateStat(statsPriorityOrder[3], _thirdRemainingPoints);
+            _fifthRemainingPoints = CalculateStat(statsPriorityOrder[4], _fourthRemainingPoints);
         }
 
-        private void IncDefensePoints(int i)
+        private int CalculateStat(StatsOrder stat, int remaining)
         {
-            _defensePoints += i;
-        }
-
-        private void IncAgilityPoints(int i)
-        {
-            _agilityPoints += i;
-        }
-
-        private void IncDexterityPoints(int i)
-        {
-            _wisdomPoints += i;
-        }
-
-        private int CalculateMaxHP()
-        {
-            return (2 * _characterClass.BaseHP + _strengthPoints / 4) * _level / 100 + _level + 10;
-        }
-
-        private int CalculateAttack()
-        {
-            return (2 * _characterClass.BaseStrength + (_strengthPoints * 2 + _agilityPoints) / 4) * _level / 100 + 5;
-        }
-
-        private int CalculateDefense()
-        {
-            return (2 * _characterClass.BaseDefense + (_defensePoints * 2 + _wisdomPoints) / 4) * _level / 100 + 5;
-        }
-
-        private int CalculateAgility()
-        {
-            return (2 * _characterClass.BaseAgility + _agilityPoints * 2 / 4) * _level / 100 + 5;
-        }
-
-        private int CalculateWisdom()
-        {
-            return (2 * _characterClass.BaseWisdom + _wisdomPoints * 2 / 4) * _level / 100 + 5;
-        }
-
-        // Este método é responsável por randomizar os pontos de build de um personagem aleatorio ao ser criado
-        private int RandomizeBuildPoints()
-        {
-            Random rnd = new();
-            for (int i = 0; i < _level; i++)
+            switch (stat)
             {
-                for (int j = 0; j < BuildPointsPerLevel; j++)
-                {
-                    int random = rnd.Next(0, 4);
-                    switch (random)
-                    {
-                        case 0:
-                            IncStrengthPoints(1);
-                            break;
-                        case 1:
-                            IncDefensePoints(1);
-                            break;
-                        case 2:
-                            IncAgilityPoints(1);
-                            break;
-                        case 3:
-                            IncDexterityPoints(1);
-                            break;
-                    }
-                }
+                case StatsOrder.HP:
+                    return CalculateMaxHP(remaining);
+                case StatsOrder.Attack:
+                    return CalculateAttack(remaining);
+                case StatsOrder.Defense:
+                    return CalculateDefense(remaining);
+                case StatsOrder.Speed:
+                    return CalculateAgility(remaining);
+                case StatsOrder.Intelligence:
+                    return CalculateIntelligence(remaining);
             }
+
             return 0;
         }
-        #endregion
 
-        // Esta região é responsável por definir os getters e setters
-        #region Getters/Setters
-        public int Level => _level;
-        public int Experience => _experience;
-        public CharacterTypes Type => _characterClass.Type;
-        public int HP => _hp;
-        public int BuildPoints => _buildPoints;
-        public int StrenghtPoints => _strengthPoints;
-        public int DefensePoints => _defensePoints;
-        public int AgilityPoints => _agilityPoints;
-        public int WisdomPoints => _wisdomPoints;
-        #region Calculed Stats
-        public int MaxHP => CalculateMaxHP();
-        public int Attack => CalculateAttack();
-        public int Defense => CalculateDefense();
-        public int Agility => CalculateAgility();
-        public int Wisdom => CalculateWisdom();
-        #endregion
+        private int CalculateMaxHP(int remaining)
+        {
+            var charDef = _characterClass.CharacterDefinition;
+            var actualLevel = PlayerManager.Instance.PlayerLevel.Level;
+            var maxHp = charDef.HPBaseBuildPoints + (charDef.HPLevelBuildPoints * actualLevel);
+
+            var totalValue = Mathf.FloorToInt(maxHp) + remaining;
+            _maxHp = totalValue;
+            if (totalValue > 100)
+            {
+                _maxHp = 100;
+                return totalValue - 100;
+            }
+
+            return 0;
+        }
+
+        private int CalculateAttack(int remaining)
+        {
+            var charDef = _characterClass.CharacterDefinition;
+            var actualLevel = PlayerManager.Instance.PlayerLevel.Level;
+            var attack = charDef.StrengthBaseBuildPoints + (charDef.StrengthLevelBuildPoints * actualLevel);
+
+            var totalValue = Mathf.FloorToInt(attack) + remaining;
+            _attack = totalValue;
+            if (totalValue > 100)
+            {
+                _attack = 100;
+                return totalValue - 100;
+            }
+
+            return 0;
+        }
+
+        private int CalculateDefense(int remaining)
+        {
+            var charDef = _characterClass.CharacterDefinition;
+            var actualLevel = PlayerManager.Instance.PlayerLevel.Level;
+            var defense = charDef.DefenseBaseBuildPoints + (charDef.DefenseLevelBuildPoints * actualLevel);
+
+            var totalValue = Mathf.FloorToInt(defense) + remaining;
+            _defense = totalValue;
+            if (totalValue > 100)
+            {
+                _defense = 100;
+                return totalValue - 100;
+            }
+
+            return 0;
+        }
+
+        private int CalculateAgility(int remaining)
+        {
+            var charDef = _characterClass.CharacterDefinition;
+            var actualLevel = PlayerManager.Instance.PlayerLevel.Level;
+            var agility = charDef.AgilityBaseBuildPoints + (charDef.AgilityLevelBuildPoints * actualLevel);
+
+            var totalValue = Mathf.FloorToInt(agility) + remaining;
+            _speed = totalValue;
+            if (totalValue > 100)
+            {
+                _speed = 100;
+                return totalValue - 100;
+            }
+
+            return 0;
+        }
+
+        private int CalculateIntelligence(int remaining)
+        {
+            var charDef = _characterClass.CharacterDefinition;
+            var actualLevel = PlayerManager.Instance.PlayerLevel.Level;
+            var wisdom = charDef.WisdomBaseBuildPoints + (charDef.WisdomLevelBuildPoints * actualLevel);
+
+            var totalValue = Mathf.FloorToInt(wisdom) + remaining;
+            _intelligence = totalValue;
+            if (totalValue > 100)
+            {
+                _intelligence = 100;
+                return totalValue - 100;
+            }
+
+            return 0;
+        }
+
         #endregion
     }
 }
