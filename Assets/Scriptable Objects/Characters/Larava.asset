@@ -17,7 +17,7 @@ MonoBehaviour:
   _name: Larava
   _baseStats:
     baseHP: 100
-    baseAttack: 0
+    baseAttack: 55
     baseDefense: 14
     baseSpeed: 100
     baseIntelligence: 0

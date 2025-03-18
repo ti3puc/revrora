@@ -17,7 +17,7 @@ MonoBehaviour:
   _name: Jellostorm
   _baseStats:
     baseHP: 39
-    baseAttack: 0
+    baseAttack: 51
     baseDefense: 60
     baseSpeed: 50
     baseIntelligence: 0

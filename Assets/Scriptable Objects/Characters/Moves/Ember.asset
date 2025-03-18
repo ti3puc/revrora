@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Ember
   m_EditorClassIdentifier: 
   moveName: Ember
+  moveDescription: 
   category: 0
   type: 0
   power: 5
-  manaCost: 0
-  rate: 100
-  script: 
+  accuracy: 100
+  statsToImprove: []
+  visualPrefab: {fileID: 0}
+  animationDuration: 0
