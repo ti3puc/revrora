@@ -13,17 +13,26 @@ namespace Character.Base
     {
         #region Fields
 
+        [Header("Stats")]
         [SerializeField, ReadOnly] private int _hp;
         [SerializeField, ReadOnly] private int _maxHp;
         [SerializeField, ReadOnly] private int _attack;
         [SerializeField, ReadOnly] private int _defense;
         [SerializeField, ReadOnly] private int _speed;
         [SerializeField, ReadOnly] private int _intelligence;
+
+        [Header("Remaining Level Points")]
         [SerializeField, ReadOnly] private int _firstRemainingPoints;
         [SerializeField, ReadOnly] private int _secondRemainingPoints;
         [SerializeField, ReadOnly] private int _thirdRemainingPoints;
         [SerializeField, ReadOnly] private int _fourthRemainingPoints;
         [SerializeField, ReadOnly] private int _fifthRemainingPoints;
+
+        [Header("Temporary Stats")]
+        [SerializeField, ReadOnly] private int _tempAttack;
+        [SerializeField, ReadOnly] private int _tempDefense;
+        [SerializeField, ReadOnly] private int _tempSpeed;
+        [SerializeField, ReadOnly] private int _tempIntelligence;
 
         private ICharacterClass _characterClass;
 
@@ -35,6 +44,10 @@ namespace Character.Base
         {
             _characterClass = characterClass;
             _hp = MaxHP;
+            _tempAttack = 0;
+            _tempDefense = 0;
+            _tempSpeed = 0;
+            _tempIntelligence = 0;
         }
 
         #endregion
@@ -56,7 +69,7 @@ namespace Character.Base
             get
             {
                 CalculateAttributes();
-                return _attack;
+                return _attack + _tempAttack;
             }
         }
         public int Defense
@@ -64,7 +77,7 @@ namespace Character.Base
             get
             {
                 CalculateAttributes();
-                return _defense;
+                return _defense + _tempDefense;
             }
         }
         public int Speed
@@ -72,7 +85,7 @@ namespace Character.Base
             get
             {
                 CalculateAttributes();
-                return _speed;
+                return _speed + _tempSpeed;
             }
         }
         public int Intelligence
@@ -80,7 +93,7 @@ namespace Character.Base
             get
             {
                 CalculateAttributes();
-                return _intelligence;
+                return _intelligence + _tempIntelligence;
             }
         }
 
@@ -98,6 +111,12 @@ namespace Character.Base
 
         public void ReceiveDamage(int damage)
         {
+            if (damage <= 0)
+            {
+                _characterClass.RaiseDamageMissed();
+                return;
+            }
+
             _hp -= damage;
             _characterClass.RaiseDamageReceived();
             if (_hp <= 0)
@@ -111,6 +130,26 @@ namespace Character.Base
         public bool IsDead()
         {
             return _hp <= 0;
+        }
+
+        public void ImproveAttack(int value)
+        {
+            _tempAttack += value;
+        }
+
+        public void ImproveDefense(int value)
+        {
+            _tempDefense += value;
+        }
+
+        public void ImproveSpeed(int value)
+        {
+            _tempSpeed += value;
+        }
+
+        public void ImproveIntelligence(int value)
+        {
+            _tempIntelligence += value;
         }
 
         #endregion

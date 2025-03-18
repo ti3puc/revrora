@@ -18,5 +18,6 @@ namespace Character.Class
 
         public void RaiseCharacterDied();
         public void RaiseDamageReceived();
+        public void RaiseDamageMissed();
     }
 }

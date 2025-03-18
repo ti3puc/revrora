@@ -3,6 +3,7 @@
     public enum MoveCategory
     {
         PHYSICAL,
+        MAGICAL,
         STATUS
     }
 }

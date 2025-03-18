@@ -13,6 +13,7 @@ namespace Character.Base
         public delegate void CharacterEvent(BaseCharacter character);
         public static event CharacterEvent OnCharacterDied;
         public static event CharacterEvent OnDamageReceived;
+        public static event CharacterEvent OnDamageMissed;
 
         [Header("Level")]
         [SerializeField] private int _customLevel = 1;
@@ -22,6 +23,8 @@ namespace Character.Base
         [SerializeField] private CharacterTeam _characterTeam;
         [SerializeField] private GameObject _damageVfx;
         [SerializeField] private string _hitSoundId = "hit";
+        [SerializeField] private GameObject _missVfx;
+        [SerializeField] private string _missSoundId = "miss";
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private CharacterStats _characterStats;
@@ -72,6 +75,14 @@ namespace Character.Base
             Instantiate(_damageVfx, transform);
             AudioManager.Instance.PlaySoundOneShot(_hitSoundId, 3);
             OnDamageReceived?.Invoke(this);
+        }
+
+        public void RaiseDamageMissed()
+        {
+            if (_missVfx != null)
+                Instantiate(_missVfx, transform);
+            AudioManager.Instance.PlaySoundOneShot(_missSoundId, 3);
+            OnDamageMissed?.Invoke(this);
         }
 
         [Button]

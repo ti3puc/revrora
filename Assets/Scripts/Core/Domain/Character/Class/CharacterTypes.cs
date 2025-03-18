@@ -6,6 +6,6 @@
         WATER,
         FIRE,
         EARTH,
-        WIND
+        AIR
     }
 }

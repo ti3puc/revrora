@@ -65,6 +65,8 @@ MonoBehaviour:
     _audioClip: {fileID: 8300000, guid: 145c9e21126cbda4b99c4b30c0e49e48, type: 3}
   - _id: collect
     _audioClip: {fileID: 8300000, guid: dda9db792f6977941acb2463b5669fe2, type: 3}
+  - _id: miss
+    _audioClip: {fileID: 8300000, guid: 1ce1aa4074fd7764a86d584020fd7ac3, type: 3}
   _fadeTime: 0.5
   _tracks: []
 --- !u!82 &8365461079339131892
