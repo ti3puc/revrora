@@ -15,7 +15,7 @@ MonoBehaviour:
   moveName: Rollout
   moveDescription: 
   category: 0
-  type: 0
+  type: 3
   power: 5
   accuracy: 100
   statsToImprove: []

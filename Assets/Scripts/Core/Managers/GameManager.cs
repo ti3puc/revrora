@@ -71,8 +71,38 @@ namespace Managers
 
 				_charactersDefinitions.Add(characterDefinition);
 			}
+
+			_charactersDefinitions.Sort((a, b) => a.Id.CompareTo(b.Id));
+			CheckDuplicatedIds();
 		}
-		
+
+		// [Button]
+		// public void FixIdsBasedOnListOrder()
+		// {
+		// 	for (var i = 0; i < _charactersDefinitions.Count; i++)
+		// 		_charactersDefinitions[i].Id = i;
+		// }
+
+		[Button]
+		public void CheckDuplicatedIds()
+		{
+			var idCounts = new Dictionary<int, List<string>>();
+
+			foreach (var characterDefinition in _charactersDefinitions)
+			{
+				if (!idCounts.ContainsKey(characterDefinition.Id))
+					idCounts[characterDefinition.Id] = new List<string>();
+
+				idCounts[characterDefinition.Id].Add(characterDefinition.name);
+			}
+
+			foreach (var kvp in idCounts)
+			{
+				if (kvp.Value.Count > 1)
+					Debug.LogError($"Duplicated ID: {kvp.Key} found in the following objects: {string.Join(", ", kvp.Value)}");
+			}
+		}
+
 		[Button]
 		public void GetAllItems()
 		{

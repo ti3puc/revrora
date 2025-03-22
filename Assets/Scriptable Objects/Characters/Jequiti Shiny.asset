@@ -17,10 +17,10 @@ MonoBehaviour:
   _name: Jequitiranaboia
   _baseStats:
     baseHP: 39
-    baseStrength: 43
+    baseAttack: 0
     baseDefense: 60
-    baseAgility: 50
-    baseWisdom: 65
+    baseSpeed: 0
+    baseIntelligence: 0
     type: 0
   maxBuildPoints: 400
   baseBuildPointsPercentage: 0.6

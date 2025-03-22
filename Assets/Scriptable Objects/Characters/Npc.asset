@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6186e71f71368342b7058710441a95b, type: 3}
   m_Name: Npc
   m_EditorClassIdentifier: 
-  _id: 99
+  _id: 91
   _isPlayer: 0
   _name: Botcha
   _baseStats:
     baseHP: 39
-    baseStrength: 43
+    baseAttack: 0
     baseDefense: 60
-    baseAgility: 50
-    baseWisdom: 65
+    baseSpeed: 0
+    baseIntelligence: 0
     type: 0
   maxBuildPoints: 400
   baseBuildPointsPercentage: 0.6

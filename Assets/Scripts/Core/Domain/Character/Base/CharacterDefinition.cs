@@ -69,7 +69,11 @@ namespace Character.Base
         [SerializeField] private GameObject _visual;
         [SerializeField, ShowAssetPreview(128)] private Texture2D _icon;
 
-        public int Id => _id;
+        public int Id
+        {
+            get => _id;
+            set => _id = value;
+        }
         public bool IsPlayer => _isPlayer = _id == 0;
         public string Name => _name;
         public BaseCharacterStats BaseStats => _baseStats;

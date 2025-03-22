@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6186e71f71368342b7058710441a95b, type: 3}
   m_Name: Jequiti
   m_EditorClassIdentifier: 
-  _id: 11
+  _id: 10
   _isPlayer: 0
   _name: Jequitiranaboia
   _baseStats:
