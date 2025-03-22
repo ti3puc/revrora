@@ -104,22 +104,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b988af56518e264d9a9dd809b680579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _customLevel: 1
   _characterDefinition: {fileID: 11400000, guid: c9d9ee231966ac04aa1bfff28ca588a6,
     type: 2}
   _characterTeam: 0
-  _damageVfx: {fileID: 7719087324886769821, guid: fe54ac683d85c2745b402db31ca5e414,
-    type: 3}
+  _rotationSpeed: 180
   _hitSoundId: hit
+  _missVfx: {fileID: 0}
+  _missSoundId: miss
+  _healSoundId: heal
+  _deathVfx: {fileID: 0}
+  _deadSoundId: dead
+  _improvedSoundId: improved
   _characterStats:
-    _level: 0
-    _experience: 0
     _hp: 0
-    _mana: 0
-    _buildPoints: 0
-    _strengthPoints: 0
-    _defensePoints: 0
-    _agilityPoints: 0
-    _wisdomPoints: 0
+    _maxHp: 0
+    _attack: 0
+    _defense: 0
+    _speed: 0
+    _intelligence: 0
+    _firstRemainingPoints: 0
+    _secondRemainingPoints: 0
+    _thirdRemainingPoints: 0
+    _fourthRemainingPoints: 0
+    _fifthRemainingPoints: 0
+    _tempAttack: 0
+    _tempDefense: 0
+    _tempSpeed: 0
+    _tempIntelligence: 0
 --- !u!114 &2344595445268851040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveAccordingToCameraView: 1
   speed: 15
-  runningSpeed: 30
+  runningSpeed: 20
   acceleration: 5
   deceleration: 10
   movementStartsDisabled: 0
@@ -249,11 +261,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3154674c5656094780ebba8231e7146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxLevelTotal: 8
   _maxLevelPerRegion: 02000000040000000600000008000000
   _experiencePerLevel: 3200000032000000320000003200000032000000320000003200000032000000
   _level: 0
   _experience: 0
+  _currentMaxLevel: 0
+  _isLevelLocked: 0
 --- !u!114 &2996699411777276875
 MonoBehaviour:
   m_ObjectHideFlags: 0
