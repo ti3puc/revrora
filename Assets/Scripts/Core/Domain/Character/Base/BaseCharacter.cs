@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Character.Class;
 using Core.Domain.Character.Moves;
@@ -13,7 +14,9 @@ namespace Character.Base
         public delegate void CharacterEvent(BaseCharacter character);
         public static event CharacterEvent OnCharacterDied;
         public static event CharacterEvent OnDamageReceived;
+        public static event CharacterEvent OnHealReceived;
         public static event CharacterEvent OnDamageMissed;
+        public static event CharacterEvent OnImprovedStat;
 
         [Header("Level")]
         [SerializeField] private int _customLevel = 1;
@@ -21,10 +24,19 @@ namespace Character.Base
         [Header("References")]
         [SerializeField, OnValueChanged("InstantiateVisual")] private CharacterDefinition _characterDefinition;
         [SerializeField] private CharacterTeam _characterTeam;
-        [SerializeField] private GameObject _damageVfx;
+
+        [Header("Animation")]
+        [SerializeField] private float _rotationSpeed = 180;
+
+        [Header("VFX and Audio")]
+        // damage vfx gets from move
         [SerializeField] private string _hitSoundId = "hit";
         [SerializeField] private GameObject _missVfx;
         [SerializeField] private string _missSoundId = "miss";
+        [SerializeField] private string _healSoundId = "heal";
+        [SerializeField] private GameObject _deathVfx;
+        [SerializeField] private string _deadSoundId = "dead";
+        [SerializeField] private string _improvedSoundId = "improved";
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private CharacterStats _characterStats;
@@ -66,15 +78,30 @@ namespace Character.Base
 
         public void RaiseCharacterDied()
         {
+            if (_deathVfx != null)
+                Instantiate(_deathVfx, transform);
+            AudioManager.Instance.PlaySoundOneShot(_deadSoundId, 3);
+
+            // TODO: die animation
             gameObject.SetActive(false);
+
             OnCharacterDied?.Invoke(this);
         }
 
-        public void RaiseDamageReceived()
+        public void RaiseDamageReceived(GameObject vfx)
         {
-            Instantiate(_damageVfx, transform);
+            if (vfx != null)
+                Instantiate(vfx, transform);
             AudioManager.Instance.PlaySoundOneShot(_hitSoundId, 3);
             OnDamageReceived?.Invoke(this);
+        }
+
+        public void RaiseHealReceived(GameObject vfx)
+        {
+            if (vfx != null)
+                Instantiate(vfx, transform);
+            AudioManager.Instance.PlaySoundOneShot(_healSoundId, 3);
+            OnHealReceived?.Invoke(this);
         }
 
         public void RaiseDamageMissed()
@@ -83,6 +110,48 @@ namespace Character.Base
                 Instantiate(_missVfx, transform);
             AudioManager.Instance.PlaySoundOneShot(_missSoundId, 3);
             OnDamageMissed?.Invoke(this);
+        }
+
+        public void RaiseImprovedStat(GameObject vfx)
+        {
+            if (vfx != null)
+                Instantiate(vfx, transform);
+            AudioManager.Instance.PlaySoundOneShot(_improvedSoundId, 3);
+            OnImprovedStat?.Invoke(this);
+        }
+
+        public void SpawnVfx(GameObject vfx)
+        {
+            if (vfx != null)
+                Instantiate(vfx, transform);
+        }
+
+        public void RotateTo(Quaternion rotation) => StartCoroutine(SmoothRotateTo(rotation));
+        public void RotateTo(Transform target) => StartCoroutine(SmoothRotateTo(target));
+
+        private IEnumerator SmoothRotateTo(Transform target)
+        {
+            var direction = target.position - transform.position;
+            var angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg; // Use X and Z for Y-axis rotation
+            var rotation = Quaternion.Euler(0, angle, 0); // Only modify the Y-axis
+
+            while (Quaternion.Angle(transform.rotation, rotation) > 0.01f)
+            {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, _rotationSpeed * Time.deltaTime);
+                yield return null;
+            }
+        }
+
+        private IEnumerator SmoothRotateTo(Quaternion target)
+        {
+            var targetEuler = target.eulerAngles;
+            var targetRotation = Quaternion.Euler(0, targetEuler.y, 0); // Only modify the Y-axis
+
+            while (Quaternion.Angle(transform.rotation, targetRotation) > 0.01f)
+            {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+                yield return null;
+            }
         }
 
         [Button]

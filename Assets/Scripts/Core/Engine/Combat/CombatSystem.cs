@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Character.Base;
 using Character.Class;
+using Core.Domain.Character.Moves;
 using Core.Engine.Combat.CombatActions;
 using Managers;
 using Managers.Combat;
@@ -116,11 +117,19 @@ namespace Combat
                 }
 
                 var move = _currentCharacter.CharacterMoves[_turnMoveDict[_currentCharacter]];
-                new CombatActionMove().Execute(_currentCharacter, move, TurnCombatManager.Instance.GetEnemies(_currentCharacter));
+                var targets = TurnCombatManager.Instance.GetEnemies(_currentCharacter);
+
+                if (move.Category == MoveCategory.HEAL)
+                {
+                    targets.Clear();
+                    targets = TurnCombatManager.Instance.GetAllies(_currentCharacter);
+                }
+
+                new CombatActionMove().Execute(_currentCharacter, move, targets);
                 Debug.Log($"{_currentCharacter.Name} used {move.MoveName}");
 
                 TurnCombatManager.Instance.SetNextCharacter();
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(move.AnimationDuration);
             }
 
             // if combat end there's no need to finish processing

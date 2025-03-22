@@ -4,6 +4,8 @@
     {
         PHYSICAL,
         MAGICAL,
-        STATUS
+        BUFF,
+        DEBUFF,
+        HEAL
     }
 }

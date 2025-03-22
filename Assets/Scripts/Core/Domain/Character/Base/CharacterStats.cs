@@ -109,7 +109,7 @@ namespace Character.Base
         // a manipulação dos atributos do personagem baseado em regras de negócio.
         #region Public Methods
 
-        public void ReceiveDamage(int damage)
+        public void ReceiveDamage(int damage, GameObject vfx)
         {
             if (damage <= 0)
             {
@@ -118,7 +118,7 @@ namespace Character.Base
             }
 
             _hp -= damage;
-            _characterClass.RaiseDamageReceived();
+            _characterClass.RaiseDamageReceived(vfx);
             if (_hp <= 0)
             {
                 _hp = 0;
@@ -127,29 +127,50 @@ namespace Character.Base
             }
         }
 
+        public void ReceiveHeal(int heal, GameObject vfx)
+        {
+            if (_hp <= 0) return;
+
+            if (heal <= 0)
+            {
+                _characterClass.RaiseDamageMissed();
+                return;
+            }
+
+            _hp += heal;
+            if (_hp > MaxHP)
+                _hp = MaxHP;
+
+            _characterClass.RaiseHealReceived(vfx);
+        }
+
         public bool IsDead()
         {
             return _hp <= 0;
         }
 
-        public void ImproveAttack(int value)
+        public void ImproveAttack(int value, GameObject vfx)
         {
             _tempAttack += value;
+            _characterClass.RaiseImprovedStat(vfx);
         }
 
-        public void ImproveDefense(int value)
+        public void ImproveDefense(int value, GameObject vfx)
         {
             _tempDefense += value;
+            _characterClass.RaiseImprovedStat(vfx);
         }
 
-        public void ImproveSpeed(int value)
+        public void ImproveSpeed(int value, GameObject vfx)
         {
             _tempSpeed += value;
+            _characterClass.RaiseImprovedStat(vfx);
         }
 
-        public void ImproveIntelligence(int value)
+        public void ImproveIntelligence(int value, GameObject vfx)
         {
             _tempIntelligence += value;
+            _characterClass.RaiseImprovedStat(vfx);
         }
 
         #endregion
@@ -158,7 +179,6 @@ namespace Character.Base
         // a manipulação dos atributos do personagem baseado em regras de negócio,
         // mas que não devem ser acessíveis diretamente.
         #region Private Methods
-
 
         private void CalculateAttributes()
         {

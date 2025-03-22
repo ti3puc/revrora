@@ -22,6 +22,7 @@ namespace Core.Domain.Character.Moves
         {
             public StatsCanImprove StatToImprove;
             public int ValueToImprove;
+            public GameObject VfxPrefab;
         }
 
         [Header("Settings")]
@@ -34,8 +35,9 @@ namespace Core.Domain.Character.Moves
         [SerializeField] private List<StatsImprove> statsToImprove = new();
 
         [Header("Visuals")]
-        [SerializeField] private GameObject visualPrefab;
-        [SerializeField] private float animationDuration;
+        [SerializeField, Tooltip("If false spawns on user")] private bool spawnVfxOnTarget = true;
+        [SerializeField] private GameObject vfxPrefab;
+        [SerializeField] private float moveAnimationDuration;
 
         public string MoveName => moveName;
         public string MoveDescription => moveDescription;
@@ -43,8 +45,9 @@ namespace Core.Domain.Character.Moves
         public CharacterTypes Type => type;
         public int Power => power;
         public int Accuracy => accuracy;
-        public GameObject VisualPrefab => visualPrefab;
-        public float AnimationDuration => animationDuration;
+        public bool SpawnVfxOnTarget => spawnVfxOnTarget;
+        public GameObject VfxPrefab => vfxPrefab;
+        public float AnimationDuration => moveAnimationDuration;
         public List<StatsImprove> StatsToImprove => statsToImprove;
     }
 }

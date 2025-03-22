@@ -1,4 +1,5 @@
 ﻿using Character.Base;
+using UnityEngine;
 
 namespace Character.Class
 {
@@ -17,7 +18,9 @@ namespace Character.Class
         int CustomLevel { get; set; }
 
         public void RaiseCharacterDied();
-        public void RaiseDamageReceived();
+        public void RaiseDamageReceived(GameObject vfx);
+        public void RaiseHealReceived(GameObject vfx);
+        public void RaiseImprovedStat(GameObject vfx);
         public void RaiseDamageMissed();
     }
 }

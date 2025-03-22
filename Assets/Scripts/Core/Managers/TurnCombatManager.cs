@@ -112,6 +112,11 @@ namespace Managers.Combat
             return list;
         }
 
+        public List<BaseCharacter> GetAllies(BaseCharacter character)
+        {
+            return _turnCharacters.Where(c => (c.CharacterTeam == character.CharacterTeam) && (!c.CharacterStats.IsDead())).ToList();
+        }
+
         public void GiveItems()
         {
             if (_itemsToGive == null || _itemsToGive.Count <= 0)
