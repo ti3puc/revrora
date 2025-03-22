@@ -177,7 +177,7 @@ namespace UI.Combat
             for (int i = 0; i < moveButtons.Length; i++)
             {
                 var moveNameText = moveButtons[i].transform.GetChild(0).GetComponent<TMP_Text>();
-                var moveBox = moveButtons[i].GetComponentInChildren<Image>();
+                var moveBox = moveButtons[i].transform.GetChild(1).GetComponent<Image>();
                 var moveBoxText = moveBox.GetComponentInChildren<TMP_Text>();
                 var move = character.CharacterMoves.Count > i ? character.CharacterMoves[i] : null;
 
