@@ -13,9 +13,16 @@ MonoBehaviour:
   m_Name: Spark
   m_EditorClassIdentifier: 
   moveName: Spark
-  category: 0
-  type: 0
-  power: 5
-  manaCost: 0
-  rate: 100
-  script: 
+  moveDescription: Throws a small lightning attack. Slightly improves the user speed.
+  category: 1
+  type: 4
+  power: 25
+  accuracy: 85
+  statsToImprove:
+  - StatToImprove: 2
+    ValueToImprove: 5
+    VfxPrefab: {fileID: 0}
+  spawnVfxOnTarget: 1
+  vfxPrefab: {fileID: 7719087324886769821, guid: fe54ac683d85c2745b402db31ca5e414,
+    type: 3}
+  moveAnimationDuration: 1

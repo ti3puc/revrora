@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Gust
   m_EditorClassIdentifier: 
   moveName: Gust
-  category: 0
-  type: 0
-  power: 5
-  manaCost: 0
-  rate: 100
-  script: 
+  moveDescription: Throws a powerful gust of wind to damage your foe.
+  category: 1
+  type: 4
+  power: 80
+  accuracy: 75
+  statsToImprove: []
+  spawnVfxOnTarget: 1
+  vfxPrefab: {fileID: 7719087324886769821, guid: fe54ac683d85c2745b402db31ca5e414,
+    type: 3}
+  moveAnimationDuration: 1

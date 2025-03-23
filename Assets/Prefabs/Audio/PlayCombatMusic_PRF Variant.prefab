@@ -20,6 +20,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5639650105084532260, guid: 9110223bd210d184694300dfd6e784d8,
         type: 3}
+      propertyPath: _musicsPerTrack.Array.data[0].Track
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639650105084532260, guid: 9110223bd210d184694300dfd6e784d8,
+        type: 3}
       propertyPath: _musicsPerTrack.Array.data[0].MusicId
       value: combat
       objectReference: {fileID: 0}
@@ -73,8 +78,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5639650105084532260, guid: 9110223bd210d184694300dfd6e784d8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2961653668032440104, guid: 9110223bd210d184694300dfd6e784d8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 989383619137519801}
   m_SourcePrefab: {fileID: 100100000, guid: 9110223bd210d184694300dfd6e784d8, type: 3}
+--- !u!1 &1817393210276457292 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2961653668032440104, guid: 9110223bd210d184694300dfd6e784d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468129256846019684}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &989383619137519801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817393210276457292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d78d1e913ba00ee4db857c50e0adb9d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _musicsPerTrack:
+  - MusicId: combat loop
+    Track: 1

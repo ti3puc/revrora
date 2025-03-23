@@ -13,19 +13,33 @@ MonoBehaviour:
   m_Name: Agua Viva Big
   m_EditorClassIdentifier: 
   _id: 6
-  _name: Jellostorm
+  _isPlayer: 0
+  _name: "Jellostorm \u03B2"
   _baseStats:
-    baseHP: 39
-    baseMana: 52
-    baseStrength: 43
-    baseDefense: 60
-    baseAgility: 50
-    baseWisdom: 65
-    type: 0
+    baseHP: 69
+    baseAttack: 80
+    baseDefense: 69
+    baseSpeed: 59
+    baseIntelligence: 66
+    type: 1
+  maxBuildPoints: 400
+  baseBuildPointsPercentage: 0.6
+  baseBuildPoints: 240.00002
+  baseBuildPointsPerStat: 48.000004
+  totalBuildPointsPerLevelPercentage: 0.39999998
+  totalBuildPointsPerLevel: 19.999998
+  buildPointsPerLevelPercentagePerStat: 0.08
+  buildPointsPerLevelPerStat: 3.9999995
+  statsLevelDivision: 2
+  statsPriorityOrder: 0100000000000000020000000400000003000000
   _characterMoves:
-  - {fileID: 11400000, guid: b063865351c6c674491fe0301c39eeb0, type: 2}
-  - {fileID: 11400000, guid: a86174b892340d9488253bac56145ea7, type: 2}
+  - {fileID: 11400000, guid: 607bab2da78967147b6932fb9aae4db8, type: 2}
   - {fileID: 11400000, guid: 873586ba1d493ed429aaef6124b61316, type: 2}
+  - {fileID: 11400000, guid: ba3b89c02ea93b945a37046b26a66c05, type: 2}
+  _dropItems:
+  - _itemReference: {fileID: 11400000, guid: 787b4918b53cfb44cb588c331910b3b4, type: 2}
+    _quantity: 2
+  - _itemReference: {fileID: 11400000, guid: 636393416550acf46891a402b58974fe, type: 2}
+    _quantity: 10
   _visual: {fileID: 533990679215027218, guid: 64bc312727a96fc4496e4b2151a5df4d, type: 3}
   _icon: {fileID: 2800000, guid: 02187d77b53e50749b7ca17613e4c84a, type: 3}
-  _graph: {fileID: 21300000, guid: 4b335fe1a6991e34186fd99b81779a71, type: 3}

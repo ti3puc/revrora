@@ -12,20 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6186e71f71368342b7058710441a95b, type: 3}
   m_Name: Questboard
   m_EditorClassIdentifier: 
-  _id: 99
+  _id: 92
+  _isPlayer: 0
   _name: Questboard
   _baseStats:
     baseHP: 39
-    baseMana: 52
-    baseStrength: 43
+    baseAttack: 0
     baseDefense: 60
-    baseAgility: 50
-    baseWisdom: 65
+    baseSpeed: 0
+    baseIntelligence: 0
     type: 0
+  maxBuildPoints: 400
+  baseBuildPointsPercentage: 0.6
+  baseBuildPoints: 240.00002
+  baseBuildPointsPerStat: 48.000004
+  totalBuildPointsPerLevelPercentage: 0.39999998
+  totalBuildPointsPerLevel: 19.999998
+  buildPointsPerLevelPercentagePerStat: 0.08
+  buildPointsPerLevelPerStat: 3.9999995
+  statsLevelDivision: 0
+  statsPriorityOrder: 0000000001000000020000000300000004000000
   _characterMoves:
   - {fileID: 11400000, guid: 0836f2666f00007499f4acc1c52a874d, type: 2}
   - {fileID: 11400000, guid: b7d5cc13a136b2445b5a3d3bd84e32e3, type: 2}
   - {fileID: 11400000, guid: b063865351c6c674491fe0301c39eeb0, type: 2}
+  _dropItems: []
   _visual: {fileID: 0}
   _icon: {fileID: 0}
-  _graph: {fileID: 0}

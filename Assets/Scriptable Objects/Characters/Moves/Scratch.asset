@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Scratch
   m_EditorClassIdentifier: 
   moveName: Scratch
+  moveDescription: Uses your sharp claws or teeth to damage the foe.
   category: 0
   type: 0
-  power: 5
-  manaCost: 0
-  rate: 100
-  script: 
+  power: 10
+  accuracy: 100
+  statsToImprove: []
+  spawnVfxOnTarget: 1
+  vfxPrefab: {fileID: 7719087324886769821, guid: fe54ac683d85c2745b402db31ca5e414,
+    type: 3}
+  moveAnimationDuration: 1

@@ -19,7 +19,7 @@ namespace Managers.Combat
         [SerializeField, ReadOnly] private int _turnInputIndex;
 
         public List<BaseCharacter> TurnInputCharacters => _turnInputCharacters;
-        public bool HasInitialized => _turnInputCharacters != null && _turnInputCharacters.Count > 0;
+        public bool HasInitialized => _turnInputCharacters != null && _turnInputCharacters.Count > 0 && _turnInputCharacters.All(x => x.IsInitialized);
         public bool IsTurnInputEnd => _turnInputIndex > _turnInputCharacters.Count - 1;
 
         public void InitializeCharacters(List<BaseCharacter> characters)

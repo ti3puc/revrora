@@ -12,6 +12,8 @@ using UnityEngine;
 using Persistence;
 using Environment.Interaction;
 using Inventory.Items;
+using static Audio.PlayLevelMusic;
+using Managers.Audio;
 
 namespace Creatures.Combat
 {
@@ -21,6 +23,11 @@ namespace Creatures.Combat
         [SerializeField] private ItemData _itemDrop;
         [SerializeField] private ItemPickup _itemPickupPrefab;
         [SerializeField] private Vector3 _itemSpawnOffset = new Vector3(0, 0, -2);
+
+        [Header("Sound")]
+        [SerializeField]
+        private MusicPerTrack _combatMusic = new MusicPerTrack
+        { MusicId = "combat", Track = 1 };
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private CreatureCharacter _creatureCharacter;
@@ -57,6 +64,8 @@ namespace Creatures.Combat
         {
             if (_hasTriggered) return;
 
+            AudioManager.Instance.PlaySound(_combatMusic.MusicId, _combatMusic.Track);
+
             var playerPokemon = GameManager.Characters.Find(x => x.Id == PlayerManager.Instance.Player.Id);
             var partyPokemon = GameManager.Characters.Find(x => x.Id == PartyManager.Instance.ActivePartyMember.Id);
             var wildPokemon = GameManager.Characters.Find(x => x.Id == _creatureCharacter.Id);
@@ -75,7 +84,14 @@ namespace Creatures.Combat
                     CharacterTeam.Enemy
                 };
 
-            TurnCombatManager.Instance.CacheInstantiateCharacters(characterDefinitions, characterTeams);
+            var customLevels = new List<int>
+                {
+                    -1,
+                    -1,
+                    _creatureCharacter.CustomLevel
+                };
+
+            TurnCombatManager.Instance.CacheInstantiateCharacters(characterDefinitions, characterTeams, customLevels);
             TurnCombatManager.Instance.CacheLastSceneInformation(SceneId, PlayerManager.Instance.PlayerTransform.position);
             ScenesManager.LoadScene("Combat");
 

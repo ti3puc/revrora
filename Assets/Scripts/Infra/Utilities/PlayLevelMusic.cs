@@ -12,9 +12,21 @@ namespace Audio
 			public int Track;
 		}
 
-		[SerializeField] private MusicPerTrack[] _musicsPerTrack;
+		[SerializeField] protected MusicPerTrack[] _musicsPerTrack;
 
-		private void Start()
+		protected virtual void OnValidate()
+		{
+			if (_musicsPerTrack == null || _musicsPerTrack.Length <= 0)
+				return;
+
+			for (int i = 0; i < _musicsPerTrack.Length; i++)
+			{
+				if (_musicsPerTrack[i].Track == 0)
+					_musicsPerTrack[i].Track = 1;
+			}
+		}
+
+		protected virtual void Start()
 		{
 			foreach (var musicPerTrack in _musicsPerTrack)
 			{

@@ -31,7 +31,8 @@ namespace Persistence
     [Serializable]
     public class PlayerData
     {
-
+        public int Experience;
+        public int Level;
     }
 
     [Serializable]

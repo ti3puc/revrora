@@ -37,6 +37,7 @@ namespace Combat.Creatures
         {
             var characterDefinitions = TurnCombatManager.Instance.ToInstanceCharacterDefinitions;
             var characterTeams = TurnCombatManager.Instance.ToInstanceCharacterTeams;
+            var customLevels = TurnCombatManager.Instance.ToInstanceCustomLevels;
 
             // player as pokemon
             var playerCharacter = Instantiate(_playerCombatPrefab, _playerSpawnPoint.position, _playerSpawnPoint.rotation)
@@ -65,6 +66,7 @@ namespace Combat.Creatures
             var enemyIndex = characterTeams.IndexOf(CharacterTeam.Enemy);
             var enemyDefinition = characterDefinitions[enemyIndex];
 
+            enemyCharacter.CustomLevel = customLevels[enemyIndex];
             enemyCharacter.CharacterDefinition = enemyDefinition;
             enemyCharacter.Initialize();
 

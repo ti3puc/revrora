@@ -3,6 +3,9 @@
     public enum MoveCategory
     {
         PHYSICAL,
-        STATUS
+        MAGICAL,
+        BUFF,
+        DEBUFF,
+        HEAL
     }
 }

@@ -18,9 +18,13 @@ namespace Inventory.Items
         [SerializeField] private int _minimumStackSize = 0;
         [SerializeField] private int _maximumStackSize = 99;
 
+        [Header("XP")]
+        [SerializeField] private bool _canSell;
+        [SerializeField, ShowIf("_canSell")] private int _sellXp;
+
         [Header("UI")]
         [SerializeField] private string _displayName;
-        [SerializeField] private Sprite _icon;
+        [SerializeField, ShowAssetPreview(128)] private Sprite _icon;
         [SerializeField] private GameObject _icon3d;
         [SerializeField] private bool _hideItemIfNotAvailable;
         [SerializeField, HideIf("_hideItemIfNotAvailable")] private bool _ghostItemIfNotAvailable;
@@ -39,5 +43,7 @@ namespace Inventory.Items
         public bool GhostItemIfNotAvailable => _ghostItemIfNotAvailable;
         public bool ShowStackText => _showStackText;
         public bool HideStackIfEmpty => _hideStackIfEmpty;
+        public bool CanSell => _canSell;
+        public int SellXp => _sellXp;
     }
 }

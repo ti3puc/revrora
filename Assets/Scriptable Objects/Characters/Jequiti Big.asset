@@ -13,19 +13,31 @@ MonoBehaviour:
   m_Name: Jequiti Big
   m_EditorClassIdentifier: 
   _id: 12
-  _name: Jequitiranaboia
+  _isPlayer: 0
+  _name: "Jequitiranaboia \u03B2"
   _baseStats:
-    baseHP: 39
-    baseMana: 52
-    baseStrength: 43
-    baseDefense: 60
-    baseAgility: 50
-    baseWisdom: 65
-    type: 0
+    baseHP: 72
+    baseAttack: 76
+    baseDefense: 54
+    baseSpeed: 34
+    baseIntelligence: 47
+    type: 2
+  maxBuildPoints: 400
+  baseBuildPointsPercentage: 0.6
+  baseBuildPoints: 240.00002
+  baseBuildPointsPerStat: 48.000004
+  totalBuildPointsPerLevelPercentage: 0.39999998
+  totalBuildPointsPerLevel: 19.999998
+  buildPointsPerLevelPercentagePerStat: 0.08
+  buildPointsPerLevelPerStat: 3.9999995
+  statsLevelDivision: 2
+  statsPriorityOrder: 0100000000000000020000000400000003000000
   _characterMoves:
-  - {fileID: 11400000, guid: 0836f2666f00007499f4acc1c52a874d, type: 2}
-  - {fileID: 11400000, guid: b7d5cc13a136b2445b5a3d3bd84e32e3, type: 2}
-  - {fileID: 11400000, guid: b063865351c6c674491fe0301c39eeb0, type: 2}
-  _visual: {fileID: 2496978506789081796, guid: d3b17ca88bd42ab4ea1f698deff35e03, type: 3}
+  - {fileID: 11400000, guid: 5d495c74a51fc514db01be6a68560f2d, type: 2}
+  - {fileID: 11400000, guid: bf54f484adae6ad43b65c908ffb8f65b, type: 2}
+  - {fileID: 11400000, guid: c2778df798c39f64b985313fd4559a5f, type: 2}
+  _dropItems:
+  - _itemReference: {fileID: 11400000, guid: 787b4918b53cfb44cb588c331910b3b4, type: 2}
+    _quantity: 3
+  _visual: {fileID: 5358481315907754382, guid: fc8c79d1827f0594388d1d79125750f9, type: 3}
   _icon: {fileID: 2800000, guid: c807a285b85a98f47a0b7514f2f158d0, type: 3}
-  _graph: {fileID: 21300000, guid: ca1bd6dc80342034aab3a7f6c5ae7c2f, type: 3}

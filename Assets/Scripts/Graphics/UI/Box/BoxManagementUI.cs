@@ -4,6 +4,7 @@ using Character.Base;
 using Managers.Box;
 using Managers.Party;
 using NaughtyAttributes;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,14 @@ namespace UI.Box
 
         [Header("References Party")]
         [SerializeField] private List<Button> _partyMembersButtons = new List<Button>();
+
+        [Header("References UI")]
+        [SerializeField] private string _toSelectSlot = "Select slot";
+        [SerializeField] private string _noMemberOnSlot = "Empty";
+        [SerializeField] private TMP_Text _selectSlotText;
+        [SerializeField] private string _notSelectedStorage = "Storage";
+        [SerializeField] private string _toSelectStorage = "Select creature";
+        [SerializeField] private TMP_Text _selectStorageText;
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private Button _currentPartyMemberSelected;
@@ -82,7 +91,7 @@ namespace UI.Box
                 bool hasPartyMember = PartyManager.Instance.PartyMembers.Contains(partyInstanceMember);
 
                 var sendToBoxButton = _partyMembersButtons[i].GetComponentInChildren<SendToBoxButtonUI>(true);
-                sendToBoxButton.gameObject.SetActive(hasPartyMember);
+                sendToBoxButton.gameObject.SetActive(hasPartyMember && _currentPartyMemberSelected == _partyMembersButtons[i]);
 
                 var image = _partyMembersButtons[i].transform.GetChild(0).GetComponent<RawImage>();
 
@@ -97,6 +106,8 @@ namespace UI.Box
 
                 sendToBoxButton.SetCharacter(partyInstanceMember.CharacterDefinition);
             }
+            
+            UpdateTitles();
         }
 
         private void SelectPartyMember(int index)
@@ -107,6 +118,27 @@ namespace UI.Box
             _currentPartyMemberSelected = _partyMembersButtons[index];
             foreach (var partyMemberButton in _partyMembersButtons)
                 partyMemberButton.interactable = partyMemberButton != _partyMembersButtons[index];
+
+            UpdatePartyMembers();
+        }
+
+        private void UpdateTitles()
+        {
+            if (_currentPartyMemberSelected == null)
+            {
+                _selectSlotText.text = _toSelectSlot;
+                _selectStorageText.text = _notSelectedStorage;
+                return;
+            }
+
+            int memberIndex = _partyMembersButtons.IndexOf(_currentPartyMemberSelected);
+
+            var partyInstanceMember = PartySceneInstanceManager.Instance.PartyBaseCharacters[memberIndex];
+            bool hasPartyMember = partyInstanceMember != null && PartyManager.Instance.PartyMembers.Contains(partyInstanceMember)
+                && partyInstanceMember.CharacterDefinition != null;
+
+            _selectSlotText.text = hasPartyMember ? partyInstanceMember.CharacterDefinition.Name : _noMemberOnSlot;
+            _selectStorageText.text = _toSelectStorage;
         }
 
         private void SwitchBoxCharacter(CharacterDefinition characterDefinition)
@@ -138,12 +170,12 @@ namespace UI.Box
                 PartySceneInstanceManager.Instance.AddCharacterToParty(characterDefinition, partyMemberIndex);
             }
 
-            UpdateBoxMembers();
-            UpdatePartyMembers();
-
             _currentPartyMemberSelected = null;
             foreach (var partyMemberButton in _partyMembersButtons)
                 partyMemberButton.interactable = true;
+
+            UpdateBoxMembers();
+            UpdatePartyMembers();
         }
 
         private void SendToBox(CharacterDefinition characterDefinition)
@@ -161,12 +193,12 @@ namespace UI.Box
 
             PartyManager.Instance.SwitchActiveMemberIndex(PartyManager.Instance.ActiveMemberIndex);
 
-            UpdateBoxMembers();
-            UpdatePartyMembers();
-
             _currentPartyMemberSelected = null;
             foreach (var partyMemberButton in _partyMembersButtons)
                 partyMemberButton.interactable = true;
+
+            UpdateBoxMembers();
+            UpdatePartyMembers();
         }
     }
 }

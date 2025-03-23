@@ -55,9 +55,19 @@ MonoBehaviour:
   - _id: menu
     _audioClip: {fileID: 8300000, guid: 3d23c585c3c7ae543a3fcc31e969cc7a, type: 3}
   - _id: city
-    _audioClip: {fileID: 8300000, guid: 1d2c07bb38d16b04aa15eee746053c55, type: 3}
-  - _id: combat
-    _audioClip: {fileID: 8300000, guid: ee21497649ef0e4438183809dfb4d736, type: 3}
+    _audioClip: {fileID: 8300000, guid: a804eb0e9ec61a54aaab56fbbdd4610c, type: 3}
+  - _id: combat in
+    _audioClip: {fileID: 8300000, guid: 1b9f8ac630b0575448aad006c909bac2, type: 3}
+  - _id: combat loop
+    _audioClip: {fileID: 8300000, guid: 050e31616f3d36e42876f9b26e4d9070, type: 3}
+  - _id: water
+    _audioClip: {fileID: 8300000, guid: f9233d2b1a78db548bdcc96b5617397e, type: 3}
+  - _id: earth
+    _audioClip: {fileID: 8300000, guid: 0796da3efd804f3449ae2be1ec3c816c, type: 3}
+  - _id: fire
+    _audioClip: {fileID: 8300000, guid: ef5853a68d45fb24ba5a0da8d48fbb84, type: 3}
+  - _id: air
+    _audioClip: {fileID: 8300000, guid: 9a387b397ffd59349ad3ae1119981644, type: 3}
   _soundEffects:
   - _id: ui_click
     _audioClip: {fileID: 8300000, guid: 15fcd43809e7edc44966a0d9fc6199fb, type: 3}
@@ -65,6 +75,8 @@ MonoBehaviour:
     _audioClip: {fileID: 8300000, guid: 145c9e21126cbda4b99c4b30c0e49e48, type: 3}
   - _id: collect
     _audioClip: {fileID: 8300000, guid: dda9db792f6977941acb2463b5669fe2, type: 3}
+  - _id: miss
+    _audioClip: {fileID: 8300000, guid: 1ce1aa4074fd7764a86d584020fd7ac3, type: 3}
   _fadeTime: 0.5
   _tracks: []
 --- !u!82 &8365461079339131892

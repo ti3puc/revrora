@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Character.Base;
 using Character.Class;
+using Core.Domain.Character.Moves;
 using Core.Engine.Combat.CombatActions;
+using Managers;
 using Managers.Combat;
+using Managers.Player;
 using NaughtyAttributes;
 using Persistence;
 using Player.Input;
@@ -45,14 +48,16 @@ namespace Combat
         private void Update()
         {
             if (_isCombatEnded) return;
+            if (TurnCombatManager.Instance.HasInitialized == false) return;
+            if (TurnInputManager.Instance.HasInitialized == false) return;
 
-            if (TurnCombatManager.Instance.HasInitialized && _isReceivingTurnInput)
+            if (_isReceivingTurnInput)
             {
                 StartCoroutine(GetCombatInputs());
                 _isReceivingTurnInput = false;
             }
 
-            if (TurnCombatManager.Instance.HasInitialized && _hasFinishedTurnInputs)
+            if (_hasFinishedTurnInputs)
             {
                 StartCoroutine(ProcessCombatCoroutine());
                 _hasFinishedTurnInputs = false;
@@ -114,10 +119,18 @@ namespace Combat
                 }
 
                 var move = _currentCharacter.CharacterMoves[_turnMoveDict[_currentCharacter]];
-                new CombatActionMove().execute(_currentCharacter, move, TurnCombatManager.Instance.GetEnemies(_currentCharacter));
+                var targets = TurnCombatManager.Instance.GetEnemies(_currentCharacter);
+
+                if (move.Category == MoveCategory.HEAL)
+                {
+                    targets.Clear();
+                    targets = TurnCombatManager.Instance.GetAllies(_currentCharacter);
+                }
+
+                new CombatActionMove().Execute(_currentCharacter, move, targets);
 
                 TurnCombatManager.Instance.SetNextCharacter();
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(move.AnimationDuration);
             }
 
             // if combat end there's no need to finish processing
@@ -176,6 +189,8 @@ namespace Combat
                     SaveSystem.Instance.GameData.CombatSceneWinData.CombatSceneIds.Add(combatSceneId);
 
                 SaveSystem.Instance.GameData.CombatSceneWinData.LastPlayerPosition = TurnCombatManager.Instance.LastPlayerPosition;
+
+                TurnCombatManager.Instance.GiveItems();
 
                 GameLog.Debug(this, "You win!");
                 OnPlayerWonCombat?.Invoke();
