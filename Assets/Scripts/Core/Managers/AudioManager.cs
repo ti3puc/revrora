@@ -136,6 +136,24 @@ namespace Managers.Audio
 		{
 			StartCoroutine(StartChangeSoundWithFade(soundName, trackNumber, GetTrackVolume(trackNumber)));
 		}
+
+		public void QueueSound(string nextSoundName, int trackNumber)
+		{
+			StartCoroutine(WaitForSoundToFinish(nextSoundName, trackNumber));
+		}
+
+		private IEnumerator WaitForSoundToFinish(string nextSoundName, int trackNumber, float overlapTime = .1f)
+		{
+			AudioSource audioSource = GetTrack(trackNumber);
+			if (audioSource == null || audioSource.clip == null) yield break;
+
+			audioSource.loop = false;
+
+			while (audioSource.isPlaying && (audioSource.clip.length - audioSource.time) > overlapTime)
+				yield return null;
+
+			PlaySound(nextSoundName, trackNumber);
+		}
 		#endregion
 
 		#region Private Methods

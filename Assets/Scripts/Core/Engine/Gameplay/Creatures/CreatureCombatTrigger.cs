@@ -19,7 +19,7 @@ namespace Creatures.Combat
     public class CreatureCombatTrigger : MonoBehaviour
     {
 		[SerializeField] private MusicPerTrack _combatMusic = new MusicPerTrack
-            { MusicId = "combat", Track = 1 };
+            { MusicId = "combat in", Track = 1 };
 
         [Header("Debug")]
         [SerializeField, ReadOnly] private CreatureCharacter _creatureCharacter;

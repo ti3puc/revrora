@@ -49,21 +49,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd0bffaa84d2dd4d8175f3a2a898d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _customLevel: 1
   _characterDefinition: {fileID: 0}
   _characterTeam: 1
-  _damageVfx: {fileID: 7719087324886769821, guid: fe54ac683d85c2745b402db31ca5e414,
-    type: 3}
+  _rotationSpeed: 180
   _hitSoundId: hit
+  _missVfx: {fileID: 0}
+  _missSoundId: miss
+  _healSoundId: heal
+  _deathVfx: {fileID: 0}
+  _deadSoundId: dead
+  _improvedSoundId: improved
   _characterStats:
-    _level: 0
-    _experience: 0
     _hp: 0
-    _mana: 0
-    _buildPoints: 0
-    _strengthPoints: 0
-    _defensePoints: 0
-    _agilityPoints: 0
-    _wisdomPoints: 0
+    _maxHp: 0
+    _attack: 0
+    _defense: 0
+    _speed: 0
+    _intelligence: 0
+    _firstRemainingPoints: 0
+    _secondRemainingPoints: 0
+    _thirdRemainingPoints: 0
+    _fourthRemainingPoints: 0
+    _fifthRemainingPoints: 0
+    _tempAttack: 0
+    _tempDefense: 0
+    _tempSpeed: 0
+    _tempIntelligence: 0
   _addToPartyOnStart: 0
   _addToPartyIndex: 0
 --- !u!114 &3472689800138208592
@@ -157,6 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d96c01134ead94792d461a9278cabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _combatMusic:
+    MusicId: combat in
+    Track: 1
   _creatureCharacter: {fileID: 0}
   _hasTriggered: 0
   _sceneId: 0
