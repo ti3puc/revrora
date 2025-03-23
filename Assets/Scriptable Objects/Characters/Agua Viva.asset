@@ -21,7 +21,7 @@ MonoBehaviour:
     baseDefense: 60
     baseSpeed: 50
     baseIntelligence: 0
-    type: 0
+    type: 1
   maxBuildPoints: 400
   baseBuildPointsPercentage: 0.6
   baseBuildPoints: 240.00002

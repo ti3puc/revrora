@@ -19,6 +19,8 @@ namespace UI.Combat
         public delegate void MoveEvent(int moveIndex);
         public static event MoveEvent OnMoveCalled;
 
+        public static event Action OnShouldShowCombatLogs;
+
         [Header("Canvas")]
         [SerializeField] private Canvas _canvas;
 
@@ -50,6 +52,9 @@ namespace UI.Combat
         [SerializeField] private Color _earthColor = Color.green;
         [SerializeField] private Color _airColor = Color.grey;
 
+        [Header("Moves History")]
+        [SerializeField] private Button _showCombatLogsButton;
+
         [Header("Debug")]
         [SerializeField, ReadOnly] private bool _isShowingMovesPanel;
         [SerializeField, ReadOnly] private BaseCharacter _currentCharacter;
@@ -75,6 +80,10 @@ namespace UI.Combat
 
             TurnInputManager.OnChangedInputCharacter += OnChangedInputCharacter;
             CanvasManager.OnTogglePauseCanvas += ToggleUI;
+
+            CombatInfoUI.OnShouldShowActions += BackToShowActions;
+
+            _showCombatLogsButton.onClick.AddListener(ShowCombatLogs);
         }
 
         private void OnDestroy()
@@ -94,6 +103,10 @@ namespace UI.Combat
 
             TurnInputManager.OnChangedInputCharacter -= OnChangedInputCharacter;
             CanvasManager.OnTogglePauseCanvas -= ToggleUI;
+
+            CombatInfoUI.OnShouldShowActions -= BackToShowActions;
+
+            _showCombatLogsButton.onClick.RemoveListener(ShowCombatLogs);
         }
 
         private void LateUpdate()
@@ -126,10 +139,23 @@ namespace UI.Combat
             _hasSetMoveInfo = false;
         }
 
-        private void ToggleUI(bool isPaused)
+        private void ShowCombatLogs()
         {
-            var canvas = GetComponent<Canvas>();
-            canvas.enabled = !isPaused;
+            ToggleUI(false);
+            OnShouldShowCombatLogs?.Invoke();
+        }
+
+        private void BackToShowActions()
+        {
+            ToggleUI(true);
+        }
+
+        private void ToggleUI(bool state)
+        {
+            if (state)
+                ShowUI();
+            else
+                HideUI();
         }
 
         private void HideUI()

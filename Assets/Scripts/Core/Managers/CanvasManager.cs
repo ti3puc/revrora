@@ -108,7 +108,7 @@ namespace UI
 
             _isPaused = !_isPaused;
             _pauseCanvas.gameObject.SetActive(_isPaused);
-            OnTogglePauseCanvas?.Invoke(_isPaused);
+            OnTogglePauseCanvas?.Invoke(!_isPaused);
 
             if (_mainCanvas)
                 _mainCanvas.gameObject.SetActive(false);

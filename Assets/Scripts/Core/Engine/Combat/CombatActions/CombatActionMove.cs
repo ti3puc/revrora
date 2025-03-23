@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Character.Base;
 using Character.Class;
 using Combat;
@@ -6,11 +7,14 @@ using Core.Domain.Character.Moves;
 using UnityEngine;
 using static Character.Base.CharacterDefinition;
 using static Core.Domain.Character.Moves.CharacterMove;
+using Random = UnityEngine.Random;
 
 namespace Core.Engine.Combat.CombatActions
 {
     public class CombatActionMove : ICombatAction
     {
+        public static event Action<string> OnMoveHistory;
+
         private List<BaseCharacter> _targets;
 
         public void Execute(BaseCharacter user, CharacterMove move, List<BaseCharacter> targets)
@@ -55,6 +59,8 @@ namespace Core.Engine.Combat.CombatActions
                         user.RotateTo(cachedBaseRotation);
                     else
                         user.RotateTo(target.transform);
+
+                    OnMoveHistory?.Invoke($"{user.Name} missed {move.MoveName} on {target.Name}.");
                 }
                 return;
             }
@@ -66,7 +72,7 @@ namespace Core.Engine.Combat.CombatActions
                 else
                     user.RotateTo(target.transform);
 
-                var modifier = TypeModifier(move.Type, target.Type);
+                var modifier = TypeModifier(move.Type, target.Type, out string effectiveComplement);
                 var heal = ((1 - target.Intelligence / 100f) + move.Power) * modifier * (1 - target.Intelligence / 100f);
 
                 Debug.Log($"Heal: ((1 - {target.Intelligence} / 100) + {move.Power}) * {modifier} * (1 - {target.Intelligence} / 100) = {heal}");
@@ -75,6 +81,8 @@ namespace Core.Engine.Combat.CombatActions
                 target.CharacterStats.ReceiveHeal(Mathf.FloorToInt(heal), vfx);
                 if (!move.SpawnVfxOnTarget)
                     user.SpawnVfx(move.VfxPrefab);
+
+                OnMoveHistory?.Invoke($"{user.Name} used {move.MoveName} on {target.Name}. {effectiveComplement}");
 
                 var statusTarget = move.Category == MoveCategory.DEBUFF ? targets[0] : user;
                 ImproveStats(statusTarget, move);
@@ -99,6 +107,8 @@ namespace Core.Engine.Combat.CombatActions
                         user.RotateTo(cachedBaseRotation);
                     else
                         user.RotateTo(target.transform);
+
+                    OnMoveHistory?.Invoke($"{user.Name} missed {move.MoveName} on {target.Name}.");
                 }
                 return;
             }
@@ -110,7 +120,7 @@ namespace Core.Engine.Combat.CombatActions
                 else
                     user.RotateTo(target.transform);
 
-                var modifier = TypeModifier(move.Type, target.Type);
+                var modifier = TypeModifier(move.Type, target.Type, out string effectiveComplement);
                 var damage = ((1 - target.Attack / 100f) + move.Power) * modifier * (1 - target.Defense / 100f);
 
                 Debug.Log($"Damage: ((1 - {target.Attack} / 100) + {move.Power}) * {modifier} * (1 - {target.Defense} / 100) = {damage}");
@@ -119,6 +129,8 @@ namespace Core.Engine.Combat.CombatActions
                 target.CharacterStats.ReceiveDamage(Mathf.FloorToInt(damage), vfx);
                 if (!move.SpawnVfxOnTarget)
                     user.SpawnVfx(move.VfxPrefab);
+
+                OnMoveHistory?.Invoke($"{user.Name} used {move.MoveName} on {target.Name}. {effectiveComplement}");
 
                 var statusTarget = move.Category == MoveCategory.DEBUFF ? targets[0] : user;
                 ImproveStats(statusTarget, move);
@@ -143,6 +155,8 @@ namespace Core.Engine.Combat.CombatActions
                         user.RotateTo(cachedBaseRotation);
                     else
                         user.RotateTo(target.transform);
+
+                    OnMoveHistory?.Invoke($"{user.Name} missed {move.MoveName} on {target.Name}.");
                 }
                 return;
             }
@@ -154,7 +168,7 @@ namespace Core.Engine.Combat.CombatActions
                 else
                     user.RotateTo(target.transform);
 
-                var modifier = TypeModifier(move.Type, target.Type);
+                var modifier = TypeModifier(move.Type, target.Type, out string effectiveComplement);
                 var damage = ((1 - target.Intelligence / 100f) + move.Power) * modifier * (1 - target.Intelligence / 100f);
 
                 Debug.Log($"Damage: ((1 - {target.Intelligence} / 100) + {move.Power}) * {modifier} * (1 - {target.Intelligence} / 100) = {damage}");
@@ -163,6 +177,8 @@ namespace Core.Engine.Combat.CombatActions
                 target.CharacterStats.ReceiveDamage(Mathf.FloorToInt(damage), vfx);
                 if (!move.SpawnVfxOnTarget)
                     user.SpawnVfx(move.VfxPrefab);
+
+                OnMoveHistory?.Invoke($"{user.Name} used {move.MoveName} on {target.Name}. {effectiveComplement}");
 
                 var statusTarget = move.Category == MoveCategory.DEBUFF ? targets[0] : user;
                 ImproveStats(statusTarget, move);
@@ -204,13 +220,21 @@ namespace Core.Engine.Combat.CombatActions
                         user.CharacterStats.ImproveIntelligence(stat.ValueToImprove, stat.VfxPrefab);
                         break;
                 }
+
+                string action = move.Category == MoveCategory.BUFF ? "increased" : "decreased";
+                string value = stat.ValueToImprove > 60 ? "drastically" : stat.ValueToImprove > 35 ? "significantly" : "slightly";
+                OnMoveHistory?.Invoke($"{user.Name} {stat.StatToImprove.ToString().ToLower()} {value} {action}.");
             }
 
             Debug.Log($"Stats improved: {improvedLog}");
         }
 
-        private float TypeModifier(CharacterTypes moveUsed, CharacterTypes targetCharacter)
+        private float TypeModifier(CharacterTypes moveUsed, CharacterTypes targetCharacter, out string effectiveComplement)
         {
+            effectiveComplement = "";
+            string ineffective = "It's not very effective...";
+            string effective = "It's super effective!";
+
             switch (moveUsed)
             {
                 case CharacterTypes.NORMAL:
@@ -221,12 +245,15 @@ namespace Core.Engine.Combat.CombatActions
                     switch (targetCharacter)
                     {
                         case CharacterTypes.WATER:
+                            effectiveComplement = ineffective;
                             return .5f;
                         case CharacterTypes.EARTH:
                             return 1;
                         case CharacterTypes.FIRE:
+                            effectiveComplement = ineffective;
                             return .5f;
                         case CharacterTypes.AIR:
+                            effectiveComplement = effective;
                             return 2;
                     }
                     break;
@@ -234,10 +261,13 @@ namespace Core.Engine.Combat.CombatActions
                     switch (targetCharacter)
                     {
                         case CharacterTypes.WATER:
+                            effectiveComplement = ineffective;
                             return .5f;
                         case CharacterTypes.EARTH:
+                            effectiveComplement = ineffective;
                             return .5f;
                         case CharacterTypes.FIRE:
+                            effectiveComplement = effective;
                             return 2;
                         case CharacterTypes.AIR:
                             return 1;
@@ -247,12 +277,15 @@ namespace Core.Engine.Combat.CombatActions
                     switch (targetCharacter)
                     {
                         case CharacterTypes.WATER:
+                            effectiveComplement = effective;
                             return 2;
                         case CharacterTypes.EARTH:
+                            effectiveComplement = ineffective;
                             return .5f;
                         case CharacterTypes.FIRE:
                             return 1;
                         case CharacterTypes.AIR:
+                            effectiveComplement = ineffective;
                             return .5f;
                     }
                     break;
@@ -262,10 +295,13 @@ namespace Core.Engine.Combat.CombatActions
                         case CharacterTypes.WATER:
                             return 1;
                         case CharacterTypes.EARTH:
+                            effectiveComplement = effective;
                             return 2;
                         case CharacterTypes.FIRE:
+                            effectiveComplement = ineffective;
                             return .5f;
                         case CharacterTypes.AIR:
+                            effectiveComplement = ineffective;
                             return .5f;
                     }
                     break;

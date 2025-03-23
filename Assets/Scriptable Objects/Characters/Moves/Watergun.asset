@@ -15,7 +15,7 @@ MonoBehaviour:
   moveName: Watergun
   moveDescription: 
   category: 0
-  type: 0
+  type: 1
   power: 5
   accuracy: 100
   statsToImprove: []

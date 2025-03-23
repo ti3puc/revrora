@@ -83,7 +83,9 @@ namespace Character.Base
             AudioManager.Instance.PlaySoundOneShot(_deadSoundId, 3);
 
             // TODO: die animation
-            gameObject.SetActive(false);
+            // if player dies does not disable object, only enter in a dead state
+            if (CharacterDefinition.IsPlayer == false)
+                gameObject.SetActive(false);
 
             OnCharacterDied?.Invoke(this);
         }
