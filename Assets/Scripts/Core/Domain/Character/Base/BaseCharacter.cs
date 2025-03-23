@@ -39,7 +39,7 @@ namespace Character.Base
         [SerializeField] private string _improvedSoundId = "improved";
 
         [Header("Debug")]
-        [SerializeField, ReadOnly] private CharacterStats _characterStats;
+        [SerializeField, ReadOnly] private CharacterStats _characterStats = null;
 
         public int Id => _characterDefinition.Id;
         public string Name => _characterDefinition.Name;
@@ -63,6 +63,7 @@ namespace Character.Base
             get => _characterDefinition;
             set => _characterDefinition = value;
         }
+        public bool IsInitialized => _characterDefinition != null && _characterStats != null;
 
         private void Awake()
         {
@@ -73,6 +74,7 @@ namespace Character.Base
         public void Initialize(CharacterDefinition newCharacterDefinition)
         {
             _characterDefinition = newCharacterDefinition;
+            _characterDefinition.Setup();
             InstantiateVisual();
         }
 

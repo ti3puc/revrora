@@ -36,7 +36,7 @@ namespace Managers.Combat
         public List<CharacterDefinition> ToInstanceCharacterDefinitions => _toInstanceCacheCharacterDefinitions;
         public List<CharacterTeam> ToInstanceCharacterTeams => _toInstanceCacheCharacterTeams;
         public List<int> ToInstanceCustomLevels => _toInstanceCustomLevels;
-        public bool HasInitialized => _turnCharacters != null && _turnCharacters.Count > 0;
+        public bool HasInitialized => _turnCharacters != null && _turnCharacters.Count > 0 && _turnCharacters.All(x => x.IsInitialized);
         public bool IsTurnEnd => _isTurnEnd = _turnIndex > _turnCharacters.Count - 1;
         public int CombatCreatureSceneId => _combatCreatureSceneId;
         public Vector3 LastPlayerPosition => _lastPlayerPosition;

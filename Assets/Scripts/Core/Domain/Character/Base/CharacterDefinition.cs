@@ -98,6 +98,11 @@ namespace Character.Base
 
         private void OnValidate()
         {
+            Setup();
+        }
+
+        public void Setup()
+        {
             _isPlayer = _id == 0;
 
             baseBuildPoints = maxBuildPoints * baseBuildPointsPercentage; // if base points is 20%, each level (max 8) is 10%

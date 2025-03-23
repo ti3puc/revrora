@@ -48,14 +48,16 @@ namespace Combat
         private void Update()
         {
             if (_isCombatEnded) return;
+            if (TurnCombatManager.Instance.HasInitialized == false) return;
+            if (TurnInputManager.Instance.HasInitialized == false) return;
 
-            if (TurnCombatManager.Instance.HasInitialized && _isReceivingTurnInput)
+            if (_isReceivingTurnInput)
             {
                 StartCoroutine(GetCombatInputs());
                 _isReceivingTurnInput = false;
             }
 
-            if (TurnCombatManager.Instance.HasInitialized && _hasFinishedTurnInputs)
+            if (_hasFinishedTurnInputs)
             {
                 StartCoroutine(ProcessCombatCoroutine());
                 _hasFinishedTurnInputs = false;
@@ -126,7 +128,6 @@ namespace Combat
                 }
 
                 new CombatActionMove().Execute(_currentCharacter, move, targets);
-                Debug.Log($"{_currentCharacter.Name} used {move.MoveName}");
 
                 TurnCombatManager.Instance.SetNextCharacter();
                 yield return new WaitForSeconds(move.AnimationDuration);
