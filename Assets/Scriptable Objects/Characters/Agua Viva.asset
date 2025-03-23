@@ -33,8 +33,8 @@ MonoBehaviour:
   statsLevelDivision: 1
   statsPriorityOrder: 0300000002000000010000000000000004000000
   _characterMoves:
+  - {fileID: 11400000, guid: b063865351c6c674491fe0301c39eeb0, type: 2}
   - {fileID: 11400000, guid: 873586ba1d493ed429aaef6124b61316, type: 2}
-  - {fileID: 11400000, guid: a86174b892340d9488253bac56145ea7, type: 2}
   - {fileID: 11400000, guid: 4300c2bbcb6770649a188029a4d4f933, type: 2}
   _dropItems:
   - _itemReference: {fileID: 11400000, guid: 636393416550acf46891a402b58974fe, type: 2}

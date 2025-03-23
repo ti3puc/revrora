@@ -45,13 +45,6 @@ namespace UI.Combat
         [SerializeField] private Button _moveButton2;
         [SerializeField] private Button _moveButton3;
 
-        [Header("Moves: Color")]
-        [SerializeField] private Color _normalColor = Color.magenta;
-        [SerializeField] private Color _fireColor = Color.red;
-        [SerializeField] private Color _waterColor = Color.blue;
-        [SerializeField] private Color _earthColor = Color.green;
-        [SerializeField] private Color _airColor = Color.grey;
-
         [Header("Moves History")]
         [SerializeField] private Button _showCombatLogsButton;
 
@@ -214,9 +207,8 @@ namespace UI.Combat
             for (int i = 0; i < moveButtons.Length; i++)
             {
                 var moveNameText = moveButtons[i].transform.GetChild(0).GetComponent<TMP_Text>();
-                var moveBox = moveButtons[i].transform.GetChild(1).GetComponent<Image>();
-                var moveBoxText = moveBox.GetComponentInChildren<TMP_Text>();
                 var move = character.CharacterMoves.Count > i ? character.CharacterMoves[i] : null;
+                var moveBox = moveButtons[i].transform.GetChild(1).GetComponent<TypeBoxUI>();
 
                 if (move != null)
                 {
@@ -224,18 +216,7 @@ namespace UI.Combat
                     moveNameText.text = $"{move.MoveName}";
 
                     moveBox.gameObject.SetActive(true);
-                    moveBox.color = move.Type switch
-                    {
-                        CharacterTypes.NORMAL => _normalColor,
-                        CharacterTypes.FIRE => _fireColor,
-                        CharacterTypes.WATER => _waterColor,
-                        CharacterTypes.EARTH => _earthColor,
-                        CharacterTypes.AIR => _airColor,
-                        _ => _normalColor,
-                    };
-
-                    var type = char.ToUpper(move.Type.ToString()[0]) + move.Type.ToString().Substring(1).ToLower();
-                    moveBoxText.text = type;
+                    moveBox.SetTypeBox(move.Type);
                 }
                 else
                 {
