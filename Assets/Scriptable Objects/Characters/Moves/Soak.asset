@@ -10,15 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7ce6dd5a45e44f5b027dfad7fa623a7, type: 3}
-  m_Name: Earthquake
+  m_Name: Soak
   m_EditorClassIdentifier: 
-  moveName: Earthquake
-  moveDescription: Powerful move that shakes the ground causing damage to your foe.
-  category: 1
-  type: 3
-  power: 100
-  accuracy: 35
-  statsToImprove: []
+  moveName: Soak
+  moveDescription: Soaks the foe with water, decreasing its speed.
+  category: 3
+  type: 1
+  power: 0
+  accuracy: 60
+  statsToImprove:
+  - StatToImprove: 2
+    ValueToImprove: -61
+    VfxPrefab: {fileID: 0}
   spawnVfxOnTarget: 1
   vfxPrefab: {fileID: 7719087324886769821, guid: fe54ac683d85c2745b402db31ca5e414,
     type: 3}

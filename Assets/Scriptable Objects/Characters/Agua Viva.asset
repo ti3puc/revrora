@@ -19,9 +19,9 @@ MonoBehaviour:
     baseHP: 39
     baseAttack: 51
     baseDefense: 60
-    baseSpeed: 50
-    baseIntelligence: 0
-    type: 1
+    baseSpeed: 72
+    baseIntelligence: 41
+    type: 4
   maxBuildPoints: 400
   baseBuildPointsPercentage: 0.6
   baseBuildPoints: 240.00002
@@ -30,12 +30,12 @@ MonoBehaviour:
   totalBuildPointsPerLevel: 19.999998
   buildPointsPerLevelPercentagePerStat: 0.08
   buildPointsPerLevelPerStat: 3.9999995
-  statsLevelDivision: 0
-  statsPriorityOrder: 0000000001000000020000000300000004000000
+  statsLevelDivision: 1
+  statsPriorityOrder: 0300000002000000010000000000000004000000
   _characterMoves:
-  - {fileID: 11400000, guid: b063865351c6c674491fe0301c39eeb0, type: 2}
-  - {fileID: 11400000, guid: a86174b892340d9488253bac56145ea7, type: 2}
   - {fileID: 11400000, guid: 873586ba1d493ed429aaef6124b61316, type: 2}
+  - {fileID: 11400000, guid: a86174b892340d9488253bac56145ea7, type: 2}
+  - {fileID: 11400000, guid: 4300c2bbcb6770649a188029a4d4f933, type: 2}
   _dropItems:
   - _itemReference: {fileID: 11400000, guid: 636393416550acf46891a402b58974fe, type: 2}
     _quantity: 5

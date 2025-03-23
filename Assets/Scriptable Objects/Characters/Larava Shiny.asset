@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 2
   _isPlayer: 0
-  _name: Larava
+  _name: "Larava \u03B1"
   _baseStats:
-    baseHP: 39
-    baseAttack: 0
-    baseDefense: 60
-    baseSpeed: 0
-    baseIntelligence: 0
-    type: 0
+    baseHP: 36
+    baseAttack: 29
+    baseDefense: 63
+    baseSpeed: 20
+    baseIntelligence: 82
+    type: 2
   maxBuildPoints: 400
   baseBuildPointsPercentage: 0.6
   baseBuildPoints: 240.00002
@@ -30,12 +30,16 @@ MonoBehaviour:
   totalBuildPointsPerLevel: 19.999998
   buildPointsPerLevelPercentagePerStat: 0.08
   buildPointsPerLevelPerStat: 3.9999995
-  statsLevelDivision: 0
-  statsPriorityOrder: 0000000001000000020000000300000004000000
+  statsLevelDivision: 2
+  statsPriorityOrder: 0400000000000000010000000200000003000000
   _characterMoves:
-  - {fileID: 11400000, guid: 0836f2666f00007499f4acc1c52a874d, type: 2}
   - {fileID: 11400000, guid: b7d5cc13a136b2445b5a3d3bd84e32e3, type: 2}
-  - {fileID: 11400000, guid: ea6be09bad5551a4c986774cb83238c9, type: 2}
-  _dropItems: []
+  - {fileID: 11400000, guid: 5d495c74a51fc514db01be6a68560f2d, type: 2}
+  - {fileID: 11400000, guid: ba3b89c02ea93b945a37046b26a66c05, type: 2}
+  _dropItems:
+  - _itemReference: {fileID: 11400000, guid: 636393416550acf46891a402b58974fe, type: 2}
+    _quantity: 4
+  - _itemReference: {fileID: 11400000, guid: 80f62e667f39f924298844c4e7424fe6, type: 2}
+    _quantity: 2
   _visual: {fileID: 8476388555293555231, guid: d583c5ab53ebc0548ba15108f1753248, type: 3}
   _icon: {fileID: 2800000, guid: b59730f8b91d7984db5b83ce448daa37, type: 3}

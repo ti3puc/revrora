@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 5
   _isPlayer: 0
-  _name: Jellostorm
+  _name: "Jellostorm \u03B1"
   _baseStats:
-    baseHP: 39
-    baseStrength: 43
-    baseDefense: 60
-    baseAgility: 50
-    baseWisdom: 65
-    type: 0
+    baseHP: 52
+    baseAttack: 56
+    baseDefense: 71
+    baseSpeed: 58
+    baseIntelligence: 70
+    type: 1
   maxBuildPoints: 400
   baseBuildPointsPercentage: 0.6
   baseBuildPoints: 240.00002
@@ -31,11 +31,13 @@ MonoBehaviour:
   buildPointsPerLevelPercentagePerStat: 0.08
   buildPointsPerLevelPerStat: 3.9999995
   statsLevelDivision: 0
-  statsPriorityOrder: 0000000001000000020000000300000004000000
+  statsPriorityOrder: 0400000001000000020000000000000003000000
   _characterMoves:
+  - {fileID: 11400000, guid: 607bab2da78967147b6932fb9aae4db8, type: 2}
   - {fileID: 11400000, guid: b063865351c6c674491fe0301c39eeb0, type: 2}
-  - {fileID: 11400000, guid: a86174b892340d9488253bac56145ea7, type: 2}
-  - {fileID: 11400000, guid: 873586ba1d493ed429aaef6124b61316, type: 2}
-  _dropItems: []
+  - {fileID: 11400000, guid: ab07959d0ab40164686eff2bbaac4e68, type: 2}
+  _dropItems:
+  - _itemReference: {fileID: 11400000, guid: 80f62e667f39f924298844c4e7424fe6, type: 2}
+    _quantity: 2
   _visual: {fileID: 6069005108788048848, guid: a86e823f4154071499c6ea61ec3190ba, type: 3}
   _icon: {fileID: 2800000, guid: 797e3d0af02ca8d4c9c26fc57a5179cb, type: 3}

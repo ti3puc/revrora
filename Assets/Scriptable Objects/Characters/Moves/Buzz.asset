@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Buzz
   m_EditorClassIdentifier: 
   moveName: Buzz
-  moveDescription: 
-  category: 0
+  moveDescription: Produces high pitched piercing sound waves to damage your foe.
+  category: 1
   type: 3
-  power: 5
-  accuracy: 100
+  power: 40
+  accuracy: 95
   statsToImprove: []
   spawnVfxOnTarget: 1
   vfxPrefab: {fileID: 7719087324886769821, guid: fe54ac683d85c2745b402db31ca5e414,

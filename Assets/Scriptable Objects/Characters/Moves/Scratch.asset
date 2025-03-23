@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Scratch
   m_EditorClassIdentifier: 
   moveName: Scratch
-  moveDescription: 
+  moveDescription: Uses your sharp claws or teeth to damage the foe.
   category: 0
   type: 0
-  power: 5
+  power: 10
   accuracy: 100
   statsToImprove: []
   spawnVfxOnTarget: 1

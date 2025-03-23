@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Watergun
   m_EditorClassIdentifier: 
   moveName: Watergun
-  moveDescription: 
-  category: 0
+  moveDescription: Throws a precise jet of water to damage your foe.
+  category: 1
   type: 1
-  power: 5
+  power: 20
   accuracy: 100
   statsToImprove: []
   spawnVfxOnTarget: 1

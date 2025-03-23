@@ -129,7 +129,10 @@ namespace UI.Combat
             var move = _currentCharacter.CharacterMoves[moveIndex];
 
             var category = char.ToUpper(move.Category.ToString()[0]) + move.Category.ToString().Substring(1).ToLower();
-            _moveInfo.text = $"Power: {move.Power}\nAccuracy: {move.Accuracy}\n\n{category} move: {move.MoveDescription}";
+            if (move.Power > 0)
+                _moveInfo.text = $"Power: {move.Power}\nAccuracy: {move.Accuracy}\n\n{category} move: {move.MoveDescription}";
+            else
+                _moveInfo.text = $"Accuracy: {move.Accuracy}\n\n{category} move: {move.MoveDescription}";
 
             _hasSetMoveInfo = true;
         }

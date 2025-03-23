@@ -24,7 +24,7 @@ namespace Inventory.Items
 
         [Header("UI")]
         [SerializeField] private string _displayName;
-        [SerializeField] private Sprite _icon;
+        [SerializeField, ShowAssetPreview(128)] private Sprite _icon;
         [SerializeField] private GameObject _icon3d;
         [SerializeField] private bool _hideItemIfNotAvailable;
         [SerializeField, HideIf("_hideItemIfNotAvailable")] private bool _ghostItemIfNotAvailable;
