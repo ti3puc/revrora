@@ -74,6 +74,7 @@ namespace UI.Combat
             ShowActions();
 
             TurnInputManager.OnChangedInputCharacter += OnChangedInputCharacter;
+            CanvasManager.OnTogglePauseCanvas += ToggleUI;
         }
 
         private void OnDestroy()
@@ -92,6 +93,7 @@ namespace UI.Combat
             CombatSystem.OnCombatEnded -= HideUI;
 
             TurnInputManager.OnChangedInputCharacter -= OnChangedInputCharacter;
+            CanvasManager.OnTogglePauseCanvas -= ToggleUI;
         }
 
         private void LateUpdate()
@@ -122,6 +124,12 @@ namespace UI.Combat
         public void RemoveMoveInfo(BaseEventData eventData)
         {
             _hasSetMoveInfo = false;
+        }
+
+        private void ToggleUI(bool isPaused)
+        {
+            var canvas = GetComponent<Canvas>();
+            canvas.enabled = !isPaused;
         }
 
         private void HideUI()

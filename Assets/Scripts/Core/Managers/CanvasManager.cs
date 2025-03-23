@@ -13,6 +13,8 @@ namespace UI
 {
     public class CanvasManager : Singleton<CanvasManager>
     {
+        public static event Action<bool> OnTogglePauseCanvas;
+
         [Header("References")]
         [SerializeField] private Canvas _mainCanvas;
         [SerializeField] private Canvas _inventoryCanvas;
@@ -57,11 +59,13 @@ namespace UI
 
         public void ShowMainCanvas()
         {
+            if (_pauseCanvas)
+                _pauseCanvas.gameObject.SetActive(false);
+
             if (_mainCanvas == null) return;
 
             _mainCanvas.gameObject.SetActive(true);
             _inventoryCanvas.gameObject.SetActive(false);
-            _pauseCanvas.gameObject.SetActive(false);
             _boxCanvas.gameObject.SetActive(false);
             _storeCanvas.gameObject.SetActive(false);
             _dialogOptionsCanvas.gameObject.SetActive(false);
@@ -103,13 +107,19 @@ namespace UI
             }
 
             _isPaused = !_isPaused;
-
-            _mainCanvas.gameObject.SetActive(false);
-            _inventoryCanvas.gameObject.SetActive(false);
-            _boxCanvas.gameObject.SetActive(false);
             _pauseCanvas.gameObject.SetActive(_isPaused);
-            _storeCanvas.gameObject.SetActive(false);
-            _dialogOptionsCanvas.gameObject.SetActive(false);
+            OnTogglePauseCanvas?.Invoke(_isPaused);
+
+            if (_mainCanvas)
+                _mainCanvas.gameObject.SetActive(false);
+            if (_inventoryCanvas)
+                _inventoryCanvas.gameObject.SetActive(false);
+            if (_boxCanvas)
+                _boxCanvas.gameObject.SetActive(false);
+            if (_boxCanvas)
+                _storeCanvas.gameObject.SetActive(false);
+            if (_dialogOptionsCanvas)
+                _dialogOptionsCanvas.gameObject.SetActive(false);
 
             if (_isPaused)
                 GameManager.Pause();

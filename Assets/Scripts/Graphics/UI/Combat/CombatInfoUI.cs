@@ -37,6 +37,7 @@ namespace UI.Combat
             BaseCharacter.OnDamageReceived += UpdateHealthBar;
             TurnCombatManager.OnGivingItemsAfterCombat += SetupItemsToGive;
             TurnCombatManager.OnTurnManagerInitialized += SetupCharacterNames;
+            CanvasManager.OnTogglePauseCanvas += ToggleUI;
 
             foreach (var button in _exitButtons)
                 button.onClick.AddListener(ExitBattle);
@@ -51,9 +52,16 @@ namespace UI.Combat
             BaseCharacter.OnDamageReceived -= UpdateHealthBar;
             TurnCombatManager.OnGivingItemsAfterCombat -= SetupItemsToGive;
             TurnCombatManager.OnTurnManagerInitialized -= SetupCharacterNames;
+            CanvasManager.OnTogglePauseCanvas -= ToggleUI;
 
             foreach (var button in _exitButtons)
                 button.onClick.RemoveListener(ExitBattle);
+        }
+
+        private void ToggleUI(bool isPaused)
+        {
+            var canvas = GetComponent<Canvas>();
+            canvas.enabled = !isPaused;
         }
 
         private void ShowWinScreen()

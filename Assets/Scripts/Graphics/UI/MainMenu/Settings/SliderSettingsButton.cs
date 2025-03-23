@@ -86,7 +86,7 @@ namespace UI.Menu.Settings
         {
             if (!_isHoldingDecrease && !_isHoldingIncrease) return;
 
-            _holdingTimer += Time.deltaTime;
+            _holdingTimer += Time.unscaledDeltaTime;
             if (_holdingTimer > _timeToStartHold)
             {
                 if (_isHoldingDecrease)
