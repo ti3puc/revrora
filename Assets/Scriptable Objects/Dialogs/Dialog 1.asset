@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sentences:
   - "Purifique as criaturas em cada regi\xE3o e seu l\xEDder."
-  - Comece indo para as Ilhas de Tiree ao sul.
+  - "Ao purificar o l\xEDder, voc\xEA ganhar\xE1 uma habilidade especial para desbloquear
+    outras regi\xF5es."
+  - "Comece pegando o barco para ir \xE0s Ilhas de Tiree."
   - Boa sorte!

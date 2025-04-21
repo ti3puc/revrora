@@ -73,6 +73,9 @@ namespace Character.Base
         public void Initialize() => Initialize(_characterDefinition);
         public void Initialize(CharacterDefinition newCharacterDefinition)
         {
+            if (newCharacterDefinition == null)
+                return;
+
             _characterDefinition = newCharacterDefinition;
             _characterDefinition.Setup();
             InstantiateVisual();
