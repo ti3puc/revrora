@@ -1416,6 +1416,8 @@ MonoBehaviour:
   _isReceivingTurnInput: 0
   _hasFinishedTurnInputs: 0
   _isCombatEnded: 0
+  _victorySoundId: victory
+  _defeatSoundId: defeat
 --- !u!4 &611649231
 Transform:
   m_ObjectHideFlags: 0
@@ -3447,6 +3449,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 624178372137884021, guid: 48d48b6cf21715c41a36cdecfd834f75,
+        type: 3}
+      propertyPath: _soundEffects.Array.data[4]._id
+      value: victory
+      objectReference: {fileID: 0}
     - target: {fileID: 1651536244668353858, guid: 48d48b6cf21715c41a36cdecfd834f75,
         type: 3}
       propertyPath: m_LocalPosition.x
