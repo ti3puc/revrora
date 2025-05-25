@@ -4841,6 +4841,7 @@ GameObject:
   - component: {fileID: 8014841393489649211}
   - component: {fileID: 7100148777023504194}
   - component: {fileID: 8543484593580517591}
+  - component: {fileID: 4712818857349454630}
   m_Layer: 0
   m_Name: Earth_Attack
   m_TagString: Untagged
@@ -4857,7 +4858,7 @@ Transform:
   m_GameObject: {fileID: 7803621717679435970}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.23, z: 2.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9688,3 +9689,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &4712818857349454630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7803621717679435970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 140df4a362bec954ebc50f7b3aa9bd9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyTime: 2

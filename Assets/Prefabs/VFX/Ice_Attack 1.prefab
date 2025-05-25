@@ -4899,6 +4899,7 @@ GameObject:
   - component: {fileID: 8069213704688950281}
   - component: {fileID: 803012969977203461}
   - component: {fileID: 1915584906096104349}
+  - component: {fileID: -4432389421886349194}
   m_Layer: 0
   m_Name: Ice_Attack 1
   m_TagString: Untagged
@@ -4915,7 +4916,7 @@ Transform:
   m_GameObject: {fileID: 483346981973473602}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.37, z: 1.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9719,3 +9720,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-4432389421886349194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483346981973473602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 140df4a362bec954ebc50f7b3aa9bd9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyTime: 2

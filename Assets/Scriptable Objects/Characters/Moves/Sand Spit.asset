@@ -22,7 +22,7 @@ MonoBehaviour:
   - StatToImprove: 1
     ValueToImprove: -40
     VfxPrefab: {fileID: 0}
-  spawnVfxOnTarget: 1
-  vfxPrefab: {fileID: 7719087324886769821, guid: fe54ac683d85c2745b402db31ca5e414,
+  spawnVfxOnTarget: 0
+  vfxPrefab: {fileID: 7803621717679435970, guid: 9dc1d075b26b1ae418be8f941e9d7141,
     type: 3}
   moveAnimationDuration: 1

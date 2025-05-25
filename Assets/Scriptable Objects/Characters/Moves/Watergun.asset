@@ -19,7 +19,7 @@ MonoBehaviour:
   power: 20
   accuracy: 100
   statsToImprove: []
-  spawnVfxOnTarget: 1
-  vfxPrefab: {fileID: 7719087324886769821, guid: fe54ac683d85c2745b402db31ca5e414,
+  spawnVfxOnTarget: 0
+  vfxPrefab: {fileID: 8902535911650719336, guid: a22b05676d7ab254fbc8c6a0bda29248,
     type: 3}
   moveAnimationDuration: 1
