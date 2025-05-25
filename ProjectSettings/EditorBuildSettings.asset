@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Main Scenes/Load Before Menu.unity
+    guid: f831016658d275343ba32248595b9d8c
+  - enabled: 1
     path: Assets/Scenes/Main Scenes/Main Menu.unity
     guid: 2794ce2055bdfc44691ab8e5d36b44ee
   - enabled: 1
@@ -22,16 +25,16 @@ EditorBuildSettings:
     guid: 7d7ac68af6aac8043a0444efd8a14243
   - enabled: 1
     path: Assets/Scenes/Water Scenes/Water.unity
-    guid: 96e0563543d2dad4a8fd90ab874a05d6
+    guid: 2860bde65285098458cccdca7cfc73c7
   - enabled: 1
     path: Assets/Scenes/Fire Scenes/Fire.unity
-    guid: f9d69f043de5ba44cacded4670fe653b
+    guid: 4e843acb592f8494c9c0f857cc090663
   - enabled: 1
     path: Assets/Scenes/Air Scenes/Air Transition.unity
-    guid: c3da82c1fd75faf4ebff4b2cf391d15c
+    guid: 6d3789bb00f203945aac623fd320c4ca
   - enabled: 1
     path: Assets/Scenes/Air Scenes/Air.unity
-    guid: 1e346ce9476be5e4582d1a2bdc196bc9
+    guid: 97cb248d81d8bd04ba97e157b6149130
   - enabled: 1
     path: Assets/Scenes/Prototypes/Combat.unity
     guid: b5748881f54262346abf45575e1c18f9
