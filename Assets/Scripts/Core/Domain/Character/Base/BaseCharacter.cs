@@ -35,7 +35,8 @@ namespace Character.Base
         [SerializeField] private string _missSoundId = "miss";
         [SerializeField] private string _healSoundId = "heal";
         [SerializeField] private GameObject _deathVfx;
-        [SerializeField] private string _deadSoundId = "dead";
+        [SerializeField] private string _enemyDeathSoundId = "death_enemy";
+        [SerializeField] private string _allyDeathSoundId = "death_ally";
         [SerializeField] private string _improvedSoundId = "improved";
 
         [Header("Debug")]
@@ -85,13 +86,22 @@ namespace Character.Base
         {
             if (_deathVfx != null)
                 Instantiate(_deathVfx, transform);
-            AudioManager.Instance.PlaySoundOneShot(_deadSoundId, 3);
+            if (CharacterDefinition.IsPlayer == false)
+            {
+                //Whenever the player dies, the battle ends in a defeat, playing the defeat SFX instead of death_ally 
+                gameObject.SetActive(false);
+            }
+            else if (_characterTeam == CharacterTeam.Ally)
+            {
+                AudioManager.Instance.PlaySoundOneShot(_allyDeathSoundId, 3);
+            }
+            else
+            {
+                AudioManager.Instance.PlaySoundOneShot(_enemyDeathSoundId, 3);
+            }
 
             // TODO: die animation
             // if player dies does not disable object, only enter in a dead state
-            if (CharacterDefinition.IsPlayer == false)
-                gameObject.SetActive(false);
-
             OnCharacterDied?.Invoke(this);
         }
 

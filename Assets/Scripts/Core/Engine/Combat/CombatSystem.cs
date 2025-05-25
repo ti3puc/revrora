@@ -7,6 +7,7 @@ using Character.Class;
 using Core.Domain.Character.Moves;
 using Core.Engine.Combat.CombatActions;
 using Managers;
+using Managers.Audio;
 using Managers.Combat;
 using Managers.Player;
 using NaughtyAttributes;
@@ -33,7 +34,9 @@ namespace Combat
         [SerializeField, ReadOnly] private bool _hasFinishedTurnInputs;
         [SerializeField, ReadOnly] private bool _isCombatEnded;
         [SerializeField, ReadOnly] private Dictionary<BaseCharacter, int> _turnMoveDict = new();
-
+        [SerializeField] private string _victorySoundId = "victory";
+        [SerializeField] private string _defeatSoundId = "defeat";
+        
         private void Awake()
         {
             CombatInputUI.OnMoveCalled += ChooseMove;
@@ -189,7 +192,7 @@ namespace Combat
                     SaveSystem.Instance.GameData.CombatSceneWinData.CombatSceneIds.Add(combatSceneId);
 
                 SaveSystem.Instance.GameData.CombatSceneWinData.LastPlayerPosition = TurnCombatManager.Instance.LastPlayerPosition;
-
+                AudioManager.Instance.PlaySoundOneShot(_victorySoundId, 3);
                 TurnCombatManager.Instance.GiveItems();
 
                 GameLog.Debug(this, "You win!");
@@ -197,6 +200,8 @@ namespace Combat
             }
             else
             {
+                AudioManager.Instance.PlaySoundOneShot(_defeatSoundId, 3);
+                
                 GameLog.Debug(this, "You lose!");
                 OnPlayerLostCombat?.Invoke();
             }
