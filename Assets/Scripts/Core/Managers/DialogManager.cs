@@ -148,7 +148,7 @@ namespace Core.Managers
             }
         }
 
-        private void ReceivedInteraction()
+        public void ReceivedInteraction()
         {
             _isInteracting = true;
         }

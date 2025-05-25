@@ -66,7 +66,7 @@ namespace Character.Base
         [SerializeField] private List<CombatDropItem> _dropItems;
 
         [Header("Visuals")]
-        [SerializeField] private GameObject _visual;
+        [SerializeField, ShowAssetPreview(500)] private GameObject _visual;
         [SerializeField, ShowAssetPreview(128)] private Texture2D _icon;
 
         public int Id
