@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveAccordingToCameraView: 1
-  speed: 15
+  speed: 12
   runningSpeed: 20
   acceleration: 5
   deceleration: 10
