@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7651895518973919847}
   - component: {fileID: 4513290975093372611}
   - component: {fileID: 6324439737366284235}
+  - component: {fileID: 9130879357403109914}
+  - component: {fileID: 5965443462645474864}
   m_Layer: 0
   m_Name: WaterVolume_PRF
   m_TagString: Untagged
@@ -99,9 +101,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IncludeFaces: 15
   IncludeFoam: 15
-  TileSize: 1.6
+  TileSize: 2.7
   ShowDebug: 1
   RealtimeUpdates: 0
+--- !u!114 &9130879357403109914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5603894256349710710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf39edffa406b4d4c8db438c744f592a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WaterVolume: {fileID: 6324439737366284235}
+--- !u!114 &5965443462645474864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5603894256349710710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &6983803109178351005
 GameObject:
   m_ObjectHideFlags: 0

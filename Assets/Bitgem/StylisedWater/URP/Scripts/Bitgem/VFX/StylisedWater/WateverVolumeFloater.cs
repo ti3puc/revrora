@@ -12,7 +12,10 @@ namespace Bitgem.VFX.StylisedWater
     {
         #region Public fields
 
+        public Vector3 Offset = Vector3.zero;
         public WaterVolumeHelper WaterVolumeHelper = null;
+
+        [SerializeField] private bool printIfHasHeight;
 
         #endregion
 
@@ -26,7 +29,12 @@ namespace Bitgem.VFX.StylisedWater
                 return;
             }
 
-            transform.position = new Vector3(transform.position.x, instance.GetHeight(transform.position) ?? transform.position.y, transform.position.z);
+            var hasHeight = instance.GetHeight(transform.position).HasValue;
+            transform.position = new Vector3(transform.position.x, instance.GetHeight(transform.position) ?? transform.position.y, transform.position.z)
+                + (hasHeight ? Offset : Vector3.zero);
+
+            if (printIfHasHeight)
+                Debug.Log("Water Has Height: " + hasHeight);
         }
 
         #endregion

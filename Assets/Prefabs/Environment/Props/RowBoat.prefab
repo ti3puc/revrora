@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d2b09a5f876072645b7f1806efcfcc02,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 190
+      value: 148.39326
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d2b09a5f876072645b7f1806efcfcc02,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 190
+      value: 148.39326
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d2b09a5f876072645b7f1806efcfcc02,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 190
+      value: 148.39326
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d2b09a5f876072645b7f1806efcfcc02,
         type: 3}
@@ -73,6 +73,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -56.019
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d2b09a5f876072645b7f1806efcfcc02,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d2b09a5f876072645b7f1806efcfcc02,
         type: 3}
       propertyPath: m_Name
@@ -86,6 +91,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -7852613263748709973}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d2b09a5f876072645b7f1806efcfcc02,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4972718669768973283}
   m_SourcePrefab: {fileID: 100100000, guid: d2b09a5f876072645b7f1806efcfcc02, type: 3}
 --- !u!1 &4926253539761465510 stripped
 GameObject:
@@ -115,3 +124,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1423555792485197802, guid: d2b09a5f876072645b7f1806efcfcc02, type: 3}
+--- !u!114 &4972718669768973283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4926253539761465510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36aa02d38bb10b548bc7b8879596b15c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Offset: {x: 0, y: 3.36, z: 0}
+  WaterVolumeHelper: {fileID: 0}
