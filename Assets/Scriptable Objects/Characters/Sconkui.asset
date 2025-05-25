@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6186e71f71368342b7058710441a95b, type: 3}
   m_Name: Sconkui
   m_EditorClassIdentifier: 
-  _id: 7
+  _id: 13
   _isPlayer: 0
-  _name: Forlein
+  _name: Sconkui
   _baseStats:
     baseHP: 58
     baseAttack: 60
     baseDefense: 60
     baseSpeed: 78
     baseIntelligence: 63
-    type: 1
+    type: 2
   maxBuildPoints: 400
   baseBuildPointsPercentage: 0.6
   baseBuildPoints: 240.00002
@@ -33,11 +33,11 @@ MonoBehaviour:
   statsLevelDivision: 2
   statsPriorityOrder: 0300000004000000000000000100000002000000
   _characterMoves:
-  - {fileID: 11400000, guid: 475d6e5d924d7ff4dadf88b24db1bf2c, type: 2}
-  - {fileID: 11400000, guid: 4300c2bbcb6770649a188029a4d4f933, type: 2}
-  - {fileID: 11400000, guid: 5a49e48806eef4a4da9af742394826f9, type: 2}
+  - {fileID: 11400000, guid: 5d495c74a51fc514db01be6a68560f2d, type: 2}
+  - {fileID: 11400000, guid: c2778df798c39f64b985313fd4559a5f, type: 2}
+  - {fileID: 11400000, guid: 10919aa647c563b46a21174d156f4e09, type: 2}
   _dropItems:
   - _itemReference: {fileID: 11400000, guid: 5f2fe688f369da54d9c526a46db34de7, type: 2}
     _quantity: 2
-  _visual: {fileID: 4836545088471044051, guid: 193b7c62e63d6bb4ebc4f3590a137179, type: 3}
-  _icon: {fileID: 2800000, guid: 7082ceccc9c7cae49bd46d284196d9d8, type: 3}
+  _visual: {fileID: 5413379306106565311, guid: 71d669229a3dba741b8c5ad68f7fabdb, type: 3}
+  _icon: {fileID: 2800000, guid: 8f6f375aaea29eb4589bd9c67e1ed97b, type: 3}

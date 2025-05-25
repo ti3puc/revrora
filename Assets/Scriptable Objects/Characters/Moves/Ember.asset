@@ -22,4 +22,4 @@ MonoBehaviour:
   spawnVfxOnTarget: 0
   vfxPrefab: {fileID: 9053428303068832146, guid: 5c223810cf76c554dab76a82e4d87986,
     type: 3}
-  moveAnimationDuration: 1
+  moveAnimationDuration: 2

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6186e71f71368342b7058710441a95b, type: 3}
   m_Name: Npc-Generic 2
   m_EditorClassIdentifier: 
-  _id: 91
+  _id: 93
   _isPlayer: 0
   _name: Nanda
   _baseStats:
