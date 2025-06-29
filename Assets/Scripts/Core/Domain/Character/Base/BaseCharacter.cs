@@ -26,6 +26,7 @@ namespace Character.Base
         [SerializeField] private CharacterTeam _characterTeam;
 
         [Header("Animation")]
+        [SerializeField] private GameObject _evilFogVfx;
         [SerializeField] private float _rotationSpeed = 180;
 
         [Header("VFX and Audio")]
@@ -194,6 +195,9 @@ namespace Character.Base
             {
                 _characterStats = new CharacterStats(this);
                 Instantiate(_characterDefinition.Visual, visualObj);
+
+                if (_evilFogVfx != null && _characterTeam == CharacterTeam.Enemy)
+                    Instantiate(_evilFogVfx, visualObj);
             }
         }
     }

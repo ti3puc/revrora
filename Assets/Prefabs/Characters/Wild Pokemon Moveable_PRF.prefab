@@ -52,13 +52,16 @@ MonoBehaviour:
   _customLevel: 1
   _characterDefinition: {fileID: 0}
   _characterTeam: 1
+  _evilFogVfx: {fileID: 6520402350904065935, guid: 9b53064c24541074eb0489bd2a4c8448,
+    type: 3}
   _rotationSpeed: 180
   _hitSoundId: hit
   _missVfx: {fileID: 0}
   _missSoundId: miss
   _healSoundId: heal
   _deathVfx: {fileID: 0}
-  _deadSoundId: dead
+  _enemyDeathSoundId: death_enemy
+  _allyDeathSoundId: death_ally
   _improvedSoundId: improved
   _characterStats:
     _hp: 0
